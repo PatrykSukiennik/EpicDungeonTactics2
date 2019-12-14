@@ -6,8 +6,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.Random;
+
 public class EpicDungeonTactics extends ApplicationAdapter {
-	
+
+	public static Random random;
+
+	static {
+		random = new Random();
+	}
+
 	@Override
 	public void create () {
 
@@ -21,6 +29,6 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		
+
 	}
 }
