@@ -5,16 +5,21 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public final class MenuScreen {
 
-    private Stage stage;
+    private SpriteBatch batch;
     private CharacterSelector characterSelector;
 
     public MenuScreen() {
-        stage = new Stage();
-        characterSelector = new CharacterSelector(stage);
+        characterSelector = new CharacterSelector();
     }
 
-    public void draw(SpriteBatch batch) {
-        stage.draw();
+    public void draw() {
+        characterSelector.draw(batch);
+    }
+
+    public boolean tap(float x, float y) {
+        if (characterSelector.tap(x, y)) {}
+
+        return true;
     }
 
 }
