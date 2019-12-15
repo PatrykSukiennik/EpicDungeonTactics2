@@ -3,19 +3,16 @@ package com.appatstudio.epicdungeontactics2;
 import com.appatstudio.epicdungeontactics2.global.assets.AssetsMaster;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.HeroEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Random;
 
-import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.GAME_SCREEN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.MENU_SCREEN;
 
 public class EpicDungeonTactics extends ApplicationAdapter {
@@ -28,11 +25,15 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
 	private static CurrentScreenEnum currentScreen;
 
+	private static CharacterEnum selectedHero;
+	private static PerkEnum selectedPerk;
+
 	static {
 		random = new Random();
 	}
 
-	public static void startGame(HeroEnum heroEnum) {
+	public static void startGame() {
+
 	}
 
 	@Override
@@ -87,6 +88,14 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 		}
 
 		currentScreen = newCurrentScreen;
+	}
+
+	public static void setSelectedHero(CharacterEnum selectedHero) {
+		EpicDungeonTactics.selectedHero = selectedHero;
+	}
+
+	public static void setSelectedPerk(PerkEnum selectedPerk) {
+		EpicDungeonTactics.selectedPerk = selectedPerk;
 	}
 
 	public static CurrentScreenEnum getCurrentScreen() {

@@ -1,6 +1,8 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,14 +11,29 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 public final class CharacterSelector {
 
     CharacterIcon[] characterIcons;
-    RelativePosText[] characterTitles;
     SelectorArrow leftArrow, rightArrow;
-    int currectIndex;
+    int currectIndex = 0;
 
     private final float MOVE_TIME = 0.2f;
 
     CharacterSelector() {
 
+        characterIcons = new CharacterIcon[]{
+            new CharacterIcon(CharacterEnum.HERO_ADVENTURER),
+            new CharacterIcon(CharacterEnum.HERO_KNIGHT),
+            new CharacterIcon(CharacterEnum.HERO_WIZZARD),
+            new CharacterIcon(CharacterEnum.HERO_LIZARD),
+            new CharacterIcon(CharacterEnum.HERO_NINJA),
+            new CharacterIcon(CharacterEnum.HERO_PIRATE),
+            new CharacterIcon(CharacterEnum.HERO_BABY)
+        };
+
+        characterIcons[currectIndex].setPosition(
+                        Gdx.graphics.getWidth()/2f - characterIcons[0].getWidth()/2f,
+                        characterIcons[0].getY());
+
+        leftArrow = new SelectorArrow(DirectionEnum.LEFT);
+        rightArrow = new SelectorArrow(DirectionEnum.RIGHT);
 
     }
 
@@ -42,7 +59,7 @@ public final class CharacterSelector {
 
             currectIndex--;
             if (currectIndex < 0) {
-                currectIndex = characterTitles.length - 1;
+                currectIndex = characterIcons.length - 1;
             }
 
             characterIcons[currectIndex].addAction(
@@ -60,7 +77,7 @@ public final class CharacterSelector {
 
             currectIndex++;
             if (currectIndex >= characterIcons.length) {
-                currectIndex = characterTitles.length - 0;
+                currectIndex = characterIcons.length - 0;
             }
 
             characterIcons[currectIndex].addAction(
@@ -74,7 +91,8 @@ public final class CharacterSelector {
             for (CharacterIcon icon : characterIcons) {
                 if (icon.tap(x, y)) {
                     if (icon.isUnlocked) {
-                        EpicDungeonTactics.startGame(icon.getHeroEnum());
+                        EpicDungeonTactics.setSelectedHero(icon.getCharacterEnum());
+                        MenuScreen.showPerkSelector();
                     } else {
                         Gdx.input.vibrate(50);
                     }

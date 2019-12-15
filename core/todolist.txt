@@ -1,0 +1,3 @@
+chests that saves max 3 items between all heroes and stages
+
+pets?

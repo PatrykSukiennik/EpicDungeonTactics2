@@ -7,9 +7,14 @@ public final class MenuScreen {
 
     private SpriteBatch batch;
     private CharacterSelector characterSelector;
+    private static PerkWindow perkWindow;
 
     public MenuScreen() {
         characterSelector = new CharacterSelector();
+    }
+
+    public static void showPerkSelector() {
+        perkWindow.show();
     }
 
     public void draw() {

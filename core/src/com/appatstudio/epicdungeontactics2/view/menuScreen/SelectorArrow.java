@@ -1,9 +1,29 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
+import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public final class SelectorArrow extends Image {
+
+    SelectorArrow(DirectionEnum direction) {
+
+        this.setSize(Gdx.graphics.getWidth()/10f, Gdx.graphics.getWidth()/10f);
+        this.setY(Gdx.graphics.getHeight()/2f - this.getHeight()/2f);
+
+        switch (direction) {
+            case LEFT: {
+                this.setX(Gdx.graphics.getWidth()/4f - this.getWidth());
+                break;
+            }
+            case RIGHT: {
+                this.setX(Gdx.graphics.getWidth()/1.25f);
+                break;
+            }
+        }
+
+    }
 
     public boolean tap(float x, float y) {
         if (x > this.getX() && x < this.getX() + this.getWidth() &&
