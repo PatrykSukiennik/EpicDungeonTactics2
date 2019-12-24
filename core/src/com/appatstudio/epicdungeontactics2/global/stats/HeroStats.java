@@ -1,7 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.stats;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +11,12 @@ public final class HeroStats {
     private final static Map<CharacterEnum, Integer> pointsPerLvlMap;
     private final static Map<CharacterEnum, Integer> buyCostMap;
     private final static Map<CharacterEnum, Integer> requiredStageToUnlockMap;
-    private final static Map<CharacterEnum, ItemEnum> startingItemMap;
+    private final static Map<CharacterEnum, ItemEnum[]> startingItemMap;
     private final static Map<CharacterEnum, Integer> skillCooldownMap;
 
     static {
         pointsPerLvlMap = new HashMap<>();
-        pointsPerLvlMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        pointsPerLvlMap.put(CharacterEnum.HERO_ELF, 3);
         pointsPerLvlMap.put(CharacterEnum.HERO_KNIGHT, 2);
         pointsPerLvlMap.put(CharacterEnum.HERO_WIZZARD, 5);
         pointsPerLvlMap.put(CharacterEnum.HERO_LIZARD, 4);
@@ -25,7 +25,7 @@ public final class HeroStats {
         pointsPerLvlMap.put(CharacterEnum.HERO_BABY, 7);
 
         buyCostMap = new HashMap<>();
-        buyCostMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        buyCostMap.put(CharacterEnum.HERO_ELF, 3);
         buyCostMap.put(CharacterEnum.HERO_KNIGHT, 2);
         buyCostMap.put(CharacterEnum.HERO_WIZZARD, 5);
         buyCostMap.put(CharacterEnum.HERO_LIZARD, 4);
@@ -34,7 +34,7 @@ public final class HeroStats {
         buyCostMap.put(CharacterEnum.HERO_BABY, 7);
 
         requiredStageToUnlockMap = new HashMap<>();
-        requiredStageToUnlockMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        requiredStageToUnlockMap.put(CharacterEnum.HERO_ELF, 3);
         requiredStageToUnlockMap.put(CharacterEnum.HERO_KNIGHT, 2);
         requiredStageToUnlockMap.put(CharacterEnum.HERO_WIZZARD, 5);
         requiredStageToUnlockMap.put(CharacterEnum.HERO_LIZARD, 4);
@@ -43,7 +43,7 @@ public final class HeroStats {
         requiredStageToUnlockMap.put(CharacterEnum.HERO_BABY, 7);
 
         skillCooldownMap = new HashMap<>();
-        skillCooldownMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        skillCooldownMap.put(CharacterEnum.HERO_ELF, 3);
         skillCooldownMap.put(CharacterEnum.HERO_KNIGHT, 2);
         skillCooldownMap.put(CharacterEnum.HERO_WIZZARD, 5);
         skillCooldownMap.put(CharacterEnum.HERO_LIZARD, 4);
@@ -52,13 +52,13 @@ public final class HeroStats {
         skillCooldownMap.put(CharacterEnum.HERO_BABY, 7);
 
         startingItemMap = new HashMap<>();
-        startingItemMap.put(CharacterEnum.HERO_ADVENTURER, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_KNIGHT, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_WIZZARD, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_LIZARD, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_NINJA, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_PIRATE, ItemEnum.PLACEHOLDER);
-        startingItemMap.put(CharacterEnum.HERO_BABY, ItemEnum.PLACEHOLDER);
+        startingItemMap.put(CharacterEnum.HERO_ELF, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_KNIGHT, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_WIZZARD, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_LIZARD, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_NINJA, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_PIRATE, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_BABY, new ItemEnum[]{});
 
     }
 
@@ -74,7 +74,7 @@ public final class HeroStats {
         return requiredStageToUnlockMap.get(characterEnum);
     }
 
-    public static ItemEnum getStartingItem(CharacterEnum characterEnum) {
+    public static ItemEnum[] getStartingItems(CharacterEnum characterEnum) {
         return startingItemMap.get(characterEnum);
     }
 

@@ -15,7 +15,7 @@ public final class CharacterStats {
 
     static {
         strengthMap = new HashMap<>();
-        strengthMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        strengthMap.put(CharacterEnum.HERO_ELF, 3);
         strengthMap.put(CharacterEnum.HERO_KNIGHT, 3);
         strengthMap.put(CharacterEnum.HERO_WIZZARD, 3);
         strengthMap.put(CharacterEnum.HERO_LIZARD, 3);
@@ -24,7 +24,7 @@ public final class CharacterStats {
         strengthMap.put(CharacterEnum.HERO_BABY, 3);
 
         dexterityMap = new HashMap<>();
-        dexterityMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        dexterityMap.put(CharacterEnum.HERO_ELF, 3);
         dexterityMap.put(CharacterEnum.HERO_KNIGHT, 3);
         dexterityMap.put(CharacterEnum.HERO_WIZZARD, 3);
         dexterityMap.put(CharacterEnum.HERO_LIZARD, 3);
@@ -33,7 +33,7 @@ public final class CharacterStats {
         dexterityMap.put(CharacterEnum.HERO_BABY, 3);
 
         intelligenceMap = new HashMap<>();
-        intelligenceMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        intelligenceMap.put(CharacterEnum.HERO_ELF, 3);
         intelligenceMap.put(CharacterEnum.HERO_KNIGHT, 3);
         intelligenceMap.put(CharacterEnum.HERO_WIZZARD, 3);
         intelligenceMap.put(CharacterEnum.HERO_LIZARD, 3);
@@ -42,7 +42,7 @@ public final class CharacterStats {
         intelligenceMap.put(CharacterEnum.HERO_BABY, 3);
 
         constitutionMap = new HashMap<>();
-        constitutionMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        constitutionMap.put(CharacterEnum.HERO_ELF, 3);
         constitutionMap.put(CharacterEnum.HERO_KNIGHT, 3);
         constitutionMap.put(CharacterEnum.HERO_WIZZARD, 3);
         constitutionMap.put(CharacterEnum.HERO_LIZARD, 3);
@@ -51,7 +51,7 @@ public final class CharacterStats {
         constitutionMap.put(CharacterEnum.HERO_BABY, 3);
 
         luckMap = new HashMap<>();
-        luckMap.put(CharacterEnum.HERO_ADVENTURER, 3);
+        luckMap.put(CharacterEnum.HERO_ELF, 3);
         luckMap.put(CharacterEnum.HERO_KNIGHT, 3);
         luckMap.put(CharacterEnum.HERO_WIZZARD, 3);
         luckMap.put(CharacterEnum.HERO_LIZARD, 3);

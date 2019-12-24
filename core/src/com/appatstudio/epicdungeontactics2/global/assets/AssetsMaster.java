@@ -36,7 +36,7 @@ public final class AssetsMaster {
 
     public static void loaded() {
         GraphicsManager.load(assetManager);
-        StringsManager.load(assetManager);
+        StringsManager.load();
         FontsManager.load(assetManager);
         SoundsManager.load(assetManager);
     }
@@ -55,7 +55,7 @@ public final class AssetsMaster {
 
     public static boolean isFinished() {
         assetManager.update();
-        return assetManager.isFinished() && assetManager.isLoaded("tileAnimationsAtlas.atlas");
+        return assetManager.isFinished() && assetManager.isLoaded("game-world-graphics-atlas.txt");
     }
 
     public static void dispose() {

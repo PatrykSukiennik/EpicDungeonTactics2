@@ -1,11 +1,10 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.HashMap;

@@ -1,4 +1,5 @@
 package com.appatstudio.epicdungeontactics2.global.enums;
 
-public enum ItemTypeEnum {
+public enum CharacterStateEnum {
+    IDLE, RUN
 }

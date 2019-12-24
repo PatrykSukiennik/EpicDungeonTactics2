@@ -1,18 +1,26 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosTextWithIcon;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
-public final class CharacterIcon extends Image {
+public final class CharacterIcon extends Actor {
 
-    CharacterEnum characterEnum;
+    private final CharacterEnum characterEnum;
+    private final Animation<SpriteDrawable> animation;
+    private float stateTime = 0f;
 
     RelativePosText title;
     RelativePosTextWithIcon cost;
@@ -20,6 +28,8 @@ public final class CharacterIcon extends Image {
     boolean isUnlocked = false;
 
     CharacterIcon(CharacterEnum character) {
+        this.animation = GraphicsManager.getCharactersAnimation(character, CharacterStateEnum.IDLE);
+
         this.characterEnum = character;
 
         this.setSize(Gdx.graphics.getWidth()/2f, Gdx.graphics.getWidth()/2f);
@@ -31,7 +41,7 @@ public final class CharacterIcon extends Image {
                 StringsManager.getCharacterName(characterEnum)
                 );
 
-        if (!isUnlocked) this.getColor().a = 0.3f;
+        //if (!isUnlocked) this.getColor().a = 0.3f;
     }
 
     boolean tap(float x, float y) {
@@ -45,7 +55,9 @@ public final class CharacterIcon extends Image {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+        stateTime += Gdx.graphics.getDeltaTime();
+
+        animation.getKeyFrame(stateTime).draw(batch, this.getX(), this.getY(), this.getWidth(), this.getHeight());
 
         title.draw(batch,
                 this.getX() + this.getWidth()/2f,

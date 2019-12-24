@@ -39,7 +39,7 @@ public final class LoadingScreen {
         barHeight = maxBarWidth * 0.05f;
         randomText = getRandomLoadingCommunicate();
 
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/decoratedFont.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/decorated_font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.characters = randomText;
         fontParameter.borderColor = Color.BLACK;

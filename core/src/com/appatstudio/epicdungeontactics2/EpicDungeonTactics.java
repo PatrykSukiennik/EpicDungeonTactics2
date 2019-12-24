@@ -46,7 +46,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0,  0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		switch (currentScreen) {
@@ -88,6 +88,16 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 		}
 
 		currentScreen = newCurrentScreen;
+	}
+
+	public static void tap(float x, float y) {
+		switch (currentScreen) {
+			case MENU_SCREEN:
+				menuScreen.tap(x, y);
+				break;
+			case GAME_SCREEN:
+
+		}
 	}
 
 	public static void setSelectedHero(CharacterEnum selectedHero) {

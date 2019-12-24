@@ -10,6 +10,8 @@ public final class MenuScreen {
     private static PerkWindow perkWindow;
 
     public MenuScreen() {
+        batch = new SpriteBatch();
+
         characterSelector = new CharacterSelector();
     }
 
@@ -18,7 +20,10 @@ public final class MenuScreen {
     }
 
     public void draw() {
+        batch.begin();
         characterSelector.draw(batch);
+
+        batch.end();
     }
 
     public boolean tap(float x, float y) {

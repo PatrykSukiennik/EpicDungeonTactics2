@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global.input;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,6 +12,7 @@ public final class MobileInputManager implements GestureDetector.GestureListener
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
+        EpicDungeonTactics.tap(x, y);
         return false;
     }
 

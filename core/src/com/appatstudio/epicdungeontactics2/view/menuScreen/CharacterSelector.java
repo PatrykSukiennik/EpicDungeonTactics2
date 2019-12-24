@@ -3,7 +3,6 @@ package com.appatstudio.epicdungeontactics2.view.menuScreen;
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
-import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -19,7 +18,7 @@ public final class CharacterSelector {
     CharacterSelector() {
 
         characterIcons = new CharacterIcon[]{
-            new CharacterIcon(CharacterEnum.HERO_ADVENTURER),
+            new CharacterIcon(CharacterEnum.HERO_ELF),
             new CharacterIcon(CharacterEnum.HERO_KNIGHT),
             new CharacterIcon(CharacterEnum.HERO_WIZZARD),
             new CharacterIcon(CharacterEnum.HERO_LIZARD),
@@ -40,14 +39,14 @@ public final class CharacterSelector {
     public void draw(SpriteBatch batch) {
         for (CharacterIcon icon : characterIcons) {
             icon.act(Gdx.graphics.getDeltaTime());
-            icon.draw(batch, Gdx.graphics.getDeltaTime());
+            icon.draw(batch, 1f);
         }
 
         leftArrow.act(Gdx.graphics.getDeltaTime());
-        leftArrow.draw(batch, Gdx.graphics.getDeltaTime());
+        leftArrow.draw(batch, 1f);
 
         rightArrow.act(Gdx.graphics.getDeltaTime());
-        rightArrow.draw(batch, Gdx.graphics.getDeltaTime());
+        rightArrow.draw(batch, 1f);
     }
 
     public boolean tap(float x, float y) {
@@ -77,7 +76,7 @@ public final class CharacterSelector {
 
             currectIndex++;
             if (currectIndex >= characterIcons.length) {
-                currectIndex = characterIcons.length - 0;
+                currectIndex = characterIcons.length - 1;
             }
 
             characterIcons[currectIndex].addAction(
