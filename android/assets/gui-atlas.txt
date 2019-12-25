@@ -969,6 +969,13 @@ rings/RINGv21
   orig: 16, 16
   offset: 0, 0
   index: -1
+SETTINGS_ICON
+  rotate: false
+  xy: 134, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 shields/SHIELDv0
   rotate: false
   xy: 64, 63
@@ -1149,6 +1156,41 @@ staffs/STAFFv7
   xy: 208, 63
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: -1
+stat-icons/DEX
+  rotate: false
+  xy: 204, 143
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: -1
+stat-icons/INT
+  rotate: false
+  xy: 204, 143
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: -1
+stat-icons/LCK
+  rotate: false
+  xy: 204, 143
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: -1
+stat-icons/STR
+  rotate: false
+  xy: 204, 143
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: -1
+stat-icons/VIT
+  rotate: false
+  xy: 204, 143
+  size: 48, 16
+  orig: 48, 16
   offset: 0, 0
   index: -1
 STONE_BUTTON_WIDE

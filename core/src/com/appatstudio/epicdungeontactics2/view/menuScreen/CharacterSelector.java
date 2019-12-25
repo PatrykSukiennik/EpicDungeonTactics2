@@ -47,12 +47,14 @@ public final class CharacterSelector {
 
         rightArrow.act(Gdx.graphics.getDeltaTime());
         rightArrow.draw(batch, 1f);
+
+        System.out.println(currectIndex);
     }
 
     public boolean tap(float x, float y) {
         if (leftArrow.tap(x, y)) {
             characterIcons[currectIndex].addAction(
-                    Actions.moveTo(-characterIcons[0].getWidth(),
+                    Actions.moveTo(Gdx.graphics.getWidth() + characterIcons[0].getWidth(),
                             characterIcons[0].getY(),
                             MOVE_TIME));
 
@@ -63,25 +65,26 @@ public final class CharacterSelector {
 
             characterIcons[currectIndex].addAction(
                     Actions.sequence(
-                            Actions.moveTo(Gdx.graphics.getWidth(), characterIcons[0].getY()),
+                            Actions.moveTo(-characterIcons[0].getWidth() - characterIcons[0].getWidth(), characterIcons[0].getY()),
                             Actions.moveTo(Gdx.graphics.getWidth() / 2f - characterIcons[0].getWidth() / 2f,
                                     characterIcons[0].getY(),
                                     MOVE_TIME)));
             return true;
         } else if (rightArrow.tap(x, y)) {
             characterIcons[currectIndex].addAction(
-                    Actions.moveTo(Gdx.graphics.getWidth(),
+                    Actions.moveTo(-characterIcons[0].getWidth() - characterIcons[0].getWidth(),
                             characterIcons[0].getY(),
                             MOVE_TIME));
 
             currectIndex++;
             if (currectIndex >= characterIcons.length) {
-                currectIndex = characterIcons.length - 1;
+                currectIndex = 0;
             }
 
             characterIcons[currectIndex].addAction(
                     Actions.sequence(
-                            Actions.moveTo(-characterIcons[0].getWidth(), characterIcons[0].getY()),
+                            Actions.moveTo(Gdx.graphics.getWidth() + characterIcons[0].getWidth()
+                                    , characterIcons[0].getY()),
                             Actions.moveTo(Gdx.graphics.getWidth() / 2f - characterIcons[0].getWidth() / 2f,
                                     characterIcons[0].getY(),
                                     MOVE_TIME)));

@@ -16,11 +16,11 @@ public final class SelectorArrow extends Image {
         this.setY(Gdx.graphics.getHeight()/2f - this.getHeight()/2f);
 
         switch (direction) {
-            case LEFT: {
+            case RIGHT: {
                 this.setX(Gdx.graphics.getWidth() * 0.95f - this.getWidth());
                 break;
             }
-            case RIGHT: {
+            case LEFT: {
                 this.setX(Gdx.graphics.getWidth() * 0.05f);
                 break;
             }
@@ -33,7 +33,7 @@ public final class SelectorArrow extends Image {
                 y > this.getY() && y < this.getY() + this.getHeight()) {
 
             this.addAction(Actions.sequence(
-                    Actions.scaleTo(0.9f, 0.9f, 0.05f),
+                    Actions.scaleTo(0.8f, 0.8f, 0.05f),
                     Actions.scaleTo(1f, 1f, 0.05f)));
             return true;
         }

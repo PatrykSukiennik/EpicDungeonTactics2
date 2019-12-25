@@ -198,6 +198,11 @@
             <key type="filename">gui/SILVER_BUTTON_WIDE.png</key>
             <key type="filename">gui/STONE_BUTTON_WIDE.png</key>
             <key type="filename">gui/YELLOW_BUTTON_WIDE.png</key>
+            <key type="filename">gui/stat-icons/DEX.png</key>
+            <key type="filename">gui/stat-icons/INT.png</key>
+            <key type="filename">gui/stat-icons/LCK.png</key>
+            <key type="filename">gui/stat-icons/STR.png</key>
+            <key type="filename">gui/stat-icons/VIT.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

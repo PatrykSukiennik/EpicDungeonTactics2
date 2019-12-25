@@ -52,7 +52,7 @@ public final class HeroStats {
         skillCooldownMap.put(CharacterEnum.HERO_BABY, 7);
 
         startingItemMap = new HashMap<>();
-        startingItemMap.put(CharacterEnum.HERO_ELF, new ItemEnum[]{});
+        startingItemMap.put(CharacterEnum.HERO_ELF, new ItemEnum[]{ItemEnum.BOWv0, ItemEnum.SWORDv0, ItemEnum.FOODv3});
         startingItemMap.put(CharacterEnum.HERO_KNIGHT, new ItemEnum[]{});
         startingItemMap.put(CharacterEnum.HERO_WIZZARD, new ItemEnum[]{});
         startingItemMap.put(CharacterEnum.HERO_LIZARD, new ItemEnum[]{});

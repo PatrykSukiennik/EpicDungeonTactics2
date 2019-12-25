@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -22,6 +23,7 @@ public final class GraphicsManager {
 
     private static Map<ItemEnum, SpriteDrawable> itemImages;
     private static Map<GuiElementEnum, SpriteDrawable> guiElements;
+    private static Map<StatisticEnum, SpriteDrawable> statIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
     public static void load(AssetManager assetManager) {
@@ -142,6 +144,12 @@ public final class GraphicsManager {
         for (GuiElementEnum g : allElements) {
             guiElements.put(g, new SpriteDrawable(new Sprite(atlas.findRegion(g.toString()))));
         }
+
+        statIconsMap = new HashMap<>();
+        StatisticEnum[] allStats = StatisticEnum.values();
+        for (StatisticEnum s : allStats) {
+            statIconsMap.put(s, new SpriteDrawable(new Sprite(atlas.findRegion("stat-icons/" + s.toString()))));
+        }
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
@@ -186,5 +194,13 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getGuiElement(GuiElementEnum g) {
         return guiElements.get(g);
+    }
+
+    public static SpriteDrawable getItemImage(ItemEnum itemEnum) {
+        return itemImages.get(itemEnum);
+    }
+
+    public static SpriteDrawable getStatIcon(StatisticEnum s) {
+        return statIconsMap.get(s);
     }
 }

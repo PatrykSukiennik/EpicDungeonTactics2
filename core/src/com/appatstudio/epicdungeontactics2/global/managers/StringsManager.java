@@ -16,12 +16,14 @@ public final class StringsManager {
     private static I18NBundle perkNames;
     private static I18NBundle perkDescriptions;
     private static I18NBundle characterNames;
+    private static I18NBundle characterDescriptions;
     private static I18NBundle statsNames;
 
     private static Map<ItemEnum, String> itemNamesMap;
     private static Map<PerkEnum, String> perkNamesMap;
     private static Map<PerkEnum, String> perkDescriptionsMap;
     private static Map<CharacterEnum, String> characterNamesMap;
+    private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<StatisticEnum, String> statsNameMap;
 
 
@@ -31,6 +33,7 @@ public final class StringsManager {
         perkNames = I18NBundle.createBundle(Gdx.files.internal("strings/perk_names"), java.util.Locale.getDefault());
         perkDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/perk_descriptions"), java.util.Locale.getDefault());
         characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
+        characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
         statsNames = I18NBundle.createBundle(Gdx.files.internal("strings/stats_names"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
@@ -48,9 +51,11 @@ public final class StringsManager {
         }
 
         characterNamesMap = new HashMap<>();
+        characterDescriptionsMap = new HashMap<>();
         CharacterEnum[] characterEnums = CharacterEnum.values();
         for (CharacterEnum currEnum : characterEnums) {
             characterNamesMap.put(currEnum, characterNames.get(currEnum.toString()));
+            characterDescriptionsMap.put(currEnum, characterDescriptions.get(currEnum.toString()));
         }
 
         statsNameMap = new HashMap<>();
@@ -65,16 +70,20 @@ public final class StringsManager {
         return itemNamesMap.get(itemEnum);
     }
 
-    public static  String getPerkName(PerkEnum perkEnum) {
+    public static String getPerkName(PerkEnum perkEnum) {
         return perkNamesMap.get(perkEnum);
     }
 
-    public static  String getPerkDescription(PerkEnum perkEnum) {
+    public static String getPerkDescription(PerkEnum perkEnum) {
         return perkDescriptionsMap.get(perkEnum);
     }
 
-    public static  String getCharacterName(CharacterEnum characterEnum) {
+    public static String getCharacterName(CharacterEnum characterEnum) {
         return characterNamesMap.get(characterEnum);
+    }
+
+    public static String getCharacterDescription(CharacterEnum characterEnum) {
+        return characterDescriptionsMap.get(characterEnum);
     }
 
     public static  String getStatName(StatisticEnum statisticEnum) {
