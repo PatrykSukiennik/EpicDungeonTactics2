@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
@@ -18,6 +19,7 @@ public final class StringsManager {
     private static I18NBundle characterNames;
     private static I18NBundle characterDescriptions;
     private static I18NBundle statsNames;
+    private static I18NBundle guiStrings;
 
     private static Map<ItemEnum, String> itemNamesMap;
     private static Map<PerkEnum, String> perkNamesMap;
@@ -25,6 +27,7 @@ public final class StringsManager {
     private static Map<CharacterEnum, String> characterNamesMap;
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<StatisticEnum, String> statsNameMap;
+    private static Map<GuiStringEnum, String> guiStringMap;
 
 
 
@@ -35,6 +38,7 @@ public final class StringsManager {
         characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
         characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
         statsNames = I18NBundle.createBundle(Gdx.files.internal("strings/stats_names"), java.util.Locale.getDefault());
+        guiStrings = I18NBundle.createBundle(Gdx.files.internal("strings/gui_strings"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
         ItemEnum[] itemEnums = ItemEnum.values();
@@ -64,6 +68,12 @@ public final class StringsManager {
             statsNameMap.put(currEnum, statsNames.get(currEnum.toString()));
         }
 
+        guiStringMap = new HashMap<>();
+        GuiStringEnum[] guiStringEnums = GuiStringEnum.values();
+        for (GuiStringEnum currEnum : guiStringEnums) {
+            guiStringMap.put(currEnum, guiStrings.get(currEnum.toString()));
+        }
+
     }
 
     public static String getItemName(ItemEnum itemEnum) {
@@ -90,4 +100,7 @@ public final class StringsManager {
         return statsNameMap.get(statisticEnum);
     }
 
+    public static String getGuiString(GuiStringEnum stringEnum) {
+        return guiStringMap.get(stringEnum);
+    }
 }

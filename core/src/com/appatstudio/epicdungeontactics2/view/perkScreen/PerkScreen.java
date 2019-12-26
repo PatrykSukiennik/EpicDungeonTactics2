@@ -1,10 +1,9 @@
-package com.appatstudio.epicdungeontactics2.view.menuScreen;
+package com.appatstudio.epicdungeontactics2.view.perkScreen;
 
-import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public final class PerkWindow {
+public final class PerkScreen {
 
     private Image bg;
     private PerkIcon[] perks;

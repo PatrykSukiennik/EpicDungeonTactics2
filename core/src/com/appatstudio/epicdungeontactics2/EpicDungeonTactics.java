@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2;
 import com.appatstudio.epicdungeontactics2.global.assets.AssetsMaster;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
@@ -110,5 +111,11 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
 	public static CurrentScreenEnum getCurrentScreen() {
 		return currentScreen;
+	}
+
+	public static void swiped(DirectionEnum directionEnum) {
+		switch (currentScreen) {
+			case MENU_SCREEN: menuScreen.swiped(directionEnum); break;
+		}
 	}
 }

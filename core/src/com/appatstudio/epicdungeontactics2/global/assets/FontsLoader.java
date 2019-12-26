@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 final class FontsLoader {
 
     private static final Color COLOR_WHITE_TEXT = new Color(0.95f, 0.95f, 0.95f, 1f);
-    private static final Color COLOR_GRAY_TEXT = new Color(0.75f, 0.75f, 0.75f, 1f);
+    private static final Color COLOR_GRAY_TEXT = new Color(0.45f, 0.45f, 0.45f, 1f);
     private static final Color COLOR_BLUE_TEXT = new Color(0.1f, 0.1f, 0.95f, 1f);
     private static final Color COLOR_YELLOW_TEXT = new Color(0.1f, 0.75f, 0.75f, 1f);
     private static final Color COLOR_GREEN_TEXT = new Color(0.1f, 0.95f, 0.1f, 1f);
@@ -18,7 +18,7 @@ final class FontsLoader {
     private static final String MAP_FONT_PATH = "fonts/map_font.ttf";
     private static final String DECORATED_FONT_PATH = "fonts/decorated_font.ttf";
 
-    private static final String CHARACTERS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/!#%&8()1234567890-:=+~[]";
+    private static final String CHARACTERS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/_!#%&8()1234567890-:=+~[]";
 
     public static void init(AssetManager assetManager) {
 

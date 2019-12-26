@@ -453,7 +453,7 @@ bows/BOWv18
   index: -1
 bows/BOWv19
   rotate: false
-  xy: 94, 288
+  xy: 168, 264
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -488,21 +488,21 @@ bows/BOWv23
   index: -1
 bows/BOWv24
   rotate: false
-  xy: 214, 288
+  xy: 0, 312
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 bows/BOWv25
   rotate: false
-  xy: 0, 312
+  xy: 214, 288
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 bows/BOWv26
   rotate: false
-  xy: 168, 264
+  xy: 94, 288
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -815,6 +815,13 @@ necklaces/NECKLACEv11
   orig: 16, 16
   offset: 1, 0
   index: -1
+POINTS_PER_LVL_ICON
+  rotate: false
+  xy: 120, 312
+  size: 48, 66
+  orig: 48, 66
+  offset: 0, 0
+  index: -1
 rings/RINGv0
   rotate: false
   xy: 148, 0
@@ -1090,7 +1097,7 @@ SILVER_BUTTON_WIDE
   index: -1
 SILVER_COMMUNICATE_WINDOW
   rotate: false
-  xy: 168, 312
+  xy: 120, 312
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -1202,7 +1209,7 @@ STONE_BUTTON_WIDE
   index: -1
 STONE_COMMUNICATE_WINDOW
   rotate: false
-  xy: 120, 312
+  xy: 168, 312
   size: 48, 66
   orig: 48, 66
   offset: 0, 0

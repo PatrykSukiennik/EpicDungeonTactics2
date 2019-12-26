@@ -1,6 +1,7 @@
-package com.appatstudio.epicdungeontactics2.view.menuScreen;
+package com.appatstudio.epicdungeontactics2.view.perkScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,11 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public final class PerkIcon extends Image {
 
-    private static final float LOADING_TIME = 0.5f;
     private static final float X, HEIGHT, WIDTH;
-
-    private float currentLoadingTime = 0f;
-    private static Texture loadingTexture;
 
     private float y;
     private PerkEnum perkEnum;
@@ -26,6 +23,7 @@ public final class PerkIcon extends Image {
     }
 
     PerkIcon(int pos, PerkEnum perkEnum) {
+        super(GraphicsManager.getPerkIcon(perkEnum));
         y = Gdx.graphics.getHeight()/2f - (HEIGHT * PerkEnum.values().length)/2f + (pos * HEIGHT);
         this.perkEnum = perkEnum;
     }

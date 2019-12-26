@@ -1,13 +1,18 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
+import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.CharacterStats;
 import com.appatstudio.epicdungeontactics2.global.stats.HeroStats;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
@@ -15,20 +20,22 @@ import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosTextWith
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
-public final class CharacterIcon extends Actor {
+public final class CharacterIcon extends Image {
 
     private final CharacterEnum characterEnum;
     private final Animation<SpriteDrawable> animation;
     private float stateTime = 0f;
 
-    RelativePosText title, description;
+    RelativePosText title, description, unlockStage;
     RelativePosTextWithIcon cost;
 
-    boolean isUnlocked = true;
+    boolean isUnlocked;
 
     private float itemsY;
     private float itemSize;
@@ -40,9 +47,10 @@ public final class CharacterIcon extends Actor {
         this.animation = GraphicsManager.getCharactersAnimation(character, CharacterStateEnum.IDLE);
 
         this.characterEnum = character;
+        this.isUnlocked = SavedInfoManager.isUnlocked(characterEnum);
 
         this.setSize(Gdx.graphics.getWidth()/2f, Gdx.graphics.getWidth()/2f);
-        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.8f - this.getHeight());
+        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.85f - this.getHeight());
 
         title = new RelativePosText(
                 FontsManager.getFont(
@@ -70,13 +78,32 @@ public final class CharacterIcon extends Actor {
 
 
         StatisticEnum[] allStats = StatisticEnum.values();
-        stats = new RelativePosTextWithIcon[allStats.length];
+        stats = new RelativePosTextWithIcon[allStats.length + 1];
         for (int i=0; i<allStats.length; i++) {
             stats[i] = new RelativePosTextWithIcon(
                     GraphicsManager.getStatIcon(allStats[i]),
                     isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
-                    allStats[i].toString() + ": " + Integer.toString(CharacterStats.getStat(characterEnum, allStats[i])),
+                    allStats[i].toString() + ": " + CharacterStats.getStat(characterEnum, allStats[i]),
                     Align.left);
+        }
+        stats[stats.length-1] = new RelativePosTextWithIcon(
+                GraphicsManager.getGuiElement(GuiElementEnum.POINTS_PER_LVL_ICON),
+                isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                "PTS: " + HeroStats.getPointsPerLvl(characterEnum),
+                Align.left);
+
+
+        if (!isUnlocked) {
+            unlockStage = new RelativePosText(
+                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    StringsManager.getGuiString(GuiStringEnum.AVAILABLE_AT_STAGE) + ": " + HeroStats.getRequiredStageToUnlock(characterEnum));
+
+            cost = new RelativePosTextWithIcon(
+                    GraphicsManager.getGuiElement(GuiElementEnum.COINS),
+                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    StringsManager.getGuiString(GuiStringEnum.COST) + ": " + Integer.toString(HeroStats.getBuyCost(characterEnum)),
+                    Align.center
+            );
         }
     }
 
@@ -91,9 +118,10 @@ public final class CharacterIcon extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        stateTime += Gdx.graphics.getDeltaTime();
+        if (isUnlocked) stateTime += Gdx.graphics.getDeltaTime();
 
-        animation.getKeyFrame(stateTime).draw(batch, this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        this.setDrawable(animation.getKeyFrame(stateTime));
+        super.draw(batch, parentAlpha);
 
         title.draw(batch,
                 this.getX() + this.getWidth()/2f,
@@ -107,7 +135,24 @@ public final class CharacterIcon extends Actor {
         }
 
         for (int i=0; i<stats.length; i++) {
-            stats[i].draw(batch, this.getX() + this.getWidth()*0.35f, this.getY() - this.getWidth() * 0.6f - (i * this.getWidth() * 0.2f));
+            stats[i].draw(batch, this.getX() + this.getWidth()*0.35f, this.getY() - this.getWidth() * 0.6f - (i * this.getWidth() * 0.16f));
         }
+
+        if (!isUnlocked) {
+            cost.draw(batch, this.getX() + this.getWidth()/2f, this.getY() + this.getHeight() * 0.65f);
+            if (SavedInfoManager.getIntFromFlag(SavedInfoFlagsEnum.DEEPEST_STAGE) < HeroStats.getRequiredStageToUnlock(characterEnum))
+                unlockStage.draw(batch, this.getX() + this.getWidth()/2f, this.getY() + this.getHeight() * 0.45f);
+        }
+
     }
+
+    boolean canBeUnlocked() {
+        return GlobalValues.getGold() >= HeroStats.getBuyCost(characterEnum) && SavedInfoManager.getIntFromFlag(SavedInfoFlagsEnum.DEEPEST_STAGE) >= HeroStats.getRequiredStageToUnlock(characterEnum);
+    }
+
+    void moveToCenterNow() {
+        this.setPosition(Gdx.graphics.getWidth() / 2f - this.getWidth() / 2f, this.getY());
+    }
+
+
 }

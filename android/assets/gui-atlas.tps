@@ -216,6 +216,7 @@
                 <false/>
             </struct>
             <key type="filename">gui/BRONZE_COMMUNICATE_WINDOW.png</key>
+            <key type="filename">gui/POINTS_PER_LVL_ICON.png</key>
             <key type="filename">gui/SILVER_COMMUNICATE_WINDOW.png</key>
             <key type="filename">gui/STONE_COMMUNICATE_WINDOW.png</key>
             <key type="filename">gui/YELLOW_COMMUNICATE_WINDOW.png</key>
@@ -417,6 +418,7 @@
                 <false/>
             </struct>
             <key type="filename">gui/BRONZE_SMALL_BUTTON.png</key>
+            <key type="filename">gui/SETTINGS_ICON.png</key>
             <key type="filename">gui/STONE_SMALL_BUTTON.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

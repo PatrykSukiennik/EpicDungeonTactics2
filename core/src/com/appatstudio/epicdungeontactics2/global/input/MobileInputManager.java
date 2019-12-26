@@ -1,11 +1,15 @@
 package com.appatstudio.epicdungeontactics2.global.input;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
 public final class MobileInputManager implements GestureDetector.GestureListener {
+
+    private final float SWIPE_TOLERANCE = Gdx.graphics.getWidth() * 0.1f;
+
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
         return false;
@@ -24,6 +28,13 @@ public final class MobileInputManager implements GestureDetector.GestureListener
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
+        if (Math.abs(velocityX) > Math.abs(velocityY)) {
+            if (velocityX > SWIPE_TOLERANCE) {
+                EpicDungeonTactics.swiped(DirectionEnum.RIGHT);
+            } else if (velocityX < -SWIPE_TOLERANCE) {
+                EpicDungeonTactics.swiped(DirectionEnum.LEFT);
+            }
+        }
         return false;
     }
 
@@ -51,4 +62,6 @@ public final class MobileInputManager implements GestureDetector.GestureListener
     public void pinchStop() {
 
     }
+
+
 }
