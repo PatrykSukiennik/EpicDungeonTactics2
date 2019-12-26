@@ -2,6 +2,8 @@ package com.appatstudio.epicdungeontactics2.global.managers.savedInfo;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.stats.CharacterStats;
 import com.appatstudio.epicdungeontactics2.global.stats.HeroStats;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -19,6 +21,7 @@ public class SavedInfoManager {
     private static Map<PerkEnum, Integer> perkLvls;
     private static Map<CharacterEnum, Integer> characterLvls;
     private static Map<CharacterEnum, Integer> characterExps;
+    private static Map<CharacterEnum, Map<StatisticEnum, Integer>> characterStats;
 
     static {
         preferences = Gdx.app.getPreferences("epicdungeontactics2");
@@ -29,15 +32,23 @@ public class SavedInfoManager {
             integerMap.put(f, preferences.getInteger(f.toString(), -1));
         }
 
+        StatisticEnum[] allStats = StatisticEnum.values();
         CharacterEnum[] heroes = new CharacterEnum[] {
                 CharacterEnum.HERO_ELF, CharacterEnum.HERO_KNIGHT, CharacterEnum.HERO_WIZZARD, CharacterEnum.HERO_LIZARD,
                 CharacterEnum.HERO_NINJA, CharacterEnum.HERO_PIRATE, CharacterEnum.HERO_BABY
         };
+
         characterLvls = new HashMap<>();
         characterExps = new HashMap<>();
+        characterStats = new HashMap<>();
         for (CharacterEnum c : heroes) {
             characterLvls.put(c, preferences.getInteger("characterLvl" + c.toString(), 1));
-            characterExps.put(c, preferences.getInteger("characterExp" + c.toString(), 1));
+            characterExps.put(c, preferences.getInteger("characterExp" + c.toString(), 0));
+
+            characterStats.put(c, new HashMap<StatisticEnum, Integer>());
+            for (StatisticEnum s : allStats) {
+                characterStats.get(c).put(s, preferences.getInteger("charStat"+c.toString()+s.toString(), CharacterStats.getStat(c, s)));
+            }
         }
 
         perkLvls = new HashMap<>();
@@ -75,5 +86,21 @@ public class SavedInfoManager {
         isCharacterUnlocked.put(characterEnum, true);
         preferences.putBoolean("isUnlocked" + characterEnum.toString(), true);
         preferences.flush();
+    }
+
+    public static int getCharacterStat(CharacterEnum c, StatisticEnum s) {
+        return characterStats.get(c).get(s);
+    }
+
+    public static int getCharacterLvl(CharacterEnum c) {
+        return characterLvls.get(c);
+    }
+
+    public static int getCharacterExp(CharacterEnum c) {
+        return characterExps.get(c);
+    }
+
+    public static int getPerkLvl(PerkEnum perkEnum) {
+        return perkLvls.get(perkEnum);
     }
 }

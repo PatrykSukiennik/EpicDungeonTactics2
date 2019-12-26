@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.viewElements;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -19,7 +20,7 @@ public final class MultiLineText {
         this.alignment = alignment;
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(Batch batch) {
         font.draw(batch, text, x, y, width, alignment, true);
     }
 

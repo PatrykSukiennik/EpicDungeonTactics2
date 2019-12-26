@@ -44,8 +44,6 @@ public final class AssetsMaster {
     public static void init() {
         FontsLoader.init(assetManager);
         GraphicsLoader.init(assetManager);
-        SoundsLoader.init(assetManager);
-        StringsLoader.init(assetManager);
     }
 
     public static float getProgress() {

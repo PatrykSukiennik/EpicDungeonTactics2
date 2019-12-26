@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.appatstudio.epicdungeontactics2" >
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -9,6 +10,11 @@
         android:appCategory="game"
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1351360411950245~7331840089"/>
+
         <activity
             android:name="com.appatstudio.epicdungeontactics2.AndroidLauncher"
             android:label="@string/app_name" 

@@ -35,6 +35,8 @@ public final class CharacterIcon extends Image {
     RelativePosText title, description, unlockStage;
     RelativePosTextWithIcon cost;
 
+    LvlExpBar lvlExpBar;
+
     boolean isUnlocked;
 
     private float itemsY;
@@ -50,7 +52,7 @@ public final class CharacterIcon extends Image {
         this.isUnlocked = SavedInfoManager.isUnlocked(characterEnum);
 
         this.setSize(Gdx.graphics.getWidth()/2f, Gdx.graphics.getWidth()/2f);
-        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.85f - this.getHeight());
+        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.9f - this.getHeight());
 
         title = new RelativePosText(
                 FontsManager.getFont(
@@ -83,7 +85,7 @@ public final class CharacterIcon extends Image {
             stats[i] = new RelativePosTextWithIcon(
                     GraphicsManager.getStatIcon(allStats[i]),
                     isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
-                    allStats[i].toString() + ": " + CharacterStats.getStat(characterEnum, allStats[i]),
+                    allStats[i].toString() + ": " + SavedInfoManager.getCharacterStat(characterEnum, allStats[i]),
                     Align.left);
         }
         stats[stats.length-1] = new RelativePosTextWithIcon(
@@ -105,6 +107,12 @@ public final class CharacterIcon extends Image {
                     Align.center
             );
         }
+
+        lvlExpBar = new LvlExpBar(
+                SavedInfoManager.getCharacterExp(character),
+                HeroStats.getExpCap(SavedInfoManager.getCharacterLvl(character)),
+                SavedInfoManager.getCharacterLvl(character)
+        );
     }
 
     boolean tap(float x, float y) {
@@ -119,6 +127,8 @@ public final class CharacterIcon extends Image {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (isUnlocked) stateTime += Gdx.graphics.getDeltaTime();
+
+        if (isUnlocked) lvlExpBar.draw(batch, this.getX() + this.getWidth()*1.1f, this.getY() + this.getHeight()*0.2f);
 
         this.setDrawable(animation.getKeyFrame(stateTime));
         super.draw(batch, parentAlpha);

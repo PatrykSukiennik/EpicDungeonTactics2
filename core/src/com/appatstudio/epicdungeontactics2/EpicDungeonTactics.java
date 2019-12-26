@@ -8,20 +8,25 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
+import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 import java.util.Random;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.GAME_SCREEN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.MENU_SCREEN;
 
 public class EpicDungeonTactics extends ApplicationAdapter {
+
+	private static AndroidCommunication androidCommunication;
 
 	public static Random random;
 
 	private static LoadingScreen loadingScreen;
 	private static MenuScreen menuScreen;
+	private static PerkScreen perkScreen;
 	private static GameScreen gameScreen;
 
 	private static CurrentScreenEnum currentScreen;
@@ -34,7 +39,12 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 	}
 
 	public static void startGame() {
+		gameScreen = new GameScreen(selectedHero, selectedPerk);
+		setCurrentScreen(GAME_SCREEN);
+	}
 
+	public EpicDungeonTactics(AndroidCommunication ac) {
+		this.androidCommunication = ac;
 	}
 
 	@Override
@@ -65,6 +75,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 				menuScreen.draw();
 				break;
 
+			case PERK_SCREEN:
+				perkScreen.draw();
+				break;
+
 			case GAME_SCREEN:
 				gameScreen.draw();
 				break;
@@ -82,8 +96,12 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 				if (menuScreen == null) menuScreen = new MenuScreen();
 				menuScreen.draw();
 				break;
+			case PERK_SCREEN:
+				if (perkScreen == null) perkScreen = new PerkScreen();
+				perkScreen.draw();
+				break;
 			case GAME_SCREEN:
-				gameScreen = new GameScreen();
+				//startGame() should be done yet
 				gameScreen.draw();
 				break;
 		}
@@ -95,6 +113,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 		switch (currentScreen) {
 			case MENU_SCREEN:
 				menuScreen.tap(x, y);
+				break;
+			case PERK_SCREEN:
+				perkScreen.tap(x, y);
 				break;
 			case GAME_SCREEN:
 
@@ -117,5 +138,13 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 		switch (currentScreen) {
 			case MENU_SCREEN: menuScreen.swiped(directionEnum); break;
 		}
+	}
+
+	public static boolean isInternetOn() {
+		return androidCommunication.checkInternetConnection();
+	}
+
+	public static void generateInterstitialAd() {
+		androidCommunication.generateInterstitialAd();
 	}
 }

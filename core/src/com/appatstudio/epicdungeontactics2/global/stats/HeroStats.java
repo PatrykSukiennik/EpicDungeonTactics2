@@ -82,4 +82,12 @@ public final class HeroStats {
         return skillCooldownMap.get(characterEnum);
     }
 
+    private static final int[] EXP_CAPS = new int[] {
+            100, 1000, 10000, 100000, 10000000, 1000000000
+    };
+
+    public static int getExpCap(int lvl) {
+        return EXP_CAPS[lvl - 1];
+    }
+
 }
