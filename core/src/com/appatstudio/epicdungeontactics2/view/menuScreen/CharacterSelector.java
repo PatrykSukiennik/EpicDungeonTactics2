@@ -25,7 +25,7 @@ public final class CharacterSelector {
     CharacterIcon[] characterIcons;
     SelectorArrow leftArrow, rightArrow;
     int currectIndex = 0;
-    TextWithIcon goldStatus;
+    TextWithIcon goldStatus, statsButton;
 
     private ButtonWithText startButton, unlockButton;
 
@@ -76,6 +76,16 @@ public final class CharacterSelector {
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
                 Align.left
         );
+
+        statsButton = new TextWithIcon(
+                GraphicsManager.getGuiElement(GuiElementEnum.STATS_ICON),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                StringsManager.getGuiString(GuiStringEnum.STATS),
+                Gdx.graphics.getWidth() * 0.95f,
+                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
+                Align.right
+        );
     }
 
     public void draw(SpriteBatch batch) {
@@ -91,6 +101,7 @@ public final class CharacterSelector {
         rightArrow.draw(batch, 1f);
 
         goldStatus.draw(batch);
+        statsButton.draw(batch);
 
         if (characterIcons[currectIndex].isUnlocked) startButton.draw(batch, 1f);
         else if (characterIcons[currectIndex].canBeUnlocked()) unlockButton.draw(batch, 1f);
@@ -103,7 +114,11 @@ public final class CharacterSelector {
         } else if (rightArrow.tap(x, y)) {
             moveRight();
             return true;
-        } else {
+        } else if (statsButton.tap(x, y)) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.STATS_SCREEN);
+            return true;
+        }
+        else {
             if (characterIcons[currectIndex].isUnlocked) {
                 if (startButton.tap(x, y)) {
                     EpicDungeonTactics.setSelectedHero(characterIcons[currectIndex].getCharacterEnum());

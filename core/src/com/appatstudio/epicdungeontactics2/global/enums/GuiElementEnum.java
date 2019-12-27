@@ -13,5 +13,5 @@ public enum  GuiElementEnum {
     COINS,
     POINTS_PER_LVL_ICON,
 
-    BACK_ICON
+    BACK_ICON, STATS_ICON
 }

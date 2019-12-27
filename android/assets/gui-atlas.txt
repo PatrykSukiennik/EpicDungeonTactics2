@@ -1417,6 +1417,13 @@ stat-icons/VIT
   orig: 48, 16
   offset: 0, 0
   index: -1
+STATS_ICON
+  rotate: false
+  xy: 176, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 STONE_BUTTON_WIDE
   rotate: false
   xy: 174, 143

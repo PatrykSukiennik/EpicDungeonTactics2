@@ -5,6 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -20,6 +21,7 @@ public final class StringsManager {
     private static I18NBundle characterDescriptions;
     private static I18NBundle statsNames;
     private static I18NBundle guiStrings;
+    private static I18NBundle playerStatStrings;
 
     private static Map<ItemEnum, String> itemNamesMap;
     private static Map<PerkEnum, String> perkNamesMap;
@@ -28,6 +30,7 @@ public final class StringsManager {
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<StatisticEnum, String> statsNameMap;
     private static Map<GuiStringEnum, String> guiStringMap;
+    private static Map<SavedInfoFlagsEnum, String> playerStatStringMap;
 
 
 
@@ -39,6 +42,7 @@ public final class StringsManager {
         characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
         statsNames = I18NBundle.createBundle(Gdx.files.internal("strings/stats_names"), java.util.Locale.getDefault());
         guiStrings = I18NBundle.createBundle(Gdx.files.internal("strings/gui_strings"), java.util.Locale.getDefault());
+        playerStatStrings = I18NBundle.createBundle(Gdx.files.internal("strings/player_statistic_descriptions"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
         ItemEnum[] itemEnums = ItemEnum.values();
@@ -74,6 +78,14 @@ public final class StringsManager {
             guiStringMap.put(currEnum, guiStrings.get(currEnum.toString()));
         }
 
+        playerStatStringMap = new HashMap<>();
+        SavedInfoFlagsEnum[] allFlags = SavedInfoFlagsEnum.values();
+        for (SavedInfoFlagsEnum f : allFlags) {
+            if (f != SavedInfoFlagsEnum.GOLD) {
+                playerStatStringMap.put(f, playerStatStrings.get(f.toString()));
+            }
+        }
+
     }
 
     public static String getItemName(ItemEnum itemEnum) {
@@ -102,5 +114,9 @@ public final class StringsManager {
 
     public static String getGuiString(GuiStringEnum stringEnum) {
         return guiStringMap.get(stringEnum);
+    }
+
+    public static String getPlayerStatDescription(SavedInfoFlagsEnum statEnum) {
+        return playerStatStringMap.get(statEnum);
     }
 }

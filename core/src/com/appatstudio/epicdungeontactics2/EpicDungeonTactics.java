@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
+import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -26,6 +27,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
 	private static LoadingScreen loadingScreen;
 	private static MenuScreen menuScreen;
+	private static StatsScreen statsScreen;
 	private static PerkScreen perkScreen;
 	private static GameScreen gameScreen;
 
@@ -75,6 +77,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 				menuScreen.draw();
 				break;
 
+			case STATS_SCREEN:
+				statsScreen.draw();
+				break;
+
 			case PERK_SCREEN:
 				perkScreen.draw();
 				break;
@@ -96,6 +102,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 				if (menuScreen == null) menuScreen = new MenuScreen();
 				menuScreen.draw();
 				break;
+			case STATS_SCREEN:
+				if (statsScreen == null) statsScreen = new StatsScreen();
+				statsScreen.draw();
+				break;
 			case PERK_SCREEN:
 				if (perkScreen == null) perkScreen = new PerkScreen();
 				perkScreen.draw();
@@ -113,6 +123,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 		switch (currentScreen) {
 			case MENU_SCREEN:
 				menuScreen.tap(x, y);
+				break;
+			case STATS_SCREEN:
+				statsScreen.tap(x, y);
 				break;
 			case PERK_SCREEN:
 				perkScreen.tap(x, y);

@@ -32,12 +32,20 @@ public final class TextWithIcon {
                 iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
                 textX = iconX + iconSize * 1.2f;
                 textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                break;
 
             }
             case Align.left: {
                 iconX = posX;
                 iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
                 textX = iconX + iconSize * 1.2f;
+                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                break;
+            }
+            case Align.right: {
+                iconX = posX - iconSize;
+                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                textX = posX - wholeWidth;
                 textY = posY + FontsManager.getTextHeight(font, "0")/2f;
             }
         }
@@ -49,10 +57,16 @@ public final class TextWithIcon {
     }
 
     public boolean tap(float x, float y) {
-        return x > iconX - iconSize * 0.4f &&
-                x < iconX + wholeWidth + iconSize * 0.4f &&
-                y > iconY - iconSize/2f - iconSize * 0.4f &&
-                y < iconY + iconSize/2f + iconSize * 0.4f;
+        return alignment == Align.right ?
+                x > iconX + iconSize - wholeWidth - iconSize * 0.4f &&
+                        x < iconX + iconSize * 1.4f &&
+                        y > iconY - iconSize/2f - iconSize * 0.4f &&
+                        y < iconY + iconSize/2f + iconSize * 0.4f
+                :
+                x > iconX - iconSize * 0.4f &&
+                        x < iconX + wholeWidth + iconSize * 0.4f &&
+                        y > iconY - iconSize/2f - iconSize * 0.4f &&
+                        y < iconY + iconSize/2f + iconSize * 0.4f;
     }
 
     public void setText(String text) {
@@ -70,6 +84,12 @@ public final class TextWithIcon {
                 iconX = posX;
                 iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
                 textX = iconX + iconSize * 1.2f;
+                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+            }
+            case Align.right: {
+                iconX = posX - iconSize;
+                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                textX = posX - wholeWidth;
                 textY = posY + FontsManager.getTextHeight(font, "0")/2f;
             }
         }

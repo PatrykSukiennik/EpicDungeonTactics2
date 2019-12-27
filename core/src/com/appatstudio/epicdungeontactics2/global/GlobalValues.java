@@ -14,7 +14,7 @@ public final class GlobalValues {
     static {
         gold = SavedInfoManager.getIntFromFlag(SavedInfoFlagsEnum.GOLD);
         if (gold == -1) {
-            gold = 3000;
+            gold = 500;
             SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
         }
     }

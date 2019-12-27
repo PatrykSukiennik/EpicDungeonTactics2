@@ -181,6 +181,26 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">gui/BACK_ICON.png</key>
+            <key type="filename">gui/BRONZE_COMMUNICATE_WINDOW.png</key>
+            <key type="filename">gui/LVL_EXP_BAR.png</key>
+            <key type="filename">gui/LVL_EXP_BAR_BG.png</key>
+            <key type="filename">gui/POINTS_PER_LVL_ICON.png</key>
+            <key type="filename">gui/SILVER_COMMUNICATE_WINDOW.png</key>
+            <key type="filename">gui/STONE_COMMUNICATE_WINDOW.png</key>
+            <key type="filename">gui/YELLOW_COMMUNICATE_WINDOW.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,17,24,33</rect>
+                <key>scale9Paddings</key>
+                <rect>12,17,24,33</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/BOTTOM_BAR.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -212,23 +232,6 @@
                 <rect>12,4,24,8</rect>
                 <key>scale9Paddings</key>
                 <rect>12,4,24,8</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">gui/BRONZE_COMMUNICATE_WINDOW.png</key>
-            <key type="filename">gui/POINTS_PER_LVL_ICON.png</key>
-            <key type="filename">gui/SILVER_COMMUNICATE_WINDOW.png</key>
-            <key type="filename">gui/STONE_COMMUNICATE_WINDOW.png</key>
-            <key type="filename">gui/YELLOW_COMMUNICATE_WINDOW.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>12,17,24,33</rect>
-                <key>scale9Paddings</key>
-                <rect>12,17,24,33</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -419,7 +422,36 @@
             </struct>
             <key type="filename">gui/BRONZE_SMALL_BUTTON.png</key>
             <key type="filename">gui/SETTINGS_ICON.png</key>
+            <key type="filename">gui/STATS_ICON.png</key>
             <key type="filename">gui/STONE_SMALL_BUTTON.png</key>
+            <key type="filename">gui/perk-icons/APPLE_FINDER.png</key>
+            <key type="filename">gui/perk-icons/BOW_DMG.png</key>
+            <key type="filename">gui/perk-icons/CHANCE_FOR_ANY_DROP.png</key>
+            <key type="filename">gui/perk-icons/DEX_BONUS.png</key>
+            <key type="filename">gui/perk-icons/DOUBLE_ATTACK.png</key>
+            <key type="filename">gui/perk-icons/DOUBLE_MOVE.png</key>
+            <key type="filename">gui/perk-icons/EXP_BONUS.png</key>
+            <key type="filename">gui/perk-icons/GLASS_CANNON.png</key>
+            <key type="filename">gui/perk-icons/GOLD_BONUS.png</key>
+            <key type="filename">gui/perk-icons/HP_RESTORATION_KILL.png</key>
+            <key type="filename">gui/perk-icons/HP_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/perk-icons/INSTAKILL_ENEMY.png</key>
+            <key type="filename">gui/perk-icons/INT_BONUS.png</key>
+            <key type="filename">gui/perk-icons/LCK_BONUS.png</key>
+            <key type="filename">gui/perk-icons/MAGICAL_DMG_BONUS.png</key>
+            <key type="filename">gui/perk-icons/MAGICAL_RESIST.png</key>
+            <key type="filename">gui/perk-icons/MAGIC_MIRROR.png</key>
+            <key type="filename">gui/perk-icons/MANA_RESTORATION_KILL.png</key>
+            <key type="filename">gui/perk-icons/MANA_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/perk-icons/MELE_DMG.png</key>
+            <key type="filename">gui/perk-icons/MISS_STAGE.png</key>
+            <key type="filename">gui/perk-icons/POISON_DURATION_DECREASE.png</key>
+            <key type="filename">gui/perk-icons/SKILL_COOLDOWN.png</key>
+            <key type="filename">gui/perk-icons/STR_BONUS.png</key>
+            <key type="filename">gui/perk-icons/TANK.png</key>
+            <key type="filename">gui/perk-icons/THIRD_CHANCE.png</key>
+            <key type="filename">gui/perk-icons/UNIQUE_LOOT.png</key>
+            <key type="filename">gui/perk-icons/VIT_BONUS.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
