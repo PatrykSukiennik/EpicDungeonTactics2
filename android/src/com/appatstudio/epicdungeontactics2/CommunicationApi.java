@@ -2,11 +2,11 @@ package com.appatstudio.epicdungeontactics2;
 
 final class CommunicationApi {
 
-    public boolean checkNetworkConnection() {
+    boolean checkNetworkConnection() {
         return AndroidLauncher.isInternetConnectionUp;
     }
 
-    public void generateInterstitialAd() {
+    void generateInterstitialAd() {
         AndroidLauncher.isAdWanted = true;
     }
 }

@@ -4,7 +4,7 @@ public class CommunicationHandler implements AndroidCommunication {
 
     private final CommunicationApi communicationApi;
 
-    public CommunicationHandler() {
+    CommunicationHandler() {
         communicationApi = new CommunicationApi();
     }
 
