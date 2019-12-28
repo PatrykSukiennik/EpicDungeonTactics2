@@ -1,12 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
-import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
-import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
-import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public final class MenuScreen {
@@ -28,7 +22,7 @@ public final class MenuScreen {
     }
 
     public boolean tap(float x, float y) {
-        if (characterSelector.tap(x, y)) {}
+        characterSelector.tap(x, y);
 
         return true;
     }

@@ -28,17 +28,6 @@ public final class GraphicsManager {
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
-    public static void load(AssetManager assetManager) {
-        TextureAtlas guiAtlas = assetManager.get("gui-atlas.txt", TextureAtlas.class);
-        TextureAtlas worldAtlas = assetManager.get("game-world-graphics-atlas.txt", TextureAtlas.class);
-
-        loadItems(guiAtlas);
-        loadGuiElements(guiAtlas);
-
-        loadCharacters(worldAtlas);
-
-    }
-
     private static void loadItems(TextureAtlas atlas) {
         itemImages = new HashMap<>();
         ItemEnum[] allItems = ItemEnum.values();
@@ -50,80 +39,70 @@ public final class GraphicsManager {
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("armors/" + s))));
-            }
-            else if (s.contains("ARROW")) {
+            } else if (s.contains("ARROW")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("arrows/" + s))));
 
-            }
-            else if (s.contains("BOOK")) {
+            } else if (s.contains("BOOK")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("books/" + s))));
 
-            }
-            else if (s.contains("BOW")) {
+            } else if (s.contains("BOW")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("bows/" + s))));
 
-            }
-            else if (s.contains("FOOD")) {
+            } else if (s.contains("FOOD")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("food/" + s))));
 
-            }
-            else if (s.contains("HELMET")) {
+            } else if (s.contains("HELMET")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("helmets/" + s))));
 
-            }
-            else if (s.contains("NECKLACE")) {
+            } else if (s.contains("NECKLACE")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("necklaces/" + s))));
 
-            }
-            else if (s.contains("RING")) {
+            } else if (s.contains("RING")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("rings/" + s))));
 
-            }
-            else if (s.contains("SHIELD")) {
+            } else if (s.contains("SHIELD")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("shields/" + s))));
 
-            }
-            else if (s.contains("STAFF")) {
+            } else if (s.contains("STAFF")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("staffs/" + s))));
 
-            }
-            else if (s.contains("SWORD")){
+            } else if (s.contains("SWORD")) {
                 itemImages.put(
                         e,
                         new SpriteDrawable(
@@ -140,6 +119,7 @@ public final class GraphicsManager {
                                 atlas.findRegion("KEY"))));
 
     }
+
     private static void loadGuiElements(TextureAtlas atlas) {
         guiElements = new HashMap<>();
         GuiElementEnum[] allElements = GuiElementEnum.values();
@@ -198,6 +178,17 @@ public final class GraphicsManager {
         return new Animation<>(frameTime, frames, playMode);
     }
 
+    public static void load(AssetManager assetManager) {
+        TextureAtlas guiAtlas = assetManager.get("gui-atlas.txt", TextureAtlas.class);
+        TextureAtlas worldAtlas = assetManager.get("game-world-graphics-atlas.txt", TextureAtlas.class);
+
+        loadItems(guiAtlas);
+        loadGuiElements(guiAtlas);
+
+        loadCharacters(worldAtlas);
+
+    }
+
     public static Animation<SpriteDrawable> getCharactersAnimation(CharacterEnum c, CharacterStateEnum s) {
         return charactersAnimations.get(c).get(s);
     }
@@ -214,6 +205,8 @@ public final class GraphicsManager {
         return statIconsMap.get(s);
     }
 
-    public static SpriteDrawable getPerkIcon(PerkEnum p) {return perkIconsMap.get(p);}
+    public static SpriteDrawable getPerkIcon(PerkEnum p) {
+        return perkIconsMap.get(p);
+    }
 
 }

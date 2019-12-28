@@ -4,7 +4,6 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.CharacterStats;
-import com.appatstudio.epicdungeontactics2.global.stats.HeroStats;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
@@ -17,6 +16,8 @@ public class SavedInfoManager {
 
     private static Map<CharacterEnum, Boolean> isCharacterUnlocked;
     private static Map<SavedInfoFlagsEnum, Integer> integerMap;
+    private static Map<PlayerStatsTrackerFlagsEnum, Integer> playerStatsMap;
+    private static Map<PlayerStatsTrackerFlagsEnum, Integer> playerStatsWaitingRewards;
 
     private static Map<PerkEnum, Integer> perkLvls;
     private static Map<CharacterEnum, Integer> characterLvls;
@@ -32,8 +33,16 @@ public class SavedInfoManager {
             integerMap.put(f, preferences.getInteger(f.toString(), -1));
         }
 
+        playerStatsMap = new HashMap<>();
+        playerStatsWaitingRewards = new HashMap<>();
+        PlayerStatsTrackerFlagsEnum[] playerFlags = PlayerStatsTrackerFlagsEnum.values();
+        for (PlayerStatsTrackerFlagsEnum f : playerFlags) {
+            playerStatsMap.put(f, preferences.getInteger(f.toString(), 0));
+            playerStatsWaitingRewards.put(f, preferences.getInteger("waitingRewards" + f.toString(), 0));
+        }
+
         StatisticEnum[] allStats = StatisticEnum.values();
-        CharacterEnum[] heroes = new CharacterEnum[] {
+        CharacterEnum[] heroes = new CharacterEnum[]{
                 CharacterEnum.HERO_ELF, CharacterEnum.HERO_KNIGHT, CharacterEnum.HERO_WIZZARD, CharacterEnum.HERO_LIZARD,
                 CharacterEnum.HERO_NINJA, CharacterEnum.HERO_PIRATE, CharacterEnum.HERO_BABY
         };
@@ -47,7 +56,7 @@ public class SavedInfoManager {
 
             characterStats.put(c, new HashMap<StatisticEnum, Integer>());
             for (StatisticEnum s : allStats) {
-                characterStats.get(c).put(s, preferences.getInteger("charStat"+c.toString()+s.toString(), CharacterStats.getStat(c, s)));
+                characterStats.get(c).put(s, preferences.getInteger("charStat" + c.toString() + s.toString(), CharacterStats.getStat(c, s)));
             }
         }
 
@@ -102,5 +111,11 @@ public class SavedInfoManager {
 
     public static int getPerkLvl(PerkEnum perkEnum) {
         return perkLvls.get(perkEnum);
+    }
+
+    public static int getPlayerStat(PlayerStatsTrackerFlagsEnum flag) {return playerStatsMap.get(flag);}
+
+    public static int getPlayerStatRewardWaiting(PlayerStatsTrackerFlagsEnum flag) {
+        return playerStatsWaitingRewards.get(flag);
     }
 }

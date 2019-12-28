@@ -21,143 +21,139 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum
 
 public class EpicDungeonTactics extends ApplicationAdapter {
 
-	private static AndroidCommunication androidCommunication;
+    private static AndroidCommunication androidCommunication;
 
-	public static Random random;
+    public static Random random;
 
-	private static LoadingScreen loadingScreen;
-	private static MenuScreen menuScreen;
-	private static StatsScreen statsScreen;
-	private static PerkScreen perkScreen;
-	private static GameScreen gameScreen;
+    private static LoadingScreen loadingScreen;
+    private static MenuScreen menuScreen;
+    private static StatsScreen statsScreen;
+    private static PerkScreen perkScreen;
+    private static GameScreen gameScreen;
 
-	private static CurrentScreenEnum currentScreen;
+    private static CurrentScreenEnum currentScreen;
 
-	private static CharacterEnum selectedHero;
-	private static PerkEnum selectedPerk;
+    private static CharacterEnum selectedHero;
+    private static PerkEnum selectedPerk;
 
-	static {
-		random = new Random();
-	}
+    static {
+        random = new Random();
+    }
 
-	public static void startGame() {
-		gameScreen = new GameScreen(selectedHero, selectedPerk);
-		setCurrentScreen(GAME_SCREEN);
-	}
+    public static void startGame() {
+        gameScreen = new GameScreen(selectedHero, selectedPerk);
+        setCurrentScreen(GAME_SCREEN);
+    }
 
-	public EpicDungeonTactics(AndroidCommunication ac) {
-		this.androidCommunication = ac;
-	}
+    public EpicDungeonTactics(AndroidCommunication ac) {
+        androidCommunication = ac;
+    }
 
-	@Override
-	public void create () {
-		currentScreen = CurrentScreenEnum.LOADING_SCREEN;
-		loadingScreen = new LoadingScreen();
+    @Override
+    public void create() {
+        currentScreen = CurrentScreenEnum.LOADING_SCREEN;
+        loadingScreen = new LoadingScreen();
 
-		AssetsMaster.init();
-	}
+        AssetsMaster.init();
+    }
 
-	@Override
-	public void render() {
-		Gdx.gl.glClearColor(0,  0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		switch (currentScreen) {
-			case LOADING_SCREEN:
-				loadingScreen.draw(AssetsMaster.getProgress());
+        switch (currentScreen) {
+            case LOADING_SCREEN:
+                loadingScreen.draw(AssetsMaster.getProgress());
 
-				if (AssetsMaster.isFinished()) {
-					AssetsMaster.loaded();
-					loadingScreen.dispose();
-					setCurrentScreen(MENU_SCREEN);
-				}
-				break;
+                if (AssetsMaster.isFinished()) {
+                    AssetsMaster.loaded();
+                    loadingScreen.dispose();
+                    setCurrentScreen(MENU_SCREEN);
+                }
+                break;
 
-			case MENU_SCREEN:
-				menuScreen.draw();
-				break;
+            case MENU_SCREEN:
+                menuScreen.draw();
+                break;
 
-			case STATS_SCREEN:
-				statsScreen.draw();
-				break;
+            case STATS_SCREEN:
+                statsScreen.draw();
+                break;
 
-			case PERK_SCREEN:
-				perkScreen.draw();
-				break;
+            case PERK_SCREEN:
+                perkScreen.draw();
+                break;
 
-			case GAME_SCREEN:
-				gameScreen.draw();
-				break;
-		}
-	}
+            case GAME_SCREEN:
+                gameScreen.draw();
+                break;
+        }
+    }
 
-	@Override
-	public void dispose () {
-		AssetsMaster.dispose();
-	}
+    @Override
+    public void dispose() {
+        AssetsMaster.dispose();
+    }
 
-	public static void setCurrentScreen(CurrentScreenEnum newCurrentScreen) {
-		switch (newCurrentScreen) {
-			case MENU_SCREEN:
-				if (menuScreen == null) menuScreen = new MenuScreen();
-				menuScreen.draw();
-				break;
-			case STATS_SCREEN:
-				if (statsScreen == null) statsScreen = new StatsScreen();
-				statsScreen.draw();
-				break;
-			case PERK_SCREEN:
-				if (perkScreen == null) perkScreen = new PerkScreen();
-				perkScreen.draw();
-				break;
-			case GAME_SCREEN:
-				//startGame() should be done yet
-				gameScreen.draw();
-				break;
-		}
+    public static void setCurrentScreen(CurrentScreenEnum newCurrentScreen) {
+        switch (newCurrentScreen) {
+            case MENU_SCREEN:
+                if (menuScreen == null) menuScreen = new MenuScreen();
+                menuScreen.draw();
+                break;
+            case STATS_SCREEN:
+                if (statsScreen == null) statsScreen = new StatsScreen();
+                statsScreen.draw();
+                break;
+            case PERK_SCREEN:
+                if (perkScreen == null) perkScreen = new PerkScreen();
+                perkScreen.draw();
+                break;
+            case GAME_SCREEN:
+                //startGame() should be done yet
+                gameScreen.draw();
+                break;
+        }
 
-		currentScreen = newCurrentScreen;
-	}
+        currentScreen = newCurrentScreen;
+    }
 
-	public static void tap(float x, float y) {
-		switch (currentScreen) {
-			case MENU_SCREEN:
-				menuScreen.tap(x, y);
-				break;
-			case STATS_SCREEN:
-				statsScreen.tap(x, y);
-				break;
-			case PERK_SCREEN:
-				perkScreen.tap(x, y);
-				break;
-			case GAME_SCREEN:
+    public static void tap(float x, float y) {
+        switch (currentScreen) {
+            case MENU_SCREEN:
+                menuScreen.tap(x, y);
+                break;
+            case STATS_SCREEN:
+                statsScreen.tap(x, y);
+                break;
+            case PERK_SCREEN:
+                perkScreen.tap(x, y);
+                break;
+            case GAME_SCREEN:
 
-		}
-	}
+        }
+    }
 
-	public static void setSelectedHero(CharacterEnum selectedHero) {
-		EpicDungeonTactics.selectedHero = selectedHero;
-	}
+    public static void setSelectedHero(CharacterEnum selectedHero) {
+        EpicDungeonTactics.selectedHero = selectedHero;
+    }
 
-	public static void setSelectedPerk(PerkEnum selectedPerk) {
-		EpicDungeonTactics.selectedPerk = selectedPerk;
-	}
+    public static void setSelectedPerk(PerkEnum selectedPerk) {
+        EpicDungeonTactics.selectedPerk = selectedPerk;
+    }
 
-	public static CurrentScreenEnum getCurrentScreen() {
-		return currentScreen;
-	}
+    public static void swiped(DirectionEnum directionEnum) {
+        if (currentScreen == MENU_SCREEN) {
+            menuScreen.swiped(directionEnum);
+        }
+    }
 
-	public static void swiped(DirectionEnum directionEnum) {
-		switch (currentScreen) {
-			case MENU_SCREEN: menuScreen.swiped(directionEnum); break;
-		}
-	}
+    public static boolean isInternetOn() {
+        return androidCommunication.checkInternetConnection();
+    }
 
-	public static boolean isInternetOn() {
-		return androidCommunication.checkInternetConnection();
-	}
-
-	public static void generateInterstitialAd() {
-		androidCommunication.generateInterstitialAd();
-	}
+    public static void generateInterstitialAd() {
+        androidCommunication.generateInterstitialAd();
+    }
 }

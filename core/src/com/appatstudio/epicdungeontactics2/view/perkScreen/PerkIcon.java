@@ -9,21 +9,16 @@ import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoMa
 import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 
 public final class PerkIcon extends Image {
 
     private static final float X, ICON_SIZE, WIDTH;
-
-
     private float y;
     private PerkEnum perkEnum;
     private MultiLineText title, description;
-    private boolean isSelected = false;
 
     static {
         X = Gdx.graphics.getWidth() * 0.1f;
@@ -43,28 +38,32 @@ public final class PerkIcon extends Image {
 
         title = new MultiLineText(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getPerkName(perkEnum) + " lvl." + Integer.toString(lvl),
-                (this.getX() + WIDTH)/2f + ICON_SIZE/2f,
+                StringsManager.getPerkName(perkEnum) + " lvl." + lvl,
+                X + ICON_SIZE * 1.2f,
                 WIDTH - ICON_SIZE * 1.2f,
-                this.y + ICON_SIZE * 0.85f,
-                Align.center
+                this.y + ICON_SIZE * 0.9f,
+                Align.left
         );
 
         String descEnd = StringsManager.getPerkDescription(perkEnum);
         float perkStat = PerkStats.getPerkStat(perkEnum, lvl);
         String descString =
                 perkStat > 1 ?
-                        Integer.toString((int)perkStat) + " " + descEnd :
-                        Integer.toString((int)(perkStat * 100)) + "% " + descEnd;
+                        (int) perkStat + " " + descEnd :
+                        (int) (perkStat * 100) + "% " + descEnd;
 
         description = new MultiLineText(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 descString,
-                (this.getX() + WIDTH)/2f + ICON_SIZE/2f,
+                X + ICON_SIZE * 1.2f,
                 WIDTH - ICON_SIZE * 1.6f,
-                this.y + ICON_SIZE * 0.6f,
-                Align.center
+                this.y + ICON_SIZE * 0.55f,
+                Align.left
         );
+    }
+
+    PerkEnum getPerkEnum() {
+        return perkEnum;
     }
 
     @Override
@@ -77,15 +76,7 @@ public final class PerkIcon extends Image {
 
     public boolean tap(float x, float y) {
         return x > X && x < X + WIDTH &&
-            y > this.y && y < this.y + ICON_SIZE;
-    }
-
-    public PerkEnum getPerkEnum() {
-        return perkEnum;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
+                y > this.y && y < this.y + ICON_SIZE;
     }
 
     static float getIconHeight() {

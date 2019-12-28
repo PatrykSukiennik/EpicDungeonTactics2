@@ -19,8 +19,8 @@ public final class ButtonWithText extends Image {
 
         this.font = font;
         this.text = text;
-        textX = x + width/2f - FontsManager.getTextWidth(font, text)/2f;
-        textY = y + height/2f + FontsManager.getTextHeight(font, text)*0.7f;
+        textX = x + width / 2f - FontsManager.getTextWidth(font, text) / 2f;
+        textY = y + height / 2f + FontsManager.getTextHeight(font, text) * 0.7f;
     }
 
     @Override

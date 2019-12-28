@@ -215,6 +215,8 @@
                 <false/>
             </struct>
             <key type="filename">gui/BRONZE_BUTTON_WIDE.png</key>
+            <key type="filename">gui/PLAYER_STAT_PROGRESS_BAR.png</key>
+            <key type="filename">gui/PLAYER_STAT_PROGRESS_BG.png</key>
             <key type="filename">gui/SILVER_BUTTON_WIDE.png</key>
             <key type="filename">gui/STONE_BUTTON_WIDE.png</key>
             <key type="filename">gui/YELLOW_BUTTON_WIDE.png</key>

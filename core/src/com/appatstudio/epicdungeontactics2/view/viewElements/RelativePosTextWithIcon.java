@@ -24,18 +24,24 @@ public class RelativePosTextWithIcon {
 
         switch (alignment) {
             case Align.center: {
-                iconModifX = -wholeWidth/2f;
-                iconModifY = -iconSize/2f;
+                iconModifX = -wholeWidth / 2f;
+                iconModifY = -iconSize / 2f;
                 textModifX = iconModifX + iconSize * 1.2f;
-                textModifY = iconSize/2f;
+                textModifY = iconSize / 2f;
                 break;
             }
             case Align.left: {
                 iconModifX = 0;
-                iconModifY = -iconSize/2f;
+                iconModifY = 0;
                 textModifX = iconSize * 1.2f;
-                textModifY = iconSize/2f;
+                textModifY = iconSize;
                 break;
+            }
+            case Align.right: {
+                iconModifX = -iconSize;
+                iconModifY = 0;
+                textModifX = -wholeWidth;
+                textModifY = iconSize;
             }
         }
     }
@@ -47,9 +53,9 @@ public class RelativePosTextWithIcon {
 
     public boolean tap(float posX, float posY, float tapX, float tapY) {
         return tapX > posX + iconModifX &&
-                tapX < posX + wholeWidth/2f &&
-                tapY > posY - iconSize/2f &&
-                tapY < posY + iconSize/2f;
+                tapX < posX + wholeWidth / 2f &&
+                tapY > posY - iconSize / 2f &&
+                tapY < posY + iconSize / 2f;
     }
 
 }

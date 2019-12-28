@@ -8,19 +8,21 @@ import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
-import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
 public class StatsScreen {
 
     private SpriteBatch batch;
     private TextWithIcon backButton;
-    private MultiLineText[] stats;
+    private StatPosition[] stats;
+    private MultiLineText title;
 
     public StatsScreen() {
         batch = new SpriteBatch();
@@ -30,41 +32,32 @@ public class StatsScreen {
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getGuiString(GuiStringEnum.BACK),
                 Gdx.graphics.getWidth() * 0.05f,
-                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f - FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0"),
+                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0"),
                 Align.left
         );
+        title = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
+                StringsManager.getGuiString(GuiStringEnum.PLAYER_STATS),
+                Gdx.graphics.getWidth() / 2f,
+                Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight() * 0.92f,
+                Align.center);
 
-        SavedInfoFlagsEnum[] statEnums = {
-            SavedInfoFlagsEnum.DEEPEST_STAGE,
-                SavedInfoFlagsEnum.GOLD_COLLECTED,
-                SavedInfoFlagsEnum.SKILL_POINTS_USED,
-                SavedInfoFlagsEnum.BOSSES_KILLED,
-                SavedInfoFlagsEnum.KILLED_ENEMIES,
-                SavedInfoFlagsEnum.DMG_DEALT,
-                SavedInfoFlagsEnum.HIGHEST_DMG_DEALT
-        };
+        PlayerStatsTrackerFlagsEnum[] allStats = PlayerStatsTrackerFlagsEnum.values();
 
-        stats = new MultiLineText[statEnums.length];
-
-        for (int i=0; i<stats.length; i++) {
-            int value = SavedInfoManager.getIntFromFlag(statEnums[i]) == -1 ? 0 : SavedInfoManager.getIntFromFlag(statEnums[i]);
-            stats[i] = new MultiLineText(
-                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                    StringsManager.getPlayerStatDescription(statEnums[i]) + " " + Integer.toString(value),
-                    Gdx.graphics.getWidth() * 0.5f,
-                    Gdx.graphics.getWidth() * 0.8f,
-                    Gdx.graphics.getHeight() * 0.8f - i * Gdx.graphics.getWidth() * 0.1f,
-                    Align.left
-            );
+        stats = new StatPosition[allStats.length];
+        for (int i = 0; i < stats.length; i++) {
+            stats[i] = new StatPosition(allStats[i], i);
         }
     }
 
     public void draw() {
         batch.begin();
+        title.draw(batch);
         backButton.draw(batch);
 
-        for (MultiLineText t : stats) {
-            t.draw(batch);
+        for (StatPosition s : stats) {
+            s.draw(batch);
         }
         batch.end();
     }

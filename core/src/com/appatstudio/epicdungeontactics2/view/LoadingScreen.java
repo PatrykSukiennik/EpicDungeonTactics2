@@ -20,7 +20,6 @@ public final class LoadingScreen {
     private MultiLineText communicate;
     private Texture bg, barBg, bar;
     private SpriteBatch batch;
-    private String randomText;
     private float bgY, bgHeight;
     private float barX, barY, maxBarWidth, barHeight;
 
@@ -32,21 +31,21 @@ public final class LoadingScreen {
         barBg = new Texture("loading-screen/barBg.jpg");
 
         bgHeight = Gdx.graphics.getWidth() * 2.5f;
-        bgY = Gdx.graphics.getHeight()/2f - bgHeight/2f;
+        bgY = Gdx.graphics.getHeight() / 2f - bgHeight / 2f;
         maxBarWidth = Gdx.graphics.getWidth() * 0.7f;
-        barX = Gdx.graphics.getWidth()/2f - maxBarWidth/2f;
+        barX = Gdx.graphics.getWidth() / 2f - maxBarWidth / 2f;
         barY = Gdx.graphics.getHeight() * 0.3f;
         barHeight = maxBarWidth * 0.05f;
-        randomText = getRandomLoadingCommunicate();
+        String randomText = getRandomLoadingCommunicate();
 
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/decorated_font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.characters = randomText;
         fontParameter.borderColor = Color.BLACK;
         fontParameter.borderWidth = 1;
-        fontParameter.size = (int)(Gdx.graphics.getWidth() * 0.05f);
+        fontParameter.size = (int) (Gdx.graphics.getWidth() * 0.05f);
 
-        communicate = new MultiLineText(fontGenerator.generateFont(fontParameter), randomText, Gdx.graphics.getWidth()/2f, maxBarWidth, Gdx.graphics.getHeight() * 0.25f, Align.center);
+        communicate = new MultiLineText(fontGenerator.generateFont(fontParameter), randomText, Gdx.graphics.getWidth() / 2f, maxBarWidth, Gdx.graphics.getHeight() * 0.25f, Align.center);
 
     }
 

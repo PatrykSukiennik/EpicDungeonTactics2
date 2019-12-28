@@ -11,9 +11,9 @@ public final class SelectorArrow extends Image {
 
     SelectorArrow(DirectionEnum direction) {
         super(GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE));
-        this.setSize(Gdx.graphics.getWidth()/8f, Gdx.graphics.getWidth()/4f);
-        this.setOrigin(getWidth()/2f, getHeight()/2f);
-        this.setY(Gdx.graphics.getHeight()/2f - this.getHeight()/2f);
+        this.setSize(Gdx.graphics.getWidth() / 8f, Gdx.graphics.getWidth() / 4f);
+        this.setOrigin(getWidth() / 2f, getHeight() / 2f);
+        this.setY(Gdx.graphics.getHeight() / 2f - this.getHeight() / 2f);
 
         switch (direction) {
             case RIGHT: {
@@ -36,8 +36,7 @@ public final class SelectorArrow extends Image {
                     Actions.scaleTo(0.8f, 0.8f, 0.05f),
                     Actions.scaleTo(1f, 1f, 0.05f)));
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
 }

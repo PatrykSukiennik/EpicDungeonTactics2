@@ -1,7 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.perkScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
-import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
@@ -14,9 +13,7 @@ import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 
 public final class PerkScreen {
@@ -29,31 +26,29 @@ public final class PerkScreen {
     private TextWithIcon backButton;
 
     private boolean wasRerollUsed;
-    private boolean isPerkSelected;
 
     public PerkScreen() {
         batch = new SpriteBatch();
 
         wasRerollUsed = false;
-        isPerkSelected = false;
 
         startButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
-                Gdx.graphics.getWidth() * 0.3f,
+                Gdx.graphics.getWidth() * 0.25f,
                 Gdx.graphics.getWidth() * 0.34f,
-                Gdx.graphics.getWidth() * 0.4f,
+                Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.FIGHT));
         rerollButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
-                Gdx.graphics.getWidth() * 0.3f,
+                Gdx.graphics.getWidth() * 0.25f,
                 Gdx.graphics.getWidth() * 0.34f + Gdx.graphics.getWidth() * 0.15f,
-                Gdx.graphics.getWidth() * 0.4f,
+                Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.REROLL));
         title = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.SELECT_PERK),
-                Gdx.graphics.getWidth()/2f,
+                Gdx.graphics.getWidth() / 2f,
                 Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight() * 0.92f,
                 Align.center);
@@ -68,8 +63,8 @@ public final class PerkScreen {
 
         PerkEnum[] perkEnums = PerkRandomizer.getRandomPerks();
         perks = new PerkIcon[perkEnums.length];
-        for (int i=0; i<perkEnums.length; i++) {
-            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight()*1.4f * i);
+        for (int i = 0; i < perkEnums.length; i++) {
+            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
             perks[i].getColor().a = 0.3f;
         }
     }
@@ -96,12 +91,10 @@ public final class PerkScreen {
             wasRerollUsed = true;
             selectedPerk = null;
             reroll();
-        }
-        else if (selectedPerk != null && startButton.tap(x, y)) {
+        } else if (selectedPerk != null && startButton.tap(x, y)) {
             EpicDungeonTactics.setSelectedPerk(selectedPerk.getPerkEnum());
             EpicDungeonTactics.startGame();
-        }
-        else if (backButton.tap(x, y)) {
+        } else if (backButton.tap(x, y)) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
         } else {
             for (PerkIcon perkIcon : perks) {
@@ -123,23 +116,14 @@ public final class PerkScreen {
 
     private void reroll() {
         PerkEnum[] oldPerks = new PerkEnum[perks.length];
-        for (int i=0; i<perks.length; i++) {
+        for (int i = 0; i < perks.length; i++) {
             oldPerks[i] = perks[i].getPerkEnum();
         }
         PerkEnum[] perkEnums = PerkRandomizer.getRandomPerks(oldPerks);
         perks = new PerkIcon[perkEnums.length];
-        for (int i=0; i<perkEnums.length; i++) {
-            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight()*1.4f * i);
+        for (int i = 0; i < perkEnums.length; i++) {
+            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
             perks[i].getColor().a = 0.3f;
         }
     }
-
-    public boolean tap(float x, float y, CharacterEnum selectedHero) {
-
-        return false;
-    }
-
-
-
-
 }

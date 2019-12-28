@@ -64,12 +64,18 @@ public final class CharacterStats {
 
     public static int getStat(CharacterEnum c, StatisticEnum s) {
         switch (s) {
-            case DEX: return dexterityMap.get(c);
-            case INT: return intelligenceMap.get(c);
-            case STR: return strengthMap.get(c);
-            case LCK: return luckMap.get(c);
-            case VIT: return vitalityMap.get(c);
-            default: return 1;
+            case DEX:
+                return dexterityMap.get(c);
+            case INT:
+                return intelligenceMap.get(c);
+            case STR:
+                return strengthMap.get(c);
+            case LCK:
+                return luckMap.get(c);
+            case VIT:
+                return vitalityMap.get(c);
+            default:
+                return 1;
         }
     }
 }

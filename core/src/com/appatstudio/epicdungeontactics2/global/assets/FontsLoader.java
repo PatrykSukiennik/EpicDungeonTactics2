@@ -20,12 +20,12 @@ final class FontsLoader {
 
     private static final String CHARACTERS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/_!#%&8()1234567890-:=+~[]";
 
-    public static void init(AssetManager assetManager) {
+    static void init(AssetManager assetManager) {
 
         //MENU HERO TITLE
         FreetypeFontLoader.FreeTypeFontLoaderParameter parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int)(Gdx.graphics.getWidth() * 0.1f);
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.1f);
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -34,7 +34,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int)(Gdx.graphics.getWidth() * 0.1f);
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.1f);
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -45,7 +45,7 @@ final class FontsLoader {
         //MENU HERO DESCRIPTION
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int)(Gdx.graphics.getWidth() * 0.05f);
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.05f);
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -54,7 +54,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int)(Gdx.graphics.getWidth() * 0.05f);
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.05f);
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;

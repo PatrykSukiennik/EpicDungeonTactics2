@@ -12,7 +12,10 @@ public final class HeroStats {
     private final static Map<CharacterEnum, Integer> buyCostMap;
     private final static Map<CharacterEnum, Integer> requiredStageToUnlockMap;
     private final static Map<CharacterEnum, ItemEnum[]> startingItemMap;
-    private final static Map<CharacterEnum, Integer> skillCooldownMap;
+
+    private static final int[] EXP_CAPS = new int[]{
+            100, 1000, 10000, 100000, 10000000, 1000000000
+    };
 
     static {
         pointsPerLvlMap = new HashMap<>();
@@ -42,15 +45,6 @@ public final class HeroStats {
         requiredStageToUnlockMap.put(CharacterEnum.HERO_PIRATE, 9);
         requiredStageToUnlockMap.put(CharacterEnum.HERO_BABY, 12);
 
-        skillCooldownMap = new HashMap<>();
-        skillCooldownMap.put(CharacterEnum.HERO_ELF, 3);
-        skillCooldownMap.put(CharacterEnum.HERO_KNIGHT, 2);
-        skillCooldownMap.put(CharacterEnum.HERO_WIZZARD, 5);
-        skillCooldownMap.put(CharacterEnum.HERO_LIZARD, 4);
-        skillCooldownMap.put(CharacterEnum.HERO_NINJA, 4);
-        skillCooldownMap.put(CharacterEnum.HERO_PIRATE, 3);
-        skillCooldownMap.put(CharacterEnum.HERO_BABY, 7);
-
         startingItemMap = new HashMap<>();
         startingItemMap.put(CharacterEnum.HERO_ELF, new ItemEnum[]{ItemEnum.BOWv1, ItemEnum.FOODv3, ItemEnum.FOODv3});
         startingItemMap.put(CharacterEnum.HERO_KNIGHT, new ItemEnum[]{ItemEnum.SWORDv2, ItemEnum.ARMORv7, ItemEnum.SHIELDv0});
@@ -77,14 +71,6 @@ public final class HeroStats {
     public static ItemEnum[] getStartingItems(CharacterEnum characterEnum) {
         return startingItemMap.get(characterEnum);
     }
-
-    public static int getSkillCooldown(CharacterEnum characterEnum) {
-        return skillCooldownMap.get(characterEnum);
-    }
-
-    private static final int[] EXP_CAPS = new int[] {
-            100, 1000, 10000, 100000, 10000000, 1000000000
-    };
 
     public static int getExpCap(int lvl) {
         return EXP_CAPS[lvl - 1];

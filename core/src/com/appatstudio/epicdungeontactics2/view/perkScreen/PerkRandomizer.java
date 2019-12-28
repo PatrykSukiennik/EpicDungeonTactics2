@@ -3,7 +3,7 @@ package com.appatstudio.epicdungeontactics2.view.perkScreen;
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 
-public final class PerkRandomizer {
+final class PerkRandomizer {
 
     private static final int PERK_AT_ONCE_COUNT = 4;
 
@@ -12,7 +12,7 @@ public final class PerkRandomizer {
         PerkEnum[] readyPerks = new PerkEnum[PERK_AT_ONCE_COUNT];
 
         int random;
-        for (int i=0; i<PERK_AT_ONCE_COUNT; i++) {
+        for (int i = 0; i < PERK_AT_ONCE_COUNT; i++) {
             do {
                 random = EpicDungeonTactics.random.nextInt(allPerks.length);
             }
@@ -28,7 +28,7 @@ public final class PerkRandomizer {
         PerkEnum[] readyPerks = new PerkEnum[PERK_AT_ONCE_COUNT];
 
         int random;
-        for (int i=0; i<PERK_AT_ONCE_COUNT; i++) {
+        for (int i = 0; i < PERK_AT_ONCE_COUNT; i++) {
             do {
                 random = EpicDungeonTactics.random.nextInt(allPerks.length);
             }

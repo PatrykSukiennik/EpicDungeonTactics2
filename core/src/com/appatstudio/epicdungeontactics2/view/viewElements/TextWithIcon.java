@@ -21,32 +21,33 @@ public final class TextWithIcon {
         this.text = text;
         this.alignment = alignment;
         this.posX = posX;
-        this.posX = posY;
+        this.posY = posY;
 
         iconSize = FontsManager.getTextHeight(font, "0") * 1.2f;
         wholeWidth = iconSize * 1.2f + FontsManager.getTextWidth(font, text);
 
         switch (alignment) {
             case Align.center: {
-                iconX = posX - wholeWidth/2f;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconX = posX - wholeWidth / 2f;
+                iconY = posY - iconSize / 2f;
                 textX = iconX + iconSize * 1.2f;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize / 2f;
                 break;
 
             }
             case Align.left: {
                 iconX = posX;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconY = posY - iconSize / 2f;
                 textX = iconX + iconSize * 1.2f;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize / 2f;
                 break;
             }
             case Align.right: {
                 iconX = posX - iconSize;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconY = posY - iconSize / 2f;
                 textX = posX - wholeWidth;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize / 2f;
+                break;
             }
         }
     }
@@ -60,13 +61,13 @@ public final class TextWithIcon {
         return alignment == Align.right ?
                 x > iconX + iconSize - wholeWidth - iconSize * 0.4f &&
                         x < iconX + iconSize * 1.4f &&
-                        y > iconY - iconSize/2f - iconSize * 0.4f &&
-                        y < iconY + iconSize/2f + iconSize * 0.4f
+                        y > iconY - iconSize / 2f - iconSize * 0.4f &&
+                        y < iconY + iconSize / 2f + iconSize * 0.4f
                 :
                 x > iconX - iconSize * 0.4f &&
                         x < iconX + wholeWidth + iconSize * 0.4f &&
-                        y > iconY - iconSize/2f - iconSize * 0.4f &&
-                        y < iconY + iconSize/2f + iconSize * 0.4f;
+                        y > iconY - iconSize / 2f - iconSize * 0.4f &&
+                        y < iconY + iconSize / 2f + iconSize * 0.4f;
     }
 
     public void setText(String text) {
@@ -74,25 +75,27 @@ public final class TextWithIcon {
 
         switch (alignment) {
             case Align.center: {
-                iconX = posX - wholeWidth/2f;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconX = posX - wholeWidth / 2f;
+                iconY = posY - iconSize / 2f;
                 textX = iconX + iconSize * 1.2f;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize / 2f;
+                break;
 
             }
             case Align.left: {
                 iconX = posX;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconY = posY - iconSize / 2f;
                 textX = iconX + iconSize * 1.2f;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize / 2f;
+                break;
             }
             case Align.right: {
                 iconX = posX - iconSize;
-                iconY = posY - FontsManager.getTextHeight(font, "0")/2f;
+                iconY = posY - iconSize / 2f;
                 textX = posX - wholeWidth;
-                textY = posY + FontsManager.getTextHeight(font, "0")/2f;
+                textY = posY + iconSize;
+                break;
             }
         }
     }
-
 }
