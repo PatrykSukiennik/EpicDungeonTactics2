@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.perkScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
@@ -9,6 +10,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
@@ -19,7 +21,7 @@ import com.badlogic.gdx.utils.Align;
 public final class PerkScreen {
 
     private SpriteBatch batch;
-    private PerkIcon[] perks;
+    private static PerkIcon[] perks;
     private PerkIcon selectedPerk;
     private ButtonWithText startButton, rerollButton;
     private MultiLineText title;
@@ -67,6 +69,17 @@ public final class PerkScreen {
             perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
             perks[i].getColor().a = 0.3f;
         }
+    }
+
+    public static void updatePerk(PerkIcon perkIcon) {
+        int index = 0;
+        for (int i=0; i<perks.length; i++) {
+            if (perks[i] == perkIcon) index = i;
+        }
+
+
+        perks[index] = new PerkIcon(perkIcon.getPerkEnum(), Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * index);
+        perks[index].getColor().a = 0.3f;
     }
 
     public void draw() {

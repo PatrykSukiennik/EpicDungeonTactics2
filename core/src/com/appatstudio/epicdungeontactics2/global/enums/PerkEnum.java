@@ -82,5 +82,22 @@ public enum PerkEnum {
     //DEX bonus
     DEX_BONUS,
 
+    //more stronger enemies-better loot
+    STRONGER_ENEMIES,
+
+    //more chance for dropping key
+    KEY_FINDER,
+
+    //more elemental effect chance
+    ELEMENTALIST,
+
+    //starts with few extra items
+    EXPERIENCED_ADVENTURER,
+
+    //starts with candies
+    SUGAR_LOVER,
+
+    //more damage under 30% hp
+    BERSERKER
 
 }

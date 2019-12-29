@@ -13,7 +13,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
-import com.appatstudio.epicdungeontactics2.global.stats.HeroStats;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosTextWithIcon;
 import com.badlogic.gdx.Gdx;

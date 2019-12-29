@@ -39,6 +39,12 @@ public final class PerkStats {
         perkStats.put(PerkEnum.LCK_BONUS, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.VIT_BONUS, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.DEX_BONUS, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.STRONGER_ENEMIES, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.KEY_FINDER, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.ELEMENTALIST, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.EXPERIENCED_ADVENTURER, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.SUGAR_LOVER, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.BERSERKER, new float[]{2f, 6f, 10f});
 
         perkUpgradeCosts = new HashMap<>();
         perkUpgradeCosts.put(PerkEnum.GOLD_BONUS, new int[]{500, 2500, 10000});
@@ -68,13 +74,20 @@ public final class PerkStats {
         perkUpgradeCosts.put(PerkEnum.LCK_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.VIT_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.DEX_BONUS, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.STRONGER_ENEMIES, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.KEY_FINDER, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.ELEMENTALIST, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.EXPERIENCED_ADVENTURER, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.SUGAR_LOVER, new int[]{500, 2500, 10000});
+        perkUpgradeCosts.put(PerkEnum.BERSERKER, new int[]{500, 2500, 10000});
+
     }
 
     public static float getPerkStat(PerkEnum perkEnum, int lvl) {
         return perkStats.get(perkEnum)[lvl];
     }
 
-    public static float getPerkUpgradeCost(PerkEnum perkEnum, int lvl) {
+    public static int getPerkUpgradeCost(PerkEnum perkEnum, int lvl) {
         return perkUpgradeCosts.get(perkEnum)[lvl-1];
     }
 

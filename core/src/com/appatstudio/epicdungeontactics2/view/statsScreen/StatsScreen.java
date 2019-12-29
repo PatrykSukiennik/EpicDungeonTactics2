@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.statsScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.utils.Align;
 public class StatsScreen {
 
     private SpriteBatch batch;
-    private TextWithIcon backButton;
+    private TextWithIcon backButton, goldStatus;
     private StatPosition[] stats;
     private MultiLineText title;
 
@@ -31,10 +32,10 @@ public class StatsScreen {
                 GraphicsManager.getGuiElement(GuiElementEnum.BACK_ICON),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getGuiString(GuiStringEnum.BACK),
-                Gdx.graphics.getWidth() * 0.05f,
+                Gdx.graphics.getWidth() * 0.95f,
                 Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0"),
-                Align.left
+                Align.right
         );
         title = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.PLAYER_STATS),
@@ -42,6 +43,15 @@ public class StatsScreen {
                 Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight() * 0.92f,
                 Align.center);
+        goldStatus = new TextWithIcon(
+                GraphicsManager.getGuiElement(GuiElementEnum.COINS),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                Integer.toString(GlobalValues.getGold()),
+                Gdx.graphics.getWidth() * 0.05f,
+                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
+                Align.left
+        );
 
         PlayerStatsTrackerFlagsEnum[] allStats = PlayerStatsTrackerFlagsEnum.values();
 
@@ -55,7 +65,7 @@ public class StatsScreen {
         batch.begin();
         title.draw(batch);
         backButton.draw(batch);
-
+        goldStatus.draw(batch);
         for (StatPosition s : stats) {
             s.draw(batch);
         }

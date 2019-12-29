@@ -1,4 +1,4 @@
-package com.appatstudio.epicdungeontactics2.global.stats;
+package com.appatstudio.epicdungeontactics2.global.stats.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;

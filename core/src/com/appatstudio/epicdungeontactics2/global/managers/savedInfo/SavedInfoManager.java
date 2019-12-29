@@ -3,7 +3,7 @@ package com.appatstudio.epicdungeontactics2.global.managers.savedInfo;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
-import com.appatstudio.epicdungeontactics2.global.stats.CharacterStats;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
@@ -56,7 +56,7 @@ public class SavedInfoManager {
 
             characterStats.put(c, new HashMap<StatisticEnum, Integer>());
             for (StatisticEnum s : allStats) {
-                characterStats.get(c).put(s, preferences.getInteger("charStat" + c.toString() + s.toString(), CharacterStats.getStat(c, s)));
+                characterStats.get(c).put(s, preferences.getInteger("charStat" + c.toString() + s.toString(), CharacterStats.getDefHeroStat(c, s)));
             }
         }
 
@@ -117,5 +117,11 @@ public class SavedInfoManager {
 
     public static int getPlayerStatRewardWaiting(PlayerStatsTrackerFlagsEnum flag) {
         return playerStatsWaitingRewards.get(flag);
+    }
+
+    public static void savePerkLvl(PerkEnum perkEnum, int lvl) {
+        perkLvls.put(perkEnum, lvl);
+        preferences.putInteger("perkLvl" + perkEnum.toString(), lvl);
+        preferences.flush();
     }
 }

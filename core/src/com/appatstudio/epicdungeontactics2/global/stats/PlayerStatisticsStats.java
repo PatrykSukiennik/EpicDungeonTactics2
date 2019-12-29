@@ -21,6 +21,11 @@ public final class PlayerStatisticsStats {
         caps.put(PlayerStatsTrackerFlagsEnum.HIGHEST_DMG_DEALT, new int[] {10, 20, 30, 40});
         caps.put(PlayerStatsTrackerFlagsEnum.SKILL_POINTS_USED, new int[] {15, 50, 100, 250});
         caps.put(PlayerStatsTrackerFlagsEnum.PERKS_UPGRADED, new int[] {3, 10, 20, 30});
+        caps.put(PlayerStatsTrackerFlagsEnum.UNIQUE_ENEMIES_SLAYED, new int[] {3, 10, 20, 30});
+        caps.put(PlayerStatsTrackerFlagsEnum.CHESTS_OPENED, new int[] {3, 10, 20, 30});
+        caps.put(PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED, new int[] {3, 10, 20, 30});
+        caps.put(PlayerStatsTrackerFlagsEnum.HEROES_UNLOCKED, new int[] {3, 10, 20, 30});
+        caps.put(PlayerStatsTrackerFlagsEnum.WEAPONS_UPGRADED, new int[] {3, 10, 20, 30});
 
         rewards = new HashMap<>();
         rewards.put(PlayerStatsTrackerFlagsEnum.KILLED_ENEMIES, new int[] {250, 500, 1000, 5000});
@@ -31,6 +36,11 @@ public final class PlayerStatisticsStats {
         rewards.put(PlayerStatsTrackerFlagsEnum.HIGHEST_DMG_DEALT, new int[] {250, 500, 1000, 5000});
         rewards.put(PlayerStatsTrackerFlagsEnum.SKILL_POINTS_USED, new int[] {250, 500, 1000, 5000});
         rewards.put(PlayerStatsTrackerFlagsEnum.PERKS_UPGRADED, new int[] {250, 500, 1000, 5000});
+        rewards.put(PlayerStatsTrackerFlagsEnum.UNIQUE_ENEMIES_SLAYED, new int[] {3, 10, 20, 30});
+        rewards.put(PlayerStatsTrackerFlagsEnum.CHESTS_OPENED, new int[] {3, 10, 20, 30});
+        rewards.put(PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED, new int[] {3, 10, 20, 30});
+        rewards.put(PlayerStatsTrackerFlagsEnum.HEROES_UNLOCKED, new int[] {3, 10, 20, 30});
+        rewards.put(PlayerStatsTrackerFlagsEnum.WEAPONS_UPGRADED, new int[] {3, 10, 20, 30});
     }
 
     public static int getReward(PlayerStatsTrackerFlagsEnum flag, int lvl) {
