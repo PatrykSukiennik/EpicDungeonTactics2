@@ -25,7 +25,7 @@ public final class PerkScreen {
     private PerkIcon selectedPerk;
     private ButtonWithText startButton, rerollButton;
     private MultiLineText title;
-    private TextWithIcon backButton;
+    private TextWithIcon backButton, goldStatus;
 
     private boolean wasRerollUsed;
 
@@ -58,8 +58,18 @@ public final class PerkScreen {
                 GraphicsManager.getGuiElement(GuiElementEnum.BACK_ICON),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getGuiString(GuiStringEnum.BACK),
+                Gdx.graphics.getWidth() * 0.95f,
+                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0"),
+                Align.right
+        );
+        goldStatus = new TextWithIcon(
+                GraphicsManager.getGuiElement(GuiElementEnum.COINS),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                Integer.toString(GlobalValues.getGold()),
                 Gdx.graphics.getWidth() * 0.05f,
-                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f - FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0"),
+                Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
                 Align.left
         );
 
@@ -71,21 +81,21 @@ public final class PerkScreen {
         }
     }
 
-    public static void updatePerk(PerkIcon perkIcon) {
-        int index = 0;
+    public static void updatePerks() {
         for (int i=0; i<perks.length; i++) {
-            if (perks[i] == perkIcon) index = i;
+            perks[i] = new PerkIcon(perks[i].getPerkEnum(), Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
+            perks[i].getColor().a = 0.3f;
         }
 
 
-        perks[index] = new PerkIcon(perkIcon.getPerkEnum(), Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * index);
-        perks[index].getColor().a = 0.3f;
+
     }
 
     public void draw() {
         batch.begin();
         title.draw(batch);
         backButton.draw(batch);
+        goldStatus.draw(batch);
 
         if (selectedPerk != null) startButton.draw(batch, 1f);
         if (!wasRerollUsed && EpicDungeonTactics.isInternetOn()) rerollButton.draw(batch, 1f);
@@ -138,5 +148,9 @@ public final class PerkScreen {
             perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
             perks[i].getColor().a = 0.3f;
         }
+    }
+
+    public void updateGold() {
+        goldStatus.setText(Integer.toString(GlobalValues.getGold()));
     }
 }

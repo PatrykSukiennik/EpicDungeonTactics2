@@ -24,8 +24,12 @@ import com.google.android.gms.ads.MobileAds;
 public class AndroidLauncher extends AndroidApplication {
 
     private static final String TAG = "Epic Dungeon Tactics 2";
+
     private static final String adBANNER_UNIT_ID = "ca-app-pub-1351360411950245/3235369322";
     private static final String adINTERSTITIAL_ID = "ca-app-pub-1351360411950245/6983042643";
+    private static final String adREWARDER_VIDEO_ID = "ca-app-pub-1351360411950245/8657437576";
+
+
     private static final String adAPP_ID = "ca-app-pub-1351360411950245~7331840089";
 
     private boolean isGamePaused = false;
@@ -68,12 +72,13 @@ public class AndroidLauncher extends AndroidApplication {
         relativeLayout.addView(gameView);
 
         MobileAds.initialize(this, adAPP_ID);
-        initBannerAd();
-        myHandler = new Handler();
 
+//      Banner and interstitial ads disabled
+//      initBannerAd();
+//      myHandler = new Handler();
+//      initInterAd();
+//      startRefreshingInterAd();
 
-        initInterAd();
-        startRefreshingInterAd();
         startRefreshingInternetChecking();
         setContentView(relativeLayout);
     }

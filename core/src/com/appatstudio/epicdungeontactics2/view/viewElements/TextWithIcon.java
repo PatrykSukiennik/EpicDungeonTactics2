@@ -71,6 +71,8 @@ public final class TextWithIcon {
     }
 
     public void setText(String text) {
+        this.text = text;
+
         wholeWidth = iconSize * 1.2f + FontsManager.getTextWidth(font, text);
 
         switch (alignment) {

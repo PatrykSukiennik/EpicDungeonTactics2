@@ -78,4 +78,8 @@ public class StatsScreen {
         }
     }
 
+    public void updateGold() {
+        goldStatus.setText(Integer.toString(GlobalValues.getGold()));
+    }
+
 }

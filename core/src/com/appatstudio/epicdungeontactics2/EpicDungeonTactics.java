@@ -149,6 +149,12 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         }
     }
 
+    public static void updateGold() {
+        if (menuScreen != null) menuScreen.updateGold();
+        if (perkScreen != null) perkScreen.updateGold();
+        if (statsScreen != null) statsScreen.updateGold();
+    }
+
     public static boolean isInternetOn() {
         return androidCommunication.checkInternetConnection();
     }

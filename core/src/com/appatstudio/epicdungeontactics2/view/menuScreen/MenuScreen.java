@@ -31,4 +31,8 @@ public final class MenuScreen {
         characterSelector.swiped(directionEnum);
     }
 
+    public void updateGold() {
+        characterSelector.updateGold();
+    }
+
 }

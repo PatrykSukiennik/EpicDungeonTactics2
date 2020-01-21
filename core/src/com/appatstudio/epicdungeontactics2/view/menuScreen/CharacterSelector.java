@@ -187,4 +187,8 @@ public final class CharacterSelector {
         }
     }
 
+    public void updateGold() {
+        goldStatus.setText(Integer.toString(GlobalValues.getGold()));
+    }
+
 }

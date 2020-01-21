@@ -427,11 +427,14 @@
             <key type="filename">gui/STATS_ICON.png</key>
             <key type="filename">gui/STONE_SMALL_BUTTON.png</key>
             <key type="filename">gui/perk-icons/APPLE_FINDER.png</key>
+            <key type="filename">gui/perk-icons/BERSERKER.png</key>
             <key type="filename">gui/perk-icons/BOW_DMG.png</key>
             <key type="filename">gui/perk-icons/CHANCE_FOR_ANY_DROP.png</key>
             <key type="filename">gui/perk-icons/DEX_BONUS.png</key>
             <key type="filename">gui/perk-icons/DOUBLE_ATTACK.png</key>
             <key type="filename">gui/perk-icons/DOUBLE_MOVE.png</key>
+            <key type="filename">gui/perk-icons/ELEMENTALIST.png</key>
+            <key type="filename">gui/perk-icons/EXPERIENCED_ADVENTURER.png</key>
             <key type="filename">gui/perk-icons/EXP_BONUS.png</key>
             <key type="filename">gui/perk-icons/GLASS_CANNON.png</key>
             <key type="filename">gui/perk-icons/GOLD_BONUS.png</key>
@@ -439,6 +442,7 @@
             <key type="filename">gui/perk-icons/HP_RESTORATION_ROOM.png</key>
             <key type="filename">gui/perk-icons/INSTAKILL_ENEMY.png</key>
             <key type="filename">gui/perk-icons/INT_BONUS.png</key>
+            <key type="filename">gui/perk-icons/KEY_FINDER.png</key>
             <key type="filename">gui/perk-icons/LCK_BONUS.png</key>
             <key type="filename">gui/perk-icons/MAGICAL_DMG_BONUS.png</key>
             <key type="filename">gui/perk-icons/MAGICAL_RESIST.png</key>
@@ -449,7 +453,9 @@
             <key type="filename">gui/perk-icons/MISS_STAGE.png</key>
             <key type="filename">gui/perk-icons/POISON_DURATION_DECREASE.png</key>
             <key type="filename">gui/perk-icons/SKILL_COOLDOWN.png</key>
+            <key type="filename">gui/perk-icons/STRONGER_ENEMIES.png</key>
             <key type="filename">gui/perk-icons/STR_BONUS.png</key>
+            <key type="filename">gui/perk-icons/SUGAR_LOVER.png</key>
             <key type="filename">gui/perk-icons/TANK.png</key>
             <key type="filename">gui/perk-icons/THIRD_CHANCE.png</key>
             <key type="filename">gui/perk-icons/UNIQUE_LOOT.png</key>

@@ -111,7 +111,7 @@ public final class PerkIcon extends Image {
 
             GlobalValues.minusGold(upgradeCost);
             SavedInfoManager.savePerkLvl(perkEnum, SavedInfoManager.getPerkLvl(perkEnum) + 1);
-            PerkScreen.updatePerk(this);
+            PerkScreen.updatePerks();
             return false;
         }
 

@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 
@@ -28,10 +29,14 @@ public final class GlobalValues {
     public static void addGold(int v) {
         gold += v;
         SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
+
+        EpicDungeonTactics.updateGold();
     }
 
     public static void minusGold(int v) {
         gold -= v;
         SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
+
+        EpicDungeonTactics.updateGold();
     }
 }

@@ -843,6 +843,13 @@ perk-icons/APPLE_FINDER
   orig: 14, 14
   offset: 0, 0
   index: -1
+perk-icons/BERSERKER
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 perk-icons/BOW_DMG
   rotate: false
   xy: 140, 0
@@ -878,7 +885,21 @@ perk-icons/DOUBLE_MOVE
   orig: 14, 14
   offset: 0, 0
   index: -1
+perk-icons/ELEMENTALIST
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
 perk-icons/EXP_BONUS
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+perk-icons/EXPERIENCED_ADVENTURER
   rotate: false
   xy: 140, 0
   size: 14, 14
@@ -921,6 +942,13 @@ perk-icons/INSTAKILL_ENEMY
   offset: 0, 0
   index: -1
 perk-icons/INT_BONUS
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+perk-icons/KEY_FINDER
   rotate: false
   xy: 140, 0
   size: 14, 14
@@ -998,6 +1026,20 @@ perk-icons/SKILL_COOLDOWN
   offset: 0, 0
   index: -1
 perk-icons/STR_BONUS
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+perk-icons/STRONGER_ENEMIES
+  rotate: false
+  xy: 140, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+perk-icons/SUGAR_LOVER
   rotate: false
   xy: 140, 0
   size: 14, 14
