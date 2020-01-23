@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
@@ -22,6 +23,7 @@ public final class StringsManager {
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<StatisticEnum, String> statsNameMap;
     private static Map<GuiStringEnum, String> guiStringMap;
+    private static Map<CommunicatesEnum, String> communicatesStringMap;
     private static Map<PlayerStatsTrackerFlagsEnum, String> playerStatStringMap;
 
     public static void load() {
@@ -33,6 +35,7 @@ public final class StringsManager {
         I18NBundle statsNames = I18NBundle.createBundle(Gdx.files.internal("strings/stats_names"), java.util.Locale.getDefault());
         I18NBundle guiStrings = I18NBundle.createBundle(Gdx.files.internal("strings/gui_strings"), java.util.Locale.getDefault());
         I18NBundle playerStatStrings = I18NBundle.createBundle(Gdx.files.internal("strings/player_statistic_descriptions"), java.util.Locale.getDefault());
+        I18NBundle communicatesStrings = I18NBundle.createBundle(Gdx.files.internal("strings/communicates"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
         ItemEnum[] itemEnums = ItemEnum.values();
@@ -74,6 +77,12 @@ public final class StringsManager {
             playerStatStringMap.put(f, playerStatStrings.get(f.toString()));
         }
 
+        communicatesStringMap = new HashMap<>();
+        CommunicatesEnum[] allCommunicates = CommunicatesEnum.values();
+        for (CommunicatesEnum c : allCommunicates) {
+            communicatesStringMap.put(c, communicatesStrings.get(c.toString()));
+        }
+
     }
 
     public static String getItemName(ItemEnum itemEnum) {
@@ -106,5 +115,9 @@ public final class StringsManager {
 
     public static String getPlayerStatDescription(PlayerStatsTrackerFlagsEnum statEnum) {
         return playerStatStringMap.get(statEnum);
+    }
+
+    public static String getCommunicate(CommunicatesEnum commEnum) {
+        return communicatesStringMap.get(commEnum);
     }
 }

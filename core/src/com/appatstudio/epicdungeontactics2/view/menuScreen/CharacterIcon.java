@@ -49,7 +49,7 @@ public final class CharacterIcon extends Image {
         this.isUnlocked = SavedInfoManager.isUnlocked(characterEnum);
 
         this.setSize(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getWidth() / 2f);
-        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.9f - this.getHeight());
+        this.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.85f - this.getHeight());
 
         title = new RelativePosText(
                 FontsManager.getFont(

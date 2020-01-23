@@ -51,7 +51,7 @@ public final class CharacterSelector {
 
         startButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
                 Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.34f,
+                Gdx.graphics.getWidth() * 0.28f,
                 Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
@@ -59,7 +59,7 @@ public final class CharacterSelector {
 
         unlockButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.STONE_BUTTON_WIDE),
                 Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.34f,
+                Gdx.graphics.getWidth() * 0.28f,
                 Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),

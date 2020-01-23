@@ -241,6 +241,13 @@
             <key type="filename">gui/COINS.png</key>
             <key type="filename">gui/DIAMOND_MEDAL.png</key>
             <key type="filename">gui/GOLD_MEDAL.png</key>
+            <key type="filename">gui/HEAD_BABY.png</key>
+            <key type="filename">gui/HEAD_ELF.png</key>
+            <key type="filename">gui/HEAD_KNIGHT.png</key>
+            <key type="filename">gui/HEAD_LIZARD.png</key>
+            <key type="filename">gui/HEAD_NINJA.png</key>
+            <key type="filename">gui/HEAD_PIRATE.png</key>
+            <key type="filename">gui/HEAD_WIZARD.png</key>
             <key type="filename">gui/SILVER_MEDAL.png</key>
             <key type="filename">items/KEY.png</key>
             <key type="filename">items/arrows/ARROWv0.png</key>
@@ -426,6 +433,7 @@
             <key type="filename">gui/SETTINGS_ICON.png</key>
             <key type="filename">gui/STATS_ICON.png</key>
             <key type="filename">gui/STONE_SMALL_BUTTON.png</key>
+            <key type="filename">gui/effect-icons/POISON.png</key>
             <key type="filename">gui/perk-icons/APPLE_FINDER.png</key>
             <key type="filename">gui/perk-icons/BERSERKER.png</key>
             <key type="filename">gui/perk-icons/BOW_DMG.png</key>
@@ -469,6 +477,34 @@
                 <rect>4,4,7,7</rect>
                 <key>scale9Paddings</key>
                 <rect>4,4,7,7</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/EXP_BAR.png</key>
+            <key type="filename">gui/HP_BAR.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>0,0,1,1</rect>
+                <key>scale9Paddings</key>
+                <rect>0,0,1,1</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/STATUS_BARS_BG.png</key>
+            <key type="filename">gui/STATUS_BARS_BORDER.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,2,12,3</rect>
+                <key>scale9Paddings</key>
+                <rect>6,2,12,3</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

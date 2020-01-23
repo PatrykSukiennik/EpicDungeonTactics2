@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
-public final class ButtonWithText extends Image {
+public class ButtonWithText extends Image {
 
     private BitmapFont font;
     private String text;

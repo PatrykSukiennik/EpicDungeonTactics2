@@ -60,6 +60,64 @@ final class FontsLoader {
         parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
+
+
+
+        //COMMUNICATE PRINTER
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.color = Color.WHITE;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.COMMUNICATE_WHITE.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.color = Color.GRAY;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.COMMUNICATE_GRAY.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.color = Color.GOLD;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.COMMUNICATE_GOLD.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.color = Color.RED;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.COMMUNICATE_RED.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.color = Color.FIREBRICK;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.COMMUNICATE_DARK_RED.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.03f);
+        parms.fontParameters.color = Color.WHITE;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.EFFECT_DURATION_FONT.toString() + ".ttf", BitmapFont.class, parms);
+
     }
 
 }

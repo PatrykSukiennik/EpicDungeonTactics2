@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
@@ -26,6 +27,7 @@ public final class GraphicsManager {
     private static Map<GuiElementEnum, SpriteDrawable> guiElements;
     private static Map<StatisticEnum, SpriteDrawable> statIconsMap;
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
+    private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
     private static void loadItems(TextureAtlas atlas) {
@@ -140,6 +142,12 @@ public final class GraphicsManager {
             perkIconsMap.put(p, new SpriteDrawable(new Sprite(atlas.findRegion("perk-icons/" + p.toString()))));
         }
 
+        effectIconsMap = new HashMap<>();
+        EffectEnum[] allEffects = EffectEnum.values();
+        for (EffectEnum e : allEffects) {
+            effectIconsMap.put(e, new SpriteDrawable(new Sprite(atlas.findRegion("effect-icons/" + e.toString()))));
+        }
+
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
@@ -209,4 +217,7 @@ public final class GraphicsManager {
         return perkIconsMap.get(p);
     }
 
+    public static SpriteDrawable getEffectIcon(EffectEnum e) {
+        return effectIconsMap.get(e);
+    }
 }
