@@ -29,7 +29,7 @@ public final class CharacterIcon extends Image {
     private final Animation<SpriteDrawable> animation;
     private float stateTime = 0f;
 
-    private RelativePosText title, description, unlockStage;
+    private RelativePosText title, description, bonus, unlockStage;
     private RelativePosTextWithIcon cost;
 
     private LvlExpBar lvlExpBar;
@@ -62,6 +62,13 @@ public final class CharacterIcon extends Image {
                 FontsManager.getFont(
                         isUnlocked ? FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED : FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getCharacterDescription(characterEnum),
+                Align.center
+        );
+
+        bonus = new RelativePosText(
+                FontsManager.getFont(
+                        isUnlocked ? FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED : FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                StringsManager.getCharacterBonus(characterEnum),
                 Align.center
         );
 
@@ -135,6 +142,9 @@ public final class CharacterIcon extends Image {
         description.draw(batch,
                 this.getX() + this.getWidth() / 2f,
                 this.getY() + this.getHeight() * 1.07f);
+        bonus.draw(batch,
+                this.getX() + this.getWidth() / 2f,
+                this.getY() - this.getHeight() * 1.6f);
 
         for (int i = 0; i < startingItems.length; i++) {
             startingItems[i].draw(batch, this.getX() - Gdx.graphics.getWidth() / 2f + this.getWidth() / 2f + itemsX[i], itemsY, itemSize, itemSize);

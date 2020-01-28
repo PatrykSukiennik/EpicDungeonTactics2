@@ -21,6 +21,7 @@ public final class StringsManager {
     private static Map<PerkEnum, String> perkDescriptionsMap;
     private static Map<CharacterEnum, String> characterNamesMap;
     private static Map<CharacterEnum, String> characterDescriptionsMap;
+    private static Map<CharacterEnum, String> characterBonusesMap;
     private static Map<StatisticEnum, String> statsNameMap;
     private static Map<GuiStringEnum, String> guiStringMap;
     private static Map<CommunicatesEnum, String> communicatesStringMap;
@@ -31,6 +32,7 @@ public final class StringsManager {
         I18NBundle perkNames = I18NBundle.createBundle(Gdx.files.internal("strings/perk_names"), java.util.Locale.getDefault());
         I18NBundle perkDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/perk_descriptions"), java.util.Locale.getDefault());
         I18NBundle characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
+        I18NBundle characterBonuses = I18NBundle.createBundle(Gdx.files.internal("strings/character_bonus"), java.util.Locale.getDefault());
         I18NBundle characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
         I18NBundle statsNames = I18NBundle.createBundle(Gdx.files.internal("strings/stats_names"), java.util.Locale.getDefault());
         I18NBundle guiStrings = I18NBundle.createBundle(Gdx.files.internal("strings/gui_strings"), java.util.Locale.getDefault());
@@ -53,10 +55,12 @@ public final class StringsManager {
 
         characterNamesMap = new HashMap<>();
         characterDescriptionsMap = new HashMap<>();
+        characterBonusesMap = new HashMap<>();
         CharacterEnum[] characterEnums = CharacterEnum.values();
         for (CharacterEnum currEnum : characterEnums) {
             characterNamesMap.put(currEnum, characterNames.get(currEnum.toString()));
             characterDescriptionsMap.put(currEnum, characterDescriptions.get(currEnum.toString()));
+            characterBonusesMap.put(currEnum, characterBonuses.get(currEnum.toString()));
         }
 
         statsNameMap = new HashMap<>();
@@ -103,6 +107,10 @@ public final class StringsManager {
 
     public static String getCharacterDescription(CharacterEnum characterEnum) {
         return characterDescriptionsMap.get(characterEnum);
+    }
+
+    public static String getCharacterBonus(CharacterEnum characterEnum) {
+        return characterBonusesMap.get(characterEnum);
     }
 
     public static String getStatName(StatisticEnum statisticEnum) {

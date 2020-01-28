@@ -584,6 +584,13 @@ effect-icons/POISON
   orig: 14, 14
   offset: 0, 0
   index: -1
+EQUIPMENT_ICON
+  rotate: false
+  xy: 0, 313
+  size: 14, 16
+  orig: 16, 16
+  offset: 1, 0
+  index: -1
 EXP_BAR
   rotate: false
   xy: 0, 0
@@ -1164,6 +1171,13 @@ POINTS_PER_LVL_ICON
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
+  index: -1
+QUEST_ICON
+  rotate: false
+  xy: 0, 313
+  size: 14, 16
+  orig: 16, 16
+  offset: 1, 0
   index: -1
 rings/RINGv0
   rotate: false

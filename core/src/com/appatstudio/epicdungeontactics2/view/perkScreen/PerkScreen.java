@@ -36,14 +36,14 @@ public final class PerkScreen {
 
         startButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
                 Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.28f,
+                Gdx.graphics.getWidth() * 0.2f,
                 Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.FIGHT));
         rerollButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
                 Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.3f + Gdx.graphics.getWidth() * 0.15f,
+                Gdx.graphics.getWidth() * 0.22f + Gdx.graphics.getWidth() * 0.15f,
                 Gdx.graphics.getWidth() * 0.5f,
                 Gdx.graphics.getWidth() * 0.15f,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),

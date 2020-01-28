@@ -81,4 +81,8 @@ public final class StatusBarContainer {
                         heroHead.getY() + heroHead.getWidth() * 0.2f));
     }
 
+    public float getBottomY() {
+        return heroHead.getY();
+    }
+
 }
