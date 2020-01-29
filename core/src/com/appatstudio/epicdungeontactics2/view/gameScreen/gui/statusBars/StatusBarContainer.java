@@ -1,9 +1,11 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -14,6 +16,8 @@ public final class StatusBarContainer {
 
     private static Image heroHead, barsBg, barsBorder, hpBar, expBar;
     private static Array<EffectIcon> effects;
+
+    private static float headSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.15f : Gdx.graphics.getWidth() * 0.2f;
 
     public StatusBarContainer(CharacterEnum hero) {
         SpriteDrawable headIcon = null;
@@ -26,8 +30,8 @@ public final class StatusBarContainer {
             case HERO_BABY: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_BABY); break;
         }
         heroHead = new Image(headIcon);
-        heroHead.setSize(Gdx.graphics.getWidth() * 0.2f, Gdx.graphics.getWidth() * 0.2f);
-        heroHead.setPosition(Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() - heroHead.getWidth() - Gdx.graphics.getWidth() * 0.05f);
+        heroHead.setSize(headSize, headSize);
+        heroHead.setPosition(GuiContainer.guiMargin, Gdx.graphics.getHeight() - heroHead.getWidth() - GuiContainer.guiMargin);
 
         barsBg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.STATUS_BARS_BG));
         barsBg.setSize(heroHead.getWidth() * (3f/2), heroHead.getHeight() * (7f/16));
@@ -77,8 +81,8 @@ public final class StatusBarContainer {
                 new EffectIcon(
                         effect,
                         duration,
-                        heroHead.getX() + (heroHead.getWidth() * 1.05f) + (heroHead.getWidth() * 0.08f + Gdx.graphics.getWidth() * 0.05f) * effects.size,
-                        heroHead.getY() + heroHead.getWidth() * 0.2f));
+                        heroHead.getX() + heroHead.getWidth() + EffectIcon.iconSize/3f + (EffectIcon.iconSize * 1.3f) * effects.size,
+                        barsBg.getY() - EffectIcon.iconSize/3f - EffectIcon.iconSize));
     }
 
     public float getBottomY() {

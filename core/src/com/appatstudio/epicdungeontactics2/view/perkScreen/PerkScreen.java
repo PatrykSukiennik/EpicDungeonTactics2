@@ -11,6 +11,8 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
+import com.appatstudio.epicdungeontactics2.view.menuScreen.CharacterSelector;
+import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
@@ -27,7 +29,10 @@ public final class PerkScreen {
     private MultiLineText title;
     private TextWithIcon backButton, goldStatus;
 
+    private static float perkStartY;
+
     private boolean wasRerollUsed;
+    private static float perkHeightModif = EpicDungeonTactics.isTablet() ? PerkIcon.getIconHeight() * 1.3f : PerkIcon.getIconHeight() * 1.5f;
 
     public PerkScreen() {
         batch = new SpriteBatch();
@@ -35,17 +40,17 @@ public final class PerkScreen {
         wasRerollUsed = false;
 
         startButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
-                Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.2f,
-                Gdx.graphics.getWidth() * 0.5f,
-                Gdx.graphics.getWidth() * 0.15f,
+                Gdx.graphics.getWidth()/2f - MenuScreen.BOTTOM_BUTTON_WIDTH/2f,
+                CharacterSelector.bottomY,
+                MenuScreen.BOTTOM_BUTTON_WIDTH,
+                MenuScreen.BOTTOM_BUTTON_HEIGHT,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.FIGHT));
         rerollButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
-                Gdx.graphics.getWidth() * 0.25f,
-                Gdx.graphics.getWidth() * 0.22f + Gdx.graphics.getWidth() * 0.15f,
-                Gdx.graphics.getWidth() * 0.5f,
-                Gdx.graphics.getWidth() * 0.15f,
+                Gdx.graphics.getWidth()/2f - MenuScreen.BOTTOM_BUTTON_WIDTH/2f,
+                startButton.getY() + startButton.getHeight(),
+                MenuScreen.BOTTOM_BUTTON_WIDTH,
+                MenuScreen.BOTTOM_BUTTON_HEIGHT,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.REROLL));
         title = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
@@ -73,17 +78,19 @@ public final class PerkScreen {
                 Align.left
         );
 
+        perkStartY = EpicDungeonTactics.isTablet() ? rerollButton.getY() + rerollButton.getHeight() * 1.5f : rerollButton.getY() + rerollButton.getHeight() * 2.2f;
+
         PerkEnum[] perkEnums = PerkRandomizer.getRandomPerks();
         perks = new PerkIcon[perkEnums.length];
         for (int i = 0; i < perkEnums.length; i++) {
-            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
+            perks[i] = new PerkIcon(perkEnums[i],  perkStartY + perkHeightModif * i);
             perks[i].getColor().a = 0.3f;
         }
     }
 
     public static void updatePerks() {
         for (int i=0; i<perks.length; i++) {
-            perks[i] = new PerkIcon(perks[i].getPerkEnum(), Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
+            perks[i] = new PerkIcon(perks[i].getPerkEnum(), perkStartY + perkHeightModif * i);
             perks[i].getColor().a = 0.3f;
         }
 
@@ -145,7 +152,7 @@ public final class PerkScreen {
         PerkEnum[] perkEnums = PerkRandomizer.getRandomPerks(oldPerks);
         perks = new PerkIcon[perkEnums.length];
         for (int i = 0; i < perkEnums.length; i++) {
-            perks[i] = new PerkIcon(perkEnums[i], Gdx.graphics.getWidth() * 0.32f + Gdx.graphics.getWidth() * 0.39f + PerkIcon.getIconHeight() * 1.4f * i);
+            perks[i] = new PerkIcon(perkEnums[i], perkStartY + perkHeightModif * i);
             perks[i].getColor().a = 0.3f;
         }
     }

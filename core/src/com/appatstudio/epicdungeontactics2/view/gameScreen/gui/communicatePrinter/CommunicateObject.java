@@ -1,12 +1,11 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter;
 
-import com.badlogic.gdx.Gdx;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public final class CommunicateObject {
 
-    private static final float TEXT_X = Gdx.graphics.getWidth() * 0.05f;
     private BitmapFont font;
     private String text;
 
@@ -16,7 +15,7 @@ public final class CommunicateObject {
     }
 
     void draw(Batch batch, float y) {
-        font.draw(batch, text, TEXT_X, y);
+        font.draw(batch, text, GuiContainer.guiMargin, y);
     }
 
 }

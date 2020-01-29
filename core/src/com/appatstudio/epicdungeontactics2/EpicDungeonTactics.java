@@ -36,6 +36,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     private static CharacterEnum selectedHero;
     private static PerkEnum selectedPerk;
 
+    private static boolean isTablet = false;
+
     static {
         random = new Random();
     }
@@ -51,6 +53,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     @Override
     public void create() {
+        isTablet = (float)Gdx.graphics.getHeight()/Gdx.graphics.getWidth() < 16f/10;
+
         currentScreen = CurrentScreenEnum.LOADING_SCREEN;
         loadingScreen = new LoadingScreen();
 
@@ -161,5 +165,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     public static void generateInterstitialAd() {
         androidCommunication.generateInterstitialAd();
+    }
+
+    public static boolean isTablet() {
+        return isTablet;
     }
 }

@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
@@ -9,11 +10,9 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.E
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.questWindow.QuestWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public final class GuiContainer {
 
@@ -26,6 +25,9 @@ public final class GuiContainer {
     private QuestWindow questWindow;
 
     private GuiButton eqButton, questButton;
+
+    public static final float guiButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.07f : Gdx.graphics.getWidth() * 0.1f;
+    public static final float guiMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
 
     public GuiContainer(GameScreen gameScreen) {
         batch = new SpriteBatch();
@@ -41,8 +43,8 @@ public final class GuiContainer {
         statusBarContainer.addEffect(EffectEnum.POISON, 2);
         statusBarContainer.addEffect(EffectEnum.POISON, 11);
 
-        eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), Gdx.graphics.getWidth() * 0.1f, Gdx.graphics.getWidth() * 0.05f, statusBarContainer.getBottomY() - Gdx.graphics.getWidth() * 0.05f - Gdx.graphics.getWidth() * 0.15f);
-        questButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.QUEST_ICON), Gdx.graphics.getWidth() * 0.1f, Gdx.graphics.getWidth() * 0.05f, eqButton.getY() - Gdx.graphics.getWidth() * 0.05f - Gdx.graphics.getWidth() * 0.15f);
+        eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, guiMargin, statusBarContainer.getBottomY() - guiMargin - guiButtonSize);
+        questButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.QUEST_ICON), guiButtonSize, guiMargin, eqButton.getY() -guiMargin - guiButtonSize);
     }
 
     public void draw() {

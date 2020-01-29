@@ -47,7 +47,7 @@ public final class PerkIcon extends Image {
         if (lvl < 4) {
             upgradeCost = PerkStats.getPerkUpgradeCost(perkEnum, lvl);
             upgradeText = new TextObject(
-                    upgradeCost <= GlobalValues.getGold() ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    upgradeCost <= GlobalValues.getGold() ? FontsManager.getFont(FontEnum.MENU_PERK_TITLE) : FontsManager.getFont(FontEnum.MENU_PERK_DESCRIPTION),
                     StringsManager.getGuiString(GuiStringEnum.UPGRADE),
                     Gdx.graphics.getWidth() * 0.95f,
                     y + ICON_SIZE * 0.9f,
@@ -55,7 +55,7 @@ public final class PerkIcon extends Image {
             );
             upgradeCostText = new TextWithIcon(
                     GraphicsManager.getGuiElement(GuiElementEnum.COINS),
-                    upgradeCost <= GlobalValues.getGold() ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    upgradeCost <= GlobalValues.getGold() ? FontsManager.getFont(FontEnum.MENU_PERK_TITLE) : FontsManager.getFont(FontEnum.MENU_PERK_DESCRIPTION),
                     Integer.toString(upgradeCost),
                     Gdx.graphics.getWidth() * 0.95f,
                     y + ICON_SIZE * 0.55f,
@@ -64,7 +64,7 @@ public final class PerkIcon extends Image {
         }
 
         title = new MultiLineText(
-                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                FontsManager.getFont(FontEnum.MENU_PERK_TITLE),
                 StringsManager.getPerkName(perkEnum) + " lvl." + lvl,
                 X + ICON_SIZE * 1.2f,
                 WIDTH - ICON_SIZE * 1.2f,
@@ -80,7 +80,7 @@ public final class PerkIcon extends Image {
                         (int) (perkStat * 100) + "% " + descEnd;
 
         description = new MultiLineText(
-                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                FontsManager.getFont(FontEnum.MENU_PERK_DESCRIPTION),
                 descString,
                 X + ICON_SIZE * 1.2f,
                 WIDTH - ICON_SIZE * 1.6f,

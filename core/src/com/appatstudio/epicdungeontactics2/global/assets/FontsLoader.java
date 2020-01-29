@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global.assets;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -22,10 +23,17 @@ final class FontsLoader {
 
     static void init(AssetManager assetManager) {
 
+        boolean isTablet = EpicDungeonTactics.isTablet();
+        int menuBigTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.07f) : (int) (Gdx.graphics.getWidth() * 0.1f);
+        int menuSmallTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.035f) : (int) (Gdx.graphics.getWidth() * 0.05f);
+
+        int communicatePrinterTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.04f);
+        int mapTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.02f) : (int) (Gdx.graphics.getWidth() * 0.03f);
+
         //MENU HERO TITLE
         FreetypeFontLoader.FreeTypeFontLoaderParameter parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.1f);
+        parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -34,7 +42,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.1f);
+        parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -45,7 +53,7 @@ final class FontsLoader {
         //MENU HERO DESCRIPTION
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.05f);
+        parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -54,7 +62,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.05f);
+        parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -62,11 +70,31 @@ final class FontsLoader {
         assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
 
+        //PERK SCREEN
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_WHITE_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.MENU_PERK_TITLE.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_GRAY_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.MENU_PERK_DESCRIPTION.toString() + ".ttf", BitmapFont.class, parms);
+
+
 
         //COMMUNICATE PRINTER
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.size = communicatePrinterTextSize;
         parms.fontParameters.color = Color.WHITE;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -75,7 +103,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.size = communicatePrinterTextSize;
         parms.fontParameters.color = Color.GRAY;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -84,7 +112,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.size = communicatePrinterTextSize;
         parms.fontParameters.color = Color.GOLD;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -93,7 +121,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.size = communicatePrinterTextSize;
         parms.fontParameters.color = Color.RED;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -102,7 +130,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.04f);
+        parms.fontParameters.size = communicatePrinterTextSize;
         parms.fontParameters.color = Color.FIREBRICK;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
@@ -111,7 +139,7 @@ final class FontsLoader {
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = MAP_FONT_PATH;
-        parms.fontParameters.size = (int) (Gdx.graphics.getWidth() * 0.03f);
+        parms.fontParameters.size = mapTextSize;
         parms.fontParameters.color = Color.WHITE;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;

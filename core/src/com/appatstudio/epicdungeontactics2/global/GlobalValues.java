@@ -14,6 +14,7 @@ public final class GlobalValues {
             gold = 500;
             SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
         }
+        gold = 5000;
     }
 
     public static int getGold() {
