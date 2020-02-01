@@ -8,6 +8,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.questWindow.QuestWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public final class GuiContainer {
 
     private Batch batch;
+
+    private RunQuitWindow runQuitWindow;
 
     private CommunicatePrinter communicatePrinter;
     private StatusBarContainer statusBarContainer;
@@ -31,6 +34,9 @@ public final class GuiContainer {
 
     public GuiContainer(GameScreen gameScreen) {
         batch = new SpriteBatch();
+        batch.enableBlending();
+
+        runQuitWindow = new RunQuitWindow();
 
         communicatePrinter = new CommunicatePrinter();
         statusBarContainer = new StatusBarContainer(gameScreen.getHero());
@@ -55,7 +61,24 @@ public final class GuiContainer {
         eqButton.draw(batch);
         questButton.draw(batch);
 
+        if (runQuitWindow.isUp()) {
+            runQuitWindow.act(Gdx.graphics.getDeltaTime());
+            runQuitWindow.draw(batch, 1f);
+        }
+
         batch.end();
+    }
+
+    public boolean tap(float x, float y) {
+        if (runQuitWindow.isUp()) {
+            runQuitWindow.tap(x, y);
+            return true;
+        }
+        return false;
+    }
+
+    public void backPressed() {
+        runQuitWindow.show();
     }
 
 }

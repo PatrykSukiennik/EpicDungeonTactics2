@@ -1,9 +1,9 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.MenuBgContainer;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public final class MenuScreen {
@@ -22,11 +22,11 @@ public final class MenuScreen {
         batch = new SpriteBatch();
 
         characterSelector = new CharacterSelector();
-
     }
 
     public void draw() {
         batch.begin();
+        MenuBgContainer.draw(batch);
         characterSelector.draw(batch);
         batch.end();
     }

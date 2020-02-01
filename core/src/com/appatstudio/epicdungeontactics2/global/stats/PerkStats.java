@@ -84,7 +84,7 @@ public final class PerkStats {
     }
 
     public static float getPerkStat(PerkEnum perkEnum, int lvl) {
-        return perkStats.get(perkEnum)[lvl];
+        return perkStats.get(perkEnum)[lvl-1];
     }
 
     public static int getPerkUpgradeCost(PerkEnum perkEnum, int lvl) {

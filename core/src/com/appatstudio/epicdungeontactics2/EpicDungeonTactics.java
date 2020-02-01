@@ -12,6 +12,7 @@ import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
 import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 
 import java.util.Random;
@@ -20,6 +21,8 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.MENU_SCREEN;
 
 public class EpicDungeonTactics extends ApplicationAdapter {
+
+    private MenuBgContainer menuBgContainer;
 
     private static AndroidCommunication androidCommunication;
 
@@ -53,6 +56,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     @Override
     public void create() {
+        Gdx.input.setCatchKey(Input.Keys.BACK, true);
+
         isTablet = (float)Gdx.graphics.getHeight()/Gdx.graphics.getWidth() < 16f/10;
 
         currentScreen = CurrentScreenEnum.LOADING_SCREEN;
@@ -82,14 +87,23 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 break;
 
             case STATS_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    setCurrentScreen(MENU_SCREEN);
+                }
                 statsScreen.draw();
                 break;
 
             case PERK_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    setCurrentScreen(MENU_SCREEN);
+                }
                 perkScreen.draw();
                 break;
 
             case GAME_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    gameScreen.backPressed();
+                }
                 gameScreen.draw();
                 break;
         }
@@ -135,7 +149,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 perkScreen.tap(x, y);
                 break;
             case GAME_SCREEN:
-
+                gameScreen.tap(x, y);
         }
     }
 
@@ -151,6 +165,11 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         if (currentScreen == MENU_SCREEN) {
             menuScreen.swiped(directionEnum);
         }
+    }
+
+    public static void runEnded() {
+        menuScreen = new MenuScreen();
+        perkScreen = new PerkScreen();
     }
 
     public static void updateGold() {

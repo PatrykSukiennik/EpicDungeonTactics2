@@ -23,6 +23,7 @@ public final class StatusBarContainer {
         SpriteDrawable headIcon = null;
         switch (hero) {
             case HERO_ELF: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_ELF); break;
+            case HERO_KNIGHT: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_KNIGHT); break;
             case HERO_LIZARD: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_LIZARD); break;
             case HERO_WIZZARD: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_WIZARD); break;
             case HERO_NINJA: headIcon = GraphicsManager.getGuiElement(GuiElementEnum.HEAD_NINJA); break;

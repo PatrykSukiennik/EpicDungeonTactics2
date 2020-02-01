@@ -100,6 +100,7 @@ public final class PerkIcon extends Image {
         title.draw(batch);
         description.draw(batch);
         upgradeText.draw(batch);
+        batch.getColor().a = 1f;
         upgradeCostText.draw(batch);
     }
 

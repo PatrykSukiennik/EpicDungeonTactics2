@@ -21,6 +21,41 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.HERO_PIRATE, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.HERO_BABY, new CharacterPrototype(3, 3, 3, 3, 3));
 
+        //forest
+        characterPrototypes.put(CharacterEnum.CENTAUR_MALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.CENTAUR_FEMALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.ENT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.TROLL, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.WOLF, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.MUSHROOM_SMALL, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.MUSHROOM_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.MUSHROOM_LARGE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.BEAR, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.ELVEN_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.ELVEN_KING, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.ELVEN_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.GNOLL_BRUTE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.GNOLL_OVERSEER, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.GNOLL_SCOUT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.GNOLL_SHAMAN, new CharacterPrototype(3, 3, 3, 3, 3));
+
+        //npcs
+        characterPrototypes.put(CharacterEnum.NPC_ALCHEMIST, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_CITIZEN_FEMALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_CITIZEN_MALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_THIEF, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_BISHOP, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_NUN_FAT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_NUN_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_MAGIC_SHOP, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_BLACKSMITH, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_KING, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
+
         //tier1
         characterPrototypes.put(CharacterEnum.TINY_ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));
@@ -50,8 +85,42 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
 
 
-
         enemyLvlUpStats = new HashMap<>();
+        //forest
+        enemyLvlUpStats.put(CharacterEnum.CENTAUR_MALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.CENTAUR_FEMALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.ENT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.TROLL, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.WOLF, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.MUSHROOM_SMALL, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.MUSHROOM_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.MUSHROOM_LARGE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.BEAR, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.ELVEN_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.ELVEN_KING, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.ELVEN_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.GNOLL_BRUTE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.GNOLL_OVERSEER, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.GNOLL_SCOUT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.GNOLL_SHAMAN, new CharacterPrototype(3, 3, 3, 3, 3));
+
+        //npcs
+        enemyLvlUpStats.put(CharacterEnum.NPC_ALCHEMIST, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_CITIZEN_FEMALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_CITIZEN_MALE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_THIEF, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_BISHOP, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_NUN_FAT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_NUN_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_MAGIC_SHOP, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_BLACKSMITH, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_KING, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
+
         //tier1
         enemyLvlUpStats.put(CharacterEnum.TINY_ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));

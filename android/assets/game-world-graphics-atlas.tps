@@ -181,6 +181,274 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">game-world-graphics/characters/BEAR/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/BEAR/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/CENTAUR_MALE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KING/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_KNIGHT/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/ELVEN_PRINCESS/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/ENT/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_OVERSEER/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SCOUT/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/GNOLL_SHAMAN/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_LARGE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_NORMAL/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/MUSHROOM_SMALL/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_ALCHEMIST/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BISHOP/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KING/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_0.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/run_0.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_NUN_NORMAL/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_PRINCESS/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_THIEF/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/idle_0.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/run_0.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/OGRE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/TROLL/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/WOLF/run_4.png</key>
+            <key type="filename">game-world-graphics/map-elements/doors/CLOSED.png</key>
+            <key type="filename">game-world-graphics/map-elements/doors/OPEN.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_0.png</key>
             <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_2.png</key>
@@ -443,28 +711,6 @@
                 <rect>4,5,8,10</rect>
                 <key>scale9Paddings</key>
                 <rect>4,5,8,10</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_0.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_0.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_3.png</key>
-            <key type="filename">game-world-graphics/map-elements/doors/CLOSED.png</key>
-            <key type="filename">game-world-graphics/map-elements/doors/OPEN.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
-                <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

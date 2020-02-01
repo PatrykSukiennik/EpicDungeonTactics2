@@ -240,6 +240,7 @@
             <key type="filename">gui/BRONZE_MEDAL.png</key>
             <key type="filename">gui/COINS.png</key>
             <key type="filename">gui/DIAMOND_MEDAL.png</key>
+            <key type="filename">gui/EQUIPMENT_ICON.png</key>
             <key type="filename">gui/GOLD_MEDAL.png</key>
             <key type="filename">gui/HEAD_BABY.png</key>
             <key type="filename">gui/HEAD_ELF.png</key>
@@ -248,6 +249,7 @@
             <key type="filename">gui/HEAD_NINJA.png</key>
             <key type="filename">gui/HEAD_PIRATE.png</key>
             <key type="filename">gui/HEAD_WIZARD.png</key>
+            <key type="filename">gui/QUEST_ICON.png</key>
             <key type="filename">gui/SILVER_MEDAL.png</key>
             <key type="filename">items/KEY.png</key>
             <key type="filename">items/arrows/ARROWv0.png</key>
@@ -433,7 +435,20 @@
             <key type="filename">gui/SETTINGS_ICON.png</key>
             <key type="filename">gui/STATS_ICON.png</key>
             <key type="filename">gui/STONE_SMALL_BUTTON.png</key>
+            <key type="filename">gui/effect-icons/BERSERKER.png</key>
+            <key type="filename">gui/effect-icons/BLESS.png</key>
+            <key type="filename">gui/effect-icons/BOW_DMG.png</key>
+            <key type="filename">gui/effect-icons/DOUBLE_ATTACK.png</key>
+            <key type="filename">gui/effect-icons/DOUBLE_MOVE.png</key>
+            <key type="filename">gui/effect-icons/EXP_BONUS.png</key>
+            <key type="filename">gui/effect-icons/FIRE.png</key>
+            <key type="filename">gui/effect-icons/GOLD_BONUS.png</key>
+            <key type="filename">gui/effect-icons/MAGIC_MIRROR.png</key>
+            <key type="filename">gui/effect-icons/MAGIC_RESISTANCE.png</key>
+            <key type="filename">gui/effect-icons/MELE_DMG.png</key>
             <key type="filename">gui/effect-icons/POISON.png</key>
+            <key type="filename">gui/effect-icons/STUN.png</key>
+            <key type="filename">gui/effect-icons/WEAKNESS.png</key>
             <key type="filename">gui/perk-icons/APPLE_FINDER.png</key>
             <key type="filename">gui/perk-icons/BERSERKER.png</key>
             <key type="filename">gui/perk-icons/BOW_DMG.png</key>

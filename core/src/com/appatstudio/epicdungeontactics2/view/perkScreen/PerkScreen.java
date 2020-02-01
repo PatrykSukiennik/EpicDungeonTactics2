@@ -10,8 +10,8 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
-import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.CharacterSelector;
+import com.appatstudio.epicdungeontactics2.MenuBgContainer;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
@@ -100,6 +100,8 @@ public final class PerkScreen {
 
     public void draw() {
         batch.begin();
+        MenuBgContainer.draw(batch);
+
         title.draw(batch);
         backButton.draw(batch);
         goldStatus.draw(batch);
