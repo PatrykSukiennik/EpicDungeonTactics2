@@ -54,25 +54,23 @@ public final class CharacterCard {
     private final float MOVE_TIME = 0.2f;
 
     static {
-        float smallFontSize = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),  "0");
+        float smallFontSize = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0");
 
         itemSize = CharacterSelector.iconSize / 5f;
-        bonusY = CharacterSelector.bottomY + MenuScreen.BOTTOM_BUTTON_HEIGHT + CharacterSelector.bigMargin + smallFontSize/2f;
+        bonusY = CharacterSelector.bottomY + MenuScreen.BOTTOM_BUTTON_HEIGHT + CharacterSelector.bigMargin + smallFontSize / 2f;
         statsY = new float[StatisticEnum.values().length + 1];
-        for (int i=0; i<statsY.length; i++) {
+        for (int i = 0; i < statsY.length; i++) {
             statsY[i] = bonusY + CharacterSelector.bigMargin + (smallFontSize * 1.2f + CharacterSelector.smallMargin) * i;
         }
-        itemsY = statsY[statsY.length-1] + smallFontSize/2f + CharacterSelector.bigMargin;
+        itemsY = statsY[statsY.length - 1] + smallFontSize / 2f + CharacterSelector.bigMargin;
         iconY = itemsY + itemSize + CharacterSelector.bigMargin;
-        descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + smallFontSize/2f;
+        descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + smallFontSize / 2f;
         titleY = descY + smallFontSize * 2;
 
 
     }
 
     CharacterCard(CharacterEnum character) {
-
-        boolean isTablet = EpicDungeonTactics.isTablet();
 
         this.icon = new CharacterIcon(character);
 
@@ -82,7 +80,7 @@ public final class CharacterCard {
         icon.setSize(CharacterSelector.iconSize, CharacterSelector.iconSize);
         icon.setPosition(
                 Gdx.graphics.getWidth(),
-                    iconY);
+                iconY);
 
         title = new RelativePosText(
                 FontsManager.getFont(
@@ -236,7 +234,7 @@ public final class CharacterCard {
                                 MOVE_TIME)));
     }
 
-    public void justCenter() {
+    void justCenter() {
         icon.setPosition(Gdx.graphics.getWidth() / 2f - icon.getWidth() / 2f,
                 icon.getY());
     }

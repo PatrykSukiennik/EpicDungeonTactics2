@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
+import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
@@ -218,5 +219,18 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getEffectIcon(EffectEnum e) {
         return effectIconsMap.get(e);
+    }
+
+    public static Animation<SpriteDrawable> getCampUpgradeFellow(CampUpgradeEnum campUpgrade, CharacterStateEnum s) {
+        switch (campUpgrade) {
+            case ALCHEMIST: return charactersAnimations.get(CharacterEnum.NPC_ALCHEMIST).get(s);
+            case BLACKSMITH: return charactersAnimations.get(CharacterEnum.NPC_BLACKSMITH).get(s);
+            case MAGIC_SHOP: return charactersAnimations.get(CharacterEnum.NPC_MAGIC_SHOP).get(s);
+            case BUTCHER: return charactersAnimations.get(CharacterEnum.NPC_BUTCHER).get(s);
+            case PRINCESS: return charactersAnimations.get(CharacterEnum.NPC_PRINCESS).get(s);
+            case MOUNTAIN_KING: return charactersAnimations.get(CharacterEnum.NPC_MOUNTAIN_KING).get(s);
+            case LUGGAGE_CARRIAGE: return charactersAnimations.get(CharacterEnum.NPC_CITIZEN_MALE).get(s);
+            default: return null;
+        }
     }
 }

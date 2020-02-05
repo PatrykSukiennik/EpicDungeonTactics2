@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.stats.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 
 import java.util.HashMap;
@@ -47,14 +48,17 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.NPC_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_THIEF, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_BISHOP, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.NPC_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_NUN_FAT, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_NUN_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_MAGIC_SHOP, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_BLACKSMITH, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_KING, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.NPC_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
+
+        //pets
+        characterPrototypes.put(CharacterEnum.PET_DOG, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.PET_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.PET_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
 
         //tier1
         characterPrototypes.put(CharacterEnum.TINY_ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));
@@ -112,14 +116,17 @@ public final class CharacterStats {
         enemyLvlUpStats.put(CharacterEnum.NPC_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_THIEF, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_BISHOP, new CharacterPrototype(3, 3, 3, 3, 3));
-        enemyLvlUpStats.put(CharacterEnum.NPC_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_NUN_FAT, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_NUN_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_MAGIC_SHOP, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_BLACKSMITH, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_KING, new CharacterPrototype(3, 3, 3, 3, 3));
-        enemyLvlUpStats.put(CharacterEnum.NPC_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
+
+        //pets
+        enemyLvlUpStats.put(CharacterEnum.PET_DOG, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.PET_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.PET_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
 
         //tier1
         enemyLvlUpStats.put(CharacterEnum.TINY_ZOMBIE, new CharacterPrototype(3, 3, 3, 3, 3));

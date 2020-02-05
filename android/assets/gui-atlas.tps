@@ -186,6 +186,7 @@
             <key type="filename">gui/LVL_EXP_BAR.png</key>
             <key type="filename">gui/LVL_EXP_BAR_BG.png</key>
             <key type="filename">gui/POINTS_PER_LVL_ICON.png</key>
+            <key type="filename">gui/RUN_QUIT_WINDOW.png</key>
             <key type="filename">gui/SILVER_COMMUNICATE_WINDOW.png</key>
             <key type="filename">gui/STONE_COMMUNICATE_WINDOW.png</key>
             <key type="filename">gui/YELLOW_COMMUNICATE_WINDOW.png</key>

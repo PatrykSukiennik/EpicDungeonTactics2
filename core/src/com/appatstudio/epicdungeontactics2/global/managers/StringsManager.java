@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
+import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
@@ -19,6 +20,8 @@ public final class StringsManager {
     private static Map<ItemEnum, String> itemNamesMap;
     private static Map<PerkEnum, String> perkNamesMap;
     private static Map<PerkEnum, String> perkDescriptionsMap;
+    private static Map<CampUpgradeEnum, String> campUpgradeNamesMap;
+    private static Map<CampUpgradeEnum, String> campUpgradeDescriptionsMap;
     private static Map<CharacterEnum, String> characterNamesMap;
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<CharacterEnum, String> characterBonusesMap;
@@ -31,6 +34,8 @@ public final class StringsManager {
         I18NBundle itemNames = I18NBundle.createBundle(Gdx.files.internal("strings/item_names"), java.util.Locale.getDefault());
         I18NBundle perkNames = I18NBundle.createBundle(Gdx.files.internal("strings/perk_names"), java.util.Locale.getDefault());
         I18NBundle perkDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/perk_descriptions"), java.util.Locale.getDefault());
+        I18NBundle campUpgradeNames = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_names"), java.util.Locale.getDefault());
+        I18NBundle campUpgradeDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_descriptions"), java.util.Locale.getDefault());
         I18NBundle characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
         I18NBundle characterBonuses = I18NBundle.createBundle(Gdx.files.internal("strings/character_bonus"), java.util.Locale.getDefault());
         I18NBundle characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
@@ -51,6 +56,14 @@ public final class StringsManager {
         for (PerkEnum currEnum : perkEnums) {
             perkNamesMap.put(currEnum, perkNames.get(currEnum.toString()));
             perkDescriptionsMap.put(currEnum, perkDescriptions.get(currEnum.toString()));
+        }
+
+        campUpgradeNamesMap = new HashMap<>();
+        campUpgradeDescriptionsMap = new HashMap<>();
+        CampUpgradeEnum[] upgradeEnums = CampUpgradeEnum.values();
+        for (CampUpgradeEnum currEnum : upgradeEnums) {
+            campUpgradeNamesMap.put(currEnum, campUpgradeNamesMap.get(currEnum.toString()));
+            campUpgradeDescriptionsMap.put(currEnum, campUpgradeDescriptionsMap.get(currEnum.toString()));
         }
 
         characterNamesMap = new HashMap<>();
@@ -99,6 +112,14 @@ public final class StringsManager {
 
     public static String getPerkDescription(PerkEnum perkEnum) {
         return perkDescriptionsMap.get(perkEnum);
+    }
+
+    public static String getCampUpgradeName(CampUpgradeEnum campUpgradeEnum) {
+        return campUpgradeNamesMap.get(campUpgradeEnum);
+    }
+
+    public static String getCampUpgradeDescription(CampUpgradeEnum campUpgradeEnum) {
+        return campUpgradeDescriptionsMap.get(campUpgradeEnum);
     }
 
     public static String getCharacterName(CharacterEnum characterEnum) {

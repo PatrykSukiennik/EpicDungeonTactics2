@@ -1,11 +1,14 @@
 package com.appatstudio.epicdungeontactics2.global.managers.savedInfo;
 
+import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
+import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,7 @@ public class SavedInfoManager {
     private static Map<CharacterEnum, Integer> characterLvls;
     private static Map<CharacterEnum, Integer> characterExps;
     private static Map<CharacterEnum, Map<StatisticEnum, Integer>> characterStats;
+    private static Map<CampUpgradeEnum, Integer> campUpgradeLvls;
 
     static {
         preferences = Gdx.app.getPreferences("epicdungeontactics2");
@@ -66,6 +70,11 @@ public class SavedInfoManager {
             perkLvls.put(p, preferences.getInteger("perkLvl" + p.toString(), 1));
         }
 
+        campUpgradeLvls = new HashMap<>();
+        CampUpgradeEnum[] allUpgrades = CampUpgradeEnum.values();
+        for (CampUpgradeEnum c : allUpgrades) {
+            campUpgradeLvls.put(c, preferences.getInteger("campUpgradeLvl" + c.toString(), 0));
+        }
 
         isCharacterUnlocked = new HashMap<>();
         isCharacterUnlocked.put(CharacterEnum.HERO_ELF, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_ELF.toString(), true));
@@ -80,6 +89,10 @@ public class SavedInfoManager {
 
     public static boolean isUnlocked(CharacterEnum characterEnum) {
         return isCharacterUnlocked.get(characterEnum);
+    }
+
+    public static boolean isUnlockedCamp(CampUpgradeEnum campUpgradeEnum) {
+        return campUpgradeLvls.get(campUpgradeEnum) != 0;
     }
 
     public static int getIntFromFlag(SavedInfoFlagsEnum flag) {
@@ -123,5 +136,51 @@ public class SavedInfoManager {
         perkLvls.put(perkEnum, lvl);
         preferences.putInteger("perkLvl" + perkEnum.toString(), lvl);
         preferences.flush();
+    }
+
+    public static void saveCampUpgradeLvl(CampUpgradeEnum campUpgradeEnum, int lvl) {
+        campUpgradeLvls.put(campUpgradeEnum, lvl);
+        preferences.putInteger("campUpgradeLvl" + campUpgradeEnum.toString(), lvl);
+        preferences.flush();
+    }
+
+    public static CharacterEnum[] getAllUnlockedCharacters() {
+        Array<CharacterEnum> characters = new Array<>();
+
+        if (isUnlocked(CharacterEnum.HERO_ELF)) characters.add(CharacterEnum.HERO_ELF);
+        if (isUnlocked(CharacterEnum.HERO_KNIGHT)) characters.add(CharacterEnum.HERO_KNIGHT);
+        if (isUnlocked(CharacterEnum.HERO_WIZZARD)) characters.add(CharacterEnum.HERO_WIZZARD);
+        if (isUnlocked(CharacterEnum.HERO_LIZARD)) characters.add(CharacterEnum.HERO_LIZARD);
+        if (isUnlocked(CharacterEnum.HERO_NINJA)) characters.add(CharacterEnum.HERO_NINJA);
+        if (isUnlocked(CharacterEnum.HERO_PIRATE)) characters.add(CharacterEnum.HERO_PIRATE);
+        if (isUnlocked(CharacterEnum.HERO_BABY)) characters.add(CharacterEnum.HERO_BABY);
+
+        CharacterEnum[] returnArray = new CharacterEnum[characters.size];
+        for (int i=0; i<characters.size; i++) {
+            returnArray[i] = characters.get(i);
+        }
+        return returnArray;
+    }
+
+    public static CharacterEnum[] getAllUnlockedNpcs() {
+        Array<CharacterEnum> characters = new Array<>();
+
+        if (isUnlockedCamp(CampUpgradeEnum.ALCHEMIST)) characters.add(CharacterEnum.NPC_ALCHEMIST);
+        if (isUnlockedCamp(CampUpgradeEnum.BLACKSMITH)) characters.add(CharacterEnum.NPC_BLACKSMITH);
+        if (isUnlockedCamp(CampUpgradeEnum.BUTCHER)) characters.add(CharacterEnum.NPC_BUTCHER);
+        if (isUnlockedCamp(CampUpgradeEnum.LUGGAGE_CARRIAGE)) characters.add(CharacterEnum.NPC_CITIZEN_MALE);
+        if (isUnlockedCamp(CampUpgradeEnum.MAGIC_SHOP)) characters.add(CharacterEnum.NPC_MAGIC_SHOP);
+        if (isUnlockedCamp(CampUpgradeEnum.PRINCESS)) characters.add(CharacterEnum.NPC_PRINCESS);
+        if (isUnlockedCamp(CampUpgradeEnum.MOUNTAIN_KING)) characters.add(CharacterEnum.NPC_MOUNTAIN_KING);
+
+        CharacterEnum[] returnArray = new CharacterEnum[characters.size];
+        for (int i=0; i<characters.size; i++) {
+            returnArray[i] = characters.get(i);
+        }
+        return returnArray;
+    }
+
+    public static int getNpcLvl(CampUpgradeEnum campUpgradeEnum) {
+        return campUpgradeLvls.get(campUpgradeEnum);
     }
 }

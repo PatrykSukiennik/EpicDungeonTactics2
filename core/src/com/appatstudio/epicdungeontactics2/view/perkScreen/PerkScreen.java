@@ -11,7 +11,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.CharacterSelector;
-import com.appatstudio.epicdungeontactics2.MenuBgContainer;
+import com.appatstudio.epicdungeontactics2.view.MenuBgContainer;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
@@ -36,6 +36,7 @@ public final class PerkScreen {
 
     public PerkScreen() {
         batch = new SpriteBatch();
+        batch.enableBlending();
 
         wasRerollUsed = false;
 
@@ -88,7 +89,7 @@ public final class PerkScreen {
         }
     }
 
-    public static void updatePerks() {
+    static void updatePerks() {
         for (int i=0; i<perks.length; i++) {
             perks[i] = new PerkIcon(perks[i].getPerkEnum(), perkStartY + perkHeightModif * i);
             perks[i].getColor().a = 0.3f;
@@ -99,9 +100,9 @@ public final class PerkScreen {
     }
 
     public void draw() {
-        batch.begin();
         MenuBgContainer.draw(batch);
 
+        batch.begin();
         title.draw(batch);
         backButton.draw(batch);
         goldStatus.draw(batch);

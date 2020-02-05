@@ -6,6 +6,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
+import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
@@ -22,8 +23,6 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum
 
 public class EpicDungeonTactics extends ApplicationAdapter {
 
-    private MenuBgContainer menuBgContainer;
-
     private static AndroidCommunication androidCommunication;
 
     public static Random random;
@@ -32,6 +31,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     private static MenuScreen menuScreen;
     private static StatsScreen statsScreen;
     private static PerkScreen perkScreen;
+    private static CampUpgradeScreen campUpgradeScreen;
     private static GameScreen gameScreen;
 
     private static CurrentScreenEnum currentScreen;
@@ -52,6 +52,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     public EpicDungeonTactics(AndroidCommunication ac) {
         androidCommunication = ac;
+    }
+
+    public static void characterUnlocked() {
+        if (campUpgradeScreen != null) CampUpgradeScreen.updateMainCharacters();
     }
 
     @Override
@@ -100,6 +104,13 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 perkScreen.draw();
                 break;
 
+            case CAMP_UPGRADE_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    setCurrentScreen(MENU_SCREEN);
+                }
+                campUpgradeScreen.draw();
+                break;
+
             case GAME_SCREEN:
                 if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
                     gameScreen.backPressed();
@@ -128,6 +139,11 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 if (perkScreen == null) perkScreen = new PerkScreen();
                 perkScreen.draw();
                 break;
+            case CAMP_UPGRADE_SCREEN:
+                if (campUpgradeScreen == null) campUpgradeScreen = new CampUpgradeScreen();
+                campUpgradeScreen.show();
+                campUpgradeScreen.draw();
+                break;
             case GAME_SCREEN:
                 //startGame() should be done yet
                 gameScreen.draw();
@@ -147,6 +163,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 break;
             case PERK_SCREEN:
                 perkScreen.tap(x, y);
+                break;
+            case CAMP_UPGRADE_SCREEN:
+                campUpgradeScreen.tap(x, y);
                 break;
             case GAME_SCREEN:
                 gameScreen.tap(x, y);
@@ -176,6 +195,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         if (menuScreen != null) menuScreen.updateGold();
         if (perkScreen != null) perkScreen.updateGold();
         if (statsScreen != null) statsScreen.updateGold();
+        if (campUpgradeScreen != null) campUpgradeScreen.updateGold();
+        if (gameScreen != null) gameScreen.updateGold();
     }
 
     public static boolean isInternetOn() {

@@ -173,6 +173,7 @@ public final class CharacterSelector {
                     CharacterEnum unlockedEnum = characterCards[currectIndex].getCharacterEnum();
                     characterCards[currectIndex] = new CharacterCard(unlockedEnum);
                     characterCards[currectIndex].moveToCenterNow();
+                    EpicDungeonTactics.characterUnlocked();
                     return true;
                 }
 
@@ -181,7 +182,7 @@ public final class CharacterSelector {
         }
     }
 
-    public void updateGold() {
+    void updateGold() {
         goldStatus.setText(Integer.toString(GlobalValues.getGold()));
     }
 
