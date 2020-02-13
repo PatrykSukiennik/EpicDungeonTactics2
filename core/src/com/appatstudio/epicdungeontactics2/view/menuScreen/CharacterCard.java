@@ -238,4 +238,8 @@ public final class CharacterCard {
         icon.setPosition(Gdx.graphics.getWidth() / 2f - icon.getWidth() / 2f,
                 icon.getY());
     }
+
+    public static float getIconY() {
+        return iconY;
+    }
 }

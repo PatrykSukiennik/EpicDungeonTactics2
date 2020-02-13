@@ -37,6 +37,7 @@ public final class MenuScreen {
 
     public void draw() {
         MenuBgContainer.draw(batch);
+        MenuBgContainer.drawAlpha50(batch);
 
         batch.begin();
         characterSelector.draw(batch);

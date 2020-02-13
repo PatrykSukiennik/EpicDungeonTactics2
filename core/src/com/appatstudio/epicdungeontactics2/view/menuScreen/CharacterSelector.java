@@ -28,9 +28,9 @@ public final class CharacterSelector {
     private TextWithIcon goldStatus, statsButton;
     private ButtonWithText startButton, unlockButton;
 
-    static final float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.35f : Gdx.graphics.getWidth()/2f;
-    static final float bigMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.05f : Gdx.graphics.getWidth() * 0.08f;
-    static final float smallMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.03f;
+    public static final float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.35f : Gdx.graphics.getWidth()/2f;
+    public static final float bigMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.05f : Gdx.graphics.getWidth() * 0.08f;
+    public static final float smallMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.03f;
     static final float wholeHeight =
                     iconSize
                     + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_LOCKED), "0")

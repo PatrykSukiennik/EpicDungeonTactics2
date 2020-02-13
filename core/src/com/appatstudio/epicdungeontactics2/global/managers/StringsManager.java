@@ -22,6 +22,7 @@ public final class StringsManager {
     private static Map<PerkEnum, String> perkDescriptionsMap;
     private static Map<CampUpgradeEnum, String> campUpgradeNamesMap;
     private static Map<CampUpgradeEnum, String> campUpgradeDescriptionsMap;
+    private static Map<CampUpgradeEnum, String> campUpgradeMainDescriptionsMap;
     private static Map<CharacterEnum, String> characterNamesMap;
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<CharacterEnum, String> characterBonusesMap;
@@ -36,6 +37,7 @@ public final class StringsManager {
         I18NBundle perkDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/perk_descriptions"), java.util.Locale.getDefault());
         I18NBundle campUpgradeNames = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_names"), java.util.Locale.getDefault());
         I18NBundle campUpgradeDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_descriptions"), java.util.Locale.getDefault());
+        I18NBundle campUpgradeMainDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_main_descriptions"), java.util.Locale.getDefault());
         I18NBundle characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
         I18NBundle characterBonuses = I18NBundle.createBundle(Gdx.files.internal("strings/character_bonus"), java.util.Locale.getDefault());
         I18NBundle characterDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/character_descriptions"), java.util.Locale.getDefault());
@@ -60,10 +62,12 @@ public final class StringsManager {
 
         campUpgradeNamesMap = new HashMap<>();
         campUpgradeDescriptionsMap = new HashMap<>();
+        campUpgradeMainDescriptionsMap = new HashMap<>();
         CampUpgradeEnum[] upgradeEnums = CampUpgradeEnum.values();
         for (CampUpgradeEnum currEnum : upgradeEnums) {
-            campUpgradeNamesMap.put(currEnum, campUpgradeNamesMap.get(currEnum.toString()));
-            campUpgradeDescriptionsMap.put(currEnum, campUpgradeDescriptionsMap.get(currEnum.toString()));
+            campUpgradeNamesMap.put(currEnum, campUpgradeNames.get(currEnum.toString()));
+            campUpgradeDescriptionsMap.put(currEnum, campUpgradeDescriptions.get(currEnum.toString()));
+            campUpgradeMainDescriptionsMap.put(currEnum, campUpgradeMainDescriptions.get(currEnum.toString()));
         }
 
         characterNamesMap = new HashMap<>();
@@ -122,6 +126,10 @@ public final class StringsManager {
         return campUpgradeDescriptionsMap.get(campUpgradeEnum);
     }
 
+    public static String getCampUpgradeMainDescription(CampUpgradeEnum upgradeEnum) {
+        return campUpgradeMainDescriptionsMap.get(upgradeEnum);
+    }
+
     public static String getCharacterName(CharacterEnum characterEnum) {
         return characterNamesMap.get(characterEnum);
     }
@@ -149,4 +157,5 @@ public final class StringsManager {
     public static String getCommunicate(CommunicatesEnum commEnum) {
         return communicatesStringMap.get(commEnum);
     }
+
 }

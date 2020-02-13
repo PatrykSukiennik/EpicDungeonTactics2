@@ -9,6 +9,8 @@ public enum  GuiElementEnum {
 
     LVL_EXP_BAR, LVL_EXP_BAR_BG,
 
+    BLACK_ALPHA_50percent,
+
     SETTINGS_ICON,
     COINS,
     POINTS_PER_LVL_ICON,

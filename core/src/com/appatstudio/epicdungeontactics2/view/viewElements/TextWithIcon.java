@@ -49,6 +49,12 @@ public final class TextWithIcon {
                 textY = posY + iconSize / 2f;
                 break;
             }
+            case Align.topRight: {
+                iconX = posX + wholeWidth / 2f - iconSize;
+                iconY = posY - iconSize / 2f;
+                textX = posX - wholeWidth / 2f;
+                textY = posY + iconSize / 2f;
+            }
         }
     }
 

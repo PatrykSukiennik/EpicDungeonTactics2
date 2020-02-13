@@ -101,6 +101,7 @@ public final class PerkScreen {
 
     public void draw() {
         MenuBgContainer.draw(batch);
+        MenuBgContainer.drawAlpha50(batch);
 
         batch.begin();
         title.draw(batch);

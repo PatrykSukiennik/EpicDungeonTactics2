@@ -62,6 +62,8 @@ public class StatsScreen {
 
     public void draw() {
         MenuBgContainer.draw(batch);
+        MenuBgContainer.drawAlpha50(batch);
+
         batch.begin();
         title.draw(batch);
         backButton.draw(batch);

@@ -19,12 +19,11 @@ final class CampUpgradeButton {
     private SpriteDrawable bg;
     private float x;
     private CampUpgradeEnum upgradeEnum;
-    private int lvl;
     private TextObject lvlText;
 
     CampUpgradeButton(int index, CampUpgradeEnum upgradeEnum) {
         this.upgradeEnum = upgradeEnum;
-        lvl = SavedInfoManager.getNpcLvl(upgradeEnum);
+        int lvl = SavedInfoManager.getNpcLvl(upgradeEnum);
 
         if (lvl == 0) {
             switch (upgradeEnum) {
@@ -84,10 +83,7 @@ final class CampUpgradeButton {
     }
 
     boolean tap(float tapX, float tapY) {
-        if (tapX > x && tapX < x + size && tapY < size) {
-            return true;
-        }
-        else return false;
+        return tapX > x && tapX < x + size && tapY < size;
     }
 
     void draw(Batch batch) {
@@ -99,5 +95,7 @@ final class CampUpgradeButton {
     }
 
 
-
+    public CampUpgradeEnum getEnum() {
+        return upgradeEnum;
+    }
 }
