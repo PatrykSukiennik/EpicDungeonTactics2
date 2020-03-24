@@ -11,6 +11,8 @@ public enum  GuiElementEnum {
 
     BLACK_ALPHA_50percent,
 
+    ARROW_LEFT, ARROW_RIGHT,
+
     SETTINGS_ICON,
     COINS,
     POINTS_PER_LVL_ICON,

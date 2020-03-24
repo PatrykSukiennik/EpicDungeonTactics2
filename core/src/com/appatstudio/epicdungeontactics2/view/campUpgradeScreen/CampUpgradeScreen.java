@@ -42,8 +42,8 @@ public final class CampUpgradeScreen {
 
     private float mainCharactersY = (Gdx.graphics.getHeight()/18f) * 9.15f;
     private float npcY = (Gdx.graphics.getHeight()/18f) * 8.15f;
-    private static float characterWidth = (Gdx.graphics.getHeight()/18f);
-    private static float characterHeight = (Gdx.graphics.getHeight()/18f) * (24f/16f);
+    private static float characterWidth = (Gdx.graphics.getHeight()/18f) * 2;
+    private static float characterHeight = (Gdx.graphics.getHeight()/18f) * 2;
 
     private static float xModif = Gdx.graphics.getWidth();
 
@@ -132,17 +132,17 @@ public final class CampUpgradeScreen {
         MenuBgContainer.drawOnlyBg(batch);
 
         if (xModif > 0) {
-            xModif -= Gdx.graphics.getWidth()/2.5f * Gdx.graphics.getDeltaTime();
+            xModif -= Gdx.graphics.getWidth()/2f * Gdx.graphics.getDeltaTime();
         }
 
         batch.begin();
 
         stateTime += Gdx.graphics.getDeltaTime();
         for (int i=0; i<mainCharacters.size; i++) {
-            mainCharacters.get(i).getKeyFrame(stateTime).draw(batch, mainCharactersX[i] - xModif, mainCharactersY, characterWidth, characterHeight);
+            mainCharacters.get(i).getKeyFrame(stateTime).draw(batch, mainCharactersX[i] - xModif - characterWidth/4f, mainCharactersY, characterWidth, characterHeight);
         }
         for (int i=0; i<npcs.size; i++) {
-            npcs.get(i).getKeyFrame(stateTime).draw(batch, npcsX[i] - xModif, npcY, characterWidth, characterHeight);
+            npcs.get(i).getKeyFrame(stateTime).draw(batch, npcsX[i] - xModif - characterWidth/4f, npcY, characterWidth, characterHeight);
         }
 
         MenuBgContainer.drawOnlyLights(batch);
@@ -174,22 +174,22 @@ public final class CampUpgradeScreen {
 
             for (int i = 0; i < allCharacters.length; i++) {
                 mainCharacters.add(GraphicsManager.getCharactersAnimation(allCharacters[i], CharacterStateEnum.RUN));
-                mainCharactersX[i] = Gdx.graphics.getWidth() / 2f + (allCharacters.length * characterWidth) / 2f - (i + 1) * characterWidth;
+                mainCharactersX[i] = Gdx.graphics.getWidth() / 2f + (allCharacters.length * characterWidth/2f) / 2f - (i + 1) * characterWidth/2f;
             }
             for (int i = 0; i < allNpcs.length; i++) {
                 npcs.add(GraphicsManager.getCharactersAnimation(allNpcs[i], CharacterStateEnum.RUN));
-                npcsX[i] = mainCharactersX[0] - (i + 0.5f) * characterWidth;
+                npcsX[i] = mainCharactersX[0] - (i + 0.5f) * characterWidth/2f;
             }
         }
         else {
             for (int i = 0; i < allNpcs.length; i++) {
                 npcs.add(GraphicsManager.getCharactersAnimation(allNpcs[i], CharacterStateEnum.RUN));
-                npcsX[i] = Gdx.graphics.getWidth() / 2f + (allNpcs.length * characterWidth) / 2f - (i + 1f) * characterWidth;
+                npcsX[i] = Gdx.graphics.getWidth() / 2f + (allNpcs.length * characterWidth/2f) / 2f - (i + 1f) * characterWidth/2f;
 
             }
             for (int i = 0; i < allCharacters.length; i++) {
                 mainCharacters.add(GraphicsManager.getCharactersAnimation(allCharacters[i], CharacterStateEnum.RUN));
-                mainCharactersX[i] = npcsX[0] - (i - 0.5f) * characterWidth;
+                mainCharactersX[i] = npcsX[0] - (i - 0.5f) * characterWidth/2f;
             }
         }
     }
@@ -205,33 +205,62 @@ public final class CampUpgradeScreen {
                 SavedInfoManager.saveCampUpgradeLvl(
                         selectedUpgrade.getUpgradeEnum(),
                         SavedInfoManager.getNpcLvl(selectedUpgrade.getUpgradeEnum()) + 1);
-            }
-            GlobalValues.minusGold(CampUpgradeStats.getCampUpgradeCost(selectedUpgrade.getUpgradeEnum(), selectedUpgrade.getLvl()));
-            CampUpgradeCard newCard = new CampUpgradeCard(selectedUpgrade.getUpgradeEnum());
-            upgradeCards.put(selectedUpgrade.getUpgradeEnum(), newCard);
-            selectedUpgrade = upgradeCards.get(newCard.getUpgradeEnum());
-            updateCharacters();
 
-            for (int i=0; i<buttons.length; i++) {
-                buttons[i] = new CampUpgradeButton(i, allUpgrades[i]);
-                upgradeCards.put(allUpgrades[i], new CampUpgradeCard(allUpgrades[i]));
+                GlobalValues.minusGold(CampUpgradeStats.getCampUpgradeCost(selectedUpgrade.getUpgradeEnum(), selectedUpgrade.getLvl()));
+                CampUpgradeCard newCard = new CampUpgradeCard(selectedUpgrade.getUpgradeEnum());
+                upgradeCards.put(selectedUpgrade.getUpgradeEnum(), newCard);
+                selectedUpgrade = upgradeCards.get(newCard.getUpgradeEnum());
+                updateCharacters();
+
+                for (int i = 0; i < buttons.length; i++) {
+                    buttons[i] = new CampUpgradeButton(i, allUpgrades[i]);
+                    upgradeCards.put(allUpgrades[i], new CampUpgradeCard(allUpgrades[i]));
+                }
             }
+            else  {
+                for (CampUpgradeButton button : buttons) {
+                    if (button.tap(x, y)) {
+                        if (selectedUpgrade != null) {
+                            if (selectedUpgrade.getUpgradeEnum() == button.getEnum())
+                                selectedUpgrade = null;
+                            else selectedUpgrade = upgradeCards.get(button.getEnum());
+                        } else selectedUpgrade = upgradeCards.get(button.getEnum());
+                        return true;
+                    }
+                }
+                if (x < Gdx.graphics.getWidth()/2f - CharacterSelector.iconSize/2f || x > Gdx.graphics.getWidth()/2f + CharacterSelector.iconSize/2f) selectedUpgrade = null;
+            }
+
         }
         else if (selectedUpgrade != null && selectedUpgrade.isUnlockPossible()) {
             if (unlockButton.tap(x, y)) {
                 SavedInfoManager.saveCampUpgradeLvl(
                         selectedUpgrade.getUpgradeEnum(),
                         SavedInfoManager.getNpcLvl(selectedUpgrade.getUpgradeEnum()) + 1);
-            }
-            GlobalValues.minusGold(CampUpgradeStats.getCampUpgradeCost(selectedUpgrade.getUpgradeEnum(), selectedUpgrade.getLvl()));
-            CampUpgradeCard newCard = new CampUpgradeCard(selectedUpgrade.getUpgradeEnum());
-            upgradeCards.put(selectedUpgrade.getUpgradeEnum(), newCard);
-            selectedUpgrade = upgradeCards.get(newCard.getUpgradeEnum());
-            updateCharacters();
 
-            for (int i=0; i<buttons.length; i++) {
-                buttons[i] = new CampUpgradeButton(i, allUpgrades[i]);
-                upgradeCards.put(allUpgrades[i], new CampUpgradeCard(allUpgrades[i]));
+                GlobalValues.minusGold(CampUpgradeStats.getCampUpgradeCost(selectedUpgrade.getUpgradeEnum(), selectedUpgrade.getLvl()));
+                CampUpgradeCard newCard = new CampUpgradeCard(selectedUpgrade.getUpgradeEnum());
+                upgradeCards.put(selectedUpgrade.getUpgradeEnum(), newCard);
+                selectedUpgrade = upgradeCards.get(newCard.getUpgradeEnum());
+                updateCharacters();
+
+                for (int i = 0; i < buttons.length; i++) {
+                    buttons[i] = new CampUpgradeButton(i, allUpgrades[i]);
+                    upgradeCards.put(allUpgrades[i], new CampUpgradeCard(allUpgrades[i]));
+                }
+            }
+            else  {
+                for (CampUpgradeButton button : buttons) {
+                    if (button.tap(x, y)) {
+                        if (selectedUpgrade != null) {
+                            if (selectedUpgrade.getUpgradeEnum() == button.getEnum())
+                                selectedUpgrade = null;
+                            else selectedUpgrade = upgradeCards.get(button.getEnum());
+                        } else selectedUpgrade = upgradeCards.get(button.getEnum());
+                        return true;
+                    }
+                }
+                if (x < Gdx.graphics.getWidth()/2f - CharacterSelector.iconSize/2f || x > Gdx.graphics.getWidth()/2f + CharacterSelector.iconSize/2f) selectedUpgrade = null;
             }
         }
         else {

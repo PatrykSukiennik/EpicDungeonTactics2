@@ -31,7 +31,7 @@ public final class CampUpgradeStats {
         campUpgradeCost.put(CampUpgradeEnum.PRINCESS, new int[]{300, 6, 9});
 
         campUnlockStage = new HashMap<>();
-        campUnlockStage.put(CampUpgradeEnum.ALCHEMIST, 1);
+        campUnlockStage.put(CampUpgradeEnum.ALCHEMIST, 0);
         campUnlockStage.put(CampUpgradeEnum.BLACKSMITH, 0);
         campUnlockStage.put(CampUpgradeEnum.MAGIC_SHOP, 6);
         campUnlockStage.put(CampUpgradeEnum.BUTCHER, 6);

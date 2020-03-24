@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.1.0</string>
+        <string>5.3.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -325,6 +325,14 @@
             <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_3.png</key>
             <key type="filename">game-world-graphics/characters/NPC_BLACKSMITH/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_BUTCHER/run_4.png</key>
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_FEMALE/idle_3.png</key>
@@ -341,14 +349,6 @@
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_3.png</key>
             <key type="filename">game-world-graphics/characters/NPC_CITIZEN_MALE/run_4.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/idle_4.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_3.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_HUNTER/run_4.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KING/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KING/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KING/idle_3.png</key>
@@ -357,14 +357,6 @@
             <key type="filename">game-world-graphics/characters/NPC_KING/run_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KING/run_3.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KING/run_4.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/idle_4.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_3.png</key>
-            <key type="filename">game-world-graphics/characters/NPC_KNIGHT/run_4.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_KNIGHT_ELITE/idle_3.png</key>
@@ -381,6 +373,14 @@
             <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_3.png</key>
             <key type="filename">game-world-graphics/characters/NPC_MAGIC_SHOP/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/NPC_MOUNTAIN_KING/run_4.png</key>
             <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_0.png</key>
             <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/NPC_NUN_FAT/idle_2.png</key>
@@ -419,6 +419,22 @@
             <key type="filename">game-world-graphics/characters/OGRE/run_1.png</key>
             <key type="filename">game-world-graphics/characters/OGRE/run_2.png</key>
             <key type="filename">game-world-graphics/characters/OGRE/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/PET_HUNTER/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/PET_KNIGHT/run_4.png</key>
             <key type="filename">game-world-graphics/characters/TROLL/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/TROLL/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/TROLL/idle_3.png</key>
@@ -440,6 +456,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -460,6 +478,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -480,6 +500,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -524,6 +546,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -609,6 +633,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -653,6 +679,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -705,6 +733,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -718,6 +748,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -736,6 +768,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

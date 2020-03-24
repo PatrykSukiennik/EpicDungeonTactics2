@@ -139,6 +139,7 @@ public final class GraphicsManager {
         perkIconsMap = new HashMap<>();
         PerkEnum[] allPerks = PerkEnum.values();
         for (PerkEnum p : allPerks) {
+            System.out.println(p.toString());
             perkIconsMap.put(p, new SpriteDrawable(new Sprite(atlas.findRegion("perk-icons/" + p.toString()))));
         }
 

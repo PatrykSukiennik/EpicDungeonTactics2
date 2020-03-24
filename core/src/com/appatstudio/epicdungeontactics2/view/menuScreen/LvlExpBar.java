@@ -13,34 +13,26 @@ import com.badlogic.gdx.utils.Align;
 public final class LvlExpBar {
 
     private SpriteDrawable bg, bar;
-    private float bgModifX, bgModifY, bgW, bgH, barW, barH, barModifX, barModifY;
-    private RelativePosText lvlText;
+    private float bgModifX, bgW, bgH, barW, barH, bgModifY, barModifX, barModifY;
 
-    LvlExpBar(int exp, int expCap, int lvl) {
-        this.lvlText = new RelativePosText(
-                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                Integer.toString(lvl),
-                Align.center
-        );
+    LvlExpBar(int exp, int expCap, float iconW) {
 
-        barW = Gdx.graphics.getWidth() * 0.05f;
-        bgW = Gdx.graphics.getWidth() * 0.08f;
-        barModifX = -barW / 2f;
-        bgModifX = -bgW / 2f;
-        bgH = bgW * 3.5f;
-        float maxBarH = bgH * 0.5f;
-        barH = ((float) exp / expCap) * maxBarH;
-        bgModifY = -bgW * 0.4f;
-        barModifY = bgH * 0.1f;
-
+        bgW = iconW/2f;
+        bgModifX = -bgW/2f;
+        barModifX = bgModifX + (1/75f) * bgW;
+        bgH = bgW / 15f;
+        bgModifY = -bgH;
+        float maxBarW = bgW * (13/15f);
+        barH = (4/5f) * bgH;
+        barW = ((float) exp / expCap) * maxBarW;
+        barModifY = -(14/15f) * bgH;
 
         bg = GraphicsManager.getGuiElement(GuiElementEnum.LVL_EXP_BAR_BG);
         bar = GraphicsManager.getGuiElement(GuiElementEnum.LVL_EXP_BAR);
     }
 
     public void draw(Batch batch, float centerX, float centerY) {
-        bg.draw(batch, centerX + bgModifX, centerY + bgModifY, bgW, bgH);
         bar.draw(batch, centerX + barModifX, centerY + barModifY, barW, barH);
-        lvlText.draw(batch, centerX, centerY);
+        bg.draw(batch, centerX + bgModifX, centerY + bgModifY, bgW, bgH);
     }
 }

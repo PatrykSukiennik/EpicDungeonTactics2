@@ -1,5 +1,5 @@
 package com.appatstudio.epicdungeontactics2.global.enums;
 
 public enum StatisticEnum {
-    STR, DEX, INT, VIT, LCK
+    LCK, INT, DEX, STR, VIT
 }

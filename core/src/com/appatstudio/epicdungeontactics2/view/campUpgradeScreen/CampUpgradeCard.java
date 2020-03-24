@@ -38,9 +38,9 @@ public final class CampUpgradeCard {
     private int upgradeCost;
     private int unlockCap;
 
-    private static float iconX = Gdx.graphics.getWidth()/2f - CharacterSelector.iconSize/2f;
+    private static float iconX = Gdx.graphics.getWidth()/2f - (CharacterSelector.iconSize * 1.6f)/2f;
     private static float iconY = CharacterCard.getIconY();
-    private static float iconSize = CharacterSelector.iconSize;
+    private static float iconSize = CharacterSelector.iconSize * 1.6f;
 
     private TextObject title, unlockStage;
     private MultiLineText unlockedDesc, mainDesc;
@@ -76,7 +76,7 @@ public final class CampUpgradeCard {
                     FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
                     StringsManager.getGuiString(GuiStringEnum.AVAILABLE_AT_STAGE) + ": " + CampUpgradeStats.getCampUnlockStage(upgradeEnum),
                     iconX + iconSize / 2f,
-                    iconY + iconSize * 0.45f,
+                    iconY + (iconSize/2f) * 0.45f,
                     Align.center);
 
             cost = new TextWithIcon(
@@ -84,7 +84,7 @@ public final class CampUpgradeCard {
                     FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
                     StringsManager.getGuiString(GuiStringEnum.COST) + ": " + CampUpgradeStats.getCampUpgradeCost(upgradeEnum, lvl),
                     iconX + iconSize / 2f,
-                    iconY + iconSize * 0.65f,
+                    iconY + (iconSize/2f) * 0.65f,
                     Align.center
             );
         }
@@ -127,13 +127,13 @@ public final class CampUpgradeCard {
 
         if (lvl > 0) {
             blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            animation.getKeyFrame(stateTime).draw(batch, iconX, iconY, CharacterSelector.iconSize, CharacterSelector.iconSize);
+            animation.getKeyFrame(stateTime).draw(batch, iconX, iconY, iconSize, iconSize);
             unlockedDesc.draw(batch);
             if (lvl < 3) cost.draw(batch);
 
         }
         else {
-            animation.getKeyFrame(0).draw(batch, iconX, iconY, CharacterSelector.iconSize, CharacterSelector.iconSize);
+            animation.getKeyFrame(0).draw(batch, iconX, iconY, iconSize, iconSize);
             blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.getColor().a = 0.8f;
             cost.draw(batch);
@@ -164,7 +164,7 @@ public final class CampUpgradeCard {
         return lvl;
     }
 
-    public boolean isMaxedOut() {
+    boolean isMaxedOut() {
         return lvl == 3;
     }
 }

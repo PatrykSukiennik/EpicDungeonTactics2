@@ -10,7 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public final class SelectorArrow extends Image {
 
     SelectorArrow(DirectionEnum direction) {
-        super(GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE));
+        super(
+                direction == DirectionEnum.LEFT ?
+                        GraphicsManager.getGuiElement(GuiElementEnum.ARROW_LEFT) :
+                        GraphicsManager.getGuiElement(GuiElementEnum.ARROW_RIGHT));
         this.setSize(Gdx.graphics.getWidth() / 8f, Gdx.graphics.getWidth() / 4f);
         this.setOrigin(getWidth() / 2f, getHeight() / 2f);
         this.setY(Gdx.graphics.getHeight() / 2f - this.getHeight() / 2f);

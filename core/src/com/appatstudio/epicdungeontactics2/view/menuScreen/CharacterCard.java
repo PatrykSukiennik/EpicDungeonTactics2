@@ -77,7 +77,7 @@ public final class CharacterCard {
         this.characterEnum = character;
         this.isUnlocked = SavedInfoManager.isUnlocked(characterEnum);
 
-        icon.setSize(CharacterSelector.iconSize, CharacterSelector.iconSize);
+        icon.setSize(CharacterSelector.iconSize * 1.6f, CharacterSelector.iconSize * 1.6f);
         icon.setPosition(
                 Gdx.graphics.getWidth(),
                 iconY);
@@ -85,7 +85,9 @@ public final class CharacterCard {
         title = new RelativePosText(
                 FontsManager.getFont(
                         isUnlocked ? FontEnum.MENU_HERO_TITLE_UNLOCKED : FontEnum.MENU_HERO_TITLE_LOCKED),
-                StringsManager.getCharacterName(characterEnum),
+                isUnlocked ?
+                        StringsManager.getCharacterName(characterEnum) + " lvl." + SavedInfoManager.getCharacterLvl(characterEnum) :
+                        StringsManager.getCharacterName(characterEnum),
                 Align.center
         );
 
@@ -117,13 +119,13 @@ public final class CharacterCard {
         StatisticEnum[] allStats = StatisticEnum.values();
         stats = new RelativePosTextWithIcon[allStats.length + 1];
         for (int i = 0; i < allStats.length; i++) {
-            stats[i] = new RelativePosTextWithIcon(
+            stats[i + 1] = new RelativePosTextWithIcon(
                     GraphicsManager.getStatIcon(allStats[i]),
                     isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                     allStats[i].toString() + ": " + SavedInfoManager.getCharacterStat(characterEnum, allStats[i]),
                     Align.left);
         }
-        stats[stats.length - 1] = new RelativePosTextWithIcon(
+        stats[0] = new RelativePosTextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.POINTS_PER_LVL_ICON),
                 isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 "PTS: " + HeroStats.getPointsPerLvl(characterEnum),
@@ -147,7 +149,7 @@ public final class CharacterCard {
         lvlExpBar = new LvlExpBar(
                 SavedInfoManager.getCharacterExp(character),
                 HeroStats.getExpCap(SavedInfoManager.getCharacterLvl(character)),
-                SavedInfoManager.getCharacterLvl(character)
+                icon.getWidth()/2f
         );
     }
 
@@ -161,7 +163,7 @@ public final class CharacterCard {
         icon.draw(batch, parentAlpha, isUnlocked);
 
         if (isUnlocked)
-            lvlExpBar.draw(batch, icon.getX() + icon.getWidth() * 1.1f, icon.getY() + icon.getHeight() * 0.2f);
+            lvlExpBar.draw(batch, icon.getX() + icon.getWidth()/2f, icon.getY() - icon.getHeight() * 0.02f);
 
         icon.draw(batch, parentAlpha);
 
@@ -180,14 +182,14 @@ public final class CharacterCard {
         }
 
         for (int i = 0; i < stats.length; i++) {
-            stats[i].draw(batch, icon.getX() + icon.getWidth() * 0.35f, statsY[i]);
+            stats[i].draw(batch, icon.getX() + icon.getWidth() * 0.38f, statsY[i]);
         }
 
         if (!isUnlocked) {
             batch.getColor().a = 0.8f;
-            cost.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + icon.getHeight() * 0.65f);
+            cost.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + (icon.getHeight()/2f) * 0.65f);
             if (SavedInfoManager.getPlayerStat(PlayerStatsTrackerFlagsEnum.DEEPEST_STAGE) < HeroStats.getRequiredStageToUnlock(characterEnum))
-                unlockStage.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + icon.getHeight() * 0.45f);
+                unlockStage.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + (icon.getHeight()/2f) * 0.45f);
         }
 
     }

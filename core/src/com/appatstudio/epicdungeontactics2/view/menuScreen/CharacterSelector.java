@@ -28,7 +28,7 @@ public final class CharacterSelector {
     private TextWithIcon goldStatus, statsButton;
     private ButtonWithText startButton, unlockButton;
 
-    public static final float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.35f : Gdx.graphics.getWidth()/2f;
+    public static final float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.7f : Gdx.graphics.getWidth()/2f;
     public static final float bigMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.05f : Gdx.graphics.getWidth() * 0.08f;
     public static final float smallMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.03f;
     static final float wholeHeight =
