@@ -15,6 +15,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
+import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosMultilineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.RelativePosTextWithIcon;
 import com.badlogic.gdx.Gdx;
@@ -31,8 +32,9 @@ public final class CharacterCard {
 
     private CharacterIcon icon;
 
-    private RelativePosText title, description, bonus, unlockStage;
+    private RelativePosText title, bonus, unlockStage;
     private RelativePosTextWithIcon cost;
+    private RelativePosMultilineText description;
 
     private LvlExpBar lvlExpBar;
 
@@ -64,8 +66,8 @@ public final class CharacterCard {
         }
         itemsY = statsY[statsY.length - 1] + smallFontSize / 2f + CharacterSelector.bigMargin;
         iconY = itemsY + itemSize + CharacterSelector.bigMargin;
-        descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + smallFontSize / 2f;
-        titleY = descY + smallFontSize * 2;
+        descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + smallFontSize * 2.5f;
+        titleY = descY + smallFontSize/2f;
 
 
     }
@@ -91,11 +93,12 @@ public final class CharacterCard {
                 Align.center
         );
 
-        description = new RelativePosText(
+        description = new RelativePosMultilineText(
                 FontsManager.getFont(
                         isUnlocked ? FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED : FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getCharacterDescription(characterEnum),
-                Align.center
+                Align.center,
+                icon.getWidth()*0.9f
         );
 
         bonus = new RelativePosText(
@@ -122,13 +125,13 @@ public final class CharacterCard {
             stats[i + 1] = new RelativePosTextWithIcon(
                     GraphicsManager.getStatIcon(allStats[i]),
                     isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
-                    allStats[i].toString() + ": " + SavedInfoManager.getCharacterStat(characterEnum, allStats[i]),
+                    " " + allStats[i].toString() + ": " + SavedInfoManager.getCharacterStat(characterEnum, allStats[i]),
                     Align.left);
         }
         stats[0] = new RelativePosTextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.POINTS_PER_LVL_ICON),
                 isUnlocked ? FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED) : FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
-                "PTS: " + HeroStats.getPointsPerLvl(characterEnum),
+                " PTS: " + HeroStats.getPointsPerLvl(characterEnum),
                 Align.left);
 
 
@@ -163,7 +166,7 @@ public final class CharacterCard {
         icon.draw(batch, parentAlpha, isUnlocked);
 
         if (isUnlocked)
-            lvlExpBar.draw(batch, icon.getX() + icon.getWidth()/2f, icon.getY() - icon.getHeight() * 0.02f);
+            lvlExpBar.draw(batch, icon.getX() + icon.getWidth()/2f, icon.getY() - icon.getHeight() * 0.04f);
 
         icon.draw(batch, parentAlpha);
 
@@ -186,7 +189,7 @@ public final class CharacterCard {
         }
 
         if (!isUnlocked) {
-            batch.getColor().a = 0.8f;
+            batch.getColor().a = 0.6f;
             cost.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + (icon.getHeight()/2f) * 0.65f);
             if (SavedInfoManager.getPlayerStat(PlayerStatsTrackerFlagsEnum.DEEPEST_STAGE) < HeroStats.getRequiredStageToUnlock(characterEnum))
                 unlockStage.draw(batch, icon.getX() + icon.getWidth() / 2f, icon.getY() + (icon.getHeight()/2f) * 0.45f);

@@ -18,8 +18,10 @@ final class FontsLoader {
 
     private static final String MAP_FONT_PATH = "fonts/map_font.ttf";
     private static final String DECORATED_FONT_PATH = "fonts/decorated_font.ttf";
+    private static final String DECORATED_FONT_ITALIC_PATH = "fonts/decorated_font_italic.ttf";
+    private static final String DECORATED_FONT_BOLD_PATH = "fonts/decorated_font_bold.ttf";
 
-    private static final String CHARACTERS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/_!#%&8()1234567890-:=+~[]";
+    private static final String CHARACTERS = "'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/_!#%&8()1234567890-:=+~[]ąĄćĆżŻźŹóÓęĘłŁńŃśŚ";
 
     static void init(AssetManager assetManager) {
 
@@ -30,9 +32,10 @@ final class FontsLoader {
         int communicatePrinterTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.04f);
         int mapTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.02f) : (int) (Gdx.graphics.getWidth() * 0.03f);
 
+
         //MENU HERO TITLE
         FreetypeFontLoader.FreeTypeFontLoaderParameter parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontFileName = DECORATED_FONT_BOLD_PATH;
         parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
@@ -41,7 +44,7 @@ final class FontsLoader {
         assetManager.load(FontEnum.MENU_HERO_TITLE_UNLOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontFileName = DECORATED_FONT_BOLD_PATH;
         parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;

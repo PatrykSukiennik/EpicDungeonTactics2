@@ -82,7 +82,7 @@ public final class StatusBarContainer {
                 new EffectIcon(
                         effect,
                         duration,
-                        heroHead.getX() + heroHead.getWidth() + EffectIcon.iconSize/3f + (EffectIcon.iconSize * 1.3f) * effects.size,
+                        heroHead.getX() + heroHead.getWidth() + EffectIcon.iconSize/3f + (EffectIcon.iconSize * 1.1f) * effects.size,
                         barsBg.getY() - EffectIcon.iconSize/3f - EffectIcon.iconSize));
     }
 

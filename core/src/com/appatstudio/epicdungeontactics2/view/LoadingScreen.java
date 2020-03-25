@@ -38,20 +38,26 @@ public final class LoadingScreen {
         barHeight = maxBarWidth * 0.05f;
         String randomText = getRandomLoadingCommunicate();
 
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/decorated_font.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/decorated_font_bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameter.characters = randomText;
         fontParameter.borderColor = Color.BLACK;
         fontParameter.borderWidth = 1;
         fontParameter.size = (int) (Gdx.graphics.getWidth() * 0.05f);
 
-        communicate = new MultiLineText(fontGenerator.generateFont(fontParameter), randomText, Gdx.graphics.getWidth() / 2f, maxBarWidth, Gdx.graphics.getHeight() * 0.25f, Align.center);
+        communicate = new MultiLineText(
+                fontGenerator.generateFont(fontParameter),
+                randomText,
+                Gdx.graphics.getWidth()/2f,
+                maxBarWidth,
+                Gdx.graphics.getHeight() * 0.25f,
+                Align.center);
 
     }
 
     private String getRandomLoadingCommunicate() {
         I18NBundle loadingTexts = I18NBundle.createBundle(Gdx.files.internal("strings/loading-texts"), Locale.getDefault());
-        return loadingTexts.get(Integer.toString(Math.abs(EpicDungeonTactics.random.nextInt(10))));
+        return loadingTexts.get(Integer.toString(Math.abs(EpicDungeonTactics.random.nextInt(199) + 1)));
     }
 
     public void draw(float progress) {

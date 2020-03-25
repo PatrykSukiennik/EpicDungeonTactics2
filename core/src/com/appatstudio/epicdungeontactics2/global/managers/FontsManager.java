@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
@@ -40,4 +41,8 @@ public final class FontsManager {
         return glyphLayout.height;
     }
 
+    public static float getTextHeightMultiline(BitmapFont font, String text, float width, int alignment) {
+        glyphLayout.setText(font, text, Color.WHITE, width, alignment, true);
+        return glyphLayout.height;
+    }
 }

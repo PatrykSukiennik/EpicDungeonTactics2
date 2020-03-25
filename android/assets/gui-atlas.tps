@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.1.0</string>
+        <string>5.3.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -64,9 +64,9 @@
             <key>filtering</key>
             <struct type="LibGDXFiltering">
                 <key>x</key>
-                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
                 <key>y</key>
-                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
             </struct>
         </struct>
         <key>shapePadding</key>
@@ -169,7 +169,7 @@
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -181,6 +181,22 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">gui/ARROW_LEFT.png</key>
+            <key type="filename">gui/ARROW_RIGHT.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,7,7,14</rect>
+                <key>scale9Paddings</key>
+                <rect>4,7,7,14</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/BACK_ICON.png</key>
             <key type="filename">gui/BRONZE_COMMUNICATE_WINDOW.png</key>
             <key type="filename">gui/LVL_EXP_BAR.png</key>
@@ -193,6 +209,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -202,10 +220,31 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/BLACK_ALPHA_50percent.png</key>
+            <key type="filename">gui/DAY_LIGHT_TEXTURE.png</key>
+            <key type="filename">gui/EXP_BAR.png</key>
+            <key type="filename">gui/HP_BAR.png</key>
+            <key type="filename">gui/NIGHT_LIGHT_TEXTURE.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>0,0,1,1</rect>
+                <key>scale9Paddings</key>
+                <rect>0,0,1,1</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/BOTTOM_BAR.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -229,6 +268,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -243,15 +284,31 @@
             <key type="filename">gui/DIAMOND_MEDAL.png</key>
             <key type="filename">gui/EQUIPMENT_ICON.png</key>
             <key type="filename">gui/GOLD_MEDAL.png</key>
+            <key type="filename">gui/HEAD_ALCHEMIST.png</key>
+            <key type="filename">gui/HEAD_ALCHEMIST_ZERO.png</key>
             <key type="filename">gui/HEAD_BABY.png</key>
+            <key type="filename">gui/HEAD_BLACKSMITH.png</key>
+            <key type="filename">gui/HEAD_BLACKSMITH_ZERO.png</key>
+            <key type="filename">gui/HEAD_BUTCHER.png</key>
+            <key type="filename">gui/HEAD_BUTCHER_ZERO.png</key>
             <key type="filename">gui/HEAD_ELF.png</key>
             <key type="filename">gui/HEAD_KNIGHT.png</key>
             <key type="filename">gui/HEAD_LIZARD.png</key>
+            <key type="filename">gui/HEAD_LUGGAGE_CARRIAGE.png</key>
+            <key type="filename">gui/HEAD_LUGGAGE_CARRIAGE_ZERO.png</key>
+            <key type="filename">gui/HEAD_MAGIC_SHOP.png</key>
+            <key type="filename">gui/HEAD_MAGIC_SHOP_ZERO.png</key>
+            <key type="filename">gui/HEAD_MOUNTAIN_KING.png</key>
+            <key type="filename">gui/HEAD_MOUNTAIN_KING_ZERO.png</key>
             <key type="filename">gui/HEAD_NINJA.png</key>
             <key type="filename">gui/HEAD_PIRATE.png</key>
+            <key type="filename">gui/HEAD_PRINCESS.png</key>
+            <key type="filename">gui/HEAD_PRINCESS_ZERO.png</key>
             <key type="filename">gui/HEAD_WIZARD.png</key>
             <key type="filename">gui/QUEST_ICON.png</key>
             <key type="filename">gui/SILVER_MEDAL.png</key>
+            <key type="filename">gui/SOUND_OFF_ICON.png</key>
+            <key type="filename">gui/SOUND_ON_ICON.png</key>
             <key type="filename">items/KEY.png</key>
             <key type="filename">items/arrows/ARROWv0.png</key>
             <key type="filename">items/arrows/ARROWv1.png</key>
@@ -423,6 +480,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -445,7 +504,6 @@
             <key type="filename">gui/effect-icons/FIRE.png</key>
             <key type="filename">gui/effect-icons/GOLD_BONUS.png</key>
             <key type="filename">gui/effect-icons/MAGIC_MIRROR.png</key>
-            <key type="filename">gui/effect-icons/MAGIC_RESISTANCE.png</key>
             <key type="filename">gui/effect-icons/MELE_DMG.png</key>
             <key type="filename">gui/effect-icons/POISON.png</key>
             <key type="filename">gui/effect-icons/STUN.png</key>
@@ -487,6 +545,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -496,17 +556,34 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">gui/EXP_BAR.png</key>
-            <key type="filename">gui/HP_BAR.png</key>
+            <key type="filename">gui/CAMP_UPGRADE_BUTTON.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>0,0,1,1</rect>
+                <rect>11,11,22,22</rect>
                 <key>scale9Paddings</key>
-                <rect>0,0,1,1</rect>
+                <rect>11,11,22,22</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/MENU_BG1.png</key>
+            <key type="filename">gui/MENU_BG2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>72,72,144,144</rect>
+                <key>scale9Paddings</key>
+                <rect>72,72,144,144</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -515,12 +592,56 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>6,2,12,3</rect>
                 <key>scale9Paddings</key>
                 <rect>6,2,12,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/effect-icons/APPLE_FINDER.png</key>
+            <key type="filename">gui/effect-icons/CHANCE_FOR_ANY_DROP.png</key>
+            <key type="filename">gui/effect-icons/DEX_BONUS.png</key>
+            <key type="filename">gui/effect-icons/ELEMENTALIST.png</key>
+            <key type="filename">gui/effect-icons/EXPERIENCED_ADVENTURER.png</key>
+            <key type="filename">gui/effect-icons/FROZE.png</key>
+            <key type="filename">gui/effect-icons/GLASS_CANNON.png</key>
+            <key type="filename">gui/effect-icons/HP_RESTORATION_KILL.png</key>
+            <key type="filename">gui/effect-icons/HP_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/effect-icons/INSTAKILL_ENEMY.png</key>
+            <key type="filename">gui/effect-icons/INT_BONUS.png</key>
+            <key type="filename">gui/effect-icons/KEY_FINDER.png</key>
+            <key type="filename">gui/effect-icons/LCK_BONUS.png</key>
+            <key type="filename">gui/effect-icons/MAGICAL_DMG_BONUS.png</key>
+            <key type="filename">gui/effect-icons/MAGICAL_RESIST.png</key>
+            <key type="filename">gui/effect-icons/MANA_RESTORATION_KILL.png</key>
+            <key type="filename">gui/effect-icons/MANA_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/effect-icons/MISS_STAGE.png</key>
+            <key type="filename">gui/effect-icons/POISON_DURATION_DECREASE.png</key>
+            <key type="filename">gui/effect-icons/SKILL_COOLDOWN.png</key>
+            <key type="filename">gui/effect-icons/STRONGER_ENEMIES.png</key>
+            <key type="filename">gui/effect-icons/STR_BONUS.png</key>
+            <key type="filename">gui/effect-icons/SUGAR_LOVER.png</key>
+            <key type="filename">gui/effect-icons/TANK.png</key>
+            <key type="filename">gui/effect-icons/THIRD_CHANCE.png</key>
+            <key type="filename">gui/effect-icons/UNIQUE_LOOT.png</key>
+            <key type="filename">gui/effect-icons/VIT_BONUS.png</key>
+            <key type="filename">gui/perk-icons/BLESS.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,7,14,14</rect>
+                <key>scale9Paddings</key>
+                <rect>7,7,14,14</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -585,6 +706,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

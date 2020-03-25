@@ -41,7 +41,7 @@ public final class PerkStats {
         perkStats.put(PerkEnum.DEX_BONUS, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.STRONGER_ENEMIES, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.KEY_FINDER, new float[]{2f, 6f, 10f});
-        perkStats.put(PerkEnum.ELEMENTALIST, new float[]{2f, 6f, 10f});
+        perkStats.put(PerkEnum.ELEMENTALIST, new float[]{0.2f, 0.6f, 0.8f});
         perkStats.put(PerkEnum.EXPERIENCED_ADVENTURER, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.SUGAR_LOVER, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.BERSERKER, new float[]{2f, 6f, 10f});

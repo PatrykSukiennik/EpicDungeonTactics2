@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoMa
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
@@ -98,4 +99,5 @@ final class CampUpgradeButton {
     public CampUpgradeEnum getEnum() {
         return upgradeEnum;
     }
+
 }

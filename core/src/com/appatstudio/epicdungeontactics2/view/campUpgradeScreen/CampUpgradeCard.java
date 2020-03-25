@@ -46,7 +46,7 @@ public final class CampUpgradeCard {
     private MultiLineText unlockedDesc, mainDesc;
     private TextWithIcon cost;
 
-    private static float descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") / 2f;
+    private final static float descY = iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") / 2f;
     private static float titleY = descY + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 2;
 
     CampUpgradeCard(CampUpgradeEnum upgradeEnum) {
@@ -61,7 +61,7 @@ public final class CampUpgradeCard {
         if (lvl == 0) title = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_LOCKED),
                 StringsManager.getCampUpgradeName(upgradeEnum),
                 Gdx.graphics.getWidth()/2f,
-                iconY + CharacterSelector.iconSize + CharacterSelector.bigMargin + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_LOCKED), "0")/2f,
+                titleY,
                 Align.center);
 
         else title = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
@@ -116,7 +116,7 @@ public final class CampUpgradeCard {
                 StringsManager.getCampUpgradeMainDescription(upgradeEnum),
                 Gdx.graphics.getWidth()/2f,
                 Gdx.graphics.getWidth()/2f,
-                iconY - iconSize * 0.25f,
+                iconY - iconSize * 0.15f,
                 Align.center
         );
 
@@ -126,21 +126,22 @@ public final class CampUpgradeCard {
         stateTime += Gdx.graphics.getDeltaTime();
 
         if (lvl > 0) {
-            blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             animation.getKeyFrame(stateTime).draw(batch, iconX, iconY, iconSize, iconSize);
+            blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             unlockedDesc.draw(batch);
             if (lvl < 3) cost.draw(batch);
 
         }
         else {
-            animation.getKeyFrame(0).draw(batch, iconX, iconY, iconSize, iconSize);
-            blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             batch.getColor().a = 0.8f;
+            animation.getKeyFrame(0).draw(batch, iconX, iconY, iconSize, iconSize);
+
+            batch.getColor().a = 1f;
+            blackAlpha.draw(batch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             cost.draw(batch);
             if (SavedInfoManager.getPlayerStat(PlayerStatsTrackerFlagsEnum.DEEPEST_STAGE) < CampUpgradeStats.getCampUnlockStage(upgradeEnum)) {
                 unlockStage.draw(batch);
             }
-            batch.getColor().a = 1f;
         }
 
         title.draw(batch);

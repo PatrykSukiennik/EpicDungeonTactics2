@@ -23,6 +23,7 @@ import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -35,13 +36,15 @@ public final class CampUpgradeScreen {
     private SpriteBatch batch;
     private TextWithIcon backButton, goldStatus;
 
+    private Image campUpgradeButton;
+
     private CampUpgradeButton[] buttons;
 
     private ButtonWithText upgradeButton, unlockButton;
     private TextObject maxedOutText;
 
-    private float mainCharactersY = (Gdx.graphics.getHeight()/18f) * 9.15f;
-    private float npcY = (Gdx.graphics.getHeight()/18f) * 8.15f;
+    private float mainCharactersY = (Gdx.graphics.getHeight()/18f) * 9.35f;
+    private float npcY = (Gdx.graphics.getHeight()/18f) * 8.35f;
     private static float characterWidth = (Gdx.graphics.getHeight()/18f) * 2;
     private static float characterHeight = (Gdx.graphics.getHeight()/18f) * 2;
 
@@ -103,6 +106,11 @@ public final class CampUpgradeScreen {
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
                 Align.left
         );
+        campUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.CAMP_UPGRADE_BUTTON));
+        float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
+        campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
+        campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
+        campUpgradeButton.getColor().a = 0.4f;
 
         upgradeCards = new HashMap<>();
         CampUpgradeEnum[] allUpgrades = CampUpgradeEnum.values();
@@ -136,6 +144,7 @@ public final class CampUpgradeScreen {
         }
 
         batch.begin();
+        batch.getColor().a = 1f;
 
         stateTime += Gdx.graphics.getDeltaTime();
         for (int i=0; i<mainCharacters.size; i++) {
@@ -147,9 +156,21 @@ public final class CampUpgradeScreen {
 
         MenuBgContainer.drawOnlyLights(batch);
 
+        campUpgradeButton.draw(batch, 1f);
+        batch.getColor().a = 1f;
+
         for (CampUpgradeButton c : buttons) {
-            c.draw(batch);
+            if (selectedUpgrade != null) {
+                if (selectedUpgrade.getUpgradeEnum() == c.getEnum()) {
+                    batch.getColor().a = 0.6f;
+                    c.draw(batch);
+                    batch.getColor().a = 1f;
+                }
+                else c.draw(batch);
+            }
+            else c.draw(batch);
         }
+
         backButton.draw(batch);
         goldStatus.draw(batch);
         if (selectedUpgrade != null) {
@@ -200,6 +221,10 @@ public final class CampUpgradeScreen {
         if (backButton.tap(x, y)) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
         }
+        if (x < Gdx.graphics.getWidth() && y > campUpgradeButton.getY() && y < campUpgradeButton.getY() + campUpgradeButton.getHeight()) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
+        }
+
         else if (selectedUpgrade != null && selectedUpgrade.isUpgradePossible()) {
             if (upgradeButton.tap(x, y)) {
                 SavedInfoManager.saveCampUpgradeLvl(
@@ -274,12 +299,37 @@ public final class CampUpgradeScreen {
                     return true;
                 }
             }
+            if (selectedUpgrade == null) {
+                for (int i = 0; i < npcs.size; i++) {
+                    if (x > npcsX[i] - xModif - characterWidth / 4f && x < npcsX[i] - xModif - characterWidth / 4f + characterWidth &&
+                            y > npcY && y < npcY + characterHeight / 2f) {
+
+                        if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_BLACKSMITH, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.BLACKSMITH);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_ALCHEMIST, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.ALCHEMIST);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_MAGIC_SHOP, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.MAGIC_SHOP);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_CITIZEN_MALE, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.LUGGAGE_CARRIAGE);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_PRINCESS, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.PRINCESS);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_MOUNTAIN_KING, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.MOUNTAIN_KING);
+                        } else if (npcs.get(i) == GraphicsManager.getCharactersAnimation(CharacterEnum.NPC_BUTCHER, CharacterStateEnum.RUN)) {
+                            selectedUpgrade = upgradeCards.get(CampUpgradeEnum.BUTCHER);
+                        }
+                        return true;
+                    }
+                }
+            }
             if (x < Gdx.graphics.getWidth()/2f - CharacterSelector.iconSize/2f || x > Gdx.graphics.getWidth()/2f + CharacterSelector.iconSize/2f) selectedUpgrade = null;
         }
         return false;
     }
 
     public void show() {
+        selectedUpgrade = null;
         xModif = Gdx.graphics.getWidth();
     }
 

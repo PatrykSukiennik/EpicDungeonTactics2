@@ -85,14 +85,14 @@ public final class PerkScreen {
         perks = new PerkIcon[perkEnums.length];
         for (int i = 0; i < perkEnums.length; i++) {
             perks[i] = new PerkIcon(perkEnums[i],  perkStartY + perkHeightModif * i);
-            perks[i].getColor().a = 0.3f;
+            perks[i].getColor().a = 0.2f;
         }
     }
 
     static void updatePerks() {
         for (int i=0; i<perks.length; i++) {
             perks[i] = new PerkIcon(perks[i].getPerkEnum(), perkStartY + perkHeightModif * i);
-            perks[i].getColor().a = 0.3f;
+            perks[i].getColor().a = 0.2f;
         }
 
 
@@ -134,11 +134,11 @@ public final class PerkScreen {
             for (PerkIcon perkIcon : perks) {
                 if (perkIcon.tap(x, y)) {
                     if (selectedPerk == perkIcon) {
-                        perkIcon.getColor().a = 0.3f;
+                        perkIcon.getColor().a = 0.2f;
                         selectedPerk = null;
                     } else {
                         if (selectedPerk != null) {
-                            selectedPerk.getColor().a = 0.3f;
+                            selectedPerk.getColor().a = 0.2f;
                         }
                         selectedPerk = perkIcon;
                         perkIcon.getColor().a = 1f;
@@ -157,7 +157,7 @@ public final class PerkScreen {
         perks = new PerkIcon[perkEnums.length];
         for (int i = 0; i < perkEnums.length; i++) {
             perks[i] = new PerkIcon(perkEnums[i], perkStartY + perkHeightModif * i);
-            perks[i].getColor().a = 0.3f;
+            perks[i].getColor().a = 0.2f;
         }
     }
 

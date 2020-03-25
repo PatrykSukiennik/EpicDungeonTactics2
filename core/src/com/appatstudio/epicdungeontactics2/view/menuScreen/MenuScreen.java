@@ -33,6 +33,7 @@ public final class MenuScreen {
         float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
         campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
         campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
+        campUpgradeButton.getColor().a = 0.8f;
     }
 
     public void draw() {
