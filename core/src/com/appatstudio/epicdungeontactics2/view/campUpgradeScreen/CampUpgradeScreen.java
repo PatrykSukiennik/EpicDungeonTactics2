@@ -36,7 +36,7 @@ public final class CampUpgradeScreen {
     private SpriteBatch batch;
     private TextWithIcon backButton, goldStatus;
 
-    private Image campUpgradeButton;
+    private Image campUpgradeButton, financesUpgradeButton;
 
     private CampUpgradeButton[] buttons;
 
@@ -106,11 +106,18 @@ public final class CampUpgradeScreen {
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f,
                 Align.left
         );
+
         campUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.CAMP_UPGRADE_BUTTON));
         float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
         campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
         campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
         campUpgradeButton.getColor().a = 0.4f;
+
+        financesUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.FINANCES_UPGRADE_BUTTON));
+        float financesUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
+        financesUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
+        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + campUpgradeButtonSize);
+        financesUpgradeButton.getColor().a = 0.8f;
 
         upgradeCards = new HashMap<>();
         CampUpgradeEnum[] allUpgrades = CampUpgradeEnum.values();
@@ -157,6 +164,7 @@ public final class CampUpgradeScreen {
         MenuBgContainer.drawOnlyLights(batch);
 
         campUpgradeButton.draw(batch, 1f);
+        financesUpgradeButton.draw(batch, 1f);
         batch.getColor().a = 1f;
 
         for (CampUpgradeButton c : buttons) {
@@ -221,8 +229,15 @@ public final class CampUpgradeScreen {
         if (backButton.tap(x, y)) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
         }
-        if (x < Gdx.graphics.getWidth() && y > campUpgradeButton.getY() && y < campUpgradeButton.getY() + campUpgradeButton.getHeight()) {
+        if (x < campUpgradeButton.getWidth() &&
+                y > campUpgradeButton.getY() &&
+                y < campUpgradeButton.getY() + campUpgradeButton.getHeight()) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
+        }
+        else if (x < financesUpgradeButton.getWidth() &&
+                y > financesUpgradeButton.getY() &&
+                y < financesUpgradeButton.getY() + financesUpgradeButton.getHeight()) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.FINANCES_UPGRADE_SCREEN);
         }
 
         else if (selectedUpgrade != null && selectedUpgrade.isUpgradePossible()) {

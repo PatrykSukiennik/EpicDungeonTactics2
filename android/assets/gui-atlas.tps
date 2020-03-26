@@ -571,6 +571,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/FINANCES_UPGRADE_BUTTON.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,11,20,21</rect>
+                <key>scale9Paddings</key>
+                <rect>10,11,20,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/MENU_BG1.png</key>
             <key type="filename">gui/MENU_BG2.png</key>
             <struct type="IndividualSpriteSettings">
@@ -631,6 +646,43 @@
             <key type="filename">gui/effect-icons/UNIQUE_LOOT.png</key>
             <key type="filename">gui/effect-icons/VIT_BONUS.png</key>
             <key type="filename">gui/perk-icons/BLESS.png</key>
+            <key type="filename">gui/skill_icons/ELF_DOUBLE_SHOT.png</key>
+            <key type="filename">gui/skill_icons/ELF_IMMOBILIZATION.png</key>
+            <key type="filename">gui/skill_icons/ELF_INSIDE_OUT.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_BREAK_WEAPON.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_SHIELD_HIT.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_TORNADO.png</key>
+            <key type="filename">gui/skill_icons/MAGE_ICE_BOLT.png</key>
+            <key type="filename">gui/skill_icons/MAGE_MEDITATION.png</key>
+            <key type="filename">gui/skill_icons/MAGE_MULTIPLE_FIREBALLS.png</key>
+            <key type="filename">gui/spell_icon/BACK_TO_PREVIOUS ROOM.png</key>
+            <key type="filename">gui/spell_icon/BIG_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/BOW_IMMOBILIZATION.png</key>
+            <key type="filename">gui/spell_icon/BOW_INSIDE_OUT.png</key>
+            <key type="filename">gui/spell_icon/DESTROY_WEAK.png</key>
+            <key type="filename">gui/spell_icon/DOUBLE_ARMOR.png</key>
+            <key type="filename">gui/spell_icon/DOUBLE_SHOT_BOW.png</key>
+            <key type="filename">gui/spell_icon/FIRE_COAT.png</key>
+            <key type="filename">gui/spell_icon/FIRE_RAIN.png</key>
+            <key type="filename">gui/spell_icon/FIRE_SPOT.png</key>
+            <key type="filename">gui/spell_icon/FROZING.png</key>
+            <key type="filename">gui/spell_icon/GAS_CLOUD.png</key>
+            <key type="filename">gui/spell_icon/GIANT_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/HEALTH_HALF_ALL.png</key>
+            <key type="filename">gui/spell_icon/LASER.png</key>
+            <key type="filename">gui/spell_icon/MAGE_ICE_BOLT.png</key>
+            <key type="filename">gui/spell_icon/MELE_BREAK_WEAPON.png</key>
+            <key type="filename">gui/spell_icon/MELE_TORNADO.png</key>
+            <key type="filename">gui/spell_icon/METEOR.png</key>
+            <key type="filename">gui/spell_icon/POSITION_CHANGE.png</key>
+            <key type="filename">gui/spell_icon/REROLL_POSITIONS.png</key>
+            <key type="filename">gui/spell_icon/RESTORATION.png</key>
+            <key type="filename">gui/spell_icon/SILVER_EXPLODE.png</key>
+            <key type="filename">gui/spell_icon/SILVER_HIT.png</key>
+            <key type="filename">gui/spell_icon/SILVER_IMPLODE.png</key>
+            <key type="filename">gui/spell_icon/SMALL_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/TELEPORT.png</key>
+            <key type="filename">gui/spell_icon/WEAKNESS.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

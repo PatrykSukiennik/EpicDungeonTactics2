@@ -7,6 +7,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
+import com.appatstudio.epicdungeontactics2.view.financesScreen.FinancesUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
@@ -32,6 +33,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     private static StatsScreen statsScreen;
     private static PerkScreen perkScreen;
     private static CampUpgradeScreen campUpgradeScreen;
+    private static FinancesUpgradeScreen financesUpgradeScreen;
     private static GameScreen gameScreen;
 
     private static CurrentScreenEnum currentScreen;
@@ -111,6 +113,13 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 campUpgradeScreen.draw();
                 break;
 
+            case FINANCES_UPGRADE_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    setCurrentScreen(MENU_SCREEN);
+                }
+                financesUpgradeScreen.draw();
+                break;
+
             case GAME_SCREEN:
                 if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
                     gameScreen.backPressed();
@@ -144,6 +153,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 campUpgradeScreen.show();
                 campUpgradeScreen.draw();
                 break;
+            case FINANCES_UPGRADE_SCREEN:
+                if (financesUpgradeScreen == null) financesUpgradeScreen = new FinancesUpgradeScreen();
+                financesUpgradeScreen.draw();
+                break;
             case GAME_SCREEN:
                 //startGame() should be done yet
                 gameScreen.draw();
@@ -166,6 +179,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 break;
             case CAMP_UPGRADE_SCREEN:
                 campUpgradeScreen.tap(x, y);
+                break;
+            case FINANCES_UPGRADE_SCREEN:
+                financesUpgradeScreen.tap(x, y);
                 break;
             case GAME_SCREEN:
                 gameScreen.tap(x, y);
