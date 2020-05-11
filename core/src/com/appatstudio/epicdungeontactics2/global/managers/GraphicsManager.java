@@ -4,6 +4,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
@@ -27,6 +28,7 @@ public final class GraphicsManager {
     private static Map<ItemEnum, SpriteDrawable> itemImages;
     private static Map<GuiElementEnum, SpriteDrawable> guiElements;
     private static Map<StatisticEnum, SpriteDrawable> statIconsMap;
+    private static Map<FinanceUpgradeEnum, SpriteDrawable> financesIconsMap;
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
     private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
@@ -149,6 +151,11 @@ public final class GraphicsManager {
             effectIconsMap.put(e, new SpriteDrawable(new Sprite(atlas.findRegion("effect-icons/" + e.toString()))));
         }
 
+        financesIconsMap = new HashMap<>();
+        FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
+        for (FinanceUpgradeEnum f : allFinances) {
+            financesIconsMap.put(f, new SpriteDrawable(new Sprite(atlas.findRegion("finances-icons/" + f.toString()))));
+        }
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
@@ -220,6 +227,10 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getEffectIcon(EffectEnum e) {
         return effectIconsMap.get(e);
+    }
+
+    public static SpriteDrawable getFinancesIcon(FinanceUpgradeEnum e) {
+        return financesIconsMap.get(e);
     }
 
     public static Animation<SpriteDrawable> getCampUpgradeFellow(CampUpgradeEnum campUpgrade, CharacterStateEnum s) {

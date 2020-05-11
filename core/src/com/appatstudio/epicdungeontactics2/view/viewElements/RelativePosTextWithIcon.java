@@ -58,4 +58,12 @@ public class RelativePosTextWithIcon {
                 tapY < posY + iconSize / 2f;
     }
 
+    public float getWidth() {
+        return iconSize * 1.2f + FontsManager.getTextWidth(font, text);
+    }
+
+    public float getHeight() {
+        return iconSize;
+    }
+
 }

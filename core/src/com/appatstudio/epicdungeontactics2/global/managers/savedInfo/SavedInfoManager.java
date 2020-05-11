@@ -1,7 +1,9 @@
 package com.appatstudio.epicdungeontactics2.global.managers.savedInfo;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
@@ -10,8 +12,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Array;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import sun.util.calendar.LocalGregorianCalendar;
 
 public class SavedInfoManager {
 
@@ -24,9 +31,12 @@ public class SavedInfoManager {
 
     private static Map<PerkEnum, Integer> perkLvls;
     private static Map<CharacterEnum, Integer> characterLvls;
+    private static Map<FinanceUpgradeEnum, Integer> financesLvls;
     private static Map<CharacterEnum, Integer> characterExps;
     private static Map<CharacterEnum, Map<StatisticEnum, Integer>> characterStats;
     private static Map<CampUpgradeEnum, Integer> campUpgradeLvls;
+
+    private static Long saved_date;
 
     static {
         preferences = Gdx.app.getPreferences("epicdungeontactics2");
@@ -76,6 +86,12 @@ public class SavedInfoManager {
             campUpgradeLvls.put(c, preferences.getInteger("campUpgradeLvl" + c.toString(), 0));
         }
 
+        financesLvls = new HashMap<>();
+        FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
+        for (FinanceUpgradeEnum f : allFinances) {
+            financesLvls.put(f, preferences.getInteger("financesUpgradeLvl" + f.toString(), 0));
+        }
+
         isCharacterUnlocked = new HashMap<>();
         isCharacterUnlocked.put(CharacterEnum.HERO_ELF, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_ELF.toString(), true));
         isCharacterUnlocked.put(CharacterEnum.HERO_KNIGHT, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_KNIGHT.toString(), true));
@@ -85,6 +101,7 @@ public class SavedInfoManager {
         isCharacterUnlocked.put(CharacterEnum.HERO_PIRATE, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_PIRATE.toString(), false));
         isCharacterUnlocked.put(CharacterEnum.HERO_BABY, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_BABY.toString(), false));
 
+        checkChangeDay();
     }
 
     public static boolean isUnlocked(CharacterEnum characterEnum) {
@@ -101,6 +118,12 @@ public class SavedInfoManager {
 
     public static void saveInt(SavedInfoFlagsEnum flag, int value) {
         preferences.putInteger(flag.toString(), value);
+        preferences.flush();
+    }
+
+    public static void addValueToFlag(SavedInfoFlagsEnum flag, int value) {
+        int value2 = getIntFromFlag(flag) + value;
+        preferences.putInteger(flag.toString(), value2);
         preferences.flush();
     }
 
@@ -144,6 +167,12 @@ public class SavedInfoManager {
         preferences.flush();
     }
 
+    public static void saveFinancesLvl(FinanceUpgradeEnum financeUpgradeEnum, int lvl) {
+        financesLvls.put(financeUpgradeEnum, lvl);
+        preferences.putInteger("financesUpgradeLvl" + financeUpgradeEnum.toString(), lvl);
+        preferences.flush();
+    }
+
     public static CharacterEnum[] getAllUnlockedCharacters() {
         Array<CharacterEnum> characters = new Array<>();
 
@@ -182,5 +211,25 @@ public class SavedInfoManager {
 
     public static int getNpcLvl(CampUpgradeEnum campUpgradeEnum) {
         return campUpgradeLvls.get(campUpgradeEnum);
+    }
+
+    public static int getFinancesLvl(FinanceUpgradeEnum financeUpgradeEnum) {
+        return financesLvls.get(financeUpgradeEnum);
+    }
+
+    public static void checkChangeDay() {
+        saved_date = preferences.getLong("date", -1);
+        if (saved_date == -1) {
+            preferences.putLong("date", TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()));
+        }
+        else {
+            long days = TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()) - saved_date;
+            System.out.println(days);
+            if (days > 0) {
+                EpicDungeonTactics.reportDayChanged((int)days);
+                preferences.putLong("date", TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()));
+                preferences.flush();
+            }
+        }
     }
 }

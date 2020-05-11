@@ -1,8 +1,10 @@
 package com.appatstudio.epicdungeontactics2.view.viewElements;
 
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
@@ -14,6 +16,8 @@ public class ButtonWithText extends Image {
 
     public ButtonWithText(SpriteDrawable bg, float x, float y, float width, float height, BitmapFont font, String text) {
         super(bg);
+        this.setOrigin(getWidth() / 2f, getHeight() / 2f);
+
         setSize(width, height);
         setPosition(x, y);
 
@@ -25,12 +29,15 @@ public class ButtonWithText extends Image {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (getDrawable() != null) super.draw(batch, parentAlpha);
+        if (getDrawable() != null) {
+            super.act(Gdx.graphics.getDeltaTime());
+            super.draw(batch, parentAlpha);
+        }
         font.draw(batch, text, textX, textY);
     }
 
     public boolean tap(float x, float y) {
-        return x > this.getX() && x < this.getX() + this.getWidth() &&
-                y > this.getY() && y < this.getY() + this.getHeight();
+        return  (x > this.getX() && x < this.getX() + this.getWidth() &&
+                y > this.getY() && y < this.getY() + this.getHeight());
     }
 }

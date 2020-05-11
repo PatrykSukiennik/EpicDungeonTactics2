@@ -1,4 +1,5 @@
 package com.appatstudio.epicdungeontactics2.global.enums;
 
-public final class FinanceUpgradeEnum {
+public enum  FinanceUpgradeEnum {
+    CASTLE, VILLAGE, FARM, MUSEUM, TAVERN, CARAVAN, HIRED_MERCHANT
 }

@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.viewElements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
@@ -29,11 +30,12 @@ public class GuiButton extends Image {
     }
 
     public boolean isTap(float x, float y) {
-        return x > this.getX() && x < this.getX() + this.getWidth() &&
-                y > this.getY() && y < this.getY() + this.getHeight();
+        return  (x > this.getX() && x < this.getX() + this.getWidth() &&
+                y > this.getY() && y < this.getY() + this.getHeight());
     }
 
     public void draw(Batch batch) {
+        super.act(Gdx.graphics.getDeltaTime());
         super.draw(batch, 1f);
     }
 }

@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
@@ -20,6 +21,8 @@ public final class StringsManager {
     private static Map<ItemEnum, String> itemNamesMap;
     private static Map<PerkEnum, String> perkNamesMap;
     private static Map<PerkEnum, String> perkDescriptionsMap;
+    private static Map<FinanceUpgradeEnum, String> financesUpgradeNamesMap;
+    private static Map<FinanceUpgradeEnum, String> financesUpgradeDescriptionsMap;
     private static Map<CampUpgradeEnum, String> campUpgradeNamesMap;
     private static Map<CampUpgradeEnum, String> campUpgradeDescriptionsMap;
     private static Map<CampUpgradeEnum, String> campUpgradeMainDescriptionsMap;
@@ -37,6 +40,8 @@ public final class StringsManager {
         I18NBundle perkDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/perk_descriptions"), java.util.Locale.getDefault());
         I18NBundle campUpgradeNames = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_names"), java.util.Locale.getDefault());
         I18NBundle campUpgradeDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_descriptions"), java.util.Locale.getDefault());
+        I18NBundle financesUpgradeNames = I18NBundle.createBundle(Gdx.files.internal("strings/finances_names"), java.util.Locale.getDefault());
+        I18NBundle financesUpgradeDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/finances_descriptions"), java.util.Locale.getDefault());
         I18NBundle campUpgradeMainDescriptions = I18NBundle.createBundle(Gdx.files.internal("strings/camp_upgrade_main_descriptions"), java.util.Locale.getDefault());
         I18NBundle characterNames = I18NBundle.createBundle(Gdx.files.internal("strings/character_names"), java.util.Locale.getDefault());
         I18NBundle characterBonuses = I18NBundle.createBundle(Gdx.files.internal("strings/character_bonus"), java.util.Locale.getDefault());
@@ -68,6 +73,14 @@ public final class StringsManager {
             campUpgradeNamesMap.put(currEnum, campUpgradeNames.get(currEnum.toString()));
             campUpgradeDescriptionsMap.put(currEnum, campUpgradeDescriptions.get(currEnum.toString()));
             campUpgradeMainDescriptionsMap.put(currEnum, campUpgradeMainDescriptions.get(currEnum.toString()));
+        }
+
+        financesUpgradeNamesMap = new HashMap<>();
+        financesUpgradeDescriptionsMap = new HashMap<>();
+        FinanceUpgradeEnum[] financesUpgradeEnums = FinanceUpgradeEnum.values();
+        for (FinanceUpgradeEnum currEnum : financesUpgradeEnums) {
+            financesUpgradeNamesMap.put(currEnum, financesUpgradeNames.get(currEnum.toString()));
+            financesUpgradeDescriptionsMap.put(currEnum, financesUpgradeDescriptions.get(currEnum.toString()));
         }
 
         characterNamesMap = new HashMap<>();
@@ -128,6 +141,14 @@ public final class StringsManager {
 
     public static String getCampUpgradeMainDescription(CampUpgradeEnum upgradeEnum) {
         return campUpgradeMainDescriptionsMap.get(upgradeEnum);
+    }
+
+    public static String getFinanceUpgradeName(FinanceUpgradeEnum financeUpgradeEnum) {
+        return financesUpgradeNamesMap.get(financeUpgradeEnum);
+    }
+
+    public static String getFinanceUpgradeDescription(FinanceUpgradeEnum financeUpgradeEnum) {
+        return financesUpgradeDescriptionsMap.get(financeUpgradeEnum);
     }
 
     public static String getCharacterName(CharacterEnum characterEnum) {
