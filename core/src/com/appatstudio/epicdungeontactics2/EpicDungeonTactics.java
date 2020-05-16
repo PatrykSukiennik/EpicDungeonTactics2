@@ -144,6 +144,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     }
 
     public static void setCurrentScreen(CurrentScreenEnum newCurrentScreen) {
+        if (currentScreen == GAME_SCREEN) androidCommunication.stopBanner();
+
         switch (newCurrentScreen) {
             case MENU_SCREEN:
                 if (menuScreen == null) menuScreen = new MenuScreen();
@@ -173,6 +175,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 break;
             case GAME_SCREEN:
                 //startGame() should be done yet
+
+                androidCommunication.startBanner();
                 gameScreen.draw();
                 break;
         }

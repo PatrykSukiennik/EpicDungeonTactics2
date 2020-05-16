@@ -17,7 +17,7 @@ public final class StatusBarContainer {
     private static Image heroHead, barsBg, barsBorder, hpBar, expBar;
     private static Array<EffectIcon> effects;
 
-    private static float headSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.15f : Gdx.graphics.getWidth() * 0.2f;
+    private static float headSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth() * 0.15f;
 
     public StatusBarContainer(CharacterEnum hero) {
         SpriteDrawable headIcon = null;
@@ -82,7 +82,7 @@ public final class StatusBarContainer {
                 new EffectIcon(
                         effect,
                         duration,
-                        heroHead.getX() + heroHead.getWidth() + EffectIcon.iconSize/3f + (EffectIcon.iconSize * 1.1f) * effects.size,
+                        heroHead.getX() + heroHead.getWidth() + EffectIcon.iconSize/3f + (EffectIcon.iconSize * 1.05f) * effects.size,
                         barsBg.getY() - EffectIcon.iconSize/3f - EffectIcon.iconSize));
     }
 

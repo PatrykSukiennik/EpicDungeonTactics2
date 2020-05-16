@@ -9,4 +9,7 @@ final class CommunicationApi {
     void generateInterstitialAd() {
         AndroidLauncher.isAdWanted = true;
     }
+
+    void startBanner() {AndroidLauncher.startBanner();}
+    void stopBanner() {AndroidLauncher.stopBanner();}
 }

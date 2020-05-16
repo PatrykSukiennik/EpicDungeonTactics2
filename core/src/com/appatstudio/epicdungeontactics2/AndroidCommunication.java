@@ -6,4 +6,7 @@ public interface AndroidCommunication {
 
     void generateInterstitialAd();
 
+    void startBanner();
+    void stopBanner();
+
 }

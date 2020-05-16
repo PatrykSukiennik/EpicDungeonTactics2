@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.financesScreen;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
@@ -33,7 +34,7 @@ public final class FinanceUpgradeIcon extends Image {
     static {
         X = Gdx.graphics.getWidth() * 0.15f;
         WIDTH = Gdx.graphics.getWidth() * 0.5f;
-        ICON_SIZE = Gdx.graphics.getWidth() * 0.15f;
+        ICON_SIZE = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth() * 0.15f;
     }
 
     FinanceUpgradeIcon(FinanceUpgradeEnum financeEnum, float y) {
@@ -114,5 +115,9 @@ public final class FinanceUpgradeIcon extends Image {
 
     public int getUpgradeCost() {
         return upgradeCost;
+    }
+
+    public static float getIconSize() {
+        return ICON_SIZE;
     }
 }

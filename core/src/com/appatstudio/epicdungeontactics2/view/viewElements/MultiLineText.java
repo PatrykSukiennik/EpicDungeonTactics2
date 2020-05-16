@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.viewElements;
 
+import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Align;
@@ -22,6 +23,10 @@ public final class MultiLineText {
 
     public void draw(Batch batch) {
         font.draw(batch, text, x, y, width, alignment, true);
+    }
+
+    public float getHeight() {
+        return FontsManager.getTextHeight(font, text);
     }
 
 }

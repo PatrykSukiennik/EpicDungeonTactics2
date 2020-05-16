@@ -87,11 +87,13 @@ public final class FinancesUpgradeScreen {
         financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + campUpgradeButtonSize);
         financesUpgradeButton.getColor().a = 0.4f;
 
+        float iconsYModif = Gdx.graphics.getHeight() * 0.92f - (title.getHeight() * 2) - FinanceUpgradeEnum.values().length * FinanceUpgradeIcon.getIconHeight() * 1.2f;
+
         FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
         for (int i = 0; i < allFinances.length; i++) {
             financeUpgradeIcons.put(allFinances[i],
                     new FinanceUpgradeIcon(FinanceUpgradeEnum.values()[i],
-                            investButton.getY() + investButton.getHeight() + investButton.getHeight() / 2f + (investButton.getHeight()) * i));
+                            iconsYModif + (FinanceUpgradeIcon.getIconHeight() * i * 1.2f)));
         }
 
     }
@@ -132,7 +134,7 @@ public final class FinancesUpgradeScreen {
                 y > financesUpgradeButton.getY() &&
                 y < financesUpgradeButton.getY() + financesUpgradeButton.getHeight()) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
-        } else if (selectedEnum != null && GlobalValues.getGold() >= FinancesStats.getCost(selectedEnum) && investButton.tap(x, y)) {
+        } else if (selectedEnum != null && GlobalValues.getGold() >= financeUpgradeIcons.get(selectedEnum).getUpgradeCost() && investButton.tap(x, y)) {
             SavedInfoManager.saveFinancesLvl(
                     selectedEnum,
                     SavedInfoManager.getFinancesLvl(selectedEnum) + 1);
@@ -140,6 +142,9 @@ public final class FinancesUpgradeScreen {
             GlobalValues.minusGold(financeUpgradeIcons.get(selectedEnum).getUpgradeCost());
             updateFinances();
             updateGold();
+
+            if (GlobalValues.getGold() < financeUpgradeIcons.get(selectedEnum).getUpgradeCost()) selectedEnum = null;
+
         } else {
             for (FinanceUpgradeIcon f : financeUpgradeIcons.values()) {
                 if (f.tap(x, y)) {
@@ -147,8 +152,10 @@ public final class FinancesUpgradeScreen {
                         selectedEnum = null;
                         break;
                     }
-                    selectedEnum = f.getFinanceEnum();
-                    break;
+                    else if (GlobalValues.getGold() >= f.getUpgradeCost()) {
+                        selectedEnum = f.getFinanceEnum();
+                        break;
+                    }
                 }
             }
         }
@@ -158,12 +165,15 @@ public final class FinancesUpgradeScreen {
     }
 
     static void updateFinances() {
+        float iconsYModif = Gdx.graphics.getHeight() * 0.92f - (title.getHeight() * 2) - FinanceUpgradeEnum.values().length * FinanceUpgradeIcon.getIconHeight() * 1.2f;
+
         FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
         for (int i = 0; i < allFinances.length; i++) {
             financeUpgradeIcons.put(allFinances[i],
                     new FinanceUpgradeIcon(FinanceUpgradeEnum.values()[i],
-                            investButton.getY() + investButton.getHeight() + investButton.getHeight() / 2f + (investButton.getHeight()) * i));
+                            iconsYModif + (FinanceUpgradeIcon.getIconHeight() * i * 1.2f)));
         }
+
     }
 
     public void updateGold() {

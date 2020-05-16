@@ -12,7 +12,6 @@ import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.questWindow.QuestWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
@@ -36,11 +35,10 @@ public final class GuiContainer {
     private StatusBarContainer statusBarContainer;
 
     private EquipmentWindow equipmentWindow;
-    private QuestWindow questWindow;
 
-    private GuiButton eqButton, questButton;
+    private GuiButton eqButton, mapButton;
 
-    public static final float guiButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.07f : Gdx.graphics.getWidth() * 0.1f;
+    public static final float guiButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
     public static final float guiMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
 
     public GuiContainer(GameScreen gameScreen) {
@@ -53,7 +51,6 @@ public final class GuiContainer {
         statusBarContainer = new StatusBarContainer(gameScreen.getHero());
 
         equipmentWindow = new EquipmentWindow();
-        questWindow = new QuestWindow();
 
         statusBarContainer.addEffect(EffectEnum.POISON, 4);
         statusBarContainer.addEffect(EffectEnum.POISON, 3);
@@ -79,8 +76,8 @@ public final class GuiContainer {
                 Align.right
         );
 
-        eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, guiMargin, statusBarContainer.getBottomY() - guiMargin - guiButtonSize);
-        questButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.QUEST_ICON), guiButtonSize, guiMargin, eqButton.getY() -guiMargin - guiButtonSize);
+        eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f);
+        mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
 
     }
 
@@ -93,7 +90,7 @@ public final class GuiContainer {
         stageStatus.draw(batch);
 
         eqButton.draw(batch);
-        questButton.draw(batch);
+        mapButton.draw(batch);
 
         if (runQuitWindow.isUp()) {
             runQuitWindow.act(Gdx.graphics.getDeltaTime());

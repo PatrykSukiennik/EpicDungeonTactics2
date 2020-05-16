@@ -27,12 +27,13 @@ public class AndroidLauncher extends AndroidApplication {
 
     private static final String adBANNER_UNIT_ID = "ca-app-pub-1351360411950245/3235369322";
     private static final String adINTERSTITIAL_ID = "ca-app-pub-1351360411950245/6983042643";
-    private static final String adREWARDER_VIDEO_ID = "ca-app-pub-1351360411950245/8657437576";
-
 
     private static final String adAPP_ID = "ca-app-pub-1351360411950245~7331840089";
 
     private boolean isGamePaused = false;
+    private static boolean isBannerWanted = false;
+    private static boolean isBannerWantedToDestroy = false;
+
     private RelativeLayout relativeLayout;
     private static Bundle extras;
     private Handler myHandler;
@@ -73,11 +74,31 @@ public class AndroidLauncher extends AndroidApplication {
 
         MobileAds.initialize(this, adAPP_ID);
 
-//      Banner and interstitial ads disabled
-//      initBannerAd();
-//      myHandler = new Handler();
-//      initInterAd();
-//      startRefreshingInterAd();
+        builder = new AdRequest.Builder();
+        builder.addTestDevice("A7BD8B805E70CDB7DC572263DB571087");
+        builder.addTestDevice("0FE985F346AD7D774CDFE6F6EE4C3936");
+        builder.addTestDevice("D96A4A5609EC5E436C75480E5ACE948B");
+        builder.addTestDevice("4AF85B2E9625DC2A496227D80300C12B");
+
+        //initInterAd();
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(adINTERSTITIAL_ID);
+        interstitialAd.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                interstitialAd.loadAd(builder.
+                        addNetworkExtrasBundle(AdMobAdapter.class, extras).build());
+
+                startRefreshingInternetChecking();
+            }
+        });
+
+        //Load first interstitial
+        interstitialAd.loadAd(builder.
+                addNetworkExtrasBundle(AdMobAdapter.class, extras).build());
+
 
         startRefreshingInternetChecking();
         setContentView(relativeLayout);
@@ -93,6 +114,7 @@ public class AndroidLauncher extends AndroidApplication {
     protected void onResume() {
         super.onResume();
         isGamePaused = false;
+        startRefreshingInternetChecking();
     }
 
     public void startRefreshingInternetChecking() {
@@ -101,8 +123,22 @@ public class AndroidLauncher extends AndroidApplication {
                 if (!isGamePaused) {
 
                     isInternetConnectionUp = isNetworkConnected();
-                    handler.postDelayed(this, 2000);
 
+                    if (isBannerWanted) {
+                        isBannerWanted = false;
+                        showBannerAd();
+                    }
+                    else if (isBannerWantedToDestroy) {
+                        isBannerWantedToDestroy = false;
+                        destroyBannerAd();
+                    }
+
+                    if (isAdWanted) {
+                        isAdWanted = false;
+                        showInterAd();
+                    }
+
+                    handler.postDelayed(this, 100);
 
                 }
             }
@@ -117,75 +153,20 @@ public class AndroidLauncher extends AndroidApplication {
         return ni != null;
     }
 
-    public void initInterAd() {
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(adINTERSTITIAL_ID);
-
-        interstitialAd.setAdListener(new AdListener() {
-
-            public void onAdLoaded() {
-                displayInterAd();
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                myHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        if (!isGamePaused) {
-
-                            if (isAdWanted) {
-                                isAdWanted = false;
-                                refreshInterAd();
-                            }
-                            myHandler.postDelayed(this, 100);
-
-
-                        }
-                    }
-                }, 100);
-
-                startRefreshingInternetChecking();
-            }
-        });
+    public void showInterAd() {
+        if (interstitialAd.isLoaded()) interstitialAd.show();
     }
 
-    public static void displayInterAd() {
-        if (interstitialAd.isLoaded()) {
-            interstitialAd.show();
-        }
+    public static void startBanner() {
+        isBannerWanted = true;
     }
 
-    public void startRefreshingInterAd() {
-        myHandler.postDelayed(new Runnable() {
-            public void run() {
-                if (!isGamePaused) {
-
-                    if (isAdWanted) {
-                        isAdWanted = false;
-                        refreshInterAd();
-                    }
-                    myHandler.postDelayed(this, 1000);
-
-
-                }
-            }
-        }, 100);
-    }
-
-    public static void refreshInterAd() {
-        interstitialAd.loadAd(builder.
-                addNetworkExtrasBundle(AdMobAdapter.class, extras).build());
-        displayInterAd();
+    public static void stopBanner() {
+        isBannerWantedToDestroy = true;
     }
 
     private void initBannerAd() {
         adView = new AdView(this);
-
-        builder = new AdRequest.Builder();
-        builder.addTestDevice("A7BD8B805E70CDB7DC572263DB571087");
-        builder.addTestDevice("0FE985F346AD7D774CDFE6F6EE4C3936");
-        builder.addTestDevice("D96A4A5609EC5E436C75480E5ACE948B");
 
         adView.setAdListener(new AdListener() {
 
@@ -204,10 +185,25 @@ public class AndroidLauncher extends AndroidApplication {
         adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         adParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
+        adView.setVisibility(View.VISIBLE);
+
         relativeLayout.addView(adView, adParams);
         adView.loadAd(builder.
                 addNetworkExtrasBundle(AdMobAdapter.class, extras).build());
 
+    }
+
+    private void showBannerAd() {
+        if (adView != null) {
+            adView.setVisibility(View.VISIBLE);
+        }
+        else initBannerAd();
+    }
+
+    private void destroyBannerAd() {
+        if (adView != null) {
+            adView.setVisibility(View.GONE);
+        }
     }
 
 

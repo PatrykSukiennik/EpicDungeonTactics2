@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.NumberUtils;
 public final class EffectIcon extends Image {
 
     private TextObject durationText = null;
-    static float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
+    static float iconSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.02f : Gdx.graphics.getWidth() * 0.035f;
 
     EffectIcon(EffectEnum effect, int duration, float x, float y) {
         super(GraphicsManager.getEffectIcon(effect));

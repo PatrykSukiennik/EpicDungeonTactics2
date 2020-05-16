@@ -1,5 +1,5 @@
 gui-atlas.png
-size: 504, 647
+size: 504, 623
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -565,7 +565,7 @@ BRONZE_BUTTON_WIDE
   index: -1
 BRONZE_COMMUNICATE_WINDOW
   rotate: false
-  xy: 396, 293
+  xy: 0, 335
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -894,9 +894,9 @@ effect-icons/WEAKNESS
   index: -1
 EQUIPMENT_ICON
   rotate: false
-  xy: 305, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 356, 293
+  size: 40, 42
+  orig: 40, 42
   offset: 0, 0
   index: -1
 EXP_BAR
@@ -957,7 +957,7 @@ finances-icons/VILLAGE
   index: -1
 FINANCES_UPGRADE_BUTTON
   rotate: false
-  xy: 356, 293
+  xy: 396, 293
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
@@ -1298,16 +1298,23 @@ LVL_EXP_BAR_BG
   orig: 75, 5
   offset: 0, 0
   index: -1
+MAP_ICON
+  rotate: false
+  xy: 436, 293
+  size: 40, 42
+  orig: 40, 42
+  offset: 0, 0
+  index: -1
 MENU_BG1
   rotate: false
-  xy: 96, 359
+  xy: 192, 335
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 MENU_BG2
   rotate: false
-  xy: 96, 359
+  xy: 192, 335
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
@@ -1832,7 +1839,7 @@ rings/RINGv21
   index: -1
 RUN_QUIT_WINDOW
   rotate: false
-  xy: 396, 293
+  xy: 0, 335
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -1958,7 +1965,7 @@ SILVER_BUTTON_WIDE
   index: -1
 SILVER_COMMUNICATE_WINDOW
   rotate: false
-  xy: 444, 293
+  xy: 48, 335
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -2364,7 +2371,7 @@ STONE_BUTTON_WIDE
   index: -1
 STONE_COMMUNICATE_WINDOW
   rotate: false
-  xy: 0, 359
+  xy: 96, 335
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -2896,7 +2903,7 @@ YELLOW_BUTTON_WIDE
   index: -1
 YELLOW_COMMUNICATE_WINDOW
   rotate: false
-  xy: 48, 359
+  xy: 144, 335
   size: 48, 66
   orig: 48, 66
   offset: 0, 0

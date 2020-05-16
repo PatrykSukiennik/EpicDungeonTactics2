@@ -17,4 +17,10 @@ public class CommunicationHandler implements AndroidCommunication {
     public void generateInterstitialAd() {
         communicationApi.generateInterstitialAd();
     }
+
+    @Override
+    public void startBanner() {communicationApi.startBanner();};
+
+    @Override
+    public void stopBanner() {communicationApi.stopBanner();};
 }

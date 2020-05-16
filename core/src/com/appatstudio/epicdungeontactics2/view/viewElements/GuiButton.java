@@ -24,7 +24,7 @@ public class GuiButton extends Image {
         isClicked = state;
 
         if (isClicked) this.getColor().a = 0.3f;
-        else this.getColor().a = 1f;
+        else this.getColor().a = 0.8f;
 
         this.act(Gdx.graphics.getDeltaTime());
     }
