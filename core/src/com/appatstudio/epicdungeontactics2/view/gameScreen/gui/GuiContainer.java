@@ -50,7 +50,7 @@ public final class GuiContainer {
         communicatePrinter = new CommunicatePrinter();
         statusBarContainer = new StatusBarContainer(gameScreen.getHero());
 
-        equipmentWindow = new EquipmentWindow();
+        equipmentWindow = new EquipmentWindow(gameScreen.getHero());
 
         statusBarContainer.addEffect(EffectEnum.POISON, 4);
         statusBarContainer.addEffect(EffectEnum.POISON, 3);
@@ -96,6 +96,11 @@ public final class GuiContainer {
             runQuitWindow.act(Gdx.graphics.getDeltaTime());
             runQuitWindow.draw(batch, 1f);
         }
+
+
+        //todo
+        equipmentWindow.draw(batch);
+
 
         batch.end();
     }

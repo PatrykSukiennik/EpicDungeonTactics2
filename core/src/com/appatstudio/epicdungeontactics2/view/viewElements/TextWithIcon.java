@@ -59,7 +59,7 @@ public final class TextWithIcon {
     }
 
     public void draw(Batch batch) {
-        icon.draw(batch, iconX, iconY, iconSize, iconSize);
+        if (icon != null) icon.draw(batch, iconX, iconY, iconSize, iconSize);
         font.draw(batch, text, textX, textY);
     }
 
@@ -105,5 +105,17 @@ public final class TextWithIcon {
                 break;
             }
         }
+    }
+
+    public float getIconY() {
+        return iconY;
+    }
+
+    public float getIconHeight() {
+        return iconSize;
+    }
+
+    public void setFont(BitmapFont newFont) {
+        this.font = newFont;
     }
 }

@@ -4,6 +4,7 @@ import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.badlogic.gdx.graphics.Color;
 
@@ -15,7 +16,9 @@ public final class GameScreen {
     private static int stage = 1;
 
     private static GuiContainer guiContainer;
-    
+
+    private static EquipmentWindow equipmentWindow;
+
     private static final Color DAY_COLOR = new Color(1f, 1f, 1f, 0f);
     private static final Color NIGHT_COLOR = new Color(0f, 0f, 0.3f, 0.45f);
 
@@ -56,4 +59,6 @@ public final class GameScreen {
     public static int getStage() {
         return stage;
     }
+
+
 }

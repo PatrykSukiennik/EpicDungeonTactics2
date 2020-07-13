@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.global.stats.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ public final class HeroStats {
     private final static Map<CharacterEnum, Integer> pointsPerLvlMap;
     private final static Map<CharacterEnum, Integer> buyCostMap;
     private final static Map<CharacterEnum, Integer> requiredStageToUnlockMap;
+    private final static Map<CharacterEnum, Integer[]> equipmentSize;
     private final static Map<CharacterEnum, ItemEnum[]> startingItemMap;
 
     private static final int[] EXP_CAPS = new int[]{
@@ -45,6 +47,15 @@ public final class HeroStats {
         requiredStageToUnlockMap.put(CharacterEnum.HERO_PIRATE, 9);
         requiredStageToUnlockMap.put(CharacterEnum.HERO_BABY, 12);
 
+        equipmentSize = new HashMap<>();
+        equipmentSize.put(CharacterEnum.HERO_ELF, new Integer[]{4, 2});
+        equipmentSize.put(CharacterEnum.HERO_KNIGHT, new Integer[]{6, 3});
+        equipmentSize.put(CharacterEnum.HERO_WIZZARD, new Integer[]{4, 2});
+        equipmentSize.put(CharacterEnum.HERO_LIZARD, new Integer[]{4, 2});
+        equipmentSize.put(CharacterEnum.HERO_NINJA, new Integer[]{2, 1});
+        equipmentSize.put(CharacterEnum.HERO_PIRATE, new Integer[]{4, 2});
+        equipmentSize.put(CharacterEnum.HERO_BABY, new Integer[]{2, 1});
+
         startingItemMap = new HashMap<>();
         startingItemMap.put(CharacterEnum.HERO_ELF, new ItemEnum[]{ItemEnum.BOWv1, ItemEnum.FOODv3, ItemEnum.FOODv3});
         startingItemMap.put(CharacterEnum.HERO_KNIGHT, new ItemEnum[]{ItemEnum.SWORDv2, ItemEnum.ARMORv7, ItemEnum.SHIELDv0});
@@ -70,6 +81,10 @@ public final class HeroStats {
 
     public static ItemEnum[] getStartingItems(CharacterEnum characterEnum) {
         return startingItemMap.get(characterEnum);
+    }
+
+    public static Integer[] getEquipmentSize(CharacterEnum characterEnum) {
+        return equipmentSize.get(characterEnum);
     }
 
     public static int getExpCap(int lvl) {

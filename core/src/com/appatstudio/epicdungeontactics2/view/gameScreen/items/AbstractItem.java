@@ -21,4 +21,5 @@ public abstract class AbstractItem {
     public ItemTypeEnum getItemTypeEnum() {
         return itemTypeEnum;
     }
+
 }

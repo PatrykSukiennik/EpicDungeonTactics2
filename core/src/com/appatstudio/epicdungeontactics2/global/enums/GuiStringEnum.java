@@ -7,5 +7,7 @@ public enum GuiStringEnum {
 
     YES, NO, QUIT_RUN_QUESTION,
 
-    MAXED_OUT, STAGE
+    MAXED_OUT, STAGE,
+
+    FINISH, NO_HERO_LEFT
 }
