@@ -17,7 +17,7 @@ public class ItemSegment extends AbstractSegment {
 
     ItemSegment() {
         posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f - AbstractSegment.fullHeight * 1.1f;
-        bg = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_ITEM);
     }
 
     void draw(Batch batch) {

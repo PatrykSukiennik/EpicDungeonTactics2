@@ -83,7 +83,7 @@ public final class FinanceUpgradeIcon extends Image {
     }
 
     public void draw(Batch batch, float parentAlpha, boolean isSelected) {
-        if (isSelected) bgAlpha.draw(batch, this.getX(), this.getY(), Gdx.graphics.getWidth() * 0.71f, this.getHeight());
+        if (isSelected) bgAlpha.draw(batch, this.getX(), this.getY(), Gdx.graphics.getWidth() * 0.70f, this.getHeight());
 
         super.draw(batch, parentAlpha);
 

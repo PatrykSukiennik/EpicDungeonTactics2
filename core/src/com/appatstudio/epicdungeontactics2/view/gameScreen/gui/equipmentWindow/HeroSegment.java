@@ -24,7 +24,7 @@ public class HeroSegment extends AbstractSegment {
 
     HeroSegment(CharacterEnum hero) {
         posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f + AbstractSegment.fullHeight * 1.1f;
-        bg = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
     }
 
     void draw(Batch batch) {

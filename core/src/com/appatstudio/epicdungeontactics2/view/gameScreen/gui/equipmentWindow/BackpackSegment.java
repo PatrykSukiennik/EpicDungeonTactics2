@@ -29,7 +29,7 @@ public class BackpackSegment extends AbstractSegment {
         currShelf = ItemBackpackShelfEnum.MELE;
         currItem = null;
 
-        bg = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_BACKPACK);
 
         ItemBackpackShelfEnum[] allCategories = ItemBackpackShelfEnum.values();
         pages = new HashMap<>();
