@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
@@ -16,15 +17,17 @@ public class HeroSegment extends AbstractSegment {
     private static float posY;
     private float stateTime = 0;
 
-    private static float heroSize = fullHeight * 0.8f;
-    private static float heroX = getPosX() + heroSize * 0.1f;
-    private static float heroY = posY + heroSize * 0.1f;
+    private static float heroSize = fullHeight;
+    private static float heroX = getPosX();
+    private static float heroY = posY;
 
     private Animation<SpriteDrawable> heroAnimation;
 
     HeroSegment(CharacterEnum hero) {
-        posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f + AbstractSegment.fullHeight * 1.1f;
+        posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f + AbstractSegment.fullHeight;
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
+        heroAnimation = GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE);
+        heroY = posY + fullHeight/2f - heroSize/3f;
     }
 
     void draw(Batch batch) {
@@ -35,11 +38,6 @@ public class HeroSegment extends AbstractSegment {
 
     }
 
-    AbstractItem tap(float x, float y) {
-        return null;
-//        return x > posX && x < posX + fullWidth
-//                && y > posY && posY < posY + fullHeight;
-    }
 
     void selectItem(AbstractItem item) {
         this.selectedItem = item;
@@ -57,7 +55,7 @@ public class HeroSegment extends AbstractSegment {
 
     public boolean isTap(float x, float y) {
         return x > posX && x < posX + fullWidth
-                && y > posY && posY < posY + fullHeight;
+                && y > posY && y < posY + fullHeight;
     }
 
 

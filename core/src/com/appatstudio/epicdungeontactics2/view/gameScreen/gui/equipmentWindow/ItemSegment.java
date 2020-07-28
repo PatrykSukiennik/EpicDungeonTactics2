@@ -16,7 +16,7 @@ public class ItemSegment extends AbstractSegment {
     private static float posY;
 
     ItemSegment() {
-        posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f - AbstractSegment.fullHeight * 1.1f;
+        posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f - AbstractSegment.fullHeight;
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_ITEM);
     }
 
@@ -40,6 +40,6 @@ public class ItemSegment extends AbstractSegment {
 
     public boolean isTap(float x, float y) {
         return x > posX && x < posX + fullWidth
-                && y > posY && posY < posY + fullHeight;
+                && y > posY && y < posY + fullHeight;
     }
 }

@@ -30,11 +30,11 @@ public final class RunQuitWindow extends Image {
         this.setSize(Gdx.graphics.getWidth()/2f, (Gdx.graphics.getWidth()/2f)/ 2);
         this.setPosition(Gdx.graphics.getWidth()/2f - this.getWidth()/2f, Gdx.graphics.getHeight()/2f - this.getHeight()/2f);
 
-        yes = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.YES), this.getX() + this.getWidth()*0.25f, this.getY() + this.getHeight()*0.25f, Align.center);
-        no = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.NO), this.getX() + this.getWidth()*0.75f, this.getY() + this.getHeight()*0.25f, Align.center);
+        yes = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.YES), this.getX() + this.getWidth()*0.25f, this.getY() + this.getHeight()*0.3f, Align.center);
+        no = new TextObject(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.NO), this.getX() + this.getWidth()*0.75f, this.getY() + this.getHeight()*0.3f, Align.center);
 
-        float maxQuestionW = EpicDungeonTactics.isTablet() ? this.getWidth() * 0.7f : this.getWidth() * 0.9f;
-        question = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.QUIT_RUN_QUESTION), this.getX() + this.getWidth()/2f, maxQuestionW, this.getY() + this.getHeight() * 0.9f, Align.center);
+        float maxQuestionW = EpicDungeonTactics.isTablet() ? this.getWidth() * 0.6f : this.getWidth() * 0.8f;
+        question = new MultiLineText(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), StringsManager.getGuiString(GuiStringEnum.QUIT_RUN_QUESTION), this.getX() + this.getWidth()/2f, maxQuestionW, this.getY() + this.getHeight() * 0.8f, Align.center);
     }
 
     public void tap(float x, float y) {

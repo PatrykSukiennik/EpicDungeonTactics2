@@ -89,7 +89,12 @@ public final class GuiContainer {
         goldStatus.draw(batch);
         stageStatus.draw(batch);
 
-        eqButton.draw(batch);
+        if (EquipmentWindow.isUp()) {
+            eqButton.draw(batch, 0.5f);
+        }
+        else eqButton.draw(batch);
+
+
         mapButton.draw(batch);
 
         if (runQuitWindow.isUp()) {
@@ -97,9 +102,9 @@ public final class GuiContainer {
             runQuitWindow.draw(batch, 1f);
         }
 
-
-        //todo
-        equipmentWindow.draw(batch);
+        else if (EquipmentWindow.isUp()) {
+            equipmentWindow.draw(batch);
+        }
 
 
         batch.end();
@@ -110,11 +115,21 @@ public final class GuiContainer {
             runQuitWindow.tap(x, y);
             return true;
         }
+        else if (EquipmentWindow.isUp()) {
+            equipmentWindow.tap(x, y);
+            return true;
+        }
+        else if (eqButton.isTap(x, y)) {
+            EquipmentWindow.show();
+        }
         return false;
     }
 
     public void backPressed() {
-        runQuitWindow.show();
+        if (EquipmentWindow.isUp()) {
+            EquipmentWindow.hide();
+        }
+        else runQuitWindow.show();
     }
 
     public void updateGold() {

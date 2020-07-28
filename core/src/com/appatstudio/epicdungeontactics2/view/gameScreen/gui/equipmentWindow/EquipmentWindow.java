@@ -41,11 +41,15 @@ public final class EquipmentWindow {
             currItem = heroSegment.getTapItem(x, y);
         }
         else if (backpackSegment.isTap(x, y)) {
-            currItem = backpackSegment.getTapItem(x, y);
-            if (currItem != null) {
-                heroSegment.selectItem(currItem);
-                backpackSegment.selectItem(currItem);
-                itemSegment.selectItem(currItem);
+            if (backpackSegment.categoriesSegmentTap(x, y)) {
+
+            } else {
+                currItem = backpackSegment.getTapItem(x, y);
+                if (currItem != null) {
+                    heroSegment.selectItem(currItem);
+                    backpackSegment.selectItem(currItem);
+                    itemSegment.selectItem(currItem);
+                }
             }
         }
         else if (currItem != null && itemSegment.isTap(x, y)) {
@@ -65,5 +69,13 @@ public final class EquipmentWindow {
 
     public static boolean isUp() {
         return isUp;
+    }
+
+    public static void hide() {
+        isUp = false;
+    }
+
+    public static void show() {
+        isUp = true;
     }
 }

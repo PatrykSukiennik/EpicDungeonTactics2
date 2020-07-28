@@ -38,4 +38,13 @@ public class GuiButton extends Image {
         super.act(Gdx.graphics.getDeltaTime());
         super.draw(batch, 1f);
     }
+
+    public void draw(Batch batch, float alpha) {
+        super.getColor().a = alpha;
+        super.act(Gdx.graphics.getDeltaTime());
+        super.draw(batch, 1f);
+        super.getColor().a = 1f;
+        batch.end();
+        batch.begin();
+    }
 }

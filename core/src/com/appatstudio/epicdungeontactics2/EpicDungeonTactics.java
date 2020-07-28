@@ -204,6 +204,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case GAME_SCREEN:
                 gameScreen.tap(x, y);
         }
+
     }
 
     public static void setSelectedHero(CharacterEnum selectedHero) {
@@ -247,7 +248,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     public static void reportDayChanged(int days) {
         int income = 0;
-        FinanceUpgradeEnum allFinances[] = FinanceUpgradeEnum.values();
+        FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
         for (FinanceUpgradeEnum f : allFinances) {
             income += SavedInfoManager.getFinancesLvl(f) * FinancesStats.getIncome(f) * days;
         }

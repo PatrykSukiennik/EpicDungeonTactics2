@@ -39,7 +39,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_TITLE_UNLOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -48,7 +48,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuBigTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_TITLE_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -59,7 +59,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -68,7 +68,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -79,7 +79,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_WHITE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_PERK_TITLE.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -88,7 +88,7 @@ final class FontsLoader {
         parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_PERK_DESCRIPTION.toString() + ".ttf", BitmapFont.class, parms);
 

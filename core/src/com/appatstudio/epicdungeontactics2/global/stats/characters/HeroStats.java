@@ -49,7 +49,7 @@ public final class HeroStats {
 
         equipmentSize = new HashMap<>();
         equipmentSize.put(CharacterEnum.HERO_ELF, new Integer[]{4, 2});
-        equipmentSize.put(CharacterEnum.HERO_KNIGHT, new Integer[]{6, 3});
+        equipmentSize.put(CharacterEnum.HERO_KNIGHT, new Integer[]{4, 2});
         equipmentSize.put(CharacterEnum.HERO_WIZZARD, new Integer[]{4, 2});
         equipmentSize.put(CharacterEnum.HERO_LIZARD, new Integer[]{4, 2});
         equipmentSize.put(CharacterEnum.HERO_NINJA, new Integer[]{2, 1});

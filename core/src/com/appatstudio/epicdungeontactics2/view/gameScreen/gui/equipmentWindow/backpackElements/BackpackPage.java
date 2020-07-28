@@ -9,7 +9,6 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.A
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.BackpackSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
@@ -18,23 +17,43 @@ public class BackpackPage {
     private final int COLS;
     private final int ROWS;
 
-    private static final float WIDTH = AbstractSegment.getFullWidth() * 0.8f;
+    private static final float WIDTH = AbstractSegment.getFullWidth();
     private static final float HEIGHT = AbstractSegment.getFullHeight();
-    private static final float X = AbstractSegment.getPosX() + CategoryColumns.getW();
+    private static final float X = AbstractSegment.getPosX();
 
     private final float itemSize;
     private Vector2[][] grid;
     private ItemBlock[] items;
     private static SpriteDrawable borders;
 
-    private CategoryColumns categoryColumns;
+    private CategoryColumn categoryColumn;
 
     public BackpackPage(ItemBackpackShelfEnum shelf, CharacterEnum hero) {
         COLS = HeroStats.getEquipmentSize(hero)[0];
         ROWS = HeroStats.getEquipmentSize(hero)[1];
 
-        itemSize = WIDTH / COLS;
         grid = new Vector2[COLS][ROWS];
+
+        if (COLS == 2) {
+            itemSize = (41f/50f) * HEIGHT;
+            grid[0][0] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[1][0]  = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+        }
+        else if (COLS == 4) {
+            itemSize = (20f/50f) * HEIGHT;
+            grid[0][0] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[1][0]  = new Vector2(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[2][0] = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[3][0]  = new Vector2(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[0][1] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[1][1]  = new Vector2(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[2][1] = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[3][1]  = new Vector2(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+        }
+        else { //todo maybe
+            itemSize = 0;
+        }
+
         items = new ItemBlock[COLS * ROWS];
 
         for (int i=0; i<COLS * ROWS; i++) {
@@ -94,10 +113,10 @@ public class BackpackPage {
     }
 
     public void draw(Batch batch, AbstractItem selectedItem) {
+        borders.draw(batch, X, BackpackSegment.getPosY(), WIDTH, HEIGHT);
         for (int i = 0; i < COLS * ROWS; i++) {
             items[i].draw(batch, grid[i % COLS][i / COLS], items[i].getItem() == selectedItem, itemSize);
         }
-        borders.draw(batch, X, BackpackSegment.getPosY(), WIDTH, HEIGHT);
     }
 
 }

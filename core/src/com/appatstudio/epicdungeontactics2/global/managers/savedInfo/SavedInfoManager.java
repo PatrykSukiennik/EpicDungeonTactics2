@@ -220,14 +220,14 @@ public class SavedInfoManager {
     public static void checkChangeDay() {
         saved_date = preferences.getLong("date", -1);
         if (saved_date == -1) {
-            preferences.putLong("date", TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()));
+            preferences.putLong("date", TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()));
         }
         else {
-            long days = TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()) - saved_date;
+            long days = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()) - saved_date;
             System.out.println(days);
             if (days > 0) {
                 EpicDungeonTactics.reportDayChanged((int)days);
-                preferences.putLong("date", TimeUnit.MICROSECONDS.toDays(System.currentTimeMillis()));
+                preferences.putLong("date", TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()));
                 preferences.flush();
             }
         }

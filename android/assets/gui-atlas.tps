@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.3.0</string>
+        <string>5.4.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -194,6 +194,26 @@
                 <rect>4,7,7,14</rect>
                 <key>scale9Paddings</key>
                 <rect>4,7,7,14</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/BACKPACK_GRID_1x2.png</key>
+            <key type="filename">gui/BACKPACK_GRID_2x4.png</key>
+            <key type="filename">gui/BACKPACK_GRID_3x6.png</key>
+            <key type="filename">gui/SEGMENT_BACKPACK.png</key>
+            <key type="filename">gui/SEGMENT_HERO.png</key>
+            <key type="filename">gui/SEGMENT_ITEM.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>31,13,62,25</rect>
+                <key>scale9Paddings</key>
+                <rect>31,13,62,25</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -571,7 +591,23 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/FINANCES_BG.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,6,65,12</rect>
+                <key>scale9Paddings</key>
+                <rect>33,6,65,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/FINANCES_UPGRADE_BUTTON.png</key>
+            <key type="filename">gui/MAP_ICON.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -583,6 +619,21 @@
                 <rect>10,11,20,21</rect>
                 <key>scale9Paddings</key>
                 <rect>10,11,20,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/IDLE_INCOME_BANNER.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>21,4,43,8</rect>
+                <key>scale9Paddings</key>
+                <rect>21,4,43,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -694,6 +745,27 @@
                 <rect>7,7,14,14</rect>
                 <key>scale9Paddings</key>
                 <rect>7,7,14,14</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/finances-icons/CARAVAN.png</key>
+            <key type="filename">gui/finances-icons/CASTLE.png</key>
+            <key type="filename">gui/finances-icons/FARM.png</key>
+            <key type="filename">gui/finances-icons/HIRED_MERCHANT.png</key>
+            <key type="filename">gui/finances-icons/MUSEUM.png</key>
+            <key type="filename">gui/finances-icons/TAVERN.png</key>
+            <key type="filename">gui/finances-icons/VILLAGE.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

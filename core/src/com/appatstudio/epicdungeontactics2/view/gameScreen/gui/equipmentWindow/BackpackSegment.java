@@ -3,21 +3,18 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackShelfEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.BackpackPage;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumns;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumn;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
 public class BackpackSegment extends AbstractSegment {
 
-    private CategoryColumns categoryColumns;
+    private CategoryColumn categoryColumn;
     private HashMap<ItemBackpackShelfEnum, BackpackPage> pages;
 
     private AbstractItem currItem;
@@ -31,10 +28,10 @@ public class BackpackSegment extends AbstractSegment {
 
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_BACKPACK);
 
+        categoryColumn = new CategoryColumn();
+
         ItemBackpackShelfEnum[] allCategories = ItemBackpackShelfEnum.values();
         pages = new HashMap<>();
-
-        categoryColumns = new CategoryColumns();
 
         for (ItemBackpackShelfEnum shelf : allCategories) {
             pages.put(shelf, new BackpackPage(shelf, hero));
@@ -65,13 +62,13 @@ public class BackpackSegment extends AbstractSegment {
 
     void draw(Batch batch) {
         bg.draw(batch, posX, getPosY(), fullWidth, fullHeight);
-        categoryColumns.draw(batch, currShelf);
         pages.get(currShelf).draw(batch, currItem);
+        categoryColumn.draw(batch, currShelf);
     }
 
     AbstractItem getTapItem(float x, float y) {
-        if (x < posX + CategoryColumns.getW()) {
-            currShelf = categoryColumns.getCategory(y);
+        if (x < posX + CategoryColumn.getW()) {
+            currShelf = categoryColumn.getCategory(y);
             return null;
         }
         else return pages.get(currShelf).tap(x, y);
@@ -114,6 +111,14 @@ public class BackpackSegment extends AbstractSegment {
 
     public boolean isTap(float x, float y) {
         return x > posX && x < posX + fullWidth
-                && y > posY && posY < posY + fullHeight;
+                && y > posY && y < posY + fullHeight;
+    }
+
+    public boolean categoriesSegmentTap(float x, float y) {
+        if (x < posX + CategoryColumn.getW()) {
+            currShelf = categoryColumn.getCategory(y);
+            return true;
+        }
+        return false;
     }
 }
