@@ -38,6 +38,7 @@ public class BackpackSegment extends AbstractSegment {
         }
     }
 
+
     boolean isSpaceFor(AbstractItem item) {
         switch (item.getItemTypeEnum()) {
             case SWORD:
@@ -72,6 +73,31 @@ public class BackpackSegment extends AbstractSegment {
             return null;
         }
         else return pages.get(currShelf).tap(x, y);
+    }
+
+    void replace(AbstractItem toReplace, AbstractItem newItem) {
+        switch (toReplace.getItemTypeEnum()) {
+            case STAFF:
+            case SWORD:
+                pages.get(ItemBackpackShelfEnum.MELE).replace(toReplace, newItem);
+                break;
+            case HELMET:
+            case NECKLACE:
+            case SHIELD:
+            case RING:
+            case ARMOR:
+                pages.get(ItemBackpackShelfEnum.ARMOR).replace(toReplace, newItem);
+                break;
+            case BOOK:
+            case FOOD:
+            case OTHER:
+                pages.get(ItemBackpackShelfEnum.FOOD).replace(toReplace, newItem);
+                break;
+            case ARROW:
+            case BOW:
+                pages.get(ItemBackpackShelfEnum.DISTANCE).replace(toReplace, newItem);
+                break;
+        }
     }
 
     void dropItem(AbstractItem item) {

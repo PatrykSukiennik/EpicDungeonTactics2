@@ -57,7 +57,7 @@ public class BackpackPage {
         items = new ItemBlock[COLS * ROWS];
 
         for (int i=0; i<COLS * ROWS; i++) {
-            items[i] = new ItemBlock();
+            items[i] = new ItemBlock(grid[i % COLS][i / COLS], itemSize);
         }
 
         if (COLS == 2) {
@@ -115,8 +115,15 @@ public class BackpackPage {
     public void draw(Batch batch, AbstractItem selectedItem) {
         borders.draw(batch, X, BackpackSegment.getPosY(), WIDTH, HEIGHT);
         for (int i = 0; i < COLS * ROWS; i++) {
-            items[i].draw(batch, grid[i % COLS][i / COLS], items[i].getItem() == selectedItem, itemSize);
+            items[i].draw(batch, items[i].getItem() == selectedItem);
         }
     }
 
+    public void replace(AbstractItem toReplace, AbstractItem newItem) {
+        for (ItemBlock i : items) {
+            if (i != null && i.getItem() == toReplace) {
+                i.setItem(toReplace);
+            }
+        }
+    }
 }

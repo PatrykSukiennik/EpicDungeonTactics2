@@ -36,9 +36,17 @@ public final class EquipmentWindow {
         return backpackSegment.isSpaceFor(item);
     }
 
+    public static void equipped(AbstractItem toReplace, AbstractItem newItem) {
+        backpackSegment.replace(toReplace, newItem);
+    }
+
     public boolean tap(float x, float y) {
         if (heroSegment.isTap(x, y)) {
-            currItem = heroSegment.getTapItem(x, y);
+            if (currItem == null) currItem = heroSegment.getTapItem(x, y);
+            else {
+                if (heroSegment.tapWithItem(x, y, currItem)) currItem = null;
+
+            }
         }
         else if (backpackSegment.isTap(x, y)) {
             if (backpackSegment.categoriesSegmentTap(x, y)) {

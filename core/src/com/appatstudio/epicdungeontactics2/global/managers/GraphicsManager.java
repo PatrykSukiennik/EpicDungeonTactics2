@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -31,6 +32,7 @@ public final class GraphicsManager {
     private static Map<FinanceUpgradeEnum, SpriteDrawable> financesIconsMap;
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
     private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
+    private static Map<ItemTypeEnum, SpriteDrawable> itemCategoryIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
     private static void loadItems(TextureAtlas atlas) {
@@ -156,6 +158,12 @@ public final class GraphicsManager {
         for (FinanceUpgradeEnum f : allFinances) {
             financesIconsMap.put(f, new SpriteDrawable(new Sprite(atlas.findRegion("finances-icons/" + f.toString()))));
         }
+
+        itemCategoryIconsMap = new HashMap<>();
+        ItemTypeEnum[] allTypes = ItemTypeEnum.values();
+        for (ItemTypeEnum i : allTypes) {
+            itemCategoryIconsMap.put(i, new SpriteDrawable(new Sprite(atlas.findRegion("item-type-icons/" + i.toString()))));
+        }
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
@@ -231,6 +239,10 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getFinancesIcon(FinanceUpgradeEnum e) {
         return financesIconsMap.get(e);
+    }
+
+    public static SpriteDrawable getItemCategoryIcon(ItemTypeEnum i) {
+        return itemCategoryIconsMap.get(i);
     }
 
     public static Animation<SpriteDrawable> getCampUpgradeFellow(CampUpgradeEnum campUpgrade, CharacterStateEnum s) {
