@@ -41,7 +41,7 @@ public class BackpackSegment extends AbstractSegment {
 
     boolean isSpaceFor(AbstractItem item) {
         switch (item.getItemTypeEnum()) {
-            case SWORD:
+            case MELE:
                 return pages.get(ItemBackpackShelfEnum.MELE).isSpace();
             case HELMET:
             case NECKLACE:
@@ -78,7 +78,7 @@ public class BackpackSegment extends AbstractSegment {
     void replace(AbstractItem toReplace, AbstractItem newItem) {
         switch (toReplace.getItemTypeEnum()) {
             case STAFF:
-            case SWORD:
+            case MELE:
                 pages.get(ItemBackpackShelfEnum.MELE).replace(toReplace, newItem);
                 break;
             case HELMET:
@@ -108,7 +108,7 @@ public class BackpackSegment extends AbstractSegment {
         if (item != null) {
             switch (item.getItemTypeEnum()) {
                 case STAFF:
-                case SWORD:
+                case MELE:
                     currShelf = ItemBackpackShelfEnum.MELE;
                     break;
                 case HELMET:

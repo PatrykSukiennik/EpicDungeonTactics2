@@ -3,25 +3,20 @@ package com.appatstudio.epicdungeontactics2.global.stats.items;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
-public final class ItemPrototype {
+public class ItemPrototype {
 
     private final ItemEnum ID;
     private final ItemTypeEnum TYPE;
-    private final int VALUE, WEIGHT;
+    private final int VALUE;
 
-    public ItemPrototype(ItemEnum id, ItemTypeEnum type, int value, int weight) {
+    public ItemPrototype(ItemEnum id, ItemTypeEnum type, int value) {
         ID = id;
         TYPE = type;
         VALUE = value;
-        WEIGHT = weight;
     }
 
     public int getVALUE() {
         return VALUE;
-    }
-
-    public int getWEIGHT() {
-        return WEIGHT;
     }
 
     public ItemEnum getID() {

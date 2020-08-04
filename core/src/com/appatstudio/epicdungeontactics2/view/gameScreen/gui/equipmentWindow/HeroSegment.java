@@ -99,7 +99,7 @@ public class HeroSegment extends AbstractSegment {
                 eqItemBlocks.add(new HeroEqItemBlock(tileNecklace, tileSize, ItemTypeEnum.NECKLACE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing0, tileSize, ItemTypeEnum.RING));
-                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.SWORD));
+                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));
                 break;
@@ -109,7 +109,7 @@ public class HeroSegment extends AbstractSegment {
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
                 eqItemBlocks.add(new HeroEqItemBlock(tileShield, tileSize, ItemTypeEnum.SHIELD));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing0, tileSize, ItemTypeEnum.RING));
-                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.SWORD));
+                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));
                 break;
@@ -125,7 +125,7 @@ public class HeroSegment extends AbstractSegment {
             case HERO_LIZARD:
                 eqItemBlocks.add(new HeroEqItemBlock(tileHelmet, tileSize, ItemTypeEnum.HELMET));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
-                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.SWORD));
+                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));
                 break;
@@ -135,7 +135,7 @@ public class HeroSegment extends AbstractSegment {
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing0, tileSize, ItemTypeEnum.RING));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing1, tileSize, ItemTypeEnum.RING));
-                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.SWORD));
+                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));
                 break;
@@ -146,7 +146,7 @@ public class HeroSegment extends AbstractSegment {
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing0, tileSize, ItemTypeEnum.RING));
                 eqItemBlocks.add(new HeroEqItemBlock(tileRing1, tileSize, ItemTypeEnum.RING));
-                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.SWORD));
+                eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));
                 break;

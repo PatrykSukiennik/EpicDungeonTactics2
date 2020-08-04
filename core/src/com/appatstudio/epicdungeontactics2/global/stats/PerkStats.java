@@ -22,8 +22,8 @@ public final class PerkStats {
         perkStats.put(PerkEnum.MAGICAL_DMG_BONUS, new float[]{0.2f, 0.4f, 0.6f});
         perkStats.put(PerkEnum.HP_RESTORATION_ROOM, new float[]{0.1f, 0.2f, 0.3f});
         perkStats.put(PerkEnum.HP_RESTORATION_KILL, new float[]{0.02f, 0.04f, 0.06f});
-        perkStats.put(PerkEnum.MANA_RESTORATION_ROOM, new float[]{0.15f, 0.3f, 0.5f});
-        perkStats.put(PerkEnum.MANA_RESTORATION_KILL, new float[]{0.05f, 0.1f, 0.15f});
+        //perkStats.put(PerkEnum.MANA_RESTORATION_ROOM, new float[]{0.15f, 0.3f, 0.5f});
+        //perkStats.put(PerkEnum.MANA_RESTORATION_KILL, new float[]{0.05f, 0.1f, 0.15f});
         perkStats.put(PerkEnum.POISON_DURATION_DECREASE, new float[]{2f, 4f, 6f});
         perkStats.put(PerkEnum.MAGICAL_RESIST, new float[]{0.15f, 0.3f, 0.45f});
         perkStats.put(PerkEnum.INSTAKILL_ENEMY, new float[]{0.01f, 0.02f, 0.03f});
@@ -57,8 +57,8 @@ public final class PerkStats {
         perkUpgradeCosts.put(PerkEnum.MAGICAL_DMG_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.HP_RESTORATION_ROOM, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.HP_RESTORATION_KILL, new int[]{500, 2500, 10000});
-        perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_ROOM, new int[]{500, 2500, 10000});
-        perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_KILL, new int[]{500, 2500, 10000});
+        //perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_ROOM, new int[]{500, 2500, 10000});
+        //perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_KILL, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.POISON_DURATION_DECREASE, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.MAGICAL_RESIST, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.INSTAKILL_ENEMY, new int[]{500, 2500, 10000});

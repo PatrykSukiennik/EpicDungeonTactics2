@@ -32,10 +32,10 @@ public enum PerkEnum {
     HP_RESTORATION_KILL,
 
     //mana restoration after clearing room
-    MANA_RESTORATION_ROOM,
+    //MANA_RESTORATION_ROOM,
 
     //mana restoration after killing enemy
-    MANA_RESTORATION_KILL,
+    //MANA_RESTORATION_KILL,
 
     //poison duration decrease
     POISON_DURATION_DECREASE,

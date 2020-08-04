@@ -5,14 +5,14 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.badlogic.gdx.utils.Array;
 
-public final class MeleWeapon extends AbstractItem {
+public final class Bow extends AbstractItem {
 
-    private int speedEffect;
+    private int range;
     private int dmg;
 
-    public MeleWeapon(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int speedEffect, int dmg) {
+    public Bow(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int range, int dmg) {
         super(itemEnum, typeEnum, value, effects);
-        this.speedEffect = speedEffect;
+        this.range = range;
         this.dmg = dmg;
     }
 }

@@ -14,7 +14,6 @@ public class ItemGeneratorConfig {
     public static final HashMap<ItemTypeEnum, HashMap<ItemEnum, Integer>> basicItemChance;
     public static final HashMap<ItemTypeEnum, HashMap<ItemEnum, Integer>> lvlItemChance;
 
-
     static {
         basicTypeChance = new HashMap<>();
         basicTypeChance.put(CharacterEnum.HERO_ELF, new HashMap<ItemTypeEnum, Integer>());
@@ -25,7 +24,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.put(CharacterEnum.HERO_PIRATE, new HashMap<ItemTypeEnum, Integer>());
         basicTypeChance.put(CharacterEnum.HERO_BABY, new HashMap<ItemTypeEnum, Integer>());
 
-        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.ARROW, 100);
@@ -38,7 +37,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.ARROW, 100);
@@ -51,7 +50,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.ARROW, 100);
@@ -64,7 +63,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.ARROW, 100);
@@ -77,7 +76,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.ARROW, 100);
@@ -90,7 +89,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.ARROW, 100);
@@ -103,7 +102,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.OTHER, 100);
         basicTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.BOOK, 100);
 
-        basicTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.SWORD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.ARROW, 100);
@@ -131,7 +130,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.put(CharacterEnum.HERO_PIRATE, new HashMap<ItemTypeEnum, Integer>());
         lvlTypeChance.put(CharacterEnum.HERO_BABY, new HashMap<ItemTypeEnum, Integer>());
 
-        lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.ARROW, 100);
@@ -144,7 +143,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.ARROW, 100);
@@ -157,7 +156,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.ARROW, 100);
@@ -170,7 +169,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_WIZZARD).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.ARROW, 100);
@@ -183,7 +182,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_LIZARD).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.ARROW, 100);
@@ -196,7 +195,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_NINJA).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.ARROW, 100);
@@ -209,7 +208,7 @@ public class ItemGeneratorConfig {
         lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.OTHER, 100);
         lvlTypeChance.get(CharacterEnum.HERO_PIRATE).put(ItemTypeEnum.BOOK, 100);
 
-        lvlTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.SWORD, 100);
+        lvlTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.MELE, 100);
         lvlTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.STAFF, 100);
         lvlTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.BOW, 100);
         lvlTypeChance.get(CharacterEnum.HERO_BABY).put(ItemTypeEnum.ARROW, 100);
@@ -492,7 +491,7 @@ public class ItemGeneratorConfig {
         basicItemSwordChance.put(ItemEnum.SWORDv70, 100);
         basicItemSwordChance.put(ItemEnum.SWORDv71, 100);
         basicItemSwordChance.put(ItemEnum.SWORDv72, 100);
-        basicItemChance.put(ItemTypeEnum.SWORD, basicItemSwordChance);
+        basicItemChance.put(ItemTypeEnum.MELE, basicItemSwordChance);
 
 
 
@@ -764,7 +763,7 @@ public class ItemGeneratorConfig {
         lvlItemSwordChance.put(ItemEnum.SWORDv70, 100);
         lvlItemSwordChance.put(ItemEnum.SWORDv71, 100);
         lvlItemSwordChance.put(ItemEnum.SWORDv72, 100);
-        lvlItemChance.put(ItemTypeEnum.SWORD, lvlItemSwordChance);
+        lvlItemChance.put(ItemTypeEnum.MELE, lvlItemSwordChance);
 
     }
 

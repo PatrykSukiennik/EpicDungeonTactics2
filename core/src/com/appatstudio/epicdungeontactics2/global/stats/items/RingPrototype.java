@@ -1,4 +1,19 @@
 package com.appatstudio.epicdungeontactics2.global.stats.items;
 
-public class RingPrototype {
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+
+public class RingPrototype extends ItemPrototype {
+
+    private final int EFFECTS;
+
+    public RingPrototype(ItemEnum id, ItemTypeEnum type, int value, int effects) {
+        super(id, type, value);
+
+        this.EFFECTS = effects;
+    }
+
+    public int getEFFECTS() {
+        return EFFECTS;
+    }
 }
