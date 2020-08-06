@@ -11,6 +11,7 @@ public final class CharacterStats {
 
     private static final Map<CharacterEnum, CharacterPrototype> characterPrototypes;
     private static final Map<CharacterEnum, CharacterPrototype> enemyLvlUpStats;
+    private static final Map<CharacterEnum, Integer> characterSizes;
 
     static {
         characterPrototypes = new HashMap<>();
@@ -156,6 +157,82 @@ public final class CharacterStats {
 
         enemyLvlUpStats.put(CharacterEnum.BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
 
+
+        characterSizes = new HashMap<>();
+        characterSizes.put(CharacterEnum.HERO_ELF, 1);
+        characterSizes.put(CharacterEnum.HERO_KNIGHT, 1);
+        characterSizes.put(CharacterEnum.HERO_WIZZARD, 1);
+        characterSizes.put(CharacterEnum.HERO_LIZARD, 1);
+        characterSizes.put(CharacterEnum.HERO_NINJA, 1);
+        characterSizes.put(CharacterEnum.HERO_PIRATE, 1);
+        characterSizes.put(CharacterEnum.HERO_BABY, 1);
+
+        //forest
+        characterSizes.put(CharacterEnum.CENTAUR_MALE, 1);
+        characterSizes.put(CharacterEnum.CENTAUR_FEMALE, 1);
+        characterSizes.put(CharacterEnum.ENT, 1);
+        characterSizes.put(CharacterEnum.TROLL, 1);
+        characterSizes.put(CharacterEnum.WOLF, 1);
+        characterSizes.put(CharacterEnum.MUSHROOM_SMALL, 1);
+        characterSizes.put(CharacterEnum.MUSHROOM_NORMAL,1);
+        characterSizes.put(CharacterEnum.MUSHROOM_LARGE, 1);
+        characterSizes.put(CharacterEnum.BEAR, 1);
+        characterSizes.put(CharacterEnum.FOREST_GUARDIAN, 1);
+        characterSizes.put(CharacterEnum.ELVEN_PRINCESS, 1);
+        characterSizes.put(CharacterEnum.ELVEN_KING, 1);
+        characterSizes.put(CharacterEnum.ELVEN_KNIGHT, 1);
+        characterSizes.put(CharacterEnum.GNOLL_BRUTE, 1);
+        characterSizes.put(CharacterEnum.GNOLL_OVERSEER, 1);
+        characterSizes.put(CharacterEnum.GNOLL_SCOUT, 1);
+        characterSizes.put(CharacterEnum.GNOLL_SHAMAN, 1);
+
+        //npcs
+        characterSizes.put(CharacterEnum.NPC_ALCHEMIST, 1);
+        characterSizes.put(CharacterEnum.NPC_CITIZEN_FEMALE, 1);
+        characterSizes.put(CharacterEnum.NPC_CITIZEN_MALE, 1);
+        characterSizes.put(CharacterEnum.NPC_PRINCESS, 1);
+        characterSizes.put(CharacterEnum.NPC_THIEF, 1);
+        characterSizes.put(CharacterEnum.NPC_BISHOP, 1);
+        characterSizes.put(CharacterEnum.NPC_NUN_FAT, 1);
+        characterSizes.put(CharacterEnum.NPC_NUN_NORMAL, 1);
+        characterSizes.put(CharacterEnum.NPC_MAGIC_SHOP, 1);
+        characterSizes.put(CharacterEnum.NPC_BLACKSMITH, 1);
+        characterSizes.put(CharacterEnum.NPC_KING, 1);
+        characterSizes.put(CharacterEnum.NPC_KNIGHT_ELITE, 1);
+
+        //pets
+        characterSizes.put(CharacterEnum.PET_DOG, 1);
+        characterSizes.put(CharacterEnum.PET_KNIGHT, 1);
+        characterSizes.put(CharacterEnum.PET_HUNTER, 1);
+
+        //tier1
+        characterSizes.put(CharacterEnum.TINY_ZOMBIE, 1);
+        characterSizes.put(CharacterEnum.ZOMBIE, 1);
+        characterSizes.put(CharacterEnum.MUDDY, 1);
+        characterSizes.put(CharacterEnum.ICE_ZOMBIE, 1);
+        characterSizes.put(CharacterEnum.GOBLIN, 1);
+
+        characterSizes.put(CharacterEnum.BIG_ZOMBIE, 1);
+
+
+        //tier2
+        characterSizes.put(CharacterEnum.ORC_SHAMAN, 1);
+        characterSizes.put(CharacterEnum.MASKED_ORC, 1);
+        characterSizes.put(CharacterEnum.ORC_WARRIOR,1);
+        characterSizes.put(CharacterEnum.SWAMPY, 1);
+
+        characterSizes.put(CharacterEnum.OGRE, 2);
+
+
+        //tier3
+        characterSizes.put(CharacterEnum.CHORT, 1);
+        characterSizes.put(CharacterEnum.IMP, 1);
+        characterSizes.put(CharacterEnum.NECROMANCER, 1);
+        characterSizes.put(CharacterEnum.SKELET, 1);
+        characterSizes.put(CharacterEnum.WOGOL, 1);
+
+        characterSizes.put(CharacterEnum.BIG_DEMON, 2);
+
     }
 
     public static CharacterPrototype getPrototype(CharacterEnum characterEnum) {
@@ -164,7 +241,12 @@ public final class CharacterStats {
     public static CharacterPrototype getEnemeyLvlUpStats(CharacterEnum characterEnum) {
         return enemyLvlUpStats.get(characterEnum);
     }
-    public static int getDefHeroStat(CharacterEnum c, StatisticEnum s) {
+
+    public static int getCharacterSize(CharacterEnum characterEnum) {
+        return characterSizes.get(characterEnum);
+    }
+
+    public static int getBasicHeroStat(CharacterEnum c, StatisticEnum s) {
         switch (s) {
             case STR: return characterPrototypes.get(c).getSTR();
             case DEX: return characterPrototypes.get(c).getDEX();

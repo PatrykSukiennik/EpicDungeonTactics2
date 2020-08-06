@@ -7,18 +7,13 @@ import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
-import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Array;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import sun.util.calendar.LocalGregorianCalendar;
 
 public class SavedInfoManager {
 
@@ -70,7 +65,7 @@ public class SavedInfoManager {
 
             characterStats.put(c, new HashMap<StatisticEnum, Integer>());
             for (StatisticEnum s : allStats) {
-                characterStats.get(c).put(s, preferences.getInteger("charStat" + c.toString() + s.toString(), CharacterStats.getDefHeroStat(c, s)));
+                characterStats.get(c).put(s, preferences.getInteger("charStat" + c.toString() + s.toString(), CharacterStats.getBasicHeroStat(c, s)));
             }
         }
 
