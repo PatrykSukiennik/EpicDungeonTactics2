@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements;
 
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,7 +11,7 @@ public class ItemBlock extends Image {
 
     AbstractItem item;
 
-    public ItemBlock(Vector2 pos, float size) {
+    public ItemBlock(CoordsFloat pos, float size) {
 
     }
 

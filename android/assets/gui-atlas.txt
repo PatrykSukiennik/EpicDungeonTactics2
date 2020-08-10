@@ -1305,6 +1305,90 @@ IDLE_INCOME_BANNER
   orig: 85, 16
   offset: 0, 0
   index: -1
+item-type-icons/ARMOR
+  rotate: false
+  xy: 244, 292
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+item-type-icons/ARROW
+  rotate: false
+  xy: 228, 292
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+item-type-icons/BOOK
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/BOW
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/FOOD
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/HELMET
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/MELE
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/NECKLACE
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/OTHER
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/RING
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/SHIELD
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+item-type-icons/STAFF
+  rotate: false
+  xy: 144, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
 KEY
   rotate: false
   xy: 229, 16

@@ -5,6 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.HeroEqItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
@@ -27,16 +28,16 @@ public class HeroSegment extends AbstractSegment {
 
     private static final float tileSize = heroSize/3f;
     //eq tiles positions
-    private static Vector2 tileHelmet = new Vector2();
-    private static Vector2 tileNecklace = new Vector2();
-    private static Vector2 tileSword = new Vector2();
-    private static Vector2 tileArmor = new Vector2();
-    private static Vector2 tileShield = new Vector2();
-    private static Vector2 tileRing0 = new Vector2();
-    private static Vector2 tileRing1 = new Vector2();
-    private static Vector2 tileBow = new Vector2();
-    private static Vector2 tileStaff = new Vector2();
-    private static Vector2 tileArrow = new Vector2();
+    private static CoordsFloat tileHelmet = new CoordsFloat();
+    private static CoordsFloat tileNecklace = new CoordsFloat();
+    private static CoordsFloat tileSword = new CoordsFloat();
+    private static CoordsFloat tileArmor = new CoordsFloat();
+    private static CoordsFloat tileShield = new CoordsFloat();
+    private static CoordsFloat tileRing0 = new CoordsFloat();
+    private static CoordsFloat tileRing1 = new CoordsFloat();
+    private static CoordsFloat tileBow = new CoordsFloat();
+    private static CoordsFloat tileStaff = new CoordsFloat();
+    private static CoordsFloat tileArrow = new CoordsFloat();
 
 
     private Animation<SpriteDrawable> heroAnimation;

@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.
 
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +13,7 @@ public class HeroEqItemBlock extends ItemBlock {
     private Image bg;
     private ItemTypeEnum requiredCategory;
 
-    public HeroEqItemBlock(Vector2 pos, float size, ItemTypeEnum requiredCategory) {
+    public HeroEqItemBlock(CoordsFloat pos, float size, ItemTypeEnum requiredCategory) {
         super(pos, size);
         bg = new Image(GraphicsManager.getItemCategoryIcon(requiredCategory));
         bg.setSize(size, size);

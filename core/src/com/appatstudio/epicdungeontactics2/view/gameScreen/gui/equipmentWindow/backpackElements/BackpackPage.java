@@ -4,6 +4,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackShelfEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.AbstractSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.BackpackSegment;
@@ -22,7 +23,7 @@ public class BackpackPage {
     private static final float X = AbstractSegment.getPosX();
 
     private final float itemSize;
-    private Vector2[][] grid;
+    private CoordsFloat[][] grid;
     private ItemBlock[] items;
     private static SpriteDrawable borders;
 
@@ -32,23 +33,23 @@ public class BackpackPage {
         COLS = HeroStats.getEquipmentSize(hero)[0];
         ROWS = HeroStats.getEquipmentSize(hero)[1];
 
-        grid = new Vector2[COLS][ROWS];
+        grid = new CoordsFloat[COLS][ROWS];
 
         if (COLS == 2) {
             itemSize = (41f/50f) * HEIGHT;
-            grid[0][0] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
-            grid[1][0]  = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[0][0] = new CoordsFloat(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[1][0]  = new CoordsFloat(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
         }
         else if (COLS == 4) {
             itemSize = (20f/50f) * HEIGHT;
-            grid[0][0] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
-            grid[1][0]  = new Vector2(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
-            grid[2][0] = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
-            grid[3][0]  = new Vector2(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
-            grid[0][1] = new Vector2(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
-            grid[1][1]  = new Vector2(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
-            grid[2][1] = new Vector2(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
-            grid[3][1]  = new Vector2(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[0][0] = new CoordsFloat(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[1][0] = new CoordsFloat(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[2][0] = new CoordsFloat(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[3][0] = new CoordsFloat(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (27f/50f) * HEIGHT);
+            grid[0][1] = new CoordsFloat(X + (35f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[1][1] = new CoordsFloat(X + (56f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[2][1] = new CoordsFloat(X + (77f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
+            grid[3][1] = new CoordsFloat(X + (98f/124f) * WIDTH, BackpackSegment.getPosY() + (6f/50f) * HEIGHT);
         }
         else { //todo maybe
             itemSize = 0;

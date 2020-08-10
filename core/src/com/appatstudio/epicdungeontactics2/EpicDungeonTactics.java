@@ -67,6 +67,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         if (campUpgradeScreen != null) CampUpgradeScreen.updateMainCharacters();
     }
 
+    public static boolean isGame() {
+        return currentScreen == GAME_SCREEN;
+    }
+
     @Override
     public void create() {
         Gdx.input.setCatchKey(Input.Keys.BACK, true);
