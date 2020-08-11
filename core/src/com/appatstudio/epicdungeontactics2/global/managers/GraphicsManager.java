@@ -7,6 +7,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
@@ -27,6 +28,7 @@ public final class GraphicsManager {
     private static final float CHARACTER_RUN_FRAMETIME = 0.1f;
 
     private static Map<ItemEnum, SpriteDrawable> itemImages;
+    private static Map<RoomTypeEnum, SpriteDrawable> mapRoomTypeImages;
     private static Map<GuiElementEnum, SpriteDrawable> guiElements;
     private static Map<StatisticEnum, SpriteDrawable> statIconsMap;
     private static Map<FinanceUpgradeEnum, SpriteDrawable> financesIconsMap;
@@ -132,6 +134,12 @@ public final class GraphicsManager {
         GuiElementEnum[] allElements = GuiElementEnum.values();
         for (GuiElementEnum g : allElements) {
             guiElements.put(g, new SpriteDrawable(new Sprite(atlas.findRegion(g.toString()))));
+        }
+
+        mapRoomTypeImages = new HashMap<>();
+        RoomTypeEnum[] allRooms = RoomTypeEnum.values();
+        for (RoomTypeEnum r : allRooms) {
+            mapRoomTypeImages.put(r, new SpriteDrawable(new Sprite(atlas.findRegion("map-room-icons/" + r.toString()))));
         }
 
         statIconsMap = new HashMap<>();
@@ -256,5 +264,9 @@ public final class GraphicsManager {
             case LUGGAGE_CARRIAGE: return charactersAnimations.get(CharacterEnum.NPC_CITIZEN_MALE).get(s);
             default: return null;
         }
+    }
+
+    public static Map<RoomTypeEnum, SpriteDrawable> getMapRoomIcons() {
+        return mapRoomTypeImages;
     }
 }

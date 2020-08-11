@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.global.input;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
@@ -45,7 +46,7 @@ public final class MobileInputManager implements GestureDetector.GestureListener
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         if (EpicDungeonTactics.isGame()) {
-            GameScreen.moveCamera(x, y, deltaX, deltaY);
+            CameraHandler.moveCamera(x, y, deltaX, deltaY);
         }
         return false;
     }
@@ -53,7 +54,7 @@ public final class MobileInputManager implements GestureDetector.GestureListener
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
         if (EpicDungeonTactics.isGame()) {
-            GameScreen.panStop();
+            CameraHandler.panStop();
         }
         return false;
     }
@@ -61,7 +62,7 @@ public final class MobileInputManager implements GestureDetector.GestureListener
     @Override
     public boolean zoom(float initialDistance, float distance) {
         if (EpicDungeonTactics.isGame()) {
-            GameScreen.zoomCamera(initialDistance, distance);
+            CameraHandler.zoomCamera(initialDistance, distance);
         }
         return false;
     }

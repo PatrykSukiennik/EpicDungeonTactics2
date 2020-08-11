@@ -11,6 +11,8 @@ public enum  GuiElementEnum {
 
     LVL_EXP_BAR, LVL_EXP_BAR_BG,
 
+    BLACK,
+
     BLACK_ALPHA_50percent,
 
     ARROW_LEFT, ARROW_RIGHT,

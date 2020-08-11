@@ -9,19 +9,19 @@ public class WorldConfig {
 
     public static final int ROOM_WIDTH = 11;
     public static final int ROOM_HEIGHT = 21;
-    public static final float TILE_SIZE = 32;
+    public static final float TILE_SIZE = 16;
     public static final float ROOM_WIDTH_RES = ROOM_WIDTH * TILE_SIZE;
     public static final float ROOM_HEIGHT_RES = ROOM_HEIGHT * TILE_SIZE;
-    public static final float INIT_CAMERA_ZOOM = ROOM_WIDTH_RES / Gdx.graphics.getWidth();
 
     public static final float ROOM_POS_X = ROOM_WIDTH_RES / 2f - (ROOM_WIDTH_RES / 2f);
     public static final float ROOM_POS_Y = ROOM_HEIGHT_RES / 2f - (ROOM_HEIGHT_RES / 2f);
 
-    public static final float CAMERA_POSITION_X_MAX = ROOM_POS_X + ROOM_WIDTH_RES - TILE_SIZE * 4f;
-    public static final float CAMERA_POSITION_X_MIN = ROOM_POS_X + TILE_SIZE * 4f;
+    public static final float CAMERA_POSITION_X_MAX = ROOM_POS_X + ROOM_WIDTH_RES - TILE_SIZE * 2f;
+    public static final float CAMERA_POSITION_X_MIN = ROOM_POS_X + TILE_SIZE * 2f;
     public static final float CAMERA_POSITION_Y_MAX = ROOM_POS_Y + ROOM_HEIGHT_RES - TILE_SIZE * 4f;
     public static final float CAMERA_POSITION_Y_MIN = ROOM_POS_Y + TILE_SIZE * 4f;
 
+    public static final float INIT_CAMERA_ZOOM = ROOM_WIDTH_RES / Gdx.graphics.getWidth() * 8f;
     public static final float CAMERA_ZOOM_LIMIT_MIN = INIT_CAMERA_ZOOM * 0.4f;
     public static final float CAMERA_ZOOM_LIMIT_MAX = INIT_CAMERA_ZOOM * 1.2f;
 

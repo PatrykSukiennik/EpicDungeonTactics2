@@ -240,6 +240,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/BLACK.png</key>
             <key type="filename">gui/BLACK_ALPHA_50percent.png</key>
             <key type="filename">gui/DAY_LIGHT_TEXTURE.png</key>
             <key type="filename">gui/EXP_BAR.png</key>
@@ -329,6 +330,7 @@
             <key type="filename">gui/SILVER_MEDAL.png</key>
             <key type="filename">gui/SOUND_OFF_ICON.png</key>
             <key type="filename">gui/SOUND_ON_ICON.png</key>
+            <key type="filename">gui/map-room-icons/BOSS_ROOM.png</key>
             <key type="filename">items/KEY.png</key>
             <key type="filename">items/arrows/ARROWv0.png</key>
             <key type="filename">items/arrows/ARROWv1.png</key>
@@ -528,6 +530,9 @@
             <key type="filename">gui/effect-icons/POISON.png</key>
             <key type="filename">gui/effect-icons/STUN.png</key>
             <key type="filename">gui/effect-icons/WEAKNESS.png</key>
+            <key type="filename">gui/map-room-icons/FIRST_ROOM.png</key>
+            <key type="filename">gui/map-room-icons/NONE.png</key>
+            <key type="filename">gui/map-room-icons/REGULAR_ROOM.png</key>
             <key type="filename">gui/perk-icons/APPLE_FINDER.png</key>
             <key type="filename">gui/perk-icons/BERSERKER.png</key>
             <key type="filename">gui/perk-icons/BOW_DMG.png</key>
@@ -766,6 +771,46 @@
                 <rect>8,8,16,16</rect>
                 <key>scale9Paddings</key>
                 <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/item-type-icons/ARMOR.png</key>
+            <key type="filename">gui/item-type-icons/ARROW.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,8,8,16</rect>
+                <key>scale9Paddings</key>
+                <rect>4,8,8,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/item-type-icons/BOOK.png</key>
+            <key type="filename">gui/item-type-icons/BOW.png</key>
+            <key type="filename">gui/item-type-icons/FOOD.png</key>
+            <key type="filename">gui/item-type-icons/HELMET.png</key>
+            <key type="filename">gui/item-type-icons/MELE.png</key>
+            <key type="filename">gui/item-type-icons/NECKLACE.png</key>
+            <key type="filename">gui/item-type-icons/OTHER.png</key>
+            <key type="filename">gui/item-type-icons/RING.png</key>
+            <key type="filename">gui/item-type-icons/SHIELD.png</key>
+            <key type="filename">gui/item-type-icons/STAFF.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,3,6,6</rect>
+                <key>scale9Paddings</key>
+                <rect>3,3,6,6</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

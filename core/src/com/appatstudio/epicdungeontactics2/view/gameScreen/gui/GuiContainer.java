@@ -12,8 +12,10 @@ import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
@@ -35,6 +37,7 @@ public final class GuiContainer {
     private StatusBarContainer statusBarContainer;
 
     private EquipmentWindow equipmentWindow;
+    private MapWindow mapWindow;
 
     private GuiButton eqButton, mapButton;
 
@@ -51,6 +54,7 @@ public final class GuiContainer {
         statusBarContainer = new StatusBarContainer(gameScreen.getHero());
 
         equipmentWindow = new EquipmentWindow(gameScreen.getHero());
+        mapWindow = new MapWindow();
 
         statusBarContainer.addEffect(EffectEnum.POISON, 4);
         statusBarContainer.addEffect(EffectEnum.POISON, 3);
@@ -68,7 +72,7 @@ public final class GuiContainer {
         );
         stageStatus = new TextObject(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + GameScreen.getStage(),
+                StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + GameScreen.getCurrentStage(),
                 Gdx.graphics.getWidth() * 0.95f,
                 Gdx.graphics.getHeight() - Gdx.graphics.getWidth() * 0.05f -
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f
@@ -106,6 +110,10 @@ public final class GuiContainer {
             equipmentWindow.draw(batch);
         }
 
+        else if (mapWindow.isUp()) {
+            mapWindow.draw(batch);
+        }
+
 
         batch.end();
     }
@@ -115,6 +123,10 @@ public final class GuiContainer {
             runQuitWindow.tap(x, y);
             return true;
         }
+        else if (mapWindow.isUp()) {
+            mapWindow.tap(x, y);
+            return true;
+        }
         else if (EquipmentWindow.isUp()) {
             equipmentWindow.tap(x, y);
             return true;
@@ -122,12 +134,18 @@ public final class GuiContainer {
         else if (eqButton.isTap(x, y)) {
             EquipmentWindow.show();
         }
+        else if (mapButton.isTap(x, y)) {
+            mapWindow.show();
+        }
         return false;
     }
 
     public void backPressed() {
         if (EquipmentWindow.isUp()) {
             EquipmentWindow.hide();
+        }
+        else if (mapWindow.isUp()) {
+            mapWindow.hide();
         }
         else runQuitWindow.show();
     }
@@ -137,7 +155,11 @@ public final class GuiContainer {
     }
 
     public void updateStage() {
-        stageStatus.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + "  " + GameScreen.getStage());
+        stageStatus.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + GameScreen.getCurrentStage());
+    }
+
+    public void setMapStage(Stage stage) {
+        mapWindow.setStage(stage);
     }
 
 }

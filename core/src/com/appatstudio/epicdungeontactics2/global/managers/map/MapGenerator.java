@@ -35,9 +35,9 @@ public class MapGenerator {
                 CoordsInt tempCoords = result.get(result.size - generatedInLastLoop + j).getPosition();
 
                 if (isFree(result, tempCoords.x - 1, tempCoords.y)) { //left
-                    if (EpicDungeonTactics.random.nextFloat() < 0.4f) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
                         result.add(new Room(
-                                result.size == roomCount ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
+                                result.size == roomCount - 1 ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
                                 stage,
                                 new CoordsInt(tempCoords.x - 1, tempCoords.y)));
 
@@ -46,9 +46,9 @@ public class MapGenerator {
                     }
                 }
                 if (isFree(result, tempCoords.x + 1, tempCoords.y)) { //right
-                    if (EpicDungeonTactics.random.nextFloat() < 0.4f) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
                         result.add(new Room(
-                                result.size == roomCount ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
+                                result.size == roomCount - 1 ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
                                 stage,
                                 new CoordsInt(tempCoords.x + 1, tempCoords.y)));
 
@@ -57,9 +57,9 @@ public class MapGenerator {
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y - 1)) { //bottom
-                    if (EpicDungeonTactics.random.nextFloat() < 0.4f) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
                         result.add(new Room(
-                                result.size == roomCount ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
+                                result.size == roomCount - 1 ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
                                 stage,
                                 new CoordsInt(tempCoords.x, tempCoords.y - 1)));
 
@@ -68,9 +68,9 @@ public class MapGenerator {
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y + 1)) { //top
-                    if (EpicDungeonTactics.random.nextFloat() < 0.4f) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
                         result.add(new Room(
-                                result.size == roomCount ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
+                                result.size == roomCount - 1 ? RoomTypeEnum.BOSS_ROOM : RoomTypeEnum.REGULAR_ROOM,
                                 stage,
                                 new CoordsInt(tempCoords.x, tempCoords.y + 1)));
 

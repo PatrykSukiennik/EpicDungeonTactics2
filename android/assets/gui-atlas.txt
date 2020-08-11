@@ -285,7 +285,7 @@ arrows/ARROWv9
   index: -1
 BACK_ICON
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
@@ -311,9 +311,16 @@ BACKPACK_GRID_3x6
   orig: 124, 50
   offset: 0, 0
   index: -1
-BLACK_ALPHA_50percent
+BLACK
   rotate: false
   xy: 0, 0
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+BLACK_ALPHA_50percent
+  rotate: false
+  xy: 1, 0
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -362,7 +369,7 @@ books/BOOKv5
   index: -1
 BOTTOM_BAR
   rotate: false
-  xy: 3, 0
+  xy: 4, 0
   size: 48, 5
   orig: 48, 5
   offset: 0, 0
@@ -579,7 +586,7 @@ bows/BOWv29
   index: -1
 BRONZE_BUTTON_WIDE
   rotate: false
-  xy: 213, 0
+  xy: 214, 0
   size: 48, 16
   orig: 48, 16
   offset: 0, 0
@@ -593,14 +600,14 @@ BRONZE_COMMUNICATE_WINDOW
   index: -1
 BRONZE_MEDAL
   rotate: false
-  xy: 261, 0
+  xy: 262, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 BRONZE_SMALL_BUTTON
   rotate: false
-  xy: 156, 0
+  xy: 157, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -614,21 +621,21 @@ CAMP_UPGRADE_BUTTON
   index: -1
 COINS
   rotate: false
-  xy: 133, 0
+  xy: 134, 0
   size: 11, 11
   orig: 11, 11
   offset: 0, 0
   index: -1
 DAY_LIGHT_TEXTURE
   rotate: false
-  xy: 1, 0
+  xy: 2, 0
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 DIAMOND_MEDAL
   rotate: false
-  xy: 277, 0
+  xy: 278, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -922,7 +929,7 @@ EQUIPMENT_ICON
   index: -1
 EXP_BAR
   rotate: false
-  xy: 51, 0
+  xy: 52, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
@@ -1069,91 +1076,91 @@ food/FOODv10
   index: -1
 GOLD_MEDAL
   rotate: false
-  xy: 293, 0
+  xy: 294, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ALCHEMIST
   rotate: false
-  xy: 309, 0
+  xy: 310, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ALCHEMIST_ZERO
   rotate: false
-  xy: 325, 0
+  xy: 326, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BABY
   rotate: false
-  xy: 341, 0
+  xy: 342, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BLACKSMITH
   rotate: false
-  xy: 357, 0
+  xy: 358, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BLACKSMITH_ZERO
   rotate: false
-  xy: 373, 0
+  xy: 374, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BUTCHER
   rotate: false
-  xy: 389, 0
+  xy: 390, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BUTCHER_ZERO
   rotate: false
-  xy: 405, 0
+  xy: 406, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ELF
   rotate: false
-  xy: 421, 0
+  xy: 422, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_KNIGHT
   rotate: false
-  xy: 437, 0
+  xy: 438, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_LIZARD
   rotate: false
-  xy: 453, 0
+  xy: 454, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_LUGGAGE_CARRIAGE
   rotate: false
-  xy: 469, 0
+  xy: 470, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_LUGGAGE_CARRIAGE_ZERO
   rotate: false
-  xy: 485, 0
+  xy: 486, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1293,7 +1300,7 @@ helmets/HELMETv9
   index: -1
 HP_BAR
   rotate: false
-  xy: 52, 0
+  xy: 53, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
@@ -1321,70 +1328,70 @@ item-type-icons/ARROW
   index: -1
 item-type-icons/BOOK
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/BOW
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/FOOD
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/HELMET
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/MELE
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/NECKLACE
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/OTHER
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/RING
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/SHIELD
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/STAFF
   rotate: false
-  xy: 144, 0
+  xy: 145, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
@@ -1398,16 +1405,44 @@ KEY
   index: -1
 LVL_EXP_BAR
   rotate: false
-  xy: 51, 0
+  xy: 52, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
   index: -1
 LVL_EXP_BAR_BG
   rotate: false
-  xy: 53, 0
+  xy: 54, 0
   size: 80, 9
   orig: 80, 9
+  offset: 0, 0
+  index: -1
+map-room-icons/BOSS_ROOM
+  rotate: false
+  xy: 0, 16
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+map-room-icons/FIRST_ROOM
+  rotate: false
+  xy: 171, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+map-room-icons/NONE
+  rotate: false
+  xy: 157, 0
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+map-room-icons/REGULAR_ROOM
+  rotate: false
+  xy: 157, 0
+  size: 14, 14
+  orig: 14, 14
   offset: 0, 0
   index: -1
 MAP_ICON
@@ -1517,7 +1552,7 @@ necklaces/NECKLACEv11
   index: -1
 NIGHT_LIGHT_TEXTURE
   rotate: false
-  xy: 2, 0
+  xy: 3, 0
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -1790,7 +1825,7 @@ POINTS_PER_LVL_ICON
   index: -1
 QUEST_ICON
   rotate: false
-  xy: 261, 0
+  xy: 262, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1979,7 +2014,7 @@ SEGMENT_ITEM
   index: -1
 SETTINGS_ICON
   rotate: false
-  xy: 156, 0
+  xy: 157, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -2511,7 +2546,7 @@ STONE_COMMUNICATE_WINDOW
   index: -1
 STONE_SMALL_BUTTON
   rotate: false
-  xy: 170, 0
+  xy: 171, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -3015,14 +3050,14 @@ swords/SWORDv70
   index: -1
 swords/SWORDv71
   rotate: false
-  xy: 198, 0
+  xy: 199, 0
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 swords/SWORDv72
   rotate: false
-  xy: 184, 0
+  xy: 185, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0

@@ -15,4 +15,8 @@ public class Stage {
     public Room getFirstRoom() {
         return firstRoom;
     }
+
+    public Array<Room> getRooms() {
+        return rooms;
+    }
 }

@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Align;
 
-public final class TextObject {
+public class TextObject {
 
-    private BitmapFont font;
-    private String text;
-    private float objectHeight, textX, textY, wholeWidth;
-    private int alignment;
-    private float posX, posY;
+    protected BitmapFont font;
+    protected String text;
+    protected float objectHeight, textX, textY, wholeWidth;
+    protected int alignment;
+    protected float posX, posY;
 
     public TextObject(BitmapFont font, String text, float posX, float posY, int alignment) {
         this.font = font;
@@ -48,7 +48,10 @@ public final class TextObject {
     }
 
     public void setText(String text) {
-        wholeWidth = objectHeight * 1.2f + FontsManager.getTextWidth(font, text);
+        this.text = text;
+
+        objectHeight = FontsManager.getTextHeight(font, "0") * 1.2f;
+        wholeWidth = FontsManager.getTextWidth(font, text);
 
         switch (alignment) {
             case Align.center: {

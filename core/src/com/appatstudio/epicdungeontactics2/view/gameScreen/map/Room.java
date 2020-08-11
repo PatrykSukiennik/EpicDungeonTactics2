@@ -27,8 +27,9 @@ public class Room {
         roomNodes.put(DirectionEnum.LEFT, null);
 
         this.position = position;
+        this.type = type;
 
-        mapDrawable = new SpriteDrawable(new Sprite(new Texture("badlogic.jpg")));
+        mapDrawable = new SpriteDrawable(new Sprite(new Texture("maps/1_FOREST_1.jpg")));
     }
 
     public void draw(Batch mapBatch, Batch guiBatch) {
