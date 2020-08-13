@@ -26,7 +26,6 @@ public class MapGenerator {
         int generatedInLastLoop = 1;
         int generatedInThisLoop = 0;
 
-        System.out.println("Room count: " + roomCount);
 
         for (int i = 1; i < roomCount; i++) {
 
@@ -90,7 +89,6 @@ public class MapGenerator {
             if (result.size == roomCount) break;
 
         }
-        System.out.println("Size: " + result.size);
 
         //generate nodes
 
@@ -98,16 +96,24 @@ public class MapGenerator {
         for (int i = 0; i < roomCount; i++) {
             currectCoords = result.get(i).getPosition();
             for (int j = i + 1; j < roomCount; j++) {
-                if (currectCoords.x - result.get(j).getPosition().x == -1) {
+                if (currectCoords.x - result.get(j).getPosition().x == -1
+                        && currectCoords.y == result.get(j).getPosition().y) {
+
                     result.get(i).getRoomNodes().put(DirectionEnum.RIGHT, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.LEFT, result.get(i));
-                } else if (currectCoords.x - result.get(j).getPosition().x == 1) {
+                } else if (currectCoords.x - result.get(j).getPosition().x == 1
+                        && currectCoords.y == result.get(j).getPosition().y) {
+
                     result.get(i).getRoomNodes().put(DirectionEnum.LEFT, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.RIGHT, result.get(i));
-                } else if (currectCoords.y - result.get(j).getPosition().y == -1) {
+                } else if (currectCoords.y - result.get(j).getPosition().y == -1
+                        && currectCoords.x == result.get(j).getPosition().x) {
+
                     result.get(i).getRoomNodes().put(DirectionEnum.TOP, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.BOTTOM, result.get(i));
-                } else if (currectCoords.y - result.get(j).getPosition().y == 1) {
+                } else if (currectCoords.y - result.get(j).getPosition().y == 1
+                        && currectCoords.x == result.get(j).getPosition().x) {
+
                     result.get(i).getRoomNodes().put(DirectionEnum.BOTTOM, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.TOP, result.get(i));
                 }

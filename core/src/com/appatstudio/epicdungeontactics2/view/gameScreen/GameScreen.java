@@ -57,6 +57,8 @@ public final class GameScreen extends Actor {
                     Gdx.graphics.getHeight() * 0.55f,
                     Align.center);
 
+    private static float freshRunTextDelay = 0f;
+
     public GameScreen(CharacterEnum hero, PerkEnum perk) {
         this.hero = hero;
         this.perk = perk;
@@ -72,6 +74,35 @@ public final class GameScreen extends Actor {
 
         guiContainer.setMapStage(currStage);
 
+        freshRunInit();
+
+        guiContainer.roomChanged(null, currRoom);
+    }
+
+    public void startGame(CharacterEnum hero, PerkEnum perk) {
+        this.hero = hero;
+        this.perk = perk;
+        stage = 1;
+
+        currStage = MapGenerator.createStage(stage);
+        currRoom = currStage.getFirstRoom();
+
+        gameBatch = new SpriteBatch();
+        mapGuiBatch = new SpriteBatch();
+
+        guiContainer = new GuiContainer(this);
+
+        guiContainer.setMapStage(currStage);
+
+        freshRunInit();
+
+        guiContainer.roomChanged(null, currRoom);
+    }
+
+    public void freshRunInit() {
+        CameraHandler.freshRun();
+        newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " 1");
+        freshRunTextDelay = 2f;
     }
 
     public void switchRoomInit(DirectionEnum direction) {
@@ -81,8 +112,8 @@ public final class GameScreen extends Actor {
     }
 
     public void nextStageInit() {
-        newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + (stage + 1));
         CameraHandler.nextStage();
+        newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + (stage + 1));
         switchStageDelay = 0.5f;
     }
 
@@ -94,15 +125,10 @@ public final class GameScreen extends Actor {
     }
 
     public void tap(float x, float y) {
-        guiContainer.tap(x, y);
-
-//        if (currRoom.getRoomNodes().get(DirectionEnum.RIGHT) != null) switchRoomInit(DirectionEnum.RIGHT);
-//        else if (currRoom.getRoomNodes().get(DirectionEnum.BOTTOM) != null) switchRoomInit(DirectionEnum.BOTTOM);
-//        else if (currRoom.getRoomNodes().get(DirectionEnum.LEFT) != null) switchRoomInit(DirectionEnum.LEFT);
-//        else if (currRoom.getRoomNodes().get(DirectionEnum.TOP) != null) switchRoomInit(DirectionEnum.TOP);
-        //if (y < Gdx.graphics.getHeight() * 0.5f) switchRoomInit(DirectionEnum.RIGHT);
-
-        nextStageInit();
+        if (CameraHandler.isTapPossible()) {
+            guiContainer.tap(x, y);
+        }
+        
     }
 
     public void draw() {
@@ -116,25 +142,7 @@ public final class GameScreen extends Actor {
 
         guiContainer.draw();
 
-        if (switchRoomDelay > 0) {
-            CameraHandler.updateCamera();
-            switchRoomDelay -= Gdx.graphics.getDeltaTime();
-            if (switchRoomDelay <= 0) currRoom = currRoom.getRoomNodes().get(switchRoomDirection);
-        }
-        if (switchStageDelay > 0) {
-            CameraHandler.updateCamera();
-            switchStageDelay -= Gdx.graphics.getDeltaTime();
-            CameraHandler.drawEffects(mapGuiBatch);
-            newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
-            if (switchStageDelay <= 0) {
-                stage++;
-                newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
-                CameraHandler.resetCameraPos();
-                currStage = MapGenerator.createStage(stage);
-                currRoom = currStage.getFirstRoom();
-                guiContainer.updateStage();
-            }
-        }
+        handleRoomChanges();
     }
 
     public CharacterEnum getHero() {
@@ -153,5 +161,38 @@ public final class GameScreen extends Actor {
         return stage;
     }
 
+    private void handleRoomChanges() {
+        if (switchRoomDelay > 0) {
+            CameraHandler.updateCamera();
+            switchRoomDelay -= Gdx.graphics.getDeltaTime();
+            if (switchRoomDelay <= 0) {
+                Room oldRoom = currRoom;
+                currRoom = currRoom.getRoomNodes().get(switchRoomDirection);
+                guiContainer.roomChanged(oldRoom, currRoom);
+            }
+        }
+
+        if (switchStageDelay > 0) {
+            CameraHandler.updateCamera();
+            switchStageDelay -= Gdx.graphics.getDeltaTime();
+            CameraHandler.drawEffects(mapGuiBatch);
+            if (switchStageDelay > 0.2f) newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
+            if (switchStageDelay <= 0) {
+                stage++;
+                newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
+                CameraHandler.resetCameraPos();
+                currStage = MapGenerator.createStage(stage);
+                currRoom = currStage.getFirstRoom();
+                guiContainer.updateStage(currStage);
+            }
+        }
+
+        if (freshRunTextDelay > 0) {
+            CameraHandler.updateCamera();
+            freshRunTextDelay -= Gdx.graphics.getDeltaTime();
+            CameraHandler.drawEffects(mapGuiBatch);
+            if (freshRunTextDelay > 0.2f) newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
+        }
+    }
 
 }

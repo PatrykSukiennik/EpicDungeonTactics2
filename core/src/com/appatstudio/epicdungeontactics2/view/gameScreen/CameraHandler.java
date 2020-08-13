@@ -160,6 +160,8 @@ public class CameraHandler extends Actor {
     }
 
     public static void nextStage() {
+        actingDuration = 2.5f;
+
         blackOut.addAction(
                 Actions.sequence(
                         Actions.fadeIn(1f),
@@ -180,5 +182,16 @@ public class CameraHandler extends Actor {
 
     public static void updateCamera() {
         camera.update();
+    }
+
+    public static boolean isTapPossible() {
+        return actingDuration <= 0;
+    }
+
+    public static void freshRun() {
+        blackOut.getColor().a = 1f;
+        blackOut.addAction(
+                Actions.fadeOut(4f)
+        );
     }
 }

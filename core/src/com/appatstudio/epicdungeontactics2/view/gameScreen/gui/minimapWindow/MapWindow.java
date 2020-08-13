@@ -24,7 +24,6 @@ public class MapWindow {
 
     private TextObject title;
     private SpriteDrawable blackBg;
-    private Stage stage;
     private Array<MapRoomIcon> roomIcons = new Array<>();
 
     public MapWindow() {
@@ -66,7 +65,6 @@ public class MapWindow {
     }
 
     public void setStage(Stage stage) {
-        this.stage = stage;
         roomIcons.clear();
         int count = stage.getRooms().size;
 
@@ -107,13 +105,19 @@ public class MapWindow {
         for (Room r : rooms) {
             roomIcons.add(
                     new MapRoomIcon(
+                            r,
                             r.getType(),
                             coords[Math.abs(minX - r.getPosition().x)][Math.abs(minY - r.getPosition().y)]));
+            roomIcons.get(roomIcons.size-1).getColor().a = 0.25f;
 
         }
+    }
 
-
-
+    public void setCurrRoom(Room oldRoom, Room newRoom) {
+        for (MapRoomIcon i : roomIcons) {
+            if (i.getRoom() == oldRoom) i.getColor().a = 0.6f;
+            else if (i.getRoom() == newRoom) i.getColor().a = 1f;
+        }
     }
 
 }

@@ -15,6 +15,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.E
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
@@ -154,12 +155,16 @@ public final class GuiContainer {
         goldStatus.setText(Integer.toString(GlobalValues.getGold()));
     }
 
-    public void updateStage() {
+    public void updateStage(Stage newStage) {
         stageStatus.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + GameScreen.getCurrentStage());
+        mapWindow.setStage(newStage);
     }
 
     public void setMapStage(Stage stage) {
         mapWindow.setStage(stage);
     }
 
+    public void roomChanged(Room oldRoom, Room newRoom) {
+        mapWindow.setCurrRoom(oldRoom, newRoom);
+    }
 }

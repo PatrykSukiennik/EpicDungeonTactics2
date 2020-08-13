@@ -55,7 +55,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     }
 
     public static void startGame() {
-        gameScreen = new GameScreen(selectedHero, selectedPerk);
+        if (gameScreen == null) gameScreen = new GameScreen(selectedHero, selectedPerk);
+        gameScreen.startGame(selectedHero, selectedPerk);
         setCurrentScreen(GAME_SCREEN);
     }
 

@@ -17,8 +17,6 @@ public class AlphaTextObject extends TextObject {
         super.draw(batch);
         batch.getColor().a = 1f;
         batch.end();
-
-        System.out.println("ALPHA:  " + alpha + "  " + posX + "  " + posY + "  " + text);
     }
 
     @Override
