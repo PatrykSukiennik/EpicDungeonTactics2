@@ -3,7 +3,9 @@ package com.appatstudio.epicdungeontactics2.global;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class WorldConfig {
 
@@ -34,7 +36,7 @@ public class WorldConfig {
         tileCoords = new CoordsFloat[ROOM_WIDTH][ROOM_HEIGHT];
         for (int x = 0; x < ROOM_WIDTH; x++) {
             for (int y = 0; y < ROOM_HEIGHT; y++) {
-                tileCoords[x][y] = new CoordsFloat(x * TILE_SIZE, y * TILE_SIZE);
+                tileCoords[x][y] = new CoordsFloat(-TILE_SIZE/2f + x * TILE_SIZE, TILE_SIZE/4f + y * TILE_SIZE);
             }
         }
 
@@ -44,7 +46,7 @@ public class WorldConfig {
         return tileCoords[x][y];
     }
 
-    public static CoordsInt getTouchCoords(float x, float y) {
+    public static CoordsInt getIntCoordsFromFloatPoint(float x, float y) {
         CoordsInt result = new CoordsInt(-1, -1);
 
         for (int i = 0; i < ROOM_WIDTH; i++) {
@@ -64,6 +66,12 @@ public class WorldConfig {
         if (result.y == -1) result.y = ROOM_HEIGHT - 1;
 
         return result;
+    }
+
+    public static CoordsInt getIntCoordsFromTouch(OrthographicCamera camera, float x, float y) {
+        Vector3 coords = new Vector3(x, y, 0);
+        camera.unproject(coords);
+        return getIntCoordsFromFloatPoint(coords.x, coords.y);
     }
 
 

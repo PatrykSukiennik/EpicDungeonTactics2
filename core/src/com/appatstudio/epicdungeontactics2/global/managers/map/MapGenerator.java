@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2.global.managers.map;
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
@@ -10,6 +11,12 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.badlogic.gdx.utils.Array;
 
 public class MapGenerator {
+
+    private static final int MAP_COUNT_FOREST_REGULAR = 1;
+    private static final int MAP_COUNT_FOREST_BOSS = 1;
+    private static final int MAP_COUNT_FOREST_FIRST = 1;
+
+
 
     public static Stage createStage(int stage) {
 
@@ -132,4 +139,7 @@ public class MapGenerator {
         return true;
     }
 
+    public static RoomEnum getRandomRoom(RoomTypeEnum type, int stage) {
+        return RoomEnum.STAGE_1_FIRST_1;
+    }
 }

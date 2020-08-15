@@ -64,6 +64,8 @@ public final class GameScreen extends Actor {
         this.perk = perk;
         stage = 1;
 
+        StatTracker.setCurrHero(hero);
+
         currStage = MapGenerator.createStage(stage);
         currRoom = currStage.getFirstRoom();
 
@@ -128,7 +130,7 @@ public final class GameScreen extends Actor {
         if (CameraHandler.isTapPossible()) {
             guiContainer.tap(x, y);
         }
-        
+
     }
 
     public void draw() {

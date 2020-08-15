@@ -26,6 +26,8 @@ public abstract class AbstractCharacter {
     private int posY;
     private CharacterStateEnum state;
 
+
+
     private HashMap<StatisticEnum, Integer> stats;
 
 
@@ -50,7 +52,7 @@ public abstract class AbstractCharacter {
 
     public void draw(Batch batch) {
         characterDrawable.act(Gdx.graphics.getDeltaTime());
-        characterDrawable.draw(batch, state);
+        characterDrawable.draw(batch, 1f);
     }
 
     public int getPosX() {

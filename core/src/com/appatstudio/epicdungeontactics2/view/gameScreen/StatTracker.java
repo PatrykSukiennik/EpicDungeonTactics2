@@ -22,6 +22,8 @@ public class StatTracker {
     public StatTracker() {
         usedCharacters = new Array<>();
 
+
+
         eqItems = new Array<>();
     }
 
@@ -59,5 +61,9 @@ public class StatTracker {
 
     public Array<CharacterEnum> getUsedCharacters() {
         return usedCharacters;
+    }
+
+    public static void setCurrHero(CharacterEnum currHero) {
+        StatTracker.currHero = currHero;
     }
 }

@@ -6,6 +6,8 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
@@ -26,6 +28,7 @@ public final class GraphicsManager {
 
     private static final float CHARACTER_IDLE_FRAMETIME = 0.2f;
     private static final float CHARACTER_RUN_FRAMETIME = 0.1f;
+    private static final Map<MapElementAnimationEnum, Float> MAP_ELEMENT_ANIMATION_FRAMETIME;
 
     private static Map<ItemEnum, SpriteDrawable> itemImages;
     private static Map<RoomTypeEnum, SpriteDrawable> mapRoomTypeImages;
@@ -36,6 +39,18 @@ public final class GraphicsManager {
     private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
     private static Map<ItemTypeEnum, SpriteDrawable> itemCategoryIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
+
+
+    private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
+    private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSprites;
+
+    static {
+        MAP_ELEMENT_ANIMATION_FRAMETIME = new HashMap<>();
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CHEST, 0.1f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TORCH, 0.1f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.WATER, 0.2f);
+    }
 
     private static void loadItems(TextureAtlas atlas) {
         itemImages = new HashMap<>();
@@ -187,26 +202,53 @@ public final class GraphicsManager {
                     createAnimation(
                             atlas,
                             "characters/" + c.toString() + "/idle",
-                            CHARACTER_IDLE_FRAMETIME,
-                            Animation.PlayMode.LOOP));
+                            CHARACTER_IDLE_FRAMETIME
+                    ));
 
             charactersAnimations.get(c).put(
                     CharacterStateEnum.RUN,
                     createAnimation(
                             atlas,
                             "characters/" + c.toString() + "/run",
-                            CHARACTER_RUN_FRAMETIME,
-                            Animation.PlayMode.LOOP));
+                            CHARACTER_RUN_FRAMETIME
+                    ));
         }
     }
 
-    private static Animation<SpriteDrawable> createAnimation(TextureAtlas atlas, String path, float frameTime, Animation.PlayMode playMode) {
+    private static void loadMapSprites(TextureAtlas atlas) {
+        mapElementSprites = new HashMap<>();
+        MapElementSpriteEnum[] allSprites = MapElementSpriteEnum.values();
+
+        for (MapElementSpriteEnum s : allSprites) {
+            mapElementSprites.put(
+                    s,
+                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString()))));
+        }
+
+        mapElementAnimations = new HashMap<>();
+        MapElementAnimationEnum[] allAnimations = MapElementAnimationEnum.values();
+
+        for (MapElementAnimationEnum a : allAnimations) {
+            mapElementAnimations.put(
+                    a,
+                    createAnimation(
+                            atlas,
+                            "map-elements/animations/" + a.toString(),
+                            MAP_ELEMENT_ANIMATION_FRAMETIME.get(a)
+                    )
+            );
+            System.out.println("wdvewve:   " + a.toString());
+        }
+
+    }
+
+    private static Animation<SpriteDrawable> createAnimation(TextureAtlas atlas, String path, float frameTime) {
         TextureRegion[] regions = atlas.findRegions(path).toArray();
         Array<SpriteDrawable> frames = new Array<>();
         for (TextureRegion r : regions) {
             frames.add(new SpriteDrawable(new Sprite(r)));
         }
-        return new Animation<>(frameTime, frames, playMode);
+        return new Animation<>(frameTime, frames, Animation.PlayMode.LOOP);
     }
 
     public static void load(AssetManager assetManager) {
@@ -217,6 +259,7 @@ public final class GraphicsManager {
         loadGuiElements(guiAtlas);
 
         loadCharacters(worldAtlas);
+        loadMapSprites(worldAtlas);
 
     }
 
@@ -267,5 +310,13 @@ public final class GraphicsManager {
 
     public static Map<RoomTypeEnum, SpriteDrawable> getMapRoomIcons() {
         return mapRoomTypeImages;
+    }
+
+    public static SpriteDrawable getMapElementSprite(MapElementSpriteEnum spriteEnum) {
+        return mapElementSprites.get(spriteEnum);
+    }
+
+    public static Animation<SpriteDrawable> getMapElementAnimation(MapElementAnimationEnum animationEnum) {
+        return mapElementAnimations.get(animationEnum);
     }
 }
