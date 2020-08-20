@@ -23,7 +23,7 @@ public class MapInfoElementsLocations {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, MapElementAnimationEnum.LAVA, MapElementAnimationEnum.WATER, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, MapElementAnimationEnum.TORCH, MapElementAnimationEnum.CANDLE_BIG, MapElementAnimationEnum.CANDLE, MapElementAnimationEnum.LAVA, MapElementAnimationEnum.WATER, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},

@@ -138,7 +138,7 @@ public final class GameScreen extends Actor {
 
         CameraHandler.update(gameBatch);
 
-        currRoom.draw(gameBatch, mapGuiBatch);
+        currRoom.draw(gameBatch, mapGuiBatch, CameraHandler.getCamera());
 
         CameraHandler.drawEffects(mapGuiBatch);
 

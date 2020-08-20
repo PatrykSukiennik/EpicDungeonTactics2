@@ -194,4 +194,8 @@ public class CameraHandler extends Actor {
                 Actions.fadeOut(4f)
         );
     }
+
+    public static OrthographicCamera getCamera() {
+        return camera;
+    }
 }

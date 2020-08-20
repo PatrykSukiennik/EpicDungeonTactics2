@@ -44,12 +44,17 @@ public final class GraphicsManager {
     private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
     private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSprites;
 
+    private static Map<MapElementAnimationEnum, SpriteDrawable> mapElementAnimationsBroken;
+    private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSpritesBroken;
+
     static {
         MAP_ELEMENT_ANIMATION_FRAMETIME = new HashMap<>();
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CHEST, 0.1f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TORCH, 0.1f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA, 0.2f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.WATER, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CANDLE, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CANDLE_BIG, 0.15f);
     }
 
     private static void loadItems(TextureAtlas atlas) {
@@ -237,9 +242,28 @@ public final class GraphicsManager {
                             MAP_ELEMENT_ANIMATION_FRAMETIME.get(a)
                     )
             );
-            System.out.println("wdvewve:   " + a.toString());
         }
 
+        //broken
+
+        mapElementSpritesBroken = new HashMap<>();
+        MapElementSpriteEnum[] allSpritesBroken = MapElementSpriteEnum.values();
+
+        for (MapElementSpriteEnum s : allSpritesBroken) {
+            mapElementSpritesBroken.put(
+                    s,
+                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString() + "_BROKEN"))));
+        }
+
+        mapElementAnimationsBroken = new HashMap<>();
+        MapElementAnimationEnum[] allAnimationsBroken = MapElementAnimationEnum.values();
+
+        for (MapElementAnimationEnum a : allAnimationsBroken) {
+            System.out.println("wdvewve:   " + a.toString());
+            mapElementAnimationsBroken.put(
+                    a,
+                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + a.toString() + "_BROKEN"))));
+        }
     }
 
     private static Animation<SpriteDrawable> createAnimation(TextureAtlas atlas, String path, float frameTime) {
@@ -318,5 +342,13 @@ public final class GraphicsManager {
 
     public static Animation<SpriteDrawable> getMapElementAnimation(MapElementAnimationEnum animationEnum) {
         return mapElementAnimations.get(animationEnum);
+    }
+
+    public static SpriteDrawable getMapElementInactiveSprite(MapElementAnimationEnum animationEnum) {
+        return mapElementAnimationsBroken.get(animationEnum);
+    }
+
+    public static SpriteDrawable getMapElementInactiveSprite(MapElementSpriteEnum spriteEnum) {
+        return mapElementSpritesBroken.get(spriteEnum);
     }
 }

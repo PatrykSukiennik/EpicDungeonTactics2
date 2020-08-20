@@ -3,14 +3,19 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.map.LightConfigObject;
+import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.Move;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MapAction;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.HashMap;
+
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 
 import static com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum.DEX;
 import static com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum.INT;
@@ -26,8 +31,6 @@ public abstract class AbstractCharacter {
     private int posY;
     private CharacterStateEnum state;
 
-
-
     private HashMap<StatisticEnum, Integer> stats;
 
 
@@ -37,7 +40,6 @@ public abstract class AbstractCharacter {
         this.posX = posX;
         this.posY = posY;
         this.state = CharacterStateEnum.IDLE;
-
 
         this.stats = new HashMap<>();
         CharacterPrototype basicPrototype = CharacterStats.getPrototype(characterEnum);
@@ -63,7 +65,7 @@ public abstract class AbstractCharacter {
         return posY;
     }
 
-    public void move(Move move) {
+    public void move(MapAction move) {
         this.characterDrawable.addAction(move.getMoveAction());
     }
 

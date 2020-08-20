@@ -1,11 +1,15 @@
 package com.appatstudio.epicdungeontactics2.global;
 
+import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+
+import java.util.HashMap;
 
 public class WorldConfig {
 
@@ -32,6 +36,9 @@ public class WorldConfig {
 
     public static final CoordsFloat[][] tileCoords;
 
+    public static final HashMap<MapElementAnimationEnum, CoordsInt> mapElementAnimationsSize;
+    public static final HashMap<MapElementSpriteEnum, CoordsInt> mapElementSpritesSize;
+
     static {
         tileCoords = new CoordsFloat[ROOM_WIDTH][ROOM_HEIGHT];
         for (int x = 0; x < ROOM_WIDTH; x++) {
@@ -40,6 +47,17 @@ public class WorldConfig {
             }
         }
 
+        mapElementAnimationsSize = new HashMap<>();
+        mapElementAnimationsSize.put(MapElementAnimationEnum.CHEST, new CoordsInt(16, 16));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.LAVA, new CoordsInt(16, 48));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.WATER, new CoordsInt(16, 48));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.CANDLE, new CoordsInt(16, 16));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.CANDLE_BIG, new CoordsInt(16, 48));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TORCH, new CoordsInt(16, 16));
+
+        mapElementSpritesSize = new HashMap<>();
+        mapElementSpritesSize.put(MapElementSpriteEnum.CHEST_EMPTY, new CoordsInt(16, 16));
+        mapElementSpritesSize.put(MapElementSpriteEnum.CRATE, new CoordsInt(16, 16));
     }
 
     public static CoordsFloat getTileCoord(int x, int y) {
@@ -73,6 +91,16 @@ public class WorldConfig {
         camera.unproject(coords);
         return getIntCoordsFromFloatPoint(coords.x, coords.y);
     }
+
+    public static CoordsInt getMapElementSpriteSize(MapElementSpriteEnum spriteEnum) {
+        return mapElementSpritesSize.get(spriteEnum);
+    }
+
+    public static CoordsInt getMapElementAnimationSize(MapElementAnimationEnum animationEnum) {
+        return mapElementAnimationsSize.get(animationEnum);
+    }
+
+
 
 
 }
