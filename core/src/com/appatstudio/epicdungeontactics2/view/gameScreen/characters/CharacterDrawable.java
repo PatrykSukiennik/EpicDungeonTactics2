@@ -11,14 +11,18 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Array;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -34,6 +38,10 @@ public class CharacterDrawable extends Image {
 
     private PointLight pointLight;
     private Body body;
+
+    private float actionTime;
+
+    private Array<Array<MapTile>> possibleMovements;
 
     public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
@@ -92,5 +100,31 @@ public class CharacterDrawable extends Image {
 
     public void dead() {
         pointLight.remove(true);
+    }
+
+    public void dispose() {
+        pointLight.remove(true);
+    }
+
+    public void moveToMapTile(MoveToMapTile way) {
+        this.addAction(way.getSequenceAction());
+        this.state = CharacterStateEnum.RUN;
+        this.actionTime = way.getDuration();
+    }
+
+    public boolean isReady() {
+        return !this.hasActions();
+    }
+
+    public void getPossibleMovement() {
+
+    }
+
+    public float getActionTime() {
+        return actionTime;
+    }
+
+    public void setPosition(CoordsInt coords) {
+        this.position = coords;
     }
 }

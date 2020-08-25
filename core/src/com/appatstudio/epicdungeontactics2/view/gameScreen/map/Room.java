@@ -5,24 +5,37 @@ import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoElementsLocations;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.RemoveFromTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.SwitchMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
@@ -39,12 +52,18 @@ public class Room {
     private RoomEnum roomEnum;
     private HashMap<DirectionEnum, Room> roomNodes;
 
+    private CharacterDrawable currentCharacterMoving;
     private Hero heroInRoom;
     private Array<CharacterDrawable> charactersInRoom;
+
+    private RoomStateEnum roomState;
+    private Array<Array<MapTile>> paths;
 
     private World world;
     private RayHandler rayHandler;
     private static Box2DDebugRenderer b2dr;
+
+    private float freezeTime = 0;
 
     public Room(RoomTypeEnum type, int stage, CoordsInt position) {
         roomNodes = new HashMap<>();
@@ -57,6 +76,8 @@ public class Room {
 
         this.position = position;
         this.type = type;
+
+        this.roomState = RoomStateEnum.CLEAN; //todo
 
         charactersInRoom = new Array<>();
 
@@ -72,7 +93,7 @@ public class Room {
 
         for (int x=0; x<WorldConfig.ROOM_WIDTH; x++) {
             for (int y=0; y<WorldConfig.ROOM_HEIGHT; y++) {
-                mapTiles[x][y] = new MapTile(x, y);
+                mapTiles[x][y] = new MapTile(x, y, true); //todo walkable array
             }
         }
 
@@ -106,9 +127,50 @@ public class Room {
                     .setCharacter(heroInRoom);
         }
 
+        //todo
+        paths = findWays(heroInRoom.getPosition(), -1);
+
+    }
+
+    public boolean tap(float x, float y) { //todo
+        if (freezeTime <= 0) {
+            if (roomState == RoomStateEnum.CLEAN) {
+                if (heroInRoom.isReady()) {
+                    MapTile tile = getTouchTile(x, y);
+                    CoordsInt coords = heroInRoom.getPosition();
+                    heroInRoom.moveToMapTile(getWay(paths, tile, heroInRoom));
+                    moveStarted(heroInRoom.getActionTime());
+                    tile.setPathFindingFlag(-1);
+                    mapTiles[coords.x][coords.y].setPathFindingFlag(-1);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void moveStarted(float freezeTime) {
+        this.freezeTime = freezeTime;
+    }
+
+    public void moveFinished() {
+        if (roomState == RoomStateEnum.CLEAN) {
+            paths = findWays(
+                    heroInRoom.getPosition(),
+                    -1
+            );
+        }
     }
 
     public void draw(Batch mapBatch, Batch guiBatch, OrthographicCamera camera) {
+        if (freezeTime > 0) {
+            freezeTime -= Gdx.graphics.getDeltaTime();
+            if (freezeTime <= 0) {
+                currentCharacterMoving = heroInRoom;
+                moveFinished();
+            }
+        }
+
         mapBatch.begin();
         mapDrawable.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
         for (int x=WorldConfig.ROOM_WIDTH-1; x>=0; x--) {
@@ -140,5 +202,173 @@ public class Room {
         return type;
     }
 
+    public void disposeRoom() {
+        rayHandler.removeAll();
+        rayHandler.dispose();
+
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body b : bodies) {
+            world.destroyBody(b);
+        }
+    }
+
+    public Array<Array<MapTile>> findWays(CoordsInt start, int range) {
+        Array<Array<MapTile>> allPaths = new Array<>();
+
+        int lifeTime = range == -1 ? WorldConfig.ROOM_HEIGHT * WorldConfig.ROOM_WIDTH : range;
+
+        int nowAdded = 0;
+        int lastlyAdded = 0;
+        int currLimit = 1;
+        int currSize = 0;
+        int currPathLen = 0;
+        CoordsInt currCoords;
+
+        allPaths.add(new Array<MapTile>());
+
+        for (int loop = 0; loop < lifeTime; loop++) {
+            for (int i = currSize; i < currLimit; i++) {
+                currPathLen = allPaths.get(i).size;
+                //System.out.println("i: " + i);
+                if (currPathLen == 0) { //first loop
+                    currCoords = start;
+                    //System.out.println("currsize: " + loop);
+
+                    if (currCoords.x > 0 &&
+                            mapTiles[currCoords.x-1][currCoords.y].isWalkable() &&
+                            mapTiles[currCoords.x-1][currCoords.y].getPathFindingFlag() == -1) {
+                        allPaths.add(new Array<MapTile>());
+                        allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x-1][currCoords.y]);
+                        nowAdded++;
+                    }
+                    if (currCoords.x < WorldConfig.ROOM_WIDTH-1 &&
+                            mapTiles[currCoords.x+1][currCoords.y].isWalkable() &&
+                            mapTiles[currCoords.x+1][currCoords.y].getPathFindingFlag() == -1) {
+                        allPaths.add(new Array<MapTile>());
+                        allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x+1][currCoords.y]);
+                        nowAdded++;
+                    }
+                    if (currCoords.y > 0 &&
+                            mapTiles[currCoords.x][currCoords.y-1].isWalkable() &&
+                            mapTiles[currCoords.x][currCoords.y-1].getPathFindingFlag() == -1) {
+                        allPaths.add(new Array<MapTile>());
+                        allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x][currCoords.y-1]);
+                        nowAdded++;
+                    }
+                    if (currCoords.y < WorldConfig.ROOM_HEIGHT-1 &&
+                            mapTiles[currCoords.x][currCoords.y+1].isWalkable() &&
+                            mapTiles[currCoords.x][currCoords.y+1].getPathFindingFlag() == -1) {
+                        allPaths.add(new Array<MapTile>());
+                        allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x][currCoords.y+1]);
+                        nowAdded++;
+                    }
+                }
+                else {
+                    for (int j=0; j<currPathLen; j++) {
+                        currCoords = allPaths.get(i).get(j).getPositionInt();
+
+                        if (currCoords.x > 0 &&
+                                mapTiles[currCoords.x-1][currCoords.y].isWalkable() &&
+                                mapTiles[currCoords.x-1][currCoords.y].getPathFindingFlag() == -1) {
+                            allPaths.add(new Array<MapTile>());
+                            allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
+                            allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x-1][currCoords.y]);
+                            mapTiles[currCoords.x-1][currCoords.y].setPathFindingFlag(i);
+                            nowAdded++;
+                        }
+                        if (currCoords.x < WorldConfig.ROOM_WIDTH-1 &&
+                                mapTiles[currCoords.x+1][currCoords.y].isWalkable() &&
+                                mapTiles[currCoords.x+1][currCoords.y].getPathFindingFlag() == -1) {
+                            allPaths.add(new Array<MapTile>());
+                            allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
+                            allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x+1][currCoords.y]);
+                            mapTiles[currCoords.x+1][currCoords.y].setPathFindingFlag(i);
+                            nowAdded++;
+                        }
+                        if (currCoords.y > 0 &&
+                                mapTiles[currCoords.x][currCoords.y-1].isWalkable() &&
+                                mapTiles[currCoords.x][currCoords.y-1].getPathFindingFlag() == -1) {
+                            allPaths.add(new Array<MapTile>());
+                            allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
+                            allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x][currCoords.y-1]);
+                            mapTiles[currCoords.x][currCoords.y-1].setPathFindingFlag(i);
+                            nowAdded++;
+                        }
+                        if (currCoords.y < WorldConfig.ROOM_HEIGHT-1 &&
+                                mapTiles[currCoords.x][currCoords.y+1].isWalkable() &&
+                                mapTiles[currCoords.x][currCoords.y+1].getPathFindingFlag() == -1) {
+                            allPaths.add(new Array<MapTile>());
+                            allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
+                            allPaths.get(allPaths.size - 1).add(mapTiles[currCoords.x][currCoords.y+1]);
+                            mapTiles[currCoords.x][currCoords.y+1].setPathFindingFlag(i);
+                            nowAdded++;
+                        }
+                    }
+                }
+            }
+            if (nowAdded == 0) break;
+            else {
+                currSize += lastlyAdded;
+                lastlyAdded = nowAdded;
+                currLimit = allPaths.size;
+                nowAdded = 0;
+            }
+        }
+
+        return allPaths;
+    }
+
+    public MoveToMapTile getWay(Array<Array<MapTile>> allPaths, MapTile end, CharacterDrawable characterDrawable) {
+        System.out.println(end.getPathFindingFlag());
+        System.out.println(end.getPositionInt().x + " " + end.getPositionInt().y);
+        System.out.println(allPaths.get(end.getPathFindingFlag()).size);
+        Array<MapTile> path = allPaths.get(end.getPathFindingFlag());
+        SequenceAction result = new SequenceAction();
+        CoordsFloat coords;
+        CoordsInt coordsInt = characterDrawable.getPosition();
+
+        MapTile oldTile = mapTiles[coordsInt.x][coordsInt.y];
+        MapTile newTile = null;
+
+        for (MapTile mapTile : path) {
+            newTile = mapTile;
+            coords = mapTile.getPositionFloat();
+
+            result.addAction(new SwitchMapTile(
+                    oldTile,
+                    newTile,
+                    characterDrawable));
+
+            result.addAction(Actions.moveTo(
+                    coords.x,
+                    coords.y,
+                    roomState == RoomStateEnum.CLEAN ?
+                            WorldConfig.MOVE_SPEED_CLEAN : WorldConfig.MOVE_SPEED_FIGHT
+            ));
+
+            oldTile = newTile;
+            System.out.println("old: " + oldTile.getPositionInt().x + " " + oldTile.getPositionInt().y);
+            System.out.println("new: " + newTile.getPositionInt().x + " " + newTile.getPositionInt().y);
+        }
+
+        result.addAction(new SwitchMapTile(oldTile, newTile, characterDrawable));
+
+        resetPathfindingFlags();
+
+        return new MoveToMapTile(
+                result,
+                result.getActions().size *
+                        (roomState == RoomStateEnum.CLEAN ?
+                                WorldConfig.MOVE_SPEED_CLEAN : WorldConfig.MOVE_SPEED_FIGHT));
+    }
+
+    private void resetPathfindingFlags() {
+        for (int x=WorldConfig.ROOM_WIDTH-1; x>=0; x--) {
+            for (int y=WorldConfig.ROOM_HEIGHT-1; y>=0; y--) {
+                mapTiles[x][y].setPathFindingFlag(-1);
+            }
+        }
+    }
 
 }

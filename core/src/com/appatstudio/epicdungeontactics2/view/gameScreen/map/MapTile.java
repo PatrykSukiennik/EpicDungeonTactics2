@@ -1,7 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
-import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
@@ -15,17 +14,25 @@ public class MapTile {
     private AnimatedElement animatedElement = null;
     private SpriteElement spriteElement = null;
     private CharacterDrawable character = null;
-    private CoordsFloat position;
+    private boolean isWalkable;
+    private int pathFindingFlag = -1; //index of correct path
 
-    public MapTile(int x, int y) {
-        position = WorldConfig.getTileCoord(x, y);
+    private CoordsFloat positionFloat;
+    private CoordsInt positionInt;
 
+    public MapTile(int x, int y, boolean isWalkable) {
+        this.positionFloat = WorldConfig.getTileCoord(x, y);
+        this.positionInt = new CoordsInt(x, y);
+        this.isWalkable = isWalkable;
     }
 
     public void draw(Batch batch) {
         if (animatedElement != null) animatedElement.draw(batch);
         if (spriteElement != null) spriteElement.draw(batch);
-        if (character != null) character.draw(batch);
+        if (character != null) {
+            System.out.println("drawing: " + positionInt.x + " " + positionInt.y);
+            character.draw(batch);
+        }
     }
 
     public void setAnimatedElement(AnimatedElement animatedElement) {
@@ -36,8 +43,8 @@ public class MapTile {
         this.spriteElement = spriteElement;
     }
 
-    public void setCharacter(Hero heroInRoom) {
-        character = heroInRoom;
+    public void setCharacter(CharacterDrawable character) {
+        this.character = character;
     }
 
     public void destroyElements() {
@@ -45,4 +52,23 @@ public class MapTile {
         if (spriteElement != null) spriteElement.destroy();
     }
 
+    public boolean isWalkable() {
+        return isWalkable;
+    }
+
+    public void setPathFindingFlag(int pathFindingFlag) {
+        this.pathFindingFlag = pathFindingFlag;
+    }
+
+    public int getPathFindingFlag() {
+        return pathFindingFlag;
+    }
+
+    public CoordsFloat getPositionFloat() {
+        return positionFloat;
+    }
+
+    public CoordsInt getPositionInt() {
+        return positionInt;
+    }
 }

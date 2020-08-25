@@ -19,4 +19,8 @@ public class Stage {
     public Array<Room> getRooms() {
         return rooms;
     }
+
+    public void disposeStage() {
+        for (Room r : rooms) r.disposeRoom();
+    }
 }

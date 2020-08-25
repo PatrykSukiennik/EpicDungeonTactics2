@@ -128,9 +128,9 @@ public final class GameScreen extends Actor {
 
     public void tap(float x, float y) {
         if (CameraHandler.isTapPossible()) {
-            guiContainer.tap(x, y);
+            if (guiContainer.tap(x, y));
+            else if (currRoom.tap(x, y));
         }
-
     }
 
     public void draw() {

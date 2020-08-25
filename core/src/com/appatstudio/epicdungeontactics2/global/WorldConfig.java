@@ -4,6 +4,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +34,9 @@ public class WorldConfig {
 
     public static final int STAGE_MIN_ROOMS = 15;
     public static final int STAGE_MAX_ROOMS = 25;
+
+    public static final float MOVE_SPEED_CLEAN = 0.08f;
+    public static final float MOVE_SPEED_FIGHT = 0.15f;
 
     public static final CoordsFloat[][] tileCoords;
 
@@ -65,16 +69,19 @@ public class WorldConfig {
     }
 
     public static CoordsInt getIntCoordsFromFloatPoint(float x, float y) {
+        Vector3 touch = new Vector3(x, Gdx.graphics.getHeight()-y, 0);
+        CameraHandler.getCamera().unproject(touch);
+
         CoordsInt result = new CoordsInt(-1, -1);
 
         for (int i = 0; i < ROOM_WIDTH; i++) {
-            if (x < tileCoords[i][0].x) {
+            if (touch.x < tileCoords[i][0].x) {
                 result.x = i-1;
                 break;
             }
         }
         for (int i = 0; i < ROOM_HEIGHT; i++) {
-            if (y < tileCoords[0][i].y) {
+            if (touch.y < tileCoords[0][i].y) {
                 result.y = i-1;
                 break;
             }
