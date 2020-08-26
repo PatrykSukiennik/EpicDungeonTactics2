@@ -13,6 +13,7 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -41,9 +42,10 @@ public class CharacterDrawable extends Image {
 
     private float actionTime;
 
+    protected Room room;
     private Array<Array<MapTile>> possibleMovements;
 
-    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world) {
+    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
 
@@ -51,6 +53,7 @@ public class CharacterDrawable extends Image {
 
         this.position = position;
         this.state = CharacterStateEnum.IDLE;
+        this.room = room;
 
         CoordsFloat coords = WorldConfig.getTileCoord(position.x, position.y);
         this.setPosition(coords.x, coords.y);
@@ -106,7 +109,8 @@ public class CharacterDrawable extends Image {
         pointLight.remove(true);
     }
 
-    public void moveToMapTile(MoveToMapTile way) {
+    public void moveToMapTile(MapTile tile) {
+        MoveToMapTile way = room.getWay(possibleMovements, tile, this);
         this.addAction(way.getSequenceAction());
         this.state = CharacterStateEnum.RUN;
         this.actionTime = way.getDuration();
@@ -126,5 +130,17 @@ public class CharacterDrawable extends Image {
 
     public void setPosition(CoordsInt coords) {
         this.position = coords;
+    }
+
+    public void setPossibleMovements(Array<Array<MapTile>> possibleMovements) {
+        this.possibleMovements = possibleMovements;
+    }
+
+    public void getPossibleWays() {
+        //override me
+    }
+
+    public void getPossibleWays(int range) {
+
     }
 }

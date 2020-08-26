@@ -27,6 +27,8 @@ public class SpriteElement {
     private CoordsFloat coords;
     private Body body;
 
+    private boolean isWalkable = false;
+
     public SpriteElement(MapElementSpriteEnum spriteEnum, CoordsFloat coords, RayHandler rayHandler, World world) {
         this.sprite = GraphicsManager.getMapElementSprite(spriteEnum);
         this.size = WorldConfig.getMapElementSpriteSize(spriteEnum);
@@ -61,5 +63,9 @@ public class SpriteElement {
     public void destroy() {
         isActive = false;
         pointLight.remove(true);
+    }
+
+    public boolean isWalkable() {
+        return isWalkable;
     }
 }

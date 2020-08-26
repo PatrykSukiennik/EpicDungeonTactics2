@@ -1,7 +1,9 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterStatsObject;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.utils.Array;
 
@@ -15,6 +17,7 @@ public class StatTracker {
     private HashMap<CharacterEnum, Boolean> lvlUps;
     private Array<CharacterEnum> usedCharacters;
     public Array<AbstractItem> eqItems;
+    public static CharacterStatsObject stats;
 
     private static CharacterEnum currHero;
     private static int lvl;
@@ -22,9 +25,9 @@ public class StatTracker {
     public StatTracker() {
         usedCharacters = new Array<>();
 
-
-
         eqItems = new Array<>();
+
+        stats = new CharacterStatsObject(currHero);
     }
 
     public static int getLvl() {
@@ -66,4 +69,9 @@ public class StatTracker {
     public static void setCurrHero(CharacterEnum currHero) {
         StatTracker.currHero = currHero;
     }
+
+    public static CharacterStatsObject getStats() {
+        return stats;
+    }
+
 }

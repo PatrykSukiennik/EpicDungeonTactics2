@@ -31,6 +31,8 @@ public class AnimatedElement {
     private CoordsFloat coords;
     private Body body;
 
+    private boolean isWalkable = false;
+
     public AnimatedElement(MapElementAnimationEnum animationEnum, CoordsFloat coords, RayHandler rayHandler, World world) {
         animation = GraphicsManager.getMapElementAnimation(animationEnum);
         this.size = WorldConfig.getMapElementAnimationSize(animationEnum);
@@ -71,4 +73,7 @@ public class AnimatedElement {
         pointLight.remove(true);
     }
 
+    public boolean isWalkable() {
+        return isWalkable;
+    }
 }
