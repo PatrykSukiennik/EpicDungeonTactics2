@@ -45,6 +45,9 @@ public class CharacterDrawable extends Image {
     protected Room room;
     private Array<Array<MapTile>> possibleMovements;
 
+    private CoordsFloat bodyOffset;
+    private CoordsFloat lightOffset;
+
     public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
@@ -61,6 +64,7 @@ public class CharacterDrawable extends Image {
         this.setSize(2f * size * WorldConfig.TILE_SIZE, 2f * size * WorldConfig.TILE_SIZE);
 
         LightConfigObject lightConfigObject = LightsConfig.getCharacterLights(characterEnum);
+        lightOffset = lightConfigObject.getOffset();
         this.pointLight = new PointLight(
                 rayHandler,
                 LightsConfig.CHARACTER_RAYS,
@@ -73,7 +77,10 @@ public class CharacterDrawable extends Image {
         if (BodyConfig.getCharacterBodyDef(characterEnum) != null) {
             this.body = world.createBody(BodyConfig.getCharacterBodyDef(characterEnum));
             this.body.createFixture(BodyConfig.getCharacterFixtureDef(characterEnum));
-            this.body.setTransform(coords.x + (size * WorldConfig.TILE_SIZE) / 2f, coords.y + (size * WorldConfig.TILE_SIZE) / 2f, 0);
+            bodyOffset = new CoordsFloat((size * WorldConfig.TILE_SIZE) / 2f, (size * WorldConfig.TILE_SIZE) / 2f);
+            this.body.setTransform(getX() + bodyOffset.x, getY() + bodyOffset.y, 0);
+
+            pointLight.attachToBody(this.body);
         }
     }
 
@@ -83,6 +90,11 @@ public class CharacterDrawable extends Image {
 
     public void draw(Batch batch) {
         super.act(Gdx.graphics.getDeltaTime());
+
+        if (hasActions()) {
+            this.body.setTransform(getX() + bodyOffset.x, getY() + bodyOffset.y, 0);
+            //this.pointLight.setPosition(getX() + lightOffset.x, getY() + lightOffset.y);
+        }
 
         stateTime += Gdx.graphics.getDeltaTime();
 

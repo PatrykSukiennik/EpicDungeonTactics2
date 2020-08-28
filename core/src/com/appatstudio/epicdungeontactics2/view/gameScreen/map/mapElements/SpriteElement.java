@@ -52,6 +52,7 @@ public class SpriteElement {
             this.body = world.createBody(BodyConfig.getMapElementsSpriteBodyDef(spriteEnum));
             this.body.createFixture(BodyConfig.getMapElementsSpriteFixtureDef(spriteEnum));
             this.body.setTransform(coords.x + size.x / 2f, coords.y + size.y / 2f, 0);
+            if (pointLight != null) pointLight.attachToBody(this.body);
         }
     }
     

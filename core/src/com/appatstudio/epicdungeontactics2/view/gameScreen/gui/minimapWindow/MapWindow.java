@@ -89,7 +89,9 @@ public class MapWindow {
         int w = maxX - minX + 1;
         int h = maxY - minY + 1;
 
-        float size = (Gdx.graphics.getWidth() * 0.8f) / w;
+        float size = h >= w * 1.5f ?
+                (Gdx.graphics.getHeight() * 0.7f) / h :
+                (Gdx.graphics.getWidth() * 0.8f) / w;
 
         MapRoomIcon.setSize(size);
         CoordsFloat[][] coords = new CoordsFloat[w][h];

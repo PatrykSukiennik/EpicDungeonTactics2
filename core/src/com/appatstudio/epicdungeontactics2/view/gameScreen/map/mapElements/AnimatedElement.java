@@ -56,6 +56,7 @@ public class AnimatedElement {
             this.body = world.createBody(BodyConfig.getMapElementsAnimationBodyDef(animationEnum));
             this.body.createFixture(BodyConfig.getMapElementsAnimationFixtureDef(animationEnum));
             this.body.setTransform(coords.x + size.x / 2f, coords.y + size.y / 2f, 0);
+            if (pointLight != null) pointLight.attachToBody(this.body);
         }
 
     }

@@ -35,8 +35,8 @@ public class WorldConfig {
     public static final int STAGE_MIN_ROOMS = 15;
     public static final int STAGE_MAX_ROOMS = 25;
 
-    public static final float MOVE_SPEED_CLEAN = 0.08f;
-    public static final float MOVE_SPEED_FIGHT = 0.15f;
+    public static final float MOVE_SPEED_CLEAN = 0.04f;
+    public static final float MOVE_SPEED_FIGHT = 0.12f;
 
     public static final CoordsFloat[][] tileCoords;
 
@@ -73,6 +73,7 @@ public class WorldConfig {
         CameraHandler.getCamera().unproject(touch);
 
         CoordsInt result = new CoordsInt(-1, -1);
+        if (touch.x < 0 || touch.x > ROOM_WIDTH_RES || touch.y < 0 || touch.y > ROOM_HEIGHT_RES) return result;
 
         for (int i = 0; i < ROOM_WIDTH; i++) {
             if (touch.x < tileCoords[i][0].x) {

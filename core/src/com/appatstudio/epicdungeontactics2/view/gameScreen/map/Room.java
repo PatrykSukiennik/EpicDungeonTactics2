@@ -20,6 +20,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.ChangeState;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.RemoveFromTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.SwitchMapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.TurnFinished;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
@@ -66,7 +67,7 @@ public class Room {
     private RayHandler rayHandler;
     private static Box2DDebugRenderer b2dr;
 
-    private float freezeTime = 0;
+    private boolean freezeTime = false;
 
     public Room(RoomTypeEnum type, int stage, CoordsInt position) {
         roomNodes = new HashMap<>();
@@ -139,14 +140,15 @@ public class Room {
 
     public boolean tap(float x, float y) { //todo
         MapTile tapped = getTouchTile(x, y);
+        if (tapped == null) return true;
 
-        if (freezeTime <= 0) {
+        if (!freezeTime) {
             if (roomState == RoomStateEnum.CLEAN) {
                 if (heroInRoom.isReady()) {
                     if (tapped.getFlag() == MapPathFindingFlags.MOVABLE ||
                             tapped.getFlag() == MapPathFindingFlags.ITEM_MOVABLE) {
                         heroInRoom.moveToMapTile(tapped);
-                        moveStarted(heroInRoom.getActionTime());
+                        moveStarted();
                     }
                 }
             } else {
@@ -157,27 +159,22 @@ public class Room {
         return true;
     }
 
-    public void moveStarted(float freezeTime) {
-        this.freezeTime = freezeTime;
+    public void moveStarted() {
+        this.freezeTime = true;
     }
 
     public void moveFinished() {
+        this.freezeTime = false;
         if (roomState == RoomStateEnum.CLEAN) {
-            heroInRoom.setPossibleMovements(findWays(
-                    heroInRoom.getPosition(),
-                    -1
-            ));
+            heroInRoom.setPossibleMovements(
+                    findWays(
+                            heroInRoom.getPosition(),
+                            -1
+                    ));
         }
     }
 
     public void draw(Batch mapBatch, Batch guiBatch, OrthographicCamera camera) {
-        if (freezeTime > 0) {
-            freezeTime -= Gdx.graphics.getDeltaTime();
-            if (freezeTime <= 0) {
-                currentCharacterMoving = heroInRoom;
-                moveFinished();
-            }
-        }
 
         mapBatch.begin();
         mapDrawable.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
@@ -195,6 +192,7 @@ public class Room {
 
     public MapTile getTouchTile(float x, float y) {
         CoordsInt coords = WorldConfig.getIntCoordsFromFloatPoint(x, y);
+        if (coords.x == -1 || coords.y == -1) return null;
         return mapTiles[coords.x][coords.y];
     }
 
@@ -228,7 +226,7 @@ public class Room {
     public Array<Array<MapTile>> findWays(CoordsInt start, int range) {
         Array<Array<MapTile>> allPaths = new Array<>();
 
-        int lifeTime = range == -1 ? WorldConfig.ROOM_HEIGHT * WorldConfig.ROOM_WIDTH : range;
+        int lifeTime = range == -1 ? WorldConfig.ROOM_HEIGHT * WorldConfig.ROOM_WIDTH * 2 : range;
 
         int nowAdded = 0;
         int lastlyAdded = 0;
@@ -378,12 +376,13 @@ public class Room {
 
         result.addAction(new SwitchMapTile(oldTile, newTile, characterDrawable));
         result.addAction(new ChangeState(characterDrawable, CharacterStateEnum.IDLE));
+        result.addAction(new TurnFinished(this));
 
         resetPathfindingFlags();
 
         return new MoveToMapTile(
                 result,
-                result.getActions().size *
+                path.size *
                         (roomState == RoomStateEnum.CLEAN ?
                                 WorldConfig.MOVE_SPEED_CLEAN : WorldConfig.MOVE_SPEED_FIGHT));
     }
