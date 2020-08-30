@@ -18,27 +18,22 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.ChangeState;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.RemoveFromTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.SwitchMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.TurnFinished;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -55,6 +50,7 @@ public class Room {
     private RoomTypeEnum type;
     private RoomEnum roomEnum;
     private HashMap<DirectionEnum, Room> roomNodes;
+    private Stage stageObject;
 
     private CharacterDrawable currentCharacterMoving;
     private Hero heroInRoom;
@@ -67,9 +63,11 @@ public class Room {
     private RayHandler rayHandler;
     private static Box2DDebugRenderer b2dr;
 
+    private TurnQueue queue;
+
     private boolean freezeTime = false;
 
-    public Room(RoomTypeEnum type, int stage, CoordsInt position) {
+    public Room(RoomTypeEnum type, int stage, CoordsInt position, Stage stageObject) {
         roomNodes = new HashMap<>();
         roomNodes.put(DirectionEnum.TOP, null);
         roomNodes.put(DirectionEnum.RIGHT, null);
@@ -122,9 +120,18 @@ public class Room {
             }
         }
 
+        charactersInRoom.add(
+                new Hero(StatTracker.getHero(),
+                        new CoordsInt(WorldConfig.ROOM_WIDTH / 2, WorldConfig.ROOM_HEIGHT / 2),
+                        rayHandler,
+                        world,
+                        this,
+                        mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][(int)(WorldConfig.ROOM_HEIGHT/2f)]));
 
-        charactersInRoom.add(new Hero(StatTracker.getHero(), new CoordsInt(WorldConfig.ROOM_WIDTH / 2, WorldConfig.ROOM_HEIGHT / 2), rayHandler, world, this));
         heroInRoom = (Hero) charactersInRoom.get(0);
+
+        createNodes();
+        this.stageObject = stageObject;
 
         if (type == RoomTypeEnum.FIRST_ROOM) {
             mapTiles[WorldConfig.ROOM_WIDTH / 2][WorldConfig.ROOM_HEIGHT / 2]
@@ -136,9 +143,13 @@ public class Room {
             heroInRoom.getPossibleWays(); //todo first move
         }
 
+        this.queue = new TurnQueue(this);
+
     }
 
     public boolean tap(float x, float y) { //todo
+        queue.tick();
+
         MapTile tapped = getTouchTile(x, y);
         if (tapped == null) return true;
 
@@ -172,6 +183,14 @@ public class Room {
                             -1
                     ));
         }
+
+        if (heroInRoom.getTileStandingOn().getFlag() == MapPathFindingFlags.ROOM_NODE) {
+            CoordsInt coords = heroInRoom.getPosition();
+            if (coords.x == 0) {
+                CameraHandler.changeRoom(DirectionEnum.LEFT);
+                stageObject.changeRoom(DirectionEnum.LEFT, roomNodes.get(DirectionEnum.LEFT), heroInRoom.getPosition());
+            }
+        }
     }
 
     public void draw(Batch mapBatch, Batch guiBatch, OrthographicCamera camera) {
@@ -188,12 +207,35 @@ public class Room {
         rayHandler.setCombinedMatrix(camera);
         rayHandler.updateAndRender();
         b2dr.render(world, camera.combined.scl(1f));
+
+        guiBatch.begin();
+        queue.draw(guiBatch);
+        guiBatch.end();
     }
 
     public MapTile getTouchTile(float x, float y) {
         CoordsInt coords = WorldConfig.getIntCoordsFromFloatPoint(x, y);
         if (coords.x == -1 || coords.y == -1) return null;
         return mapTiles[coords.x][coords.y];
+    }
+
+    private void createNodes() {
+        if (roomNodes.get(DirectionEnum.TOP) != null) {
+            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][ WorldConfig.ROOM_HEIGHT-1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f) -1][ WorldConfig.ROOM_HEIGHT-1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+        }
+        if (roomNodes.get(DirectionEnum.BOTTOM) != null) {
+            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f) -1][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+        }
+        if (roomNodes.get(DirectionEnum.LEFT) != null) {
+            mapTiles[0][(int)(WorldConfig.ROOM_HEIGHT/2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[0][(int)(WorldConfig.ROOM_HEIGHT/2f) -1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+        }
+        if (roomNodes.get(DirectionEnum.RIGHT) != null) {
+            mapTiles[WorldConfig.ROOM_WIDTH-1][(int)(WorldConfig.ROOM_HEIGHT/2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[WorldConfig.ROOM_WIDTH-1][(int)(WorldConfig.ROOM_HEIGHT/2f) -1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+        }
     }
 
     public HashMap<DirectionEnum, Room> getRoomNodes() {
@@ -395,4 +437,23 @@ public class Room {
         }
     }
 
+    public void heroMoved(DirectionEnum dir, CoordsInt coords) {
+        if (dir == DirectionEnum.RIGHT) {
+            heroInRoom.setPosition(0, coords.y);
+        }
+        else if (dir == DirectionEnum.BOTTOM) {
+            heroInRoom.setPosition(coords.x, 0);
+        }
+        else if (dir == DirectionEnum.LEFT) {
+            heroInRoom.setPosition(WorldConfig.ROOM_WIDTH - 1, coords.y);
+        }
+        else if (dir == DirectionEnum.TOP) {
+            heroInRoom.setPosition(coords.x, WorldConfig.ROOM_HEIGHT - 1);
+        }
+    }
+
+
+    public Array<CharacterDrawable> getRoomCharacters() {
+        return charactersInRoom;
+    }
 }

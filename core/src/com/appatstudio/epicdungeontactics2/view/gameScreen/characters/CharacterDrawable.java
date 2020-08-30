@@ -45,10 +45,14 @@ public class CharacterDrawable extends Image {
     protected Room room;
     private Array<Array<MapTile>> possibleMovements;
 
+    protected CharacterStatsObject stats;
+
     private CoordsFloat bodyOffset;
     private CoordsFloat lightOffset;
 
-    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room) {
+    private MapTile tileStandingOn;
+
+    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
 
@@ -82,6 +86,8 @@ public class CharacterDrawable extends Image {
 
             pointLight.attachToBody(this.body);
         }
+
+        this.tileStandingOn = tile;
     }
 
     public void setState(CharacterStateEnum state) {
@@ -154,5 +160,13 @@ public class CharacterDrawable extends Image {
 
     public void getPossibleWays(int range) {
 
+    }
+
+    public CharacterStatsObject getStats() {
+        return stats;
+    }
+
+    public MapTile getTileStandingOn() {
+        return tileStandingOn;
     }
 }
