@@ -31,13 +31,9 @@ public class MapTile {
         this.isWalkable = isWalkable;
     }
 
-    public void draw(Batch batch) {
-        if (animatedElement != null) animatedElement.draw(batch);
-        if (spriteElement != null) spriteElement.draw(batch);
-        if (character != null) {
-            //System.out.println("drawing: " + positionInt.x + " " + positionInt.y);
-            character.draw(batch);
-        }
+    public void draw(Batch mapBatch) {
+        if (animatedElement != null) animatedElement.draw(mapBatch);
+        if (spriteElement != null) spriteElement.draw(mapBatch);
     }
 
     public void setAnimatedElement(AnimatedElement animatedElement) {
@@ -98,5 +94,11 @@ public class MapTile {
 
     public CoordsInt getPositionInt() {
         return positionInt;
+    }
+
+    public void drawTop(Batch guiBatch) {
+        if (character != null) {
+            character.drawTop(guiBatch);
+        }
     }
 }

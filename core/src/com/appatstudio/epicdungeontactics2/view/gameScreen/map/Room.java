@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
@@ -12,6 +13,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoElementsLocations;
+import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoEnemy;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
@@ -101,6 +103,17 @@ public class Room {
 
         MapElementAnimationEnum[][] animatedElements = MapInfoElementsLocations.getAnimatedElements(roomEnum);
         MapElementSpriteEnum[][] spriteElements = MapInfoElementsLocations.getSpriteElements(roomEnum);
+        CharacterEnum[][] characters = MapInfoEnemy.getCharactersInfo(roomEnum);
+
+        charactersInRoom.add(
+                new Hero(StatTracker.getHero(),
+                        new CoordsInt(WorldConfig.ROOM_WIDTH / 2, WorldConfig.ROOM_HEIGHT / 2),
+                        rayHandler,
+                        world,
+                        this,
+                        mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][(int)(WorldConfig.ROOM_HEIGHT/2f)]));
+
+        heroInRoom = (Hero) charactersInRoom.get(0);
 
         for (int x = 0; x < WorldConfig.ROOM_WIDTH; x++) {
             for (int y = 0; y < WorldConfig.ROOM_HEIGHT; y++) {
@@ -117,18 +130,19 @@ public class Room {
                                         WorldConfig.getTileCoord(x, y).x,
                                         WorldConfig.getTileCoord(x, y).y),
                                 rayHandler, world));
+
+                else if (characters[x][y] != null) {
+                    CharacterDrawable newCharacter = new CharacterDrawable(
+                            characters[x][y],
+                            new CoordsInt(x, y),
+                            rayHandler, world, this, mapTiles[x][y]);
+
+                    mapTiles[x][y].setCharacter(newCharacter);
+                    charactersInRoom.add(newCharacter);
+                }
+
             }
         }
-
-        charactersInRoom.add(
-                new Hero(StatTracker.getHero(),
-                        new CoordsInt(WorldConfig.ROOM_WIDTH / 2, WorldConfig.ROOM_HEIGHT / 2),
-                        rayHandler,
-                        world,
-                        this,
-                        mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][(int)(WorldConfig.ROOM_HEIGHT/2f)]));
-
-        heroInRoom = (Hero) charactersInRoom.get(0);
 
         createNodes();
         this.stageObject = stageObject;
@@ -209,6 +223,12 @@ public class Room {
         b2dr.render(world, camera.combined.scl(1f));
 
         guiBatch.begin();
+        for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
+            for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
+                mapTiles[x][y].drawTop(guiBatch);
+            }
+        }
+
         queue.draw(guiBatch);
         guiBatch.end();
     }
@@ -379,6 +399,26 @@ public class Room {
         }
         System.out.println("size: " + allPaths.size);
         return allPaths;
+    }
+
+    public Array<CharacterDrawable> getTurnQueue() {
+        Array<CharacterDrawable> allCharacters = new Array<>();
+        Array<CharacterDrawable> result = new Array<>();
+
+        int maxSpeed = 0;
+        for (CharacterDrawable character : charactersInRoom) {
+            if (character.getStats().getSpeed() > maxSpeed) maxSpeed = character.getStats().getSpeed();
+        }
+
+        maxSpeed *= 2;
+
+        for (int i=1; i<maxSpeed; i++) {
+            for (CharacterDrawable character : charactersInRoom) {
+                if ((maxSpeed - character.getStats().getSpeed()) % i == 0) result.add(character);
+            }
+        }
+        //System.out.println("edvedvedv " + maxSpeed);
+        return result;
     }
 
     public MoveToMapTile getWay(Array<Array<MapTile>> allPaths, MapTile end, CharacterDrawable characterDrawable) {

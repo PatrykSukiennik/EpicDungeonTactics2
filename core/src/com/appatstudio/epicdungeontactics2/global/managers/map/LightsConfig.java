@@ -5,13 +5,12 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
-import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.badlogic.gdx.graphics.Color;
 
 import java.util.HashMap;
 
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BEAR;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BIG_DEMON;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BOSS_BIG_DEMON;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BIG_ZOMBIE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.CENTAUR_FEMALE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.CENTAUR_MALE;
@@ -20,7 +19,7 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ELV
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ELVEN_KNIGHT;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ELVEN_PRINCESS;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ENT;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.FOREST_GUARDIAN;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BOSS_FOREST_GUARDIAN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.GNOLL_BRUTE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.GNOLL_OVERSEER;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.GNOLL_SCOUT;
@@ -33,7 +32,6 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.HER
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.HERO_NINJA;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.HERO_PIRATE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.HERO_WIZZARD;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ICE_ZOMBIE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.IMP;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.MASKED_ORC;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.MUDDY;
@@ -54,7 +52,7 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_NUN_NORMAL;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_PRINCESS;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_THIEF;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.OGRE;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BOSS_OGRE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_SHAMAN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_WARRIOR;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.PET_DOG;
@@ -208,7 +206,7 @@ public class LightsConfig {
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
-        characterLights.put(OGRE,
+        characterLights.put(BOSS_OGRE,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
                         SMALL_SOFTNESS,
@@ -250,7 +248,7 @@ public class LightsConfig {
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
-        characterLights.put(BIG_DEMON,
+        characterLights.put(BOSS_BIG_DEMON,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
                         SMALL_SOFTNESS,
@@ -320,7 +318,7 @@ public class LightsConfig {
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
-        characterLights.put(FOREST_GUARDIAN,
+        characterLights.put(BOSS_FOREST_GUARDIAN,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
                         SMALL_SOFTNESS,

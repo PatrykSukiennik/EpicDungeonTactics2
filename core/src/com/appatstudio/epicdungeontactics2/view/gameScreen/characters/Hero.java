@@ -29,4 +29,9 @@ public class Hero extends CharacterDrawable {
                                 -1 : StatTracker.getStats().getSpeed()
                 ));
     }
+
+    @Override
+    protected void createStatsObject() {
+        this.stats = new CharacterStatsObject(getCharacterEnum());
+    }
 }

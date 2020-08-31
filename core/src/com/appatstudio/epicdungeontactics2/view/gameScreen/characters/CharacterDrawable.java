@@ -33,6 +33,8 @@ public class CharacterDrawable extends Image {
     private final Animation<SpriteDrawable> idleAnimation;
     private final Animation<SpriteDrawable> runAnimation;
 
+    private CharacterEnum characterEnum;
+
     private CharacterStateEnum state;
     private float stateTime;
     private CoordsInt position;
@@ -58,6 +60,7 @@ public class CharacterDrawable extends Image {
 
         stateTime = EpicDungeonTactics.random.nextFloat();
 
+        this.characterEnum = characterEnum;
         this.position = position;
         this.state = CharacterStateEnum.IDLE;
         this.room = room;
@@ -87,14 +90,20 @@ public class CharacterDrawable extends Image {
             pointLight.attachToBody(this.body);
         }
 
+        createStatsObject();
+
         this.tileStandingOn = tile;
+    }
+
+    protected void createStatsObject() {
+        this.stats = new CharacterStatsObject(characterEnum);
     }
 
     public void setState(CharacterStateEnum state) {
         this.state = state;
     }
 
-    public void draw(Batch batch) {
+    public void draw(Batch mapBatch, Batch guiBatch) {
         super.act(Gdx.graphics.getDeltaTime());
 
         if (hasActions()) {
@@ -103,7 +112,7 @@ public class CharacterDrawable extends Image {
         }
 
         stateTime += Gdx.graphics.getDeltaTime();
-
+        //System.out.println(characterEnum.toString() + "  " + idleAnimation.getFrameDuration());
         if (state == CharacterStateEnum.IDLE) {
             this.setDrawable(idleAnimation.getKeyFrame(stateTime));
         }
@@ -111,7 +120,7 @@ public class CharacterDrawable extends Image {
             this.setDrawable(runAnimation.getKeyFrame(stateTime));
         }
 
-        this.draw(batch, 1f);
+        this.draw(mapBatch, 1f);
 
     }
 
@@ -168,5 +177,13 @@ public class CharacterDrawable extends Image {
 
     public MapTile getTileStandingOn() {
         return tileStandingOn;
+    }
+
+    public CharacterEnum getCharacterEnum() {
+        return characterEnum;
+    }
+
+    public void drawTop(Batch guiBatch) {
+
     }
 }

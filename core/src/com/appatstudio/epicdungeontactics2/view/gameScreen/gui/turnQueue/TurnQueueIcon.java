@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue;
 
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import static com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue.COORDS;
 import static com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue.ICON_ALPHA;
@@ -19,12 +21,16 @@ import static com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.
 public class TurnQueueIcon extends Image {
 
     private CharacterDrawable representedCharacter;
+    private SpriteDrawable topSprite;
     private int extraMoves;
     private boolean isDestroyed;
     private int index;
 
+    private float topX = Gdx.graphics.getWidth() - QUEUE_ICON_SIZE + QUEUE_ICON_SIZE * 0.15f;
+    private float topSize = QUEUE_ICON_SIZE * 0.7f;
+
     public TurnQueueIcon(int index, CoordsFloat coords) {
-        super(GraphicsManager.getGuiElement(GuiElementEnum.SILVER_MEDAL));
+        super(GraphicsManager.getGuiElement(GuiElementEnum.QUEUE_BG_HERO));
 
         this.isDestroyed = false;
         this.setPosition(coords.x, coords.y);
@@ -36,6 +42,10 @@ public class TurnQueueIcon extends Image {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+
+        topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);
+        topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);
+        topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);
     }
 
     public CharacterDrawable getRepresentedCharacter() {
@@ -89,5 +99,23 @@ public class TurnQueueIcon extends Image {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public void setRepresentedCharacter(CharacterDrawable character) {
+        this.representedCharacter = character;
+
+        if (representedCharacter.getCharacterEnum().toString().startsWith("BOSS")) {
+            this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.QUEUE_BG_BOSS));
+        }
+        else if (representedCharacter.getCharacterEnum().toString().startsWith("HERO")) {
+            this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.QUEUE_BG_HERO));
+        }
+        else if (representedCharacter.getCharacterEnum().toString().startsWith("PET")) {
+            this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.QUEUE_BG_PET));
+        }
+        else this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.NONE));
+
+        topSprite = GraphicsManager.getCharactersAnimation(
+                character.getCharacterEnum(), CharacterStateEnum.IDLE).getKeyFrame(0);
     }
 }

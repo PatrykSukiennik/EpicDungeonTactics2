@@ -1,7 +1,6 @@
 package com.appatstudio.epicdungeontactics2.global.stats.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 
 import java.util.HashMap;
@@ -33,7 +32,7 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.MUSHROOM_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.MUSHROOM_LARGE, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.BEAR, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.BOSS_FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.ELVEN_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.ELVEN_KING, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.ELVEN_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
@@ -77,7 +76,7 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.ORC_WARRIOR, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.SWAMPY, new CharacterPrototype(3, 3, 3, 3, 3));
 
-        characterPrototypes.put(CharacterEnum.OGRE, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.BOSS_OGRE, new CharacterPrototype(3, 3, 3, 3, 3));
 
 
         //tier3
@@ -87,7 +86,7 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.SKELET, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.WOGOL, new CharacterPrototype(3, 3, 3, 3, 3));
 
-        characterPrototypes.put(CharacterEnum.BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.BOSS_BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
 
 
         enemyLvlUpStats = new HashMap<>();
@@ -101,7 +100,7 @@ public final class CharacterStats {
         enemyLvlUpStats.put(CharacterEnum.MUSHROOM_NORMAL, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.MUSHROOM_LARGE, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.BEAR, new CharacterPrototype(3, 3, 3, 3, 3));
-        enemyLvlUpStats.put(CharacterEnum.FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.BOSS_FOREST_GUARDIAN, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.ELVEN_PRINCESS, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.ELVEN_KING, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.ELVEN_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
@@ -145,7 +144,7 @@ public final class CharacterStats {
         enemyLvlUpStats.put(CharacterEnum.ORC_WARRIOR, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.SWAMPY, new CharacterPrototype(3, 3, 3, 3, 3));
 
-        enemyLvlUpStats.put(CharacterEnum.OGRE, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.BOSS_OGRE, new CharacterPrototype(3, 3, 3, 3, 3));
 
 
         //tier3
@@ -155,7 +154,7 @@ public final class CharacterStats {
         enemyLvlUpStats.put(CharacterEnum.SKELET, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.WOGOL, new CharacterPrototype(3, 3, 3, 3, 3));
 
-        enemyLvlUpStats.put(CharacterEnum.BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
+        enemyLvlUpStats.put(CharacterEnum.BOSS_BIG_DEMON, new CharacterPrototype(3, 3, 3, 3, 3));
 
 
         characterSizes = new HashMap<>();
@@ -177,7 +176,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.MUSHROOM_NORMAL,1);
         characterSizes.put(CharacterEnum.MUSHROOM_LARGE, 1);
         characterSizes.put(CharacterEnum.BEAR, 1);
-        characterSizes.put(CharacterEnum.FOREST_GUARDIAN, 1);
+        characterSizes.put(CharacterEnum.BOSS_FOREST_GUARDIAN, 1);
         characterSizes.put(CharacterEnum.ELVEN_PRINCESS, 1);
         characterSizes.put(CharacterEnum.ELVEN_KING, 1);
         characterSizes.put(CharacterEnum.ELVEN_KNIGHT, 1);
@@ -221,7 +220,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.ORC_WARRIOR,1);
         characterSizes.put(CharacterEnum.SWAMPY, 1);
 
-        characterSizes.put(CharacterEnum.OGRE, 2);
+        characterSizes.put(CharacterEnum.BOSS_OGRE, 2);
 
 
         //tier3
@@ -231,7 +230,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.SKELET, 1);
         characterSizes.put(CharacterEnum.WOGOL, 1);
 
-        characterSizes.put(CharacterEnum.BIG_DEMON, 2);
+        characterSizes.put(CharacterEnum.BOSS_BIG_DEMON, 2);
 
     }
 
