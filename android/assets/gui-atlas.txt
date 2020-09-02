@@ -1,5 +1,5 @@
 gui-atlas.png
-size: 496, 770
+size: 496, 751
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -201,14 +201,14 @@ armors/ARMORv27
   index: -1
 ARROW_LEFT
   rotate: false
-  xy: 452, 292
+  xy: 30, 322
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 ARROW_RIGHT
   rotate: false
-  xy: 468, 292
+  xy: 46, 322
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
@@ -285,30 +285,44 @@ arrows/ARROWv9
   index: -1
 BACK_ICON
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 BACKPACK_GRID_1x2
   rotate: false
-  xy: 120, 366
+  xy: 160, 363
   size: 124, 50
   orig: 124, 50
   offset: 0, 0
   index: -1
 BACKPACK_GRID_2x4
   rotate: false
-  xy: 244, 366
+  xy: 284, 363
   size: 124, 50
   orig: 124, 50
   offset: 0, 0
   index: -1
 BACKPACK_GRID_3x6
   rotate: false
-  xy: 368, 366
+  xy: 0, 413
   size: 124, 50
   orig: 124, 50
+  offset: 0, 0
+  index: -1
+BAR_DISTANCE
+  rotate: false
+  xy: 288, 180
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+BAR_MELE
+  rotate: false
+  xy: 316, 180
+  size: 28, 28
+  orig: 28, 28
   offset: 0, 0
   index: -1
 BLACK
@@ -367,9 +381,23 @@ books/BOOKv5
   orig: 16, 16
   offset: 0, 0
   index: -1
-BOTTOM_BAR
+BOSS_BAR
   rotate: false
   xy: 4, 0
+  size: 1, 5
+  orig: 1, 5
+  offset: 0, 0
+  index: -1
+BOSS_BAR_BG
+  rotate: false
+  xy: 56, 0
+  size: 80, 9
+  orig: 80, 9
+  offset: 0, 0
+  index: -1
+BOTTOM_BAR
+  rotate: false
+  xy: 5, 0
   size: 48, 5
   orig: 48, 5
   offset: 0, 0
@@ -586,42 +614,42 @@ bows/BOWv29
   index: -1
 BRONZE_BUTTON_WIDE
   rotate: false
-  xy: 214, 0
+  xy: 216, 0
   size: 48, 16
   orig: 48, 16
   offset: 0, 0
   index: -1
 BRONZE_COMMUNICATE_WINDOW
   rotate: false
-  xy: 372, 416
+  xy: 0, 463
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
   index: -1
 BRONZE_MEDAL
   rotate: false
-  xy: 262, 0
+  xy: 264, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 BRONZE_SMALL_BUTTON
   rotate: false
-  xy: 157, 0
+  xy: 159, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 CAMP_UPGRADE_BUTTON
   rotate: false
-  xy: 434, 324
+  xy: 0, 363
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
   index: -1
 COINS
   rotate: false
-  xy: 134, 0
+  xy: 136, 0
   size: 11, 11
   orig: 11, 11
   offset: 0, 0
@@ -635,378 +663,371 @@ DAY_LIGHT_TEXTURE
   index: -1
 DIAMOND_MEDAL
   rotate: false
-  xy: 278, 0
+  xy: 280, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 effect-icons/APPLE_FINDER
   rotate: false
-  xy: 316, 180
+  xy: 372, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/BERSERKER
   rotate: false
-  xy: 344, 180
+  xy: 400, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/BLESS
   rotate: false
-  xy: 372, 180
+  xy: 428, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/BOW_DMG
   rotate: false
-  xy: 400, 180
+  xy: 456, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/CHANCE_FOR_ANY_DROP
   rotate: false
-  xy: 428, 180
+  xy: 0, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/DEX_BONUS
   rotate: false
-  xy: 456, 180
+  xy: 28, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/DOUBLE_ATTACK
   rotate: false
-  xy: 0, 208
+  xy: 56, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/DOUBLE_MOVE
   rotate: false
-  xy: 28, 208
+  xy: 84, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/ELEMENTALIST
   rotate: false
-  xy: 56, 208
+  xy: 112, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/EXP_BONUS
   rotate: false
-  xy: 112, 208
+  xy: 168, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/EXPERIENCED_ADVENTURER
   rotate: false
-  xy: 84, 208
+  xy: 140, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/FIRE
   rotate: false
-  xy: 140, 208
+  xy: 196, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/FROZE
   rotate: false
-  xy: 168, 208
+  xy: 224, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/GLASS_CANNON
   rotate: false
-  xy: 196, 208
+  xy: 252, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/GOLD_BONUS
   rotate: false
-  xy: 224, 208
+  xy: 280, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/HP_RESTORATION_KILL
   rotate: false
-  xy: 252, 208
+  xy: 308, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/HP_RESTORATION_ROOM
   rotate: false
-  xy: 280, 208
+  xy: 336, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/INSTAKILL_ENEMY
   rotate: false
-  xy: 308, 208
+  xy: 364, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/INT_BONUS
   rotate: false
-  xy: 336, 208
+  xy: 392, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/KEY_FINDER
   rotate: false
-  xy: 364, 208
+  xy: 420, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/LCK_BONUS
   rotate: false
-  xy: 392, 208
+  xy: 448, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MAGIC_MIRROR
   rotate: false
-  xy: 0, 236
+  xy: 56, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MAGICAL_DMG_BONUS
   rotate: false
-  xy: 420, 208
+  xy: 0, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MAGICAL_RESIST
   rotate: false
-  xy: 448, 208
+  xy: 28, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MANA_RESTORATION_KILL
   rotate: false
-  xy: 28, 236
+  xy: 84, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MANA_RESTORATION_ROOM
   rotate: false
-  xy: 56, 236
+  xy: 112, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MELE_DMG
   rotate: false
-  xy: 84, 236
+  xy: 140, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/MISS_STAGE
   rotate: false
-  xy: 112, 236
+  xy: 168, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/POISON
   rotate: false
-  xy: 140, 236
+  xy: 196, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/POISON_DURATION_DECREASE
   rotate: false
-  xy: 168, 236
+  xy: 224, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/SKILL_COOLDOWN
   rotate: false
-  xy: 196, 236
+  xy: 252, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/STR_BONUS
   rotate: false
-  xy: 252, 236
+  xy: 308, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/STRONGER_ENEMIES
   rotate: false
-  xy: 224, 236
+  xy: 280, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/STUN
   rotate: false
-  xy: 280, 236
+  xy: 336, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/SUGAR_LOVER
   rotate: false
-  xy: 308, 236
+  xy: 364, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/TANK
   rotate: false
-  xy: 336, 236
+  xy: 392, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/THIRD_CHANCE
   rotate: false
-  xy: 364, 236
+  xy: 420, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/UNIQUE_LOOT
   rotate: false
-  xy: 392, 236
+  xy: 448, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/VIT_BONUS
   rotate: false
-  xy: 420, 236
+  xy: 0, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 effect-icons/WEAKNESS
   rotate: false
-  xy: 448, 236
+  xy: 28, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 ENEMY_BAR
   rotate: false
-  xy: 214, 0
-  size: 48, 16
-  orig: 48, 16
+  xy: 4, 0
+  size: 1, 5
+  orig: 1, 5
   offset: 0, 0
   index: -1
 ENEMY_BAR_BG
   rotate: false
-  xy: 214, 0
-  size: 48, 16
-  orig: 48, 16
-  offset: 0, 0
-  index: -1
-ENEMY_BAR_DISTANCE
-  rotate: false
-  xy: 262, 0
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-ENEMY_BAR_MELE
-  rotate: false
-  xy: 262, 0
-  size: 16, 16
-  orig: 16, 16
+  xy: 56, 0
+  size: 80, 9
+  orig: 80, 9
   offset: 0, 0
   index: -1
 EQUIPMENT_ICON
   rotate: false
-  xy: 0, 366
+  xy: 40, 363
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
   index: -1
+EXP_BAR — kopia
+  rotate: false
+  xy: 53, 0
+  size: 1, 5
+  orig: 1, 5
+  offset: 0, 0
+  index: -1
 EXP_BAR
   rotate: false
-  xy: 52, 0
+  xy: 53, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
   index: -1
 finances-icons/CARAVAN
   rotate: false
-  xy: 128, 324
+  xy: 190, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/CASTLE
   rotate: false
-  xy: 160, 324
+  xy: 222, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/FARM
   rotate: false
-  xy: 192, 324
+  xy: 254, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/HIRED_MERCHANT
   rotate: false
-  xy: 224, 324
+  xy: 286, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/MUSEUM
   rotate: false
-  xy: 256, 324
+  xy: 318, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/TAVERN
   rotate: false
-  xy: 288, 324
+  xy: 350, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 finances-icons/VILLAGE
   rotate: false
-  xy: 320, 324
+  xy: 382, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -1020,7 +1041,7 @@ FINANCES_BG
   index: -1
 FINANCES_UPGRADE_BUTTON
   rotate: false
-  xy: 40, 366
+  xy: 80, 363
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
@@ -1104,84 +1125,84 @@ food/FOODv10
   index: -1
 GOLD_MEDAL
   rotate: false
-  xy: 294, 0
+  xy: 296, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ALCHEMIST
   rotate: false
-  xy: 310, 0
+  xy: 312, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ALCHEMIST_ZERO
   rotate: false
-  xy: 326, 0
+  xy: 328, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BABY
   rotate: false
-  xy: 342, 0
+  xy: 344, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BLACKSMITH
   rotate: false
-  xy: 358, 0
+  xy: 360, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BLACKSMITH_ZERO
   rotate: false
-  xy: 374, 0
+  xy: 376, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BUTCHER
   rotate: false
-  xy: 390, 0
+  xy: 392, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_BUTCHER_ZERO
   rotate: false
-  xy: 406, 0
+  xy: 408, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_ELF
   rotate: false
-  xy: 422, 0
+  xy: 424, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_KNIGHT
   rotate: false
-  xy: 438, 0
+  xy: 440, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_LIZARD
   rotate: false
-  xy: 454, 0
+  xy: 456, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 HEAD_LUGGAGE_CARRIAGE
   rotate: false
-  xy: 470, 0
+  xy: 472, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1328,7 +1349,7 @@ helmets/HELMETv9
   index: -1
 HP_BAR
   rotate: false
-  xy: 53, 0
+  xy: 54, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
@@ -1342,84 +1363,84 @@ IDLE_INCOME_BANNER
   index: -1
 item-type-icons/ARMOR
   rotate: false
-  xy: 468, 292
+  xy: 46, 322
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 item-type-icons/ARROW
   rotate: false
-  xy: 452, 292
+  xy: 30, 322
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 item-type-icons/BOOK
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/BOW
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/FOOD
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/HELMET
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/MELE
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/NECKLACE
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/OTHER
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/RING
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/SHIELD
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 item-type-icons/STAFF
   rotate: false
-  xy: 145, 0
+  xy: 147, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
@@ -1433,14 +1454,14 @@ KEY
   index: -1
 LVL_EXP_BAR
   rotate: false
-  xy: 52, 0
+  xy: 53, 0
   size: 1, 5
   orig: 1, 5
   offset: 0, 0
   index: -1
 LVL_EXP_BAR_BG
   rotate: false
-  xy: 54, 0
+  xy: 56, 0
   size: 80, 9
   orig: 80, 9
   offset: 0, 0
@@ -1454,42 +1475,42 @@ map-room-icons/BOSS_ROOM
   index: -1
 map-room-icons/FIRST_ROOM
   rotate: false
-  xy: 171, 0
+  xy: 173, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 map-room-icons/NONE
   rotate: false
-  xy: 157, 0
+  xy: 159, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 map-room-icons/REGULAR_ROOM
   rotate: false
-  xy: 157, 0
+  xy: 159, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 MAP_ICON
   rotate: false
-  xy: 80, 366
+  xy: 120, 363
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
   index: -1
 MENU_BG1
   rotate: false
-  xy: 96, 482
+  xy: 192, 463
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 MENU_BG2
   rotate: false
-  xy: 96, 482
+  xy: 192, 463
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
@@ -1594,247 +1615,261 @@ NONE
   index: -1
 perk-icons/APPLE_FINDER
   rotate: false
-  xy: 316, 180
+  xy: 372, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/BERSERKER
   rotate: false
-  xy: 344, 180
+  xy: 400, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/BLESS
   rotate: false
-  xy: 372, 180
+  xy: 428, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/BOW_DMG
   rotate: false
-  xy: 400, 180
+  xy: 456, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/CHANCE_FOR_ANY_DROP
   rotate: false
-  xy: 428, 180
+  xy: 0, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/DEX_BONUS
   rotate: false
-  xy: 456, 180
+  xy: 28, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/DOUBLE_ATTACK
   rotate: false
-  xy: 0, 208
+  xy: 56, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/DOUBLE_MOVE
   rotate: false
-  xy: 28, 208
+  xy: 84, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/ELEMENTALIST
   rotate: false
-  xy: 56, 208
+  xy: 112, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/EXP_BONUS
   rotate: false
-  xy: 112, 208
+  xy: 168, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/EXPERIENCED_ADVENTURER
   rotate: false
-  xy: 84, 208
+  xy: 140, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/GLASS_CANNON
   rotate: false
-  xy: 196, 208
+  xy: 252, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/GOLD_BONUS
   rotate: false
-  xy: 224, 208
+  xy: 280, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/HP_RESTORATION_KILL
   rotate: false
-  xy: 252, 208
+  xy: 308, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/HP_RESTORATION_ROOM
   rotate: false
-  xy: 280, 208
+  xy: 336, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/INSTAKILL_ENEMY
   rotate: false
-  xy: 308, 208
+  xy: 364, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/INT_BONUS
   rotate: false
-  xy: 336, 208
+  xy: 392, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/KEY_FINDER
   rotate: false
-  xy: 364, 208
+  xy: 420, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/LCK_BONUS
   rotate: false
-  xy: 392, 208
+  xy: 448, 208
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MAGIC_MIRROR
   rotate: false
-  xy: 0, 236
+  xy: 56, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MAGICAL_DMG_BONUS
   rotate: false
-  xy: 420, 208
+  xy: 0, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MAGICAL_RESIST
   rotate: false
-  xy: 448, 208
+  xy: 28, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MANA_RESTORATION_KILL
   rotate: false
-  xy: 28, 236
+  xy: 84, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MANA_RESTORATION_ROOM
   rotate: false
-  xy: 56, 236
+  xy: 112, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MELE_DMG
   rotate: false
-  xy: 84, 236
+  xy: 140, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/MISS_STAGE
   rotate: false
-  xy: 112, 236
+  xy: 168, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/POISON_DURATION_DECREASE
   rotate: false
-  xy: 168, 236
+  xy: 224, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/SKILL_COOLDOWN
   rotate: false
-  xy: 196, 236
+  xy: 252, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/STR_BONUS
   rotate: false
-  xy: 252, 236
+  xy: 308, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/STRONGER_ENEMIES
   rotate: false
-  xy: 224, 236
+  xy: 280, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/SUGAR_LOVER
   rotate: false
-  xy: 308, 236
+  xy: 364, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/TANK
   rotate: false
-  xy: 336, 236
+  xy: 392, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/THIRD_CHANCE
   rotate: false
-  xy: 364, 236
+  xy: 420, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/UNIQUE_LOOT
   rotate: false
-  xy: 392, 236
+  xy: 448, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 perk-icons/VIT_BONUS
   rotate: false
-  xy: 420, 236
+  xy: 0, 264
   size: 28, 28
   orig: 28, 28
+  offset: 0, 0
+  index: -1
+PET_BAR
+  rotate: false
+  xy: 55, 0
+  size: 1, 5
+  orig: 1, 5
+  offset: 0, 0
+  index: -1
+PET_BAR_BG
+  rotate: false
+  xy: 56, 0
+  size: 80, 9
+  orig: 80, 9
   offset: 0, 0
   index: -1
 PLAYER_STAT_PROGRESS_BAR
@@ -1853,42 +1888,42 @@ PLAYER_STAT_PROGRESS_BG
   index: -1
 POINTS_PER_LVL_ICON
   rotate: false
-  xy: 288, 180
+  xy: 344, 180
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 QUEST_ICON
   rotate: false
-  xy: 262, 0
+  xy: 264, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 QUEUE_BG_BOSS
   rotate: false
-  xy: 0, 324
+  xy: 62, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 QUEUE_BG_HERO
   rotate: false
-  xy: 32, 324
+  xy: 94, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 QUEUE_BG_PET
   rotate: false
-  xy: 64, 324
+  xy: 126, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 QUEUE_BORDER
   rotate: false
-  xy: 96, 324
+  xy: 158, 322
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -2049,35 +2084,35 @@ rings/RINGv21
   index: -1
 RUN_QUIT_WINDOW
   rotate: false
-  xy: 352, 324
+  xy: 414, 322
   size: 82, 41
   orig: 82, 41
   offset: 0, 0
   index: -1
 SEGMENT_BACKPACK
   rotate: false
-  xy: 0, 416
+  xy: 124, 413
   size: 124, 50
   orig: 124, 50
   offset: 0, 0
   index: -1
 SEGMENT_HERO
   rotate: false
-  xy: 124, 416
+  xy: 248, 413
   size: 124, 50
   orig: 124, 50
   offset: 0, 0
   index: -1
 SEGMENT_ITEM
   rotate: false
-  xy: 248, 416
+  xy: 372, 413
   size: 124, 50
   orig: 124, 50
   offset: 0, 0
   index: -1
 SETTINGS_ICON
   rotate: false
-  xy: 157, 0
+  xy: 159, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -2196,7 +2231,7 @@ SILVER_BUTTON_WIDE
   index: -1
 SILVER_COMMUNICATE_WINDOW
   rotate: false
-  xy: 420, 416
+  xy: 48, 463
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
@@ -2210,63 +2245,63 @@ SILVER_MEDAL
   index: -1
 skill_icons/ELF_DOUBLE_SHOT
   rotate: false
-  xy: 0, 264
+  xy: 56, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/ELF_IMMOBILIZATION
   rotate: false
-  xy: 28, 264
+  xy: 84, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/ELF_INSIDE_OUT
   rotate: false
-  xy: 56, 264
+  xy: 112, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/KNIGHT_BREAK_WEAPON
   rotate: false
-  xy: 84, 264
+  xy: 140, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/KNIGHT_SHIELD_HIT
   rotate: false
-  xy: 112, 264
+  xy: 168, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/KNIGHT_TORNADO
   rotate: false
-  xy: 140, 264
+  xy: 196, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/MAGE_ICE_BOLT
   rotate: false
-  xy: 168, 264
+  xy: 224, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/MAGE_MEDITATION
   rotate: false
-  xy: 196, 264
+  xy: 252, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 skill_icons/MAGE_MULTIPLE_FIREBALLS
   rotate: false
-  xy: 224, 264
+  xy: 280, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
@@ -2287,196 +2322,196 @@ SOUND_ON_ICON
   index: -1
 spell_icon/BACK_TO_PREVIOUS ROOM
   rotate: false
-  xy: 252, 264
+  xy: 308, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/BIG_SHOCK
   rotate: false
-  xy: 280, 264
+  xy: 336, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/BOW_IMMOBILIZATION
   rotate: false
-  xy: 28, 264
+  xy: 84, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/BOW_INSIDE_OUT
   rotate: false
-  xy: 56, 264
+  xy: 112, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/DESTROY_WEAK
   rotate: false
-  xy: 308, 264
+  xy: 364, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/DOUBLE_ARMOR
   rotate: false
-  xy: 336, 264
+  xy: 392, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/DOUBLE_SHOT_BOW
   rotate: false
-  xy: 0, 264
+  xy: 56, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/FIRE_COAT
   rotate: false
-  xy: 364, 264
+  xy: 420, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/FIRE_RAIN
   rotate: false
-  xy: 224, 264
+  xy: 280, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/FIRE_SPOT
   rotate: false
-  xy: 392, 264
+  xy: 448, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/FROZING
   rotate: false
-  xy: 420, 264
+  xy: 0, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/GAS_CLOUD
   rotate: false
-  xy: 448, 264
+  xy: 28, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/GIANT_SHOCK
   rotate: false
-  xy: 0, 292
+  xy: 56, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/HEALTH_HALF_ALL
   rotate: false
-  xy: 28, 292
+  xy: 84, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/LASER
   rotate: false
-  xy: 56, 292
+  xy: 112, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/MAGE_ICE_BOLT
   rotate: false
-  xy: 168, 264
+  xy: 224, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/MELE_BREAK_WEAPON
   rotate: false
-  xy: 84, 264
+  xy: 140, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/MELE_TORNADO
   rotate: false
-  xy: 140, 264
+  xy: 196, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/METEOR
   rotate: false
-  xy: 84, 292
+  xy: 140, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/POSITION_CHANGE
   rotate: false
-  xy: 112, 292
+  xy: 168, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/REROLL_POSITIONS
   rotate: false
-  xy: 140, 292
+  xy: 196, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/RESTORATION
   rotate: false
-  xy: 364, 236
+  xy: 420, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/SILVER_EXPLODE
   rotate: false
-  xy: 168, 292
+  xy: 224, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/SILVER_HIT
   rotate: false
-  xy: 196, 292
+  xy: 252, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/SILVER_IMPLODE
   rotate: false
-  xy: 224, 292
+  xy: 280, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/SMALL_SHOCK
   rotate: false
-  xy: 252, 292
+  xy: 308, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/TELEPORT
   rotate: false
-  xy: 280, 292
+  xy: 336, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 spell_icon/WEAKNESS
   rotate: false
-  xy: 448, 236
+  xy: 28, 264
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
@@ -2539,42 +2574,42 @@ staffs/STAFFv7
   index: -1
 stat-icons/DEX
   rotate: false
-  xy: 308, 292
+  xy: 364, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 stat-icons/INT
   rotate: false
-  xy: 422, 292
+  xy: 0, 322
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 stat-icons/LCK
   rotate: false
-  xy: 336, 292
+  xy: 392, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 stat-icons/STR
   rotate: false
-  xy: 252, 236
+  xy: 308, 236
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 stat-icons/VIT
   rotate: false
-  xy: 364, 292
+  xy: 420, 292
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 STATS_ICON
   rotate: false
-  xy: 392, 292
+  xy: 448, 292
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
@@ -2602,14 +2637,14 @@ STONE_BUTTON_WIDE
   index: -1
 STONE_COMMUNICATE_WINDOW
   rotate: false
-  xy: 0, 482
+  xy: 96, 463
   size: 48, 66
   orig: 48, 66
   offset: 0, 0
   index: -1
 STONE_SMALL_BUTTON
   rotate: false
-  xy: 171, 0
+  xy: 173, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -3113,14 +3148,14 @@ swords/SWORDv70
   index: -1
 swords/SWORDv71
   rotate: false
-  xy: 199, 0
+  xy: 201, 0
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 swords/SWORDv72
   rotate: false
-  xy: 185, 0
+  xy: 187, 0
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -3134,7 +3169,7 @@ YELLOW_BUTTON_WIDE
   index: -1
 YELLOW_COMMUNICATE_WINDOW
   rotate: false
-  xy: 48, 482
+  xy: 144, 463
   size: 48, 66
   orig: 48, 66
   offset: 0, 0

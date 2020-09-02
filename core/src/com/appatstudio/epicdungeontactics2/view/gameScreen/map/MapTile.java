@@ -34,6 +34,7 @@ public class MapTile {
     public void draw(Batch mapBatch) {
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
+        if (character != null) character.draw(mapBatch);
     }
 
     public void setAnimatedElement(AnimatedElement animatedElement) {

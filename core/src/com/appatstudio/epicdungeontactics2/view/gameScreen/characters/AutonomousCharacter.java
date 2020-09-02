@@ -2,21 +2,22 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
-import com.appatstudio.epicdungeontactics2.view.viewElements.game.EnemyStatBar;
+import com.appatstudio.epicdungeontactics2.view.viewElements.game.StatBar;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.World;
 
 import box2dLight.RayHandler;
 
-public class Enemy extends CharacterDrawable {
+public class AutonomousCharacter extends CharacterDrawable {
 
-    private EnemyStatBar statBar;
+    private StatBar statBar;
 
-    public Enemy(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
+    public AutonomousCharacter(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
         super(characterEnum, position, rayHandler, world, room, tile);
+
+        statBar = new StatBar(this);
     }
 
     @Override
@@ -30,10 +31,8 @@ public class Enemy extends CharacterDrawable {
     }
 
     @Override
-    public void draw(Batch mapBatch, Batch guiBatch) {
-        super.draw(mapBatch, guiBatch);
-
-        statBar.draw(guiBatch);
+    public void draw(Batch mapBatch) {
+        super.draw(mapBatch);
     }
 
     @Override

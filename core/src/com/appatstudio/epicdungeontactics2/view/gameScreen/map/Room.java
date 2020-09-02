@@ -22,11 +22,13 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.ChangeState;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.SwitchMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.TurnFinished;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.AutonomousCharacter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
+import com.appatstudio.epicdungeontactics2.view.viewElements.game.BossHpBar;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -66,6 +68,8 @@ public class Room {
     private static Box2DDebugRenderer b2dr;
 
     private TurnQueue queue;
+
+    private static BossHpBar bossHpBar;
 
     private boolean freezeTime = false;
 
@@ -132,7 +136,7 @@ public class Room {
                                 rayHandler, world));
 
                 else if (characters[x][y] != null) {
-                    CharacterDrawable newCharacter = new CharacterDrawable(
+                    CharacterDrawable newCharacter = new AutonomousCharacter(
                             characters[x][y],
                             new CoordsInt(x, y),
                             rayHandler, world, this, mapTiles[x][y]);
@@ -155,6 +159,17 @@ public class Room {
         if (type == RoomTypeEnum.FIRST_ROOM) {
             System.out.println("dec");
             heroInRoom.getPossibleWays(); //todo first move
+        }
+
+        if (type == RoomTypeEnum.BOSS_ROOM) {
+            CharacterDrawable boss = null;
+            for (CharacterDrawable c : charactersInRoom)
+                if (c.getCharacterEnum().toString().startsWith("BOSS")) {
+                    boss = c;
+                    break;
+                }
+
+            if (boss != null) bossHpBar = new BossHpBar(boss);
         }
 
         this.queue = new TurnQueue(this);
@@ -227,6 +242,10 @@ public class Room {
             for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
                 mapTiles[x][y].drawTop(guiBatch);
             }
+        }
+
+        if (type == RoomTypeEnum.BOSS_ROOM) {
+            bossHpBar.draw(guiBatch);
         }
 
         queue.draw(guiBatch);

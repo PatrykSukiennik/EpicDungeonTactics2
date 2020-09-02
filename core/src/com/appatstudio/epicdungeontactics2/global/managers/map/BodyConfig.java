@@ -24,8 +24,16 @@ public class BodyConfig {
 
     static {
         final BodyDef smallBody;
+        final BodyDef mediumBody;
+        final BodyDef bigBody;
+
         final CircleShape smallShape;
+        final CircleShape mediumShape;
+        final CircleShape bigShape;
+
         final FixtureDef smallFixtureDef;
+        final FixtureDef mediumFixtureDef;
+        final FixtureDef bigFixtureDef;
 
         smallBody = new BodyDef();
         smallBody.type = BodyDef.BodyType.KinematicBody;
@@ -34,6 +42,22 @@ public class BodyConfig {
         smallFixtureDef = new FixtureDef();
         smallFixtureDef.shape = smallShape;
         smallFixtureDef.density = 0.8f;
+
+        mediumBody = new BodyDef();
+        mediumBody.type = BodyDef.BodyType.KinematicBody;
+        mediumShape = new CircleShape();
+        mediumShape.setRadius(WorldConfig.TILE_SIZE / 2f);
+        mediumFixtureDef = new FixtureDef();
+        mediumFixtureDef.shape = mediumShape;
+        mediumFixtureDef.density = 0.8f;
+
+        bigBody = new BodyDef();
+        bigBody.type = BodyDef.BodyType.KinematicBody;
+        bigShape = new CircleShape();
+        bigShape.setRadius(WorldConfig.TILE_SIZE);
+        bigFixtureDef = new FixtureDef();
+        bigFixtureDef.shape = bigShape;
+        bigFixtureDef.density = 0.8f;
 
         characterBodyDef = new HashMap<>();
         characterBodyDef.put(HERO_ELF, smallBody);
@@ -58,7 +82,7 @@ public class BodyConfig {
         characterBodyDef.put(IMP, smallBody);
         characterBodyDef.put(NECROMANCER, smallBody);
         characterBodyDef.put(WOGOL, smallBody);
-        characterBodyDef.put(BOSS_BIG_DEMON, smallBody);
+        characterBodyDef.put(BOSS_BIG_DEMON, bigBody);
         characterBodyDef.put(CENTAUR_MALE, smallBody);
         characterBodyDef.put(CENTAUR_FEMALE, smallBody);
         characterBodyDef.put(ENT, smallBody);
@@ -117,7 +141,7 @@ public class BodyConfig {
         characterFixtureDef.put(IMP, smallFixtureDef);
         characterFixtureDef.put(NECROMANCER, smallFixtureDef);
         characterFixtureDef.put(WOGOL, smallFixtureDef);
-        characterFixtureDef.put(BOSS_BIG_DEMON, smallFixtureDef);
+        characterFixtureDef.put(BOSS_BIG_DEMON, bigFixtureDef);
         characterFixtureDef.put(CENTAUR_MALE, smallFixtureDef);
         characterFixtureDef.put(CENTAUR_FEMALE, smallFixtureDef);
         characterFixtureDef.put(ENT, smallFixtureDef);

@@ -32,8 +32,8 @@ final class FontsLoader {
         int communicatePrinterTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.04f);
         int mapTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.02f) : (int) (Gdx.graphics.getWidth() * 0.03f);
 
-        int enemyNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.02f) : (int) (Gdx.graphics.getWidth() * 0.03f);
-        int bossNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.04f) : (int) (Gdx.graphics.getWidth() * 0.05f);
+        int enemyNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.025f) : (int) (Gdx.graphics.getWidth() * 0.035f);
+        int bossNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.06f) : (int) (Gdx.graphics.getWidth() * 0.065f);
 
 
         //MENU HERO TITLE
@@ -157,22 +157,29 @@ final class FontsLoader {
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = MAP_FONT_PATH;
         parms.fontParameters.size = enemyNameTextSize;
-        parms.fontParameters.color = Color.FIREBRICK;
+        parms.fontParameters.color = Color.RED;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.ENEMY_BAR_NAME.toString() + ".ttf", BitmapFont.class, parms);
 
-
-
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = MAP_FONT_PATH;
         parms.fontParameters.size = bossNameTextSize;
-        parms.fontParameters.color = Color.FIREBRICK;
+        parms.fontParameters.color = Color.RED;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 5;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.BOSS_BAR_NAME.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = enemyNameTextSize;
+        parms.fontParameters.color = Color.CYAN;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
-        assetManager.load(FontEnum.BOSS_BAR_NAME.toString() + ".ttf", BitmapFont.class, parms);
+        assetManager.load(FontEnum.PET_BAR_NAME.toString() + ".ttf", BitmapFont.class, parms);
 
 
     }

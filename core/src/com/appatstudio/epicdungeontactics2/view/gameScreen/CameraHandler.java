@@ -7,6 +7,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -197,5 +198,16 @@ public class CameraHandler extends Actor {
 
     public static OrthographicCamera getCamera() {
         return camera;
+    }
+
+    public static Vector3 projectCoords(Vector3 pos) {
+        return camera.project(pos);
+    }
+    public static Vector3 unprojectCoords(Vector3 pos) {
+        return camera.unproject(pos);
+    }
+
+    public static float getZoom() {
+        return camera.zoom;
     }
 }

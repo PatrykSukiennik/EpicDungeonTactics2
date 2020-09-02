@@ -77,16 +77,17 @@ public class CharacterDrawable extends Image {
                 LightsConfig.CHARACTER_RAYS,
                 lightConfigObject.getColor(),
                 lightConfigObject.getRadius(),
-                this.getX() + lightConfigObject.getOffset().x,
-                this.getY() + lightConfigObject.getOffset().y
-                );
+                //this.getX() + lightConfigObject.getOffset().x,
+                //this.getY() + lightConfigObject.getOffset().y
+                this.getX() + this.getWidth()/2f,
+                this.getY() + this.getHeight()/2f
+        );
 
         if (BodyConfig.getCharacterBodyDef(characterEnum) != null) {
             this.body = world.createBody(BodyConfig.getCharacterBodyDef(characterEnum));
             this.body.createFixture(BodyConfig.getCharacterFixtureDef(characterEnum));
-            bodyOffset = new CoordsFloat((size * WorldConfig.TILE_SIZE) / 2f, (size * WorldConfig.TILE_SIZE) / 2f);
-            this.body.setTransform(getX() + bodyOffset.x, getY() + bodyOffset.y, 0);
-
+            bodyOffset = new CoordsFloat((size * WorldConfig.TILE_SIZE), (size * WorldConfig.TILE_SIZE)/2f);
+            this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
             pointLight.attachToBody(this.body);
         }
 
@@ -103,11 +104,11 @@ public class CharacterDrawable extends Image {
         this.state = state;
     }
 
-    public void draw(Batch mapBatch, Batch guiBatch) {
+    public void draw(Batch mapBatch) {
         super.act(Gdx.graphics.getDeltaTime());
 
         if (hasActions()) {
-            this.body.setTransform(getX() + bodyOffset.x, getY() + bodyOffset.y, 0);
+            this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
             //this.pointLight.setPosition(getX() + lightOffset.x, getY() + lightOffset.y);
         }
 
@@ -184,6 +185,6 @@ public class CharacterDrawable extends Image {
     }
 
     public void drawTop(Batch guiBatch) {
-
+        //override me
     }
 }

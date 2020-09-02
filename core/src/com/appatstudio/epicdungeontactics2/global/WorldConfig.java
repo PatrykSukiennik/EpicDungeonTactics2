@@ -28,9 +28,9 @@ public class WorldConfig {
     public static final float CAMERA_POSITION_Y_MAX = ROOM_POS_Y + ROOM_HEIGHT_RES - TILE_SIZE * 4f;
     public static final float CAMERA_POSITION_Y_MIN = ROOM_POS_Y + TILE_SIZE * 4f;
 
-    public static final float INIT_CAMERA_ZOOM = ROOM_WIDTH_RES / Gdx.graphics.getWidth() * 8f;
-    public static final float CAMERA_ZOOM_LIMIT_MIN = INIT_CAMERA_ZOOM * 0.4f;
-    public static final float CAMERA_ZOOM_LIMIT_MAX = INIT_CAMERA_ZOOM * 1.2f;
+    public static final float INIT_CAMERA_ZOOM = ROOM_WIDTH_RES / Gdx.graphics.getWidth() * 5f;
+    public static final float CAMERA_ZOOM_LIMIT_MIN = INIT_CAMERA_ZOOM * 0.6f;
+    public static final float CAMERA_ZOOM_LIMIT_MAX = INIT_CAMERA_ZOOM * 1.4f;
 
     public static final int STAGE_MIN_ROOMS = 15;
     public static final int STAGE_MAX_ROOMS = 25;

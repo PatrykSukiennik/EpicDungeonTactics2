@@ -65,7 +65,6 @@ public class TurnQueueIcon extends Image {
 
     }
 
-
     public void tick() {
         index--;
         if (index < 0) index = QUEUE_SIZE - 1;
