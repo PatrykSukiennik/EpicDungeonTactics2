@@ -17,6 +17,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoEnemy;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.ChangeState;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
@@ -211,14 +212,6 @@ public class Room {
                             heroInRoom.getPosition(),
                             -1
                     ));
-        }
-
-        if (heroInRoom.getTileStandingOn().getFlag() == MapPathFindingFlags.ROOM_NODE) {
-            CoordsInt coords = heroInRoom.getPosition();
-            if (coords.x == 0) {
-                CameraHandler.changeRoom(DirectionEnum.LEFT);
-                stageObject.changeRoom(DirectionEnum.LEFT, roomNodes.get(DirectionEnum.LEFT), heroInRoom.getPosition());
-            }
         }
     }
 
@@ -496,7 +489,10 @@ public class Room {
         }
     }
 
-    public void heroMoved(DirectionEnum dir, CoordsInt coords) {
+    public void heroMovedIntoRoom(DirectionEnum dir, CoordsInt coords) {
+        mapTiles[coords.x][coords.y].setCharacter(heroInRoom);
+        heroInRoom.setTileStandingOn(mapTiles[coords.x][coords.y]);
+
         if (dir == DirectionEnum.RIGHT) {
             heroInRoom.setPosition(0, coords.y);
         }
@@ -514,5 +510,17 @@ public class Room {
 
     public Array<CharacterDrawable> getRoomCharacters() {
         return charactersInRoom;
+    }
+
+    public void changeRoom(DirectionEnum dir, CoordsInt coords) {
+        stageObject.changeRoom(dir, roomNodes.get(dir), coords);
+    }
+
+    public MapTile[][] getTiles() {
+        return mapTiles;
+    }
+
+    public void newStage() {
+        GameScreen.nextStageInit();
     }
 }

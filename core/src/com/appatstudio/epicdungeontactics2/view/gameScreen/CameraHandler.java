@@ -114,8 +114,8 @@ public class CameraHandler extends Actor {
 
         blackOut.addAction(
                 Actions.sequence(
-                        Actions.fadeIn(0.5f),
-                        Actions.fadeOut(0.5f)
+                        Actions.fadeIn(0.8f),
+                        Actions.fadeOut(0.8f)
                 )
         );
 
@@ -124,36 +124,36 @@ public class CameraHandler extends Actor {
             case TOP: {
                 movingPoint.addAction(
                         Actions.sequence(
-                        Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() + WorldConfig.ROOM_HEIGHT_RES/2f, 0.5f),
+                        Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() + WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
                                 Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f,  WorldConfig.TILE_SIZE * 2f, 0.0001f),
-                                Actions.moveBy(0, -WorldConfig.TILE_SIZE * 2f, 0.5f))
+                                Actions.moveBy(0, -WorldConfig.TILE_SIZE, 0.8f))
                 );
                 break;
             }
             case LEFT: {
                 movingPoint.addAction(
                         Actions.sequence(
-                                Actions.moveTo(movingPoint.getX() + WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES/2f, 0.5f),
+                                Actions.moveTo(movingPoint.getX() + WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
                                 Actions.moveTo(WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES/2f, 0),
-                                Actions.moveBy(-WorldConfig.TILE_SIZE * 2f, 0, 0.5f))
+                                Actions.moveBy(-WorldConfig.TILE_SIZE, 0, 0.8f))
                 );
                 break;
             }
             case RIGHT: {
                 movingPoint.addAction(
                         Actions.sequence(
-                                Actions.moveTo(movingPoint.getX() + WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES/2f, 0.5f),
+                                Actions.moveTo(movingPoint.getX() + WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
                                 Actions.moveTo(0, WorldConfig.ROOM_HEIGHT_RES/2f, 0),
-                                Actions.moveBy(WorldConfig.TILE_SIZE * 2f, 0, 0.5f))
+                                Actions.moveBy(WorldConfig.TILE_SIZE, 0, 0.8f))
                 );
                 break;
             }
             case BOTTOM: {
                 movingPoint.addAction(
                         Actions.sequence(
-                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() - WorldConfig.ROOM_HEIGHT_RES/2f, 0.5f),
+                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() - WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
                                 Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES - WorldConfig.TILE_SIZE * 2f, 0.0001f),
-                                Actions.moveBy(0, WorldConfig.TILE_SIZE * 2f, 0.5f))
+                                Actions.moveBy(0, WorldConfig.TILE_SIZE, 0.8f))
                 );
                 break;
             }

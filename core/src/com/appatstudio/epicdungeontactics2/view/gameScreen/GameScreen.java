@@ -107,16 +107,16 @@ public final class GameScreen extends Actor {
         freshRunTextDelay = 2f;
     }
 
-    public void switchRoomInit(DirectionEnum direction) {
+    public static void switchRoomInit(DirectionEnum direction) {
         CameraHandler.changeRoom(direction);
-        switchRoomDelay = 0.5f;
+        switchRoomDelay = 0.8f;
         switchRoomDirection = direction;
     }
 
-    public void nextStageInit() {
+    public static void nextStageInit() {
         CameraHandler.nextStage();
         newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + (stage + 1));
-        switchStageDelay = 0.5f;
+        switchStageDelay = 1f;
     }
 
     public static void mapLongPress(float x, float y) {
@@ -132,6 +132,7 @@ public final class GameScreen extends Actor {
             else if (currRoom.tap(x, y));
         }
     }
+
 
     public void draw() {
         this.act(Gdx.graphics.getDeltaTime());

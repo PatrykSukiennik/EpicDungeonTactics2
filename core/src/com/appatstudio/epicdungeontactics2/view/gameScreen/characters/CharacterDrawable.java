@@ -17,6 +17,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -53,6 +54,8 @@ public class CharacterDrawable extends Image {
     private CoordsFloat lightOffset;
 
     private MapTile tileStandingOn;
+
+    private boolean isRotation = EpicDungeonTactics.random.nextBoolean();
 
     public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
@@ -121,6 +124,14 @@ public class CharacterDrawable extends Image {
             this.setDrawable(runAnimation.getKeyFrame(stateTime));
         }
 
+        Sprite s = ((SpriteDrawable) this.getDrawable()).getSprite();
+        if (isRotation) {
+            if (!s.isFlipX()) s.flip(true, false);
+        }
+        else {
+            if (s.isFlipX()) s.flip(true, false);
+        }
+
         this.draw(mapBatch, 1f);
 
     }
@@ -135,6 +146,10 @@ public class CharacterDrawable extends Image {
 
     public void dispose() {
         pointLight.remove(true);
+    }
+
+    public void setTileStandingOn(MapTile tileStandingOn) {
+        this.tileStandingOn = tileStandingOn;
     }
 
     public void moveToMapTile(MapTile tile) {
@@ -157,7 +172,13 @@ public class CharacterDrawable extends Image {
     }
 
     public void setPosition(CoordsInt coords) {
+        if (coords.x < position.x) isRotation = true;
+        else if (coords.x > position.x) isRotation = false;
+
         this.position = coords;
+
+        tileStandingOn = room.getTiles()[coords.x][coords.y];
+        tileStandingOn.setCharacter(this);
     }
 
     public void setPossibleMovements(Array<Array<MapTile>> possibleMovements) {

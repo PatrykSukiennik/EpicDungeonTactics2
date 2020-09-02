@@ -134,9 +134,11 @@ public final class GuiContainer {
         }
         else if (eqButton.isTap(x, y)) {
             EquipmentWindow.show();
+            return true;
         }
         else if (mapButton.isTap(x, y)) {
             mapWindow.show();
+            return true;
         }
         return false;
     }
