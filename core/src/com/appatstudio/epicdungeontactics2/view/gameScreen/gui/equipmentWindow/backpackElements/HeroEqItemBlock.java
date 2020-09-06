@@ -4,14 +4,24 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class HeroEqItemBlock extends ItemBlock {
 
+    private static Actor pulsatingActor;
+
     private Image bg;
     private ItemTypeEnum requiredCategory;
+
+    static {
+        pulsatingActor = new Actor();
+
+    }
 
     public HeroEqItemBlock(CoordsFloat pos, float size, ItemTypeEnum requiredCategory) {
         super(pos, size);
@@ -22,10 +32,33 @@ public class HeroEqItemBlock extends ItemBlock {
         this.requiredCategory = requiredCategory;
     }
 
-    @Override
-    public void draw(Batch batch, boolean isSelected) {
-        bg.draw(batch, 1f);
-        super.draw(batch, isSelected);
+    public void draw(Batch batch, AbstractItem selectedItem) {
+        if (selectedItem == null) {
+            if (getItem() == null) {
+                bg.draw(batch, 1f);
+            }
+            else {
+                super.draw(batch, null, 1f);
+            }
+        }
+        else {
+            if (getItem() == null) {
+                if (selectedItem.getItemTypeEnum() == requiredCategory) {
+                    bg.draw(batch, pulsatingActor.getColor().a);
+                }
+                else {
+                    bg.draw(batch, 1f);
+                }
+            }
+            else {
+                if (selectedItem.getItemTypeEnum() == requiredCategory) {
+                    super.draw(batch, selectedItem, pulsatingActor.getColor().a);
+                }
+                else {
+                    super.draw(batch, selectedItem,  1f);
+                }
+            }
+        }
     }
 
     @Override
@@ -42,5 +75,18 @@ public class HeroEqItemBlock extends ItemBlock {
 
     public ItemTypeEnum getRequiredItem() {
         return requiredCategory;
+    }
+
+    public static void act() {
+        pulsatingActor.act(Gdx.graphics.getDeltaTime());
+    }
+
+    public static void resetPulsating() {
+        pulsatingActor.act(Gdx.graphics.getDeltaTime());
+        pulsatingActor.clearActions();
+        pulsatingActor.getColor().a = 1f;
+        pulsatingActor.addAction(Actions.forever(
+                Actions.sequence(
+                        Actions.fadeOut(0.7f), Actions.fadeIn(0.7f))));
     }
 }

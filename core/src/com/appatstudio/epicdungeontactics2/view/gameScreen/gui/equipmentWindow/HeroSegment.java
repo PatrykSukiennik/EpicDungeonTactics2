@@ -7,7 +7,9 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumn;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.HeroEqItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -26,26 +28,44 @@ public class HeroSegment extends AbstractSegment {
     private static float heroX = getPosX();
     private static float heroY = posY;
 
-    private static final float tileSize = heroSize/3f;
+    private static final float tileSize = (fullWidth - heroSize * 0.75f * 1.5f) / 4f;
     //eq tiles positions
-    private static CoordsFloat tileHelmet = new CoordsFloat();
-    private static CoordsFloat tileNecklace = new CoordsFloat();
-    private static CoordsFloat tileSword = new CoordsFloat();
-    private static CoordsFloat tileArmor = new CoordsFloat();
-    private static CoordsFloat tileShield = new CoordsFloat();
-    private static CoordsFloat tileRing0 = new CoordsFloat();
-    private static CoordsFloat tileRing1 = new CoordsFloat();
-    private static CoordsFloat tileBow = new CoordsFloat();
-    private static CoordsFloat tileStaff = new CoordsFloat();
-    private static CoordsFloat tileArrow = new CoordsFloat();
+    private static CoordsFloat tileHelmet;
+    private static CoordsFloat tileNecklace;
+    private static CoordsFloat tileSword;
+    private static CoordsFloat tileArmor;
+    private static CoordsFloat tileShield;
+    private static CoordsFloat tileRing0;
+    private static CoordsFloat tileRing1;
+    private static CoordsFloat tileBow;
+    private static CoordsFloat tileStaff;
+    private static CoordsFloat tileArrow;
 
 
     private Animation<SpriteDrawable> heroAnimation;
 
     private Array<HeroEqItemBlock> eqItemBlocks;
 
-    HeroSegment(CharacterEnum hero) {
+    static {
         posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f + AbstractSegment.fullHeight;
+
+        float topY = posY + fullHeight * 0.8f - tileSize;
+        float bottomY = topY - tileSize;
+        float leftX = posX + heroSize * 0.85f;
+
+        tileHelmet = new CoordsFloat(leftX, topY);
+        tileNecklace = new CoordsFloat(leftX + tileSize, topY);
+        tileArmor = new CoordsFloat(leftX, bottomY);
+        tileShield = new CoordsFloat(leftX + tileSize, bottomY);
+        tileRing0 = new CoordsFloat(leftX + tileSize * 2, bottomY);
+        tileRing1 = new CoordsFloat(leftX + tileSize * 3, bottomY);
+        tileSword = new CoordsFloat(leftX + tileSize * 2, topY);
+        tileBow = new CoordsFloat(leftX + tileSize * 3, topY);
+        tileStaff = new CoordsFloat(leftX + tileSize * 3, topY);
+        tileArrow = new CoordsFloat(leftX + tileSize * 2, bottomY);
+    }
+
+    HeroSegment(CharacterEnum hero) {
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
         heroAnimation = GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE);
         heroY = posY + fullHeight/2f - heroSize/3f;
@@ -53,20 +73,27 @@ public class HeroSegment extends AbstractSegment {
         createHeroSpecifiedEquipment(hero);
     }
 
-    void draw(Batch batch) {
+    void draw(Batch batch, AbstractItem selectedItem) {
         bg.draw(batch, posX, posY, fullWidth, fullHeight);
 
         stateTime += Gdx.graphics.getDeltaTime();
         heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
 
+        for (HeroEqItemBlock ib : eqItemBlocks) {
+            ib.draw(batch, selectedItem);
+        }
+
+        HeroEqItemBlock.act();
     }
 
 
     void selectItem(AbstractItem item) {
         this.selectedItem = item;
+        HeroEqItemBlock.resetPulsating();
     }
 
     AbstractItem getTapItem(float x, float y) {
+        for (HeroEqItemBlock ib : eqItemBlocks) if (ib.isTap(x, y)) return ib.getItem();
         return null;
     }
 
@@ -86,6 +113,11 @@ public class HeroSegment extends AbstractSegment {
 //                && y > posY && posY < posY + fullHeight;
     }
 
+    public AbstractItem tap(float x, float y) {
+        for (HeroEqItemBlock ib : eqItemBlocks) if (ib.isTap(x, y)) return ib.getItem();
+        return null;
+    }
+
     public boolean isTap(float x, float y) {
         return x > posX && x < posX + fullWidth
                 && y > posY && y < posY + fullHeight;
@@ -99,7 +131,7 @@ public class HeroSegment extends AbstractSegment {
                 eqItemBlocks.add(new HeroEqItemBlock(tileHelmet, tileSize, ItemTypeEnum.HELMET));
                 eqItemBlocks.add(new HeroEqItemBlock(tileNecklace, tileSize, ItemTypeEnum.NECKLACE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArmor, tileSize, ItemTypeEnum.ARMOR));
-                eqItemBlocks.add(new HeroEqItemBlock(tileRing0, tileSize, ItemTypeEnum.RING));
+                eqItemBlocks.add(new HeroEqItemBlock(tileRing1, tileSize, ItemTypeEnum.RING));
                 eqItemBlocks.add(new HeroEqItemBlock(tileSword, tileSize, ItemTypeEnum.MELE));
                 eqItemBlocks.add(new HeroEqItemBlock(tileBow, tileSize, ItemTypeEnum.BOW));
                 eqItemBlocks.add(new HeroEqItemBlock(tileArrow, tileSize, ItemTypeEnum.ARROW));

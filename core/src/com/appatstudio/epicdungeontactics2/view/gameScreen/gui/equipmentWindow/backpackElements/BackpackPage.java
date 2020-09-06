@@ -116,7 +116,7 @@ public class BackpackPage {
     public void draw(Batch batch, AbstractItem selectedItem) {
         borders.draw(batch, X, BackpackSegment.getPosY(), WIDTH, HEIGHT);
         for (int i = 0; i < COLS * ROWS; i++) {
-            items[i].draw(batch, items[i].getItem() == selectedItem);
+            items[i].draw(batch, selectedItem, 1f);
         }
     }
 

@@ -28,7 +28,7 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.STAFF, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOW, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.ARROW, 100);
-        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.HELMET, 100);
+        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.HELMET, 400);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.ARMOR, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.SHIELD, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.NECKLACE, 100);
@@ -272,14 +272,18 @@ public class ItemGeneratorConfig {
         basicItemArrowChance.put(ItemEnum.ARROWv9, 100);
         basicItemChance.put(ItemTypeEnum.ARROW, basicItemArrowChance);
 
+        HashMap<ItemEnum, Integer> basicItemBookChance = new HashMap<>();
+        basicItemBookChance.put(ItemEnum.BOOKv0, 100);
+        basicItemBookChance.put(ItemEnum.BOOKv1, 100);
+        basicItemBookChance.put(ItemEnum.BOOKv2, 100);
+        basicItemBookChance.put(ItemEnum.BOOKv3, 100);
+        basicItemBookChance.put(ItemEnum.BOOKv4, 100);
+        basicItemBookChance.put(ItemEnum.BOOKv5, 100);
+        basicItemChance.put(ItemTypeEnum.BOOK, basicItemBookChance);
+
         HashMap<ItemEnum, Integer> basicItemOtherChance = new HashMap<>();
-        basicItemOtherChance.put(ItemEnum.BOOKv0, 100);
-        basicItemOtherChance.put(ItemEnum.BOOKv1, 100);
-        basicItemOtherChance.put(ItemEnum.BOOKv2, 100);
-        basicItemOtherChance.put(ItemEnum.BOOKv3, 100);
-        basicItemOtherChance.put(ItemEnum.BOOKv4, 100);
-        basicItemOtherChance.put(ItemEnum.BOOKv5, 100);
-        basicItemChance.put(ItemTypeEnum.BOOK, basicItemOtherChance);
+        basicItemOtherChance.put(ItemEnum.KEY, 100);
+        basicItemChance.put(ItemTypeEnum.OTHER, basicItemOtherChance);
 
         HashMap<ItemEnum, Integer> basicItemBowChance = new HashMap<>();
         basicItemBowChance.put(ItemEnum.BOWv0, 100);
@@ -544,14 +548,18 @@ public class ItemGeneratorConfig {
         lvlItemArrowChance.put(ItemEnum.ARROWv9, 100);
         lvlItemChance.put(ItemTypeEnum.ARROW, lvlItemArrowChance);
 
+        HashMap<ItemEnum, Integer> lvlItemBookChance = new HashMap<>();
+        lvlItemBookChance.put(ItemEnum.BOOKv0, 100);
+        lvlItemBookChance.put(ItemEnum.BOOKv1, 100);
+        lvlItemBookChance.put(ItemEnum.BOOKv2, 100);
+        lvlItemBookChance.put(ItemEnum.BOOKv3, 100);
+        lvlItemBookChance.put(ItemEnum.BOOKv4, 100);
+        lvlItemBookChance.put(ItemEnum.BOOKv5, 100);
+        lvlItemChance.put(ItemTypeEnum.BOOK, lvlItemBookChance);
+
         HashMap<ItemEnum, Integer> lvlItemOtherChance = new HashMap<>();
-        lvlItemOtherChance.put(ItemEnum.BOOKv0, 100);
-        lvlItemOtherChance.put(ItemEnum.BOOKv1, 100);
-        lvlItemOtherChance.put(ItemEnum.BOOKv2, 100);
-        lvlItemOtherChance.put(ItemEnum.BOOKv3, 100);
-        lvlItemOtherChance.put(ItemEnum.BOOKv4, 100);
-        lvlItemOtherChance.put(ItemEnum.BOOKv5, 100);
-        lvlItemChance.put(ItemTypeEnum.BOOK, lvlItemOtherChance);
+        lvlItemOtherChance.put(ItemEnum.KEY, 100);
+        lvlItemChance.put(ItemTypeEnum.OTHER, lvlItemOtherChance);
 
         HashMap<ItemEnum, Integer> lvlItemBowChance = new HashMap<>();
         lvlItemBowChance.put(ItemEnum.BOWv0, 100);

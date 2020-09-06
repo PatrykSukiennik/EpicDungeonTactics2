@@ -12,6 +12,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -38,6 +39,7 @@ public final class GraphicsManager {
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
     private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
     private static Map<ItemTypeEnum, SpriteDrawable> itemCategoryIconsMap;
+    private static Map<ItemRarityEnum, SpriteDrawable> itemRarityIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
 
@@ -190,6 +192,12 @@ public final class GraphicsManager {
         ItemTypeEnum[] allTypes = ItemTypeEnum.values();
         for (ItemTypeEnum i : allTypes) {
             itemCategoryIconsMap.put(i, new SpriteDrawable(new Sprite(atlas.findRegion("item-type-icons/" + i.toString()))));
+        }
+
+        itemRarityIconsMap = new HashMap<>();
+        ItemRarityEnum[] allRarities = ItemRarityEnum.values();
+        for (ItemRarityEnum r : allRarities) {
+            itemRarityIconsMap.put(r, new SpriteDrawable(new Sprite(atlas.findRegion("item-rarity-bg/" + r.toString()))));
         }
     }
 
@@ -350,5 +358,9 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getMapElementInactiveSprite(MapElementSpriteEnum spriteEnum) {
         return mapElementSpritesBroken.get(spriteEnum);
+    }
+
+    public static SpriteDrawable getItemRaritySprite(ItemRarityEnum rarityEnum) {
+        return itemRarityIconsMap.get(rarityEnum);
     }
 }

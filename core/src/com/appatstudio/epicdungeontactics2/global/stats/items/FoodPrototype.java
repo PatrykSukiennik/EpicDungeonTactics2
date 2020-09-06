@@ -1,14 +1,15 @@
 package com.appatstudio.epicdungeontactics2.global.stats.items;
 
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
 public class FoodPrototype extends ItemPrototype {
 
     private final int HP_EFFECT;
 
-    public FoodPrototype(ItemEnum id, ItemTypeEnum type, int value, int hp) {
-        super(id, type, value);
+    public FoodPrototype(ItemEnum id, ItemTypeEnum type, int value, int hp, ItemRarityEnum rarityEnum) {
+        super(id, type, value, rarityEnum);
 
         this.HP_EFFECT = hp;
     }

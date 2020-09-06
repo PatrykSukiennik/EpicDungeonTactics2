@@ -9,5 +9,8 @@ public enum GuiStringEnum {
 
     MAXED_OUT, STAGE,
 
-    FINISH, NO_HERO_LEFT
+    FINISH, NO_HERO_LEFT,
+
+    NOT_POSSIBLE_IN_FIGHT,
+    DROP
 }

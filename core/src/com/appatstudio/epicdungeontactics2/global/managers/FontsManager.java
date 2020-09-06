@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.managers;
 
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -29,6 +30,18 @@ public final class FontsManager {
 
     public static BitmapFont getFont(FontEnum fontEnum) {
         return fontMap.get(fontEnum);
+    }
+
+    public static BitmapFont getFont(ItemRarityEnum rarityEnum) {
+        switch (rarityEnum) {
+            case WHITE: return fontMap.get(FontEnum.ITEM_TITLE_WHITE);
+            case GREEN: return fontMap.get(FontEnum.ITEM_TITLE_GREEN);
+            case BLUE: return fontMap.get(FontEnum.ITEM_TITLE_BLUE);
+            case VIOLET: return fontMap.get(FontEnum.ITEM_TITLE_VIOLET);
+            case ORANGE: return fontMap.get(FontEnum.ITEM_TITLE_ORANGE);
+            case RED: return fontMap.get(FontEnum.ITEM_TITLE_RED);
+            default: return null;
+        }
     }
 
     public static float getTextWidth(BitmapFont font, String text) {

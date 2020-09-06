@@ -10,6 +10,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
+import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
@@ -105,6 +106,17 @@ public final class GameScreen extends Actor {
         CameraHandler.freshRun();
         newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " 1");
         freshRunTextDelay = 2f;
+
+
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
+        EquipmentWindow.pickItem(ItemGenerator.getItem());
     }
 
     public static void switchRoomInit(DirectionEnum direction) {

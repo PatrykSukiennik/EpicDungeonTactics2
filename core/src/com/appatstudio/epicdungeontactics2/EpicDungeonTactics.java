@@ -54,6 +54,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         random = new Random();
     }
 
+    public EpicDungeonTactics() {
+
+    }
+
     public static void startGame() {
         if (gameScreen == null) gameScreen = new GameScreen(selectedHero, selectedPerk);
         gameScreen.startGame(selectedHero, selectedPerk);

@@ -57,6 +57,12 @@ project(":desktop") {
 project(":android") {
     apply plugin: "android"
 
+    task runPython(type:Exec) {
+        workingDir './python'
+
+        commandLine 'python', './map_info_generator.py'
+    }
+
     configurations { natives }
 
     dependencies {
@@ -115,4 +121,5 @@ project(":ios") {
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"
         
     }
+
 }

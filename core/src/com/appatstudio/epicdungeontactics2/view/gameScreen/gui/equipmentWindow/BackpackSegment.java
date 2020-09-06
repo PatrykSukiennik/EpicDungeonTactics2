@@ -24,7 +24,6 @@ public class BackpackSegment extends AbstractSegment {
 
     BackpackSegment(CharacterEnum hero) {
         currShelf = ItemBackpackShelfEnum.MELE;
-        currItem = null;
 
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_BACKPACK);
 
@@ -61,7 +60,7 @@ public class BackpackSegment extends AbstractSegment {
         }
     }
 
-    void draw(Batch batch) {
+    void draw(Batch batch, AbstractItem currItem) {
         bg.draw(batch, posX, getPosY(), fullWidth, fullHeight);
         pages.get(currShelf).draw(batch, currItem);
         categoryColumn.draw(batch, currShelf);
@@ -102,6 +101,33 @@ public class BackpackSegment extends AbstractSegment {
 
     void dropItem(AbstractItem item) {
         pages.get(currShelf).drop(item);
+    }
+
+    void pickItem(AbstractItem item) {
+        switch (item.getItemTypeEnum()) {
+            case MELE:
+                pages.get(ItemBackpackShelfEnum.MELE).put(item);
+                break;
+            case HELMET:
+            case NECKLACE:
+            case SHIELD:
+            case RING:
+            case ARMOR:
+                pages.get(ItemBackpackShelfEnum.ARMOR).put(item);
+                break;
+            case BOOK:
+            case FOOD:
+            case OTHER:
+                pages.get(ItemBackpackShelfEnum.FOOD).put(item);
+                break;
+            case ARROW:
+            case BOW:
+            case STAFF:
+                pages.get(ItemBackpackShelfEnum.DISTANCE).put(item);
+                break;
+
+        }
+
     }
 
     void selectItem(AbstractItem item) {

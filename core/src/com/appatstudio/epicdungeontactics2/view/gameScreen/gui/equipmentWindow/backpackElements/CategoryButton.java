@@ -10,10 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class CategoryButton {
 
     private ItemBackpackShelfEnum category;
-    private SpriteDrawable bg = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+    private SpriteDrawable bg;
 
     CategoryButton(ItemBackpackShelfEnum category) {
         this.category = category;
+
+        switch (category) {
+            case FOOD: bg = GraphicsManager.getGuiElement(GuiElementEnum.CATEGORY_BUTTON_FOOD); break;
+            case ARMOR: bg = GraphicsManager.getGuiElement(GuiElementEnum.CATEGORY_BUTTON_ARMOR); break;
+            case MELE: bg = GraphicsManager.getGuiElement(GuiElementEnum.CATEGORY_BUTTON_MELE); break;
+            case DISTANCE: bg = GraphicsManager.getGuiElement(GuiElementEnum.CATEGORY_BUTTON_DISTANCE); break;
+        }
     }
 
     void draw(Batch batch, boolean isSelected, float y) {

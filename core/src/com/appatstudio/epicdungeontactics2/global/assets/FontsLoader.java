@@ -35,6 +35,9 @@ final class FontsLoader {
         int enemyNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.025f) : (int) (Gdx.graphics.getWidth() * 0.035f);
         int bossNameTextSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.06f) : (int) (Gdx.graphics.getWidth() * 0.065f);
 
+        int itemTitleSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.035f) : (int) (Gdx.graphics.getWidth() * 0.04f);
+        int itemDescSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.035f);
+
 
         //MENU HERO TITLE
         FreetypeFontLoader.FreeTypeFontLoaderParameter parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
@@ -180,6 +183,73 @@ final class FontsLoader {
         parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.PET_BAR_NAME.toString() + ".ttf", BitmapFont.class, parms);
+
+
+        //ITEMS
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.WHITE;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_WHITE.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.GREEN;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_GREEN.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.BLUE;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_BLUE.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.VIOLET;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_VIOLET.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.ORANGE;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_ORANGE.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemTitleSize;
+        parms.fontParameters.color = Color.RED;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_TITLE_RED.toString() + ".ttf", BitmapFont.class, parms);
+
+        //desc
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemDescSize;
+        parms.fontParameters.color = Color.LIGHT_GRAY;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_DESC.toString() + ".ttf", BitmapFont.class, parms);
+
 
 
     }
