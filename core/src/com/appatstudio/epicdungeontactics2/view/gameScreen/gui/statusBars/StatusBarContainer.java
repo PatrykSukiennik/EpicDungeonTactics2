@@ -90,4 +90,8 @@ public final class StatusBarContainer {
         return heroHead.getY();
     }
 
+    public boolean isTap(float x, float y) {
+        return x > heroHead.getX() && x < heroHead.getX() + heroHead.getWidth()
+                && y > heroHead.getY() && y < heroHead.getY() + heroHead.getHeight();
+    }
 }

@@ -12,6 +12,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow.HeroStatWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
@@ -39,6 +40,7 @@ public final class GuiContainer {
 
     private EquipmentWindow equipmentWindow;
     private MapWindow mapWindow;
+    private HeroStatWindow heroStatWindow;
 
     private GuiButton eqButton, mapButton;
 
@@ -55,6 +57,7 @@ public final class GuiContainer {
         statusBarContainer = new StatusBarContainer(gameScreen.getHero());
 
         equipmentWindow = new EquipmentWindow(gameScreen.getHero());
+        heroStatWindow = new HeroStatWindow(gameScreen.getHero());
         mapWindow = new MapWindow();
 
         statusBarContainer.addEffect(EffectEnum.POISON, 4);
@@ -115,6 +118,10 @@ public final class GuiContainer {
             mapWindow.draw(batch);
         }
 
+        else if (heroStatWindow.isUp()) {
+            heroStatWindow.draw(batch);
+        }
+
 
         batch.end();
     }
@@ -132,12 +139,20 @@ public final class GuiContainer {
             equipmentWindow.tap(x, y);
             return true;
         }
+        else if (heroStatWindow.isUp()) {
+            heroStatWindow.tap(x, y);
+            return true;
+        }
         else if (eqButton.isTap(x, y)) {
             EquipmentWindow.show();
             return true;
         }
         else if (mapButton.isTap(x, y)) {
             mapWindow.show();
+            return true;
+        }
+        else if (statusBarContainer.isTap(x, y)) {
+            heroStatWindow.show();
             return true;
         }
         return false;
@@ -149,6 +164,9 @@ public final class GuiContainer {
         }
         else if (mapWindow.isUp()) {
             mapWindow.hide();
+        }
+        else if (heroStatWindow.isUp()) {
+            heroStatWindow.hide();
         }
         else runQuitWindow.show();
     }

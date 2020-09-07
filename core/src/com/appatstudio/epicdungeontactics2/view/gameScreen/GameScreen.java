@@ -29,8 +29,8 @@ import static java.lang.Thread.sleep;
 
 public final class GameScreen extends Actor {
 
-    private CharacterEnum hero;
-    private PerkEnum perk;
+    private static CharacterEnum hero;
+    private static PerkEnum perk;
 
     private Room currRoom;
     private Stage currStage;
@@ -60,12 +60,10 @@ public final class GameScreen extends Actor {
 
     private static float freshRunTextDelay = 0f;
 
-    public GameScreen(CharacterEnum hero, PerkEnum perk) {
-        this.hero = hero;
-        this.perk = perk;
+    public GameScreen(CharacterEnum currHero, PerkEnum currPerk) {
+        hero = currHero;
+        perk = currPerk;
         stage = 1;
-
-        StatTracker.setCurrHero(hero);
 
         currStage = MapGenerator.createStage(stage);
         currRoom = currStage.getFirstRoom();
@@ -119,6 +117,10 @@ public final class GameScreen extends Actor {
         EquipmentWindow.pickItem(ItemGenerator.getItem());
     }
 
+    public CharacterEnum getCurrHero() {
+        return hero;
+    }
+
     public static void switchRoomInit(DirectionEnum direction) {
         CameraHandler.changeRoom(direction);
         switchRoomDelay = 0.8f;
@@ -160,7 +162,7 @@ public final class GameScreen extends Actor {
         handleRoomChanges();
     }
 
-    public CharacterEnum getHero() {
+    public static CharacterEnum getHero() {
         return hero;
     }
 

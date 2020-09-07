@@ -52,7 +52,7 @@ public class HeroEqItemBlock extends ItemBlock {
             }
             else {
                 if (selectedItem.getItemTypeEnum() == requiredCategory) {
-                    super.draw(batch, selectedItem, pulsatingActor.getColor().a);
+                    super.draw(batch, selectedItem, selectedItem == getItem() ? 1f : pulsatingActor.getColor().a);
                 }
                 else {
                     super.draw(batch, selectedItem,  1f);

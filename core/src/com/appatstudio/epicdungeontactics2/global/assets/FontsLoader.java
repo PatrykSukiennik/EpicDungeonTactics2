@@ -13,8 +13,9 @@ final class FontsLoader {
     private static final Color COLOR_WHITE_TEXT = new Color(0.95f, 0.95f, 0.95f, 1f);
     private static final Color COLOR_GRAY_TEXT = new Color(0.45f, 0.45f, 0.45f, 1f);
     private static final Color COLOR_BLUE_TEXT = new Color(0.1f, 0.1f, 0.95f, 1f);
+    private static final Color COLOR_RED_TEXT = new Color(0.95f, 0.1f, 0.1f, 1f);
     private static final Color COLOR_YELLOW_TEXT = new Color(0.1f, 0.75f, 0.75f, 1f);
-    private static final Color COLOR_GREEN_TEXT = new Color(0.1f, 0.95f, 0.1f, 1f);
+    private static final Color COLOR_GREEN_TEXT = new Color(0.1f, 0.75f, 0.1f, 1f);
 
     private static final String MAP_FONT_PATH = "fonts/map_font.ttf";
     private static final String DECORATED_FONT_PATH = "fonts/decorated_font.ttf";
@@ -22,6 +23,7 @@ final class FontsLoader {
     private static final String DECORATED_FONT_BOLD_PATH = "fonts/decorated_font_bold.ttf";
 
     private static final String CHARACTERS = "'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.<>?/_!#%&8()1234567890-:=+~[]ąĄćĆżŻźŹóÓęĘłŁńŃśŚ";
+    private static final String NUMBERS = "1234567890/";
 
     static void init(AssetManager assetManager) {
 
@@ -59,6 +61,15 @@ final class FontsLoader {
         assetManager.load(FontEnum.MENU_HERO_TITLE_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
 
 
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = (int)(menuBigTextSize * 1.5f);
+        parms.fontParameters.color = COLOR_WHITE_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 3;
+        parms.fontParameters.characters = NUMBERS;
+        assetManager.load(FontEnum.LVL_POINTS_NUMBER.toString() + ".ttf", BitmapFont.class, parms);
+
         //MENU HERO DESCRIPTION
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
@@ -72,11 +83,59 @@ final class FontsLoader {
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = DECORATED_FONT_PATH;
         parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_GREEN_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED_GREEN.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_RED_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED_RED.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
         parms.fontParameters.color = COLOR_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
         parms.fontParameters.borderWidth = 2;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.MENU_HERO_DESCRIPTION_LOCKED.toString() + ".ttf", BitmapFont.class, parms);
+
+
+        //STAT WINDOW
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_BLUE_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = NUMBERS;
+        assetManager.load(FontEnum.STAT_MP.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_RED_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = NUMBERS;
+        assetManager.load(FontEnum.STAT_HP.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = DECORATED_FONT_PATH;
+        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontParameters.color = COLOR_GREEN_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 2;
+        parms.fontParameters.characters = NUMBERS;
+        assetManager.load(FontEnum.STAT_EXP.toString() + ".ttf", BitmapFont.class, parms);
+
 
 
         //PERK SCREEN

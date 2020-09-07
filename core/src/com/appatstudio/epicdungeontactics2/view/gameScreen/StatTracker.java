@@ -1,6 +1,8 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterStatsObject;
@@ -11,23 +13,33 @@ import java.util.HashMap;
 
 public class StatTracker {
 
-    private int goldCollected;
-    private int roomsCleared;
-    private HashMap<CharacterEnum, Integer> expCollected;
-    private HashMap<CharacterEnum, Boolean> lvlUps;
-    private Array<CharacterEnum> usedCharacters;
-    public Array<AbstractItem> eqItems;
+    private static int goldCollected;
+    private static int roomsCleared;
+    private static HashMap<CharacterEnum, Integer> expCollected;
+    private static HashMap<CharacterEnum, Boolean> lvlUps;
+    private static Array<CharacterEnum> usedCharacters;
+    public static Array<AbstractItem> eqItems;
     public static CharacterStatsObject stats;
+
+    private static HashMap<StatisticEnum, Integer> basicStats;
+    private static HashMap<StatisticEnum, Integer> currStats;
 
     private static CharacterEnum currHero;
     private static int lvl;
 
-    public StatTracker() {
+    static {
+        currHero = GameScreen.getHero();
         usedCharacters = new Array<>();
 
         eqItems = new Array<>();
 
-        stats = new CharacterStatsObject(currHero);
+        stats = new CharacterStatsObject(GameScreen.getHero());
+
+        basicStats = new HashMap<>();
+        currStats = new HashMap<>();
+        StatisticEnum[] allEnums = StatisticEnum.values();
+        for (StatisticEnum s : allEnums) basicStats.put(s, SavedInfoManager.getCharacterStat(currHero, s));
+        for (StatisticEnum s : allEnums) currStats.put(s, SavedInfoManager.getCharacterStat(currHero, s));
     }
 
     public static int getLvl() {
@@ -44,6 +56,14 @@ public class StatTracker {
 
     public static void lvlUp() {
         ItemGenerator.refresh();
+    }
+
+    public static int getBasicStat(StatisticEnum statisticEnum) {
+        return basicStats.get(statisticEnum);
+    }
+
+    public static int getCurrentStat(StatisticEnum statisticEnum) {
+        return currStats.get(statisticEnum);
     }
 
     public HashMap<CharacterEnum, Boolean> getLvlUps() {
@@ -64,10 +84,6 @@ public class StatTracker {
 
     public Array<CharacterEnum> getUsedCharacters() {
         return usedCharacters;
-    }
-
-    public static void setCurrHero(CharacterEnum currHero) {
-        StatTracker.currHero = currHero;
     }
 
     public static CharacterStatsObject getStats() {
