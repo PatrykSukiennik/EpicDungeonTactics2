@@ -1,12 +1,16 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterStatsObject;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Book;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Food;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
@@ -26,6 +30,11 @@ public class StatTracker {
 
     private static CharacterEnum currHero;
     private static int lvl;
+
+    private static int hp, mp, exp;
+
+    private static PerkEnum selectedPerk;
+
 
     static {
         currHero = GameScreen.getHero();
@@ -66,6 +75,31 @@ public class StatTracker {
         return currStats.get(statisticEnum);
     }
 
+    public static PerkEnum getPerk() {
+        return selectedPerk;
+    }
+
+    public static void itemUsed(AbstractItem item) {
+        if (item.getItemTypeEnum() == ItemTypeEnum.BOOK) {
+            expEffect(((Book)item).getExpEffect());
+        }
+        else if (item.getItemTypeEnum() == ItemTypeEnum.FOOD) {
+            hpEffect(((Food)item).getHpEffect());
+            hpEffect(((Food)item).getMpEffect());
+        }
+    }
+
+    public static void hpEffect(int hpEffect) {
+        hp += hpEffect;
+    }
+    public static void mpEffect(int mpEffect) {
+        mp += mpEffect;
+    }
+    public static void expEffect(int expEffect) {
+        exp += expEffect;
+    }
+
+
     public HashMap<CharacterEnum, Boolean> getLvlUps() {
         return lvlUps;
     }
@@ -88,6 +122,10 @@ public class StatTracker {
 
     public static CharacterStatsObject getStats() {
         return stats;
+    }
+
+    public static void setSelectedPerk(PerkEnum perk) {
+        selectedPerk = perk;
     }
 
 }

@@ -118,4 +118,41 @@ public final class TextWithIcon {
     public void setFont(BitmapFont newFont) {
         this.font = newFont;
     }
+
+    public void setIconAndFont(SpriteDrawable icon, String text) {
+        this.icon = icon;
+        setText(text);
+        wholeWidth = iconSize * 1.2f + FontsManager.getTextWidth(font, text);
+
+        switch (alignment) {
+            case Align.center: {
+                iconX = posX - wholeWidth / 2f;
+                iconY = posY - iconSize / 2f;
+                textX = iconX + iconSize * 1.2f;
+                textY = posY + iconSize / 2f;
+                break;
+
+            }
+            case Align.left: {
+                iconX = posX;
+                iconY = posY - iconSize / 2f;
+                textX = iconX + iconSize * 1.2f;
+                textY = posY + iconSize / 2f;
+                break;
+            }
+            case Align.right: {
+                iconX = posX - iconSize;
+                iconY = posY - iconSize / 2f;
+                textX = posX - wholeWidth;
+                textY = posY + iconSize / 2f;
+                break;
+            }
+            case Align.topRight: {
+                iconX = posX + wholeWidth / 2f - iconSize;
+                iconY = posY - iconSize / 2f;
+                textX = posX - wholeWidth / 2f;
+                textY = posY + iconSize / 2f;
+            }
+        }
+    }
 }

@@ -43,6 +43,13 @@ public final class EquipmentWindow {
         );
     }
 
+    public static void itemUsed(AbstractItem item) {
+        backpackSegment.itemUsed(item);
+
+        currItem = null;
+        //play sound or whatever
+    }
+
     public void draw(Batch batch) {
         heroSegment.draw(batch, currItem);
         backpackSegment.draw(batch, currItem);
@@ -110,6 +117,11 @@ public final class EquipmentWindow {
 
     public static void show() {
         isUp = true;
+        cleanUp();
+    }
+
+    public static void cleanUp() {
+        backpackSegment.cleanUp();
     }
 
     public static void pickItem(AbstractItem item) {

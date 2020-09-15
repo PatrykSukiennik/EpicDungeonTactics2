@@ -11,9 +11,11 @@ import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.EffectIcon;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -37,7 +39,8 @@ public final class GraphicsManager {
     private static Map<StatisticEnum, SpriteDrawable> statIconsMap;
     private static Map<FinanceUpgradeEnum, SpriteDrawable> financesIconsMap;
     private static Map<PerkEnum, SpriteDrawable> perkIconsMap;
-    private static Map<EffectEnum, SpriteDrawable> effectIconsMap;
+    private static Map<ItemEffectEnum, SpriteDrawable> itemEffectIconsMap;
+    private static Map<EffectEnum, SpriteDrawable> effectsIconMap;
     private static Map<ItemTypeEnum, SpriteDrawable> itemCategoryIconsMap;
     private static Map<ItemRarityEnum, SpriteDrawable> itemRarityIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
@@ -155,6 +158,7 @@ public final class GraphicsManager {
         guiElements = new HashMap<>();
         GuiElementEnum[] allElements = GuiElementEnum.values();
         for (GuiElementEnum g : allElements) {
+            System.out.println(g.toString());
             guiElements.put(g, new SpriteDrawable(new Sprite(atlas.findRegion(g.toString()))));
         }
 
@@ -176,11 +180,19 @@ public final class GraphicsManager {
             perkIconsMap.put(p, new SpriteDrawable(new Sprite(atlas.findRegion("perk-icons/" + p.toString()))));
         }
 
-        effectIconsMap = new HashMap<>();
-        EffectEnum[] allEffects = EffectEnum.values();
-        for (EffectEnum e : allEffects) {
-            effectIconsMap.put(e, new SpriteDrawable(new Sprite(atlas.findRegion("effect-icons/" + e.toString()))));
+        itemEffectIconsMap = new HashMap<>();
+        ItemEffectEnum[] allItemEffects = ItemEffectEnum.values();
+        for (ItemEffectEnum e : allItemEffects) {
+            itemEffectIconsMap.put(e, new SpriteDrawable(new Sprite(atlas.findRegion("item-effect-icons/" + e.toString()))));
         }
+
+        effectsIconMap = new HashMap<>();
+        EffectEnum[] allEffects = EffectEnum.values();
+        for (EffectEnum ef : allEffects) {
+            System.out.println(ef.toString());
+            effectsIconMap.put(ef, new SpriteDrawable(new Sprite(atlas.findRegion("effect-icons/" + ef.toString()))));
+        }
+
 
         financesIconsMap = new HashMap<>();
         FinanceUpgradeEnum[] allFinances = FinanceUpgradeEnum.values();
@@ -315,8 +327,12 @@ public final class GraphicsManager {
         return perkIconsMap.get(p);
     }
 
+    public static SpriteDrawable getItemEffectIcon(ItemEffectEnum e) {
+        return itemEffectIconsMap.get(e);
+    }
+
     public static SpriteDrawable getEffectIcon(EffectEnum e) {
-        return effectIconsMap.get(e);
+        return effectsIconMap.get(e);
     }
 
     public static SpriteDrawable getFinancesIcon(FinanceUpgradeEnum e) {

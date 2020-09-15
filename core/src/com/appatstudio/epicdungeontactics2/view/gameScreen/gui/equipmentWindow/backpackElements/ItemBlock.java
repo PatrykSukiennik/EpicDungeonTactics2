@@ -35,6 +35,10 @@ public class ItemBlock extends Image {
     public void setItem(AbstractItem newItem) {
         this.item = newItem;
 
+        if (newItem == null) {
+            this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.NONE));
+        }
+
         if (newItem != null) {
             this.setDrawable(GraphicsManager.getItemImage(newItem.getItemEnum()));
             this.bg = GraphicsManager.getItemRaritySprite(item.getRarity());

@@ -173,4 +173,34 @@ public class BackpackSegment extends AbstractSegment {
         }
         return false;
     }
+
+    public void itemUsed(AbstractItem item) {
+        switch (item.getItemTypeEnum()) {
+            case STAFF:
+            case MELE:
+                currShelf = ItemBackpackShelfEnum.MELE;
+                break;
+            case HELMET:
+            case NECKLACE:
+            case SHIELD:
+            case RING:
+            case ARMOR:
+                currShelf = ItemBackpackShelfEnum.ARMOR;
+                break;
+            case BOOK:
+            case FOOD:
+            case OTHER:
+                currShelf = ItemBackpackShelfEnum.FOOD;
+                break;
+            case ARROW:
+            case BOW:
+                currShelf = ItemBackpackShelfEnum.DISTANCE;
+                break;
+        }
+        pages.get(currShelf).itemUsed(item);
+    }
+
+    public void cleanUp() {
+        for (BackpackPage bp : pages.values()) bp.cleanUp();
+    }
 }

@@ -187,4 +187,8 @@ public final class GuiContainer {
     public void roomChanged(Room oldRoom, Room newRoom) {
         mapWindow.setCurrRoom(oldRoom, newRoom);
     }
+
+    public void refreshStats() {
+        heroStatWindow.refreshStats();
+    }
 }

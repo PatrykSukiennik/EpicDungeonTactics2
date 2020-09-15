@@ -16,4 +16,12 @@ public final class MeleWeapon extends AbstractItem {
         this.speedEffect = speedEffect;
         this.dmg = dmg;
     }
+
+    public int getDmg() {
+        return dmg;
+    }
+
+    public int getSpeedEffect() {
+        return speedEffect;
+    }
 }

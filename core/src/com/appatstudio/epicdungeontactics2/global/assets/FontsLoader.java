@@ -12,10 +12,10 @@ final class FontsLoader {
 
     private static final Color COLOR_WHITE_TEXT = new Color(0.95f, 0.95f, 0.95f, 1f);
     private static final Color COLOR_GRAY_TEXT = new Color(0.45f, 0.45f, 0.45f, 1f);
-    private static final Color COLOR_BLUE_TEXT = new Color(0.1f, 0.1f, 0.95f, 1f);
-    private static final Color COLOR_RED_TEXT = new Color(0.95f, 0.1f, 0.1f, 1f);
+    private static final Color COLOR_BLUE_TEXT = new Color(0.1f, 0.1f, 0.6f, 1f);
+    private static final Color COLOR_RED_TEXT = new Color(0.6f, 0.1f, 0.1f, 1f);
     private static final Color COLOR_YELLOW_TEXT = new Color(0.1f, 0.75f, 0.75f, 1f);
-    private static final Color COLOR_GREEN_TEXT = new Color(0.1f, 0.75f, 0.1f, 1f);
+    private static final Color COLOR_GREEN_TEXT = new Color(0.1f, 0.6f, 0.1f, 1f);
 
     private static final String MAP_FONT_PATH = "fonts/map_font.ttf";
     private static final String DECORATED_FONT_PATH = "fonts/decorated_font.ttf";
@@ -39,6 +39,9 @@ final class FontsLoader {
 
         int itemTitleSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.035f) : (int) (Gdx.graphics.getWidth() * 0.04f);
         int itemDescSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.035f);
+
+        int statsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.022f) : (int) (Gdx.graphics.getWidth() * 0.027f);
+        int smallStatsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.016f) : (int) (Gdx.graphics.getWidth() * 0.026f);
 
 
         //MENU HERO TITLE
@@ -110,30 +113,48 @@ final class FontsLoader {
 
         //STAT WINDOW
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = statsFontSize;
+        parms.fontParameters.color = COLOR_GRAY_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.STAT_DESC.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = smallStatsFontSize;
+        parms.fontParameters.color = COLOR_GRAY_TEXT;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.SMALL_STAT_DESC.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_BLUE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 2;
-        parms.fontParameters.characters = NUMBERS;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_MP.toString() + ".ttf", BitmapFont.class, parms);
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_RED_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 2;
-        parms.fontParameters.characters = NUMBERS;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_HP.toString() + ".ttf", BitmapFont.class, parms);
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-        parms.fontFileName = DECORATED_FONT_PATH;
-        parms.fontParameters.size = menuSmallTextSize;
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_GREEN_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 2;
-        parms.fontParameters.characters = NUMBERS;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_EXP.toString() + ".ttf", BitmapFont.class, parms);
 
 
@@ -308,6 +329,15 @@ final class FontsLoader {
         parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.ITEM_DESC.toString() + ".ttf", BitmapFont.class, parms);
+
+        parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+        parms.fontFileName = MAP_FONT_PATH;
+        parms.fontParameters.size = itemDescSize;
+        parms.fontParameters.color = Color.GOLD;
+        parms.fontParameters.borderColor = Color.BLACK;
+        parms.fontParameters.borderWidth = 1;
+        parms.fontParameters.characters = CHARACTERS;
+        assetManager.load(FontEnum.ITEM_DESC_YELLOW.toString() + ".ttf", BitmapFont.class, parms);
 
 
 

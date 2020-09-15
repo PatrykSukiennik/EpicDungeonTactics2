@@ -6,15 +6,15 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
 public class BookPrototype extends ItemPrototype {
 
-    private final int EFFECT_SLOTS;
+    private final int EXP;
 
-    public BookPrototype(ItemEnum id, ItemTypeEnum type, int value, int effects, ItemRarityEnum rarityEnum) {
+    public BookPrototype(ItemEnum id, ItemTypeEnum type, int value, int exp, ItemRarityEnum rarityEnum) {
         super(id, type, value, rarityEnum);
 
-        this.EFFECT_SLOTS = effects;
+        this.EXP = exp;
     }
 
-    public int getEFFECT_SLOTS() {
-        return EFFECT_SLOTS;
+    public int getEXP() {
+        return EXP;
     }
 }

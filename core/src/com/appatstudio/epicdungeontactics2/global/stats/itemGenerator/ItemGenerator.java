@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.global.stats.itemGenerator;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
@@ -39,6 +40,7 @@ import java.util.Set;
 public class ItemGenerator {
 
     private static int itemTypeSum;
+    private static int itemEffectSum;
     private static HashMap<ItemTypeEnum, Integer> itemSums = new HashMap<>();
 
     private static int lvl;
@@ -160,7 +162,7 @@ public class ItemGenerator {
                         typeEnum,
                         prototypeBook.getVALUE() + lvl * lvlPrototypeBook.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        (int)(prototypeBook.getEFFECT_SLOTS() + lvl * 0.1f * lvlPrototypeBook.getEFFECT_SLOTS()),
+                        (int)(prototypeBook.getEXP() + lvl * 0.1f * lvlPrototypeBook.getEXP()),
                         prototypeBook.getRARITY()
                 );
 
@@ -173,6 +175,7 @@ public class ItemGenerator {
                         prototypeFood.getVALUE() + lvl * lvlPrototypeFood.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
                         prototypeFood.getHP_EFFECT() + lvl * lvlPrototypeFood.getHP_EFFECT(),
+                        prototypeFood.getMP_EFFECT() + lvl * lvlPrototypeFood.getMP_EFFECT(),
                         prototypeFood.getRARITY()
                 );
 
@@ -252,7 +255,7 @@ public class ItemGenerator {
                         typeEnum,
                         prototypeStaff.getVALUE() + lvl * lvlPrototypeStaff.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        generateSpell(),
+                        prototypeStaff.getSPELL(),
                         prototypeStaff.getDMG() + lvl * lvlPrototypeStaff.getDMG(),
                         prototypeStaff.getSPELL_CHANCE() + lvl * lvlPrototypeStaff.getSPELL_CHANCE(),
                         prototypeStaff.getSPEED_EFFECT() + lvl * lvlPrototypeStaff.getSPEED_EFFECT(),
@@ -291,9 +294,78 @@ public class ItemGenerator {
     }
 
     private static Array<ItemEffect> generateEffects(ItemTypeEnum type) {
-        return null;
+        for (Integer i : ItemEffectsConfig.effectChance.get(type).values()) {
+            itemEffectSum += i;
+        }
+
+        Array<ItemEffect> effects = new Array<>();
+        switch (type) {
+
+            case RING:
+            case NECKLACE:
+                for (int i=0; i<4; i++) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.12f * StatTracker.getLvl()) {
+                        effects.add(getEffect(effects, type));
+                    }
+                }
+                break;
+            case ARMOR:
+            case STAFF:
+            case SHIELD:
+            case MELE:
+            case HELMET:
+            case BOW:
+                for (int i=0; i<4; i++) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.06f * StatTracker.getLvl()) {
+                        effects.add(getEffect(effects, type));
+                    }
+                }
+                break;
+            case ARROW:
+                for (int i=0; i<4; i++) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.03f * StatTracker.getLvl()) {
+                        effects.add(getEffect(effects, type));
+                    }
+                }
+            case BOOK:
+            case FOOD:
+            case OTHER:
+                break;
+        }
+        return effects;
     }
 
+    private static ItemEffect getEffect(Array<ItemEffect> effects, ItemTypeEnum typeEnum) {
+            if (itemEffectSum == 0) refresh();
+            int temp = 0;
+            int result = Math.abs(EpicDungeonTactics.random.nextInt()) % itemEffectSum;
+            ItemEffectEnum effectEnum = null;
+            ItemEffectEnum[] allEffects = ItemEffectEnum.values();
+
+            for (ItemEffectEnum effect : allEffects) {
+                temp += ItemEffectsConfig.effectChance.get(typeEnum).get(effect);
+
+                if (result <= temp && !isEffectInArray(effects, effect)) {
+                    effectEnum = effect;
+                    break;
+                }
+            }
+            if (effectEnum == null) effectEnum = ItemEffectEnum.HP_BONUS;
+
+            return new ItemEffect(
+                    effectEnum,
+                    EpicDungeonTactics.random.nextFloat()
+                            * (ItemEffectsConfig.basicEffectPower.get(effectEnum)
+                            + StatTracker.getLvl() * ItemEffectsConfig.lvlEffectPower.get(effectEnum))
+            );
+    }
+
+    private static boolean isEffectInArray(Array<ItemEffect> effects, ItemEffectEnum effect) {
+        for (ItemEffect effectObject : effects) {
+            if (effectObject.getEffectEnum() == effect) return true;
+        }
+        return false;
+    }
 
 
 }

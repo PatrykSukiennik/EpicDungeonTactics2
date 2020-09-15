@@ -32,6 +32,10 @@ public class HeroEqItemBlock extends ItemBlock {
         this.requiredCategory = requiredCategory;
     }
 
+    public static float getPulsating() {
+        return pulsatingActor.getColor().a;
+    }
+
     public void draw(Batch batch, AbstractItem selectedItem) {
         if (selectedItem == null) {
             if (getItem() == null) {
@@ -59,6 +63,7 @@ public class HeroEqItemBlock extends ItemBlock {
                 }
             }
         }
+        batch.getColor().a = 1f;
     }
 
     @Override

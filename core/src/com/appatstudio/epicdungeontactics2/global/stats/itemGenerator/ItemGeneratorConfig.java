@@ -33,9 +33,9 @@ public class ItemGeneratorConfig {
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.SHIELD, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.NECKLACE, 100);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.RING, 100);
-        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.FOOD, 100);
+        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.FOOD, 1000);
         basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.OTHER, 100);
-        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOOK, 100);
+        basicTypeChance.get(CharacterEnum.HERO_ELF).put(ItemTypeEnum.BOOK, 1000);
 
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.MELE, 100);
         basicTypeChance.get(CharacterEnum.HERO_KNIGHT).put(ItemTypeEnum.STAFF, 100);

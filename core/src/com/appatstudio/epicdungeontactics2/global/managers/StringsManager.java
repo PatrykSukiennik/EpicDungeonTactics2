@@ -3,13 +3,17 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
+import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.I18NBundle;
 
@@ -30,6 +34,8 @@ public final class StringsManager {
     private static Map<CharacterEnum, String> characterDescriptionsMap;
     private static Map<CharacterEnum, String> characterBonusesMap;
     private static Map<StatisticEnum, String> statsNameMap;
+    private static Map<ItemEffectEnum, String> itemEffectNameMap;
+    private static Map<SpellEnum, String> spellNameMap;
     private static Map<GuiStringEnum, String> guiStringMap;
     private static Map<CommunicatesEnum, String> communicatesStringMap;
     private static Map<PlayerStatsTrackerFlagsEnum, String> playerStatStringMap;
@@ -50,6 +56,8 @@ public final class StringsManager {
         I18NBundle guiStrings = I18NBundle.createBundle(Gdx.files.internal("strings/gui_strings"), java.util.Locale.getDefault());
         I18NBundle playerStatStrings = I18NBundle.createBundle(Gdx.files.internal("strings/player_statistic_descriptions"), java.util.Locale.getDefault());
         I18NBundle communicatesStrings = I18NBundle.createBundle(Gdx.files.internal("strings/communicates"), java.util.Locale.getDefault());
+        I18NBundle itemEffectStrings = I18NBundle.createBundle(Gdx.files.internal("strings/item_effects"), java.util.Locale.getDefault());
+        I18NBundle spellNamesStrings = I18NBundle.createBundle(Gdx.files.internal("strings/spell_names"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
         ItemEnum[] itemEnums = ItemEnum.values();
@@ -117,6 +125,20 @@ public final class StringsManager {
             communicatesStringMap.put(c, communicatesStrings.get(c.toString()));
         }
 
+        itemEffectNameMap = new HashMap<>();
+        ItemEffectEnum[] allEffectsNames = ItemEffectEnum.values();
+        for (ItemEffectEnum ie : allEffectsNames) {
+            itemEffectNameMap.put(ie, itemEffectStrings.get(ie.toString()));
+        }
+
+        spellNameMap = new HashMap<>();
+        SpellEnum[] allSpells = SpellEnum.values();
+        for (SpellEnum s : allSpells) {
+            spellNameMap.put(s, spellNamesStrings.get(s.toString()));
+        }
+
+
+
     }
 
     public static String getItemName(ItemEnum itemEnum) {
@@ -179,4 +201,11 @@ public final class StringsManager {
         return communicatesStringMap.get(commEnum);
     }
 
+    public static String getItemEffectDescription(ItemEffectEnum effectEnum) {
+        return itemEffectNameMap.get(effectEnum);
+    }
+
+    public static String getSpellName(SpellEnum spell) {
+        return spellNameMap.get(spell);
+    }
 }

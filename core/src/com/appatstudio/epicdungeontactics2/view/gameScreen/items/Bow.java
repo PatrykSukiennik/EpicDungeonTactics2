@@ -16,4 +16,12 @@ public final class Bow extends AbstractItem {
         this.range = range;
         this.dmg = dmg;
     }
+
+    public int getRange() {
+        return range;
+    }
+
+    public int getDmg() {
+        return dmg;
+    }
 }

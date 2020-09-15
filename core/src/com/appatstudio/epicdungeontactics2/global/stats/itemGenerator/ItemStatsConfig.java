@@ -130,17 +130,17 @@ public class ItemStatsConfig {
 
 
         basicFoodStats = new HashMap<>();
-        basicFoodStats.put(ItemEnum.FOODv0, new FoodPrototype(ItemEnum.FOODv0, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv1, new FoodPrototype(ItemEnum.FOODv1, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv2, new FoodPrototype(ItemEnum.FOODv2, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv3, new FoodPrototype(ItemEnum.FOODv3, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv4, new FoodPrototype(ItemEnum.FOODv4, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv5, new FoodPrototype(ItemEnum.FOODv5, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv6, new FoodPrototype(ItemEnum.FOODv6, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv7, new FoodPrototype(ItemEnum.FOODv7, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv8, new FoodPrototype(ItemEnum.FOODv8, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv9, new FoodPrototype(ItemEnum.FOODv9, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        basicFoodStats.put(ItemEnum.FOODv10, new FoodPrototype(ItemEnum.FOODv10, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv0, new FoodPrototype(ItemEnum.FOODv0, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv1, new FoodPrototype(ItemEnum.FOODv1, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv2, new FoodPrototype(ItemEnum.FOODv2, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv3, new FoodPrototype(ItemEnum.FOODv3, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv4, new FoodPrototype(ItemEnum.FOODv4, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv5, new FoodPrototype(ItemEnum.FOODv5, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv6, new FoodPrototype(ItemEnum.FOODv6, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv7, new FoodPrototype(ItemEnum.FOODv7, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv8, new FoodPrototype(ItemEnum.FOODv8, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv9, new FoodPrototype(ItemEnum.FOODv9, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        basicFoodStats.put(ItemEnum.FOODv10, new FoodPrototype(ItemEnum.FOODv10, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
 
 
         basicHelmetStats = new HashMap<>();
@@ -197,14 +197,14 @@ public class ItemStatsConfig {
 
 
         basicStaffStats = new HashMap<>();
-        basicStaffStats.put(ItemEnum.STAFFv0, new StaffPrototype(ItemEnum.STAFFv0, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv1, new StaffPrototype(ItemEnum.STAFFv1, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv2, new StaffPrototype(ItemEnum.STAFFv2, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv3, new StaffPrototype(ItemEnum.STAFFv3, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv4, new StaffPrototype(ItemEnum.STAFFv4, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv5, new StaffPrototype(ItemEnum.STAFFv5, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv6, new StaffPrototype(ItemEnum.STAFFv6, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        basicStaffStats.put(ItemEnum.STAFFv7, new StaffPrototype(ItemEnum.STAFFv7, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv0, new StaffPrototype(ItemEnum.STAFFv0, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv1, new StaffPrototype(ItemEnum.STAFFv1, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv2, new StaffPrototype(ItemEnum.STAFFv2, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv3, new StaffPrototype(ItemEnum.STAFFv3, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv4, new StaffPrototype(ItemEnum.STAFFv4, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv5, new StaffPrototype(ItemEnum.STAFFv5, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv6, new StaffPrototype(ItemEnum.STAFFv6, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        basicStaffStats.put(ItemEnum.STAFFv7, new StaffPrototype(ItemEnum.STAFFv7, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
 
 
         basicShieldStats = new HashMap<>();
@@ -388,17 +388,17 @@ public class ItemStatsConfig {
 
 
         lvlFoodStats = new HashMap<>();
-        lvlFoodStats.put(ItemEnum.FOODv0, new FoodPrototype(ItemEnum.FOODv0, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv1, new FoodPrototype(ItemEnum.FOODv1, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv2, new FoodPrototype(ItemEnum.FOODv2, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv3, new FoodPrototype(ItemEnum.FOODv3, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv4, new FoodPrototype(ItemEnum.FOODv4, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv5, new FoodPrototype(ItemEnum.FOODv5, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv6, new FoodPrototype(ItemEnum.FOODv6, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv7, new FoodPrototype(ItemEnum.FOODv7, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv8, new FoodPrototype(ItemEnum.FOODv8, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv9, new FoodPrototype(ItemEnum.FOODv9, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
-        lvlFoodStats.put(ItemEnum.FOODv10, new FoodPrototype(ItemEnum.FOODv10, ItemTypeEnum.FOOD, 10, 10, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv0, new FoodPrototype(ItemEnum.FOODv0, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv1, new FoodPrototype(ItemEnum.FOODv1, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv2, new FoodPrototype(ItemEnum.FOODv2, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv3, new FoodPrototype(ItemEnum.FOODv3, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv4, new FoodPrototype(ItemEnum.FOODv4, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv5, new FoodPrototype(ItemEnum.FOODv5, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv6, new FoodPrototype(ItemEnum.FOODv6, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv7, new FoodPrototype(ItemEnum.FOODv7, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv8, new FoodPrototype(ItemEnum.FOODv8, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv9, new FoodPrototype(ItemEnum.FOODv9, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
+        lvlFoodStats.put(ItemEnum.FOODv10, new FoodPrototype(ItemEnum.FOODv10, ItemTypeEnum.FOOD, 10, 10, 5, ItemRarityEnum.WHITE));
 
 
         lvlHelmetStats = new HashMap<>();
@@ -455,14 +455,14 @@ public class ItemStatsConfig {
 
 
         lvlStaffStats = new HashMap<>();
-        lvlStaffStats.put(ItemEnum.STAFFv0, new StaffPrototype(ItemEnum.STAFFv0, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv1, new StaffPrototype(ItemEnum.STAFFv1, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv2, new StaffPrototype(ItemEnum.STAFFv2, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv3, new StaffPrototype(ItemEnum.STAFFv3, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv4, new StaffPrototype(ItemEnum.STAFFv4, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv5, new StaffPrototype(ItemEnum.STAFFv5, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv6, new StaffPrototype(ItemEnum.STAFFv6, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
-        lvlStaffStats.put(ItemEnum.STAFFv7, new StaffPrototype(ItemEnum.STAFFv7, ItemTypeEnum.STAFF, 10, 10, SpellEnum.PLACEHOLDER, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv0, new StaffPrototype(ItemEnum.STAFFv0, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv1, new StaffPrototype(ItemEnum.STAFFv1, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv2, new StaffPrototype(ItemEnum.STAFFv2, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv3, new StaffPrototype(ItemEnum.STAFFv3, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv4, new StaffPrototype(ItemEnum.STAFFv4, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv5, new StaffPrototype(ItemEnum.STAFFv5, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv6, new StaffPrototype(ItemEnum.STAFFv6, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
+        lvlStaffStats.put(ItemEnum.STAFFv7, new StaffPrototype(ItemEnum.STAFFv7, ItemTypeEnum.STAFF, 10, 10, SpellEnum.BURNING, 10, 0.5f, ItemRarityEnum.WHITE));
 
 
         lvlShieldStats = new HashMap<>();

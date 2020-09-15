@@ -16,4 +16,13 @@ public final class Arrow extends AbstractItem {
         this.rangeEffect = rangeEffect;
         this.dmgEffect = dmgEffect;
     }
+
+    public int getDmgEffect() {
+        return dmgEffect;
+    }
+
+    public int getRangeEffect() {
+        return rangeEffect;
+    }
+
 }

@@ -17,11 +17,11 @@ public final class Backpack {
 
     public static void addItem(AbstractItem item) {
         items.get(item.getItemTypeEnum()).add(item);
-        currentCapacity += item.getWeight();
+        currentCapacity += item.getValue();
     }
 
     public static void deleteItem(AbstractItem item) {
-        currentCapacity -= item.getWeight();
+        currentCapacity -= item.getValue();
         items.get(item.getItemTypeEnum()).removeValue(item, true);
     }
 

@@ -127,4 +127,12 @@ public class BackpackPage {
             }
         }
     }
+
+    public void itemUsed(AbstractItem item) {
+        for (ItemBlock i : items) {
+            if (i != null && i.getItem() == item) {
+                i.setItem(null);
+            }
+        }
+    }
 }

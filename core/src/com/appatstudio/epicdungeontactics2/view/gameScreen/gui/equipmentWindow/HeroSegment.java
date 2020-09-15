@@ -7,14 +7,11 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumn;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.HeroEqItemBlock;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
@@ -47,7 +44,7 @@ public class HeroSegment extends AbstractSegment {
     private Array<HeroEqItemBlock> eqItemBlocks;
 
     static {
-        posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f + AbstractSegment.fullHeight;
+        posY = Gdx.graphics.getHeight() / 2f - AbstractSegment.getFullHeight() / 2f + AbstractSegment.fullHeight;
 
         float topY = posY + fullHeight * 0.8f - tileSize;
         float bottomY = topY - tileSize;
@@ -68,7 +65,7 @@ public class HeroSegment extends AbstractSegment {
     HeroSegment(CharacterEnum hero) {
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
         heroAnimation = GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE);
-        heroY = posY + fullHeight/2f - heroSize/3f;
+        heroY = posY + fullHeight / 2f - heroSize / 3f;
 
         createHeroSpecifiedEquipment(hero);
     }
@@ -77,11 +74,21 @@ public class HeroSegment extends AbstractSegment {
         bg.draw(batch, posX, posY, fullWidth, fullHeight);
 
         stateTime += Gdx.graphics.getDeltaTime();
-        heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
+        if (selectedItem != null
+                && (selectedItem.getItemTypeEnum() == ItemTypeEnum.FOOD
+                || selectedItem.getItemTypeEnum() == ItemTypeEnum.BOOK)) {
+            batch.getColor().a = HeroEqItemBlock.getPulsating();
+            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
+        } else {
+            batch.getColor().a = 1f;
+            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
+        }
 
+        batch.getColor().a = 1f;
         for (HeroEqItemBlock ib : eqItemBlocks) {
             ib.draw(batch, selectedItem);
         }
+
 
         HeroEqItemBlock.act();
     }
@@ -98,6 +105,14 @@ public class HeroSegment extends AbstractSegment {
     }
 
     boolean tapWithItem(float x, float y, AbstractItem item) {
+        if (item.getItemTypeEnum() == ItemTypeEnum.FOOD
+                || item.getItemTypeEnum() == ItemTypeEnum.BOOK) {
+            if (x > heroX && x < heroX + heroSize && y > heroY && y < heroY + heroSize) {
+                StatTracker.itemUsed(item);
+                EquipmentWindow.itemUsed(item);
+            }
+        }
+
         for (HeroEqItemBlock b : eqItemBlocks) {
             if (b.getRequiredItem() == item.getItemTypeEnum()) {
                 if (b.isTap(x, y)) {

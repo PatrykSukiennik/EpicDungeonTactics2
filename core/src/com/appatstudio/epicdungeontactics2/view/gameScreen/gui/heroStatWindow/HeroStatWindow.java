@@ -4,13 +4,19 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
+import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
+import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineTextWithIcon;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
@@ -45,12 +51,13 @@ public class HeroStatWindow {
 
     private TextWithIcon[] leftColumn;
     private TextWithIcon[] rightColumn;
+    private MultiLineTextWithIcon perkTextObject;
 
     private Image hpBar, mpBar, expBar;
     private Image hpBarBg, mpBarBg, expBarBg;
     private TextObject hpStat, mpStat, expStat;
 
-    private final int ROWS = 6;
+    private final int ROWS = 7;
 
     public HeroStatWindow(CharacterEnum hero) {
         this.hero = hero;
@@ -134,14 +141,14 @@ public class HeroStatWindow {
 
 
         leftColumn = new TextWithIcon[ROWS];
-        for (int i = 0; i < ROWS; i++) {
+        for (int i = 0; i < ROWS-2; i++) {
             leftColumn[i] = new TextWithIcon(
                     GraphicsManager.getStatIcon(StatisticEnum.STR),
-                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    FontsManager.getFont(FontEnum.STAT_DESC),
                     "test",
-                    bgPos.x + bgSize.x * 0.15f,
+                    bgPos.x + bgSize.x * 0.1f,
                     firstSeparator.getY() - firstSeparator.getHeight() -
-                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0") * i * 2.2f,
+                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 3f,
                     Align.left
             );
         }
@@ -150,21 +157,31 @@ public class HeroStatWindow {
         for (int i = 0; i < ROWS; i++) {
             rightColumn[i] = new TextWithIcon(
                     GraphicsManager.getStatIcon(StatisticEnum.STR),
-                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                    FontsManager.getFont(FontEnum.STAT_DESC),
                     "test",
-                    bgPos.x + bgSize.x * 0.85f,
+                    bgPos.x + bgSize.x * 0.9f,
                     firstSeparator.getY() - firstSeparator.getHeight() -
-                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0") * i * 2.2f,
+                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 3f,
                     Align.right
             );
         }
+
+        perkTextObject = new MultiLineTextWithIcon(
+                GraphicsManager.getGuiElement(GuiElementEnum.RED_DOT),
+                FontsManager.getFont(FontEnum.STAT_DESC),
+                "test",
+                bgPos.x + bgSize.x * 0.1f,
+                bgSize.x * 0.45f,
+                firstSeparator.getY() - firstSeparator.getHeight() -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * ((ROWS-2)-0.2f) * 3f
+        );
 
         secondSeparator = new Image(GraphicsManager.getGuiElement(GuiElementEnum.HERO_STAT_SEPARATOR));
         secondSeparator.setSize(bgSize.x * 0.8f, (10f/120f) * bgSize.x * 0.8f);
         secondSeparator.setPosition(
                 bgPos.x + bgSize.x/2f - firstSeparator.getWidth()/2f,
                 firstSeparator.getY() - firstSeparator.getHeight() -
-                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED), "0") * (ROWS + 1) * 2.2f);
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * (ROWS + 1) * 3f);
 
         hpBarBg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.STATUS_BAR_BG));
         mpBarBg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.STATUS_BAR_BG));
@@ -192,23 +209,23 @@ public class HeroStatWindow {
 
         hpStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_HP),
-                "100/100",
+                "hp: 100/100",
                 hpBarBg.getX() + hpBarBg.getWidth() * 0.9f,
-                hpBarBg.getY() - hpBarBg.getHeight() * 0.4f,
+                hpBarBg.getY() - hpBarBg.getHeight() * 0.35f,
                 Align.right
         );
         mpStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_MP),
-                "100/100",
+                "mp: 100/100",
                 mpBarBg.getX() + mpBarBg.getWidth() * 0.9f,
-                mpBarBg.getY() - mpBarBg.getHeight() * 0.4f,
+                mpBarBg.getY() - mpBarBg.getHeight() * 0.35f,
                 Align.right
         );
         expStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_EXP),
-                "100/100",
+                "exp: 100/100",
                 expBarBg.getX() + expBarBg.getWidth() * 0.9f,
-                expBarBg.getY() - expBarBg.getHeight() * 0.4f,
+                expBarBg.getY() - expBarBg.getHeight() * 0.35f,
                 Align.right
         );
 
@@ -231,8 +248,9 @@ public class HeroStatWindow {
             p.draw(batch, 1f);
         }
 
-        for (TextWithIcon t : leftColumn) t.draw(batch);
+        for (TextWithIcon t : leftColumn) if (t != null)t.draw(batch);
         for (TextWithIcon t : rightColumn) t.draw(batch);
+        perkTextObject.draw(batch);
 
         firstSeparator.draw(batch, 1f);
 
@@ -253,6 +271,37 @@ public class HeroStatWindow {
     }
 
     public void refreshStats() {
+        leftColumn[0].setIconAndFont(
+                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                StringsManager.getGuiString(GuiStringEnum.MELE_DMG));
+
+        leftColumn[1].setIconAndFont(
+                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG));
+
+        leftColumn[2].setIconAndFont(
+                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                StringsManager.getGuiString(GuiStringEnum.RANGE));
+
+        leftColumn[3].setIconAndFont(
+                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                StringsManager.getGuiString(GuiStringEnum.ARMOR));
+
+        leftColumn[4].setIconAndFont(
+                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                StringsManager.getGuiString(GuiStringEnum.CRIT_CHANCE));
+
+        PerkEnum heroPerk = StatTracker.getPerk();
+        String descEnd = StringsManager.getPerkDescription(heroPerk);
+        float perkStat = PerkStats.getPerkStat(heroPerk, SavedInfoManager.getPerkLvl(heroPerk));
+        String perkText =
+                perkStat > 1 ?
+                        (int) perkStat + " " + descEnd :
+                        (int) (perkStat * 100) + "% " + descEnd;
+        perkTextObject.setIconAndText(
+                GraphicsManager.getGuiElement(GuiElementEnum.RED_DOT),
+                perkText
+        );
 
     }
 
@@ -264,7 +313,11 @@ public class HeroStatWindow {
         if (lvlPlus.tap(x, y) && lvlPlus.getAvailablePoints() != 0) {
             isLvlUpMode = !isLvlUpMode;
         }
-        else isLvlUpMode = false;
+        else {
+            isLvlUpMode = false;
+
+            if (x < bgPos.x || x > bgPos.x + bgSize.x || y < bgPos.y || y > bgPos.y + bgSize.y) hide();
+        }
     }
 
     public void show() {

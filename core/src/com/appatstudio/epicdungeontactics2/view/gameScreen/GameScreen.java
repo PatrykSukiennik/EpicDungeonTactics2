@@ -115,6 +115,9 @@ public final class GameScreen extends Actor {
         EquipmentWindow.pickItem(ItemGenerator.getItem());
         EquipmentWindow.pickItem(ItemGenerator.getItem());
         EquipmentWindow.pickItem(ItemGenerator.getItem());
+
+        StatTracker.setSelectedPerk(perk);
+        guiContainer.refreshStats();
     }
 
     public CharacterEnum getCurrHero() {

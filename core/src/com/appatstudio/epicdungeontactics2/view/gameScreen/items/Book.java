@@ -8,14 +8,14 @@ import com.badlogic.gdx.utils.Array;
 
 public final class Book extends AbstractItem {
 
-    private int itemSlots;
+    private int expEffect;
 
-    public Book(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int itemSlots, ItemRarityEnum rarityEnum) {
+    public Book(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int expEffect, ItemRarityEnum rarityEnum) {
         super(itemEnum, typeEnum, value, effects, rarityEnum);
-        this.itemSlots = itemSlots;
+        this.expEffect = expEffect;
     }
 
-    public int getItemSlots() {
-        return itemSlots;
+    public int getExpEffect() {
+        return expEffect;
     }
 }

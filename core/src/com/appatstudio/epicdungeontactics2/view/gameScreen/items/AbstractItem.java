@@ -22,7 +22,7 @@ public abstract class AbstractItem {
         this.rarity = rarity;
     }
 
-    public int getWeight() {
+    public int getValue() {
         return value;
     }
 

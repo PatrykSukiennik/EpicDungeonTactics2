@@ -14,4 +14,8 @@ public final class Helmet extends AbstractItem {
         super(itemEnum, typeEnum, value, effects, rarityEnum);
         this.armor = armor;
     }
+
+    public int getArmor() {
+        return armor;
+    }
 }

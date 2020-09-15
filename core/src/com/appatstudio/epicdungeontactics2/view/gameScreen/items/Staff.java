@@ -22,4 +22,19 @@ public class Staff extends AbstractItem {
         this.speedEffect = speedEffect;
     }
 
+    public int getSpeedEffect() {
+        return speedEffect;
+    }
+
+    public int getDmg() {
+        return dmg;
+    }
+
+    public float getSpellChance() {
+        return spellChance;
+    }
+
+    public SpellEnum getSpell() {
+        return spell;
+    }
 }

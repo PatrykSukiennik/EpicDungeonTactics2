@@ -9,13 +9,19 @@ import com.badlogic.gdx.utils.Array;
 public class Food extends AbstractItem {
 
     private int hpEffect;
+    private int mpEffect;
 
-    public Food(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int hpEffect, ItemRarityEnum rarityEnum) {
+    public Food(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int hpEffect, int mpEffect, ItemRarityEnum rarityEnum) {
         super(itemEnum, typeEnum, value, effects, rarityEnum);
         this.hpEffect = hpEffect;
+        this.mpEffect = mpEffect;
     }
 
     public int getHpEffect() {
         return hpEffect;
+    }
+
+    public int getMpEffect() {
+        return mpEffect;
     }
 }

@@ -16,4 +16,12 @@ public final class Shield extends AbstractItem {
         this.armor = armor;
         this.speedEffect = speedEffect;
     }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public int getSpeedEffect() {
+        return speedEffect;
+    }
 }
