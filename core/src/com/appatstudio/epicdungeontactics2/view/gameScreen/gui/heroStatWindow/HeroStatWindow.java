@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
@@ -74,13 +75,14 @@ public class HeroStatWindow {
 
         title = new TextObject(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getCharacterName(hero) + " lvl." + StatTracker.getLvl(),
+                StringsManager.getCharacterName(hero) + " lvl." + StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL),
                 bgPos.x + heroSize.x + (bgSize.x - (heroSize.x * 1.1f))/2f,
                 heroPos.y + heroSize.y * 0.6f,
                 Align.center
                 );
 
-        StatisticEnum[] allStats = StatisticEnum.values();
+        StatisticEnum[] allStats = {StatisticEnum.VIT, StatisticEnum.STR, StatisticEnum.DEX, StatisticEnum.INT, StatisticEnum.LCK};
+        CompleteHeroStatsEnum[] heroStatsEnums = {CompleteHeroStatsEnum.VIT, CompleteHeroStatsEnum.STR, CompleteHeroStatsEnum.DEX, CompleteHeroStatsEnum.INT, CompleteHeroStatsEnum.LCK};
 
         statTitles = new HashMap<>();
         statBasic = new HashMap<>();
@@ -107,14 +109,14 @@ public class HeroStatWindow {
             ));
             statCurrent.put(allStats[i], new TextObject(
                     FontsManager.getFont(
-                            StatTracker.getCurrentStat(allStats[i])
+                            StatTracker.getCurrentStat(heroStatsEnums[i])
                                     > SavedInfoManager.getCharacterStat(hero, allStats[i])
                                     ? FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED_GREEN
-                                    : StatTracker.getCurrentStat(allStats[i])
+                                    : StatTracker.getCurrentStat(heroStatsEnums[i])
                                     < SavedInfoManager.getCharacterStat(hero, allStats[i])
                                     ? FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED_RED
                                     : FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                    Integer.toString(StatTracker.getCurrentStat(allStats[i])),
+                    Integer.toString((int)StatTracker.getCurrentStat(heroStatsEnums[i])),
                     heroPos.x + heroSize.x * 2.4f,
                     heroPos.y + heroSize.y * 0.3f - i * FontsManager.getTextHeight(
                             FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 4f,

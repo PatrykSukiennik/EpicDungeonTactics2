@@ -1,16 +1,33 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
+import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
-import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
+import com.appatstudio.epicdungeontactics2.global.stats.CampUpgradeStats;
+import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
+import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterStatsObject;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Armor;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Arrow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Book;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Bow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Food;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Helmet;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.MeleWeapon;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Necklace;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Ring;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Shield;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Staff;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
@@ -22,19 +39,21 @@ public class StatTracker {
     private static HashMap<CharacterEnum, Integer> expCollected;
     private static HashMap<CharacterEnum, Boolean> lvlUps;
     private static Array<CharacterEnum> usedCharacters;
+
     public static Array<AbstractItem> eqItems;
+    public static Array<AbstractItem> equippedItems;
+
     public static CharacterStatsObject stats;
 
-    private static HashMap<StatisticEnum, Integer> basicStats;
-    private static HashMap<StatisticEnum, Integer> currStats;
+    private static HashMap<CompleteHeroStatsEnum, Float> currStats;
 
     private static CharacterEnum currHero;
-    private static int lvl;
 
-    private static int hp, mp, exp;
 
     private static PerkEnum selectedPerk;
 
+    private static final int HP_PER_INT_POINT = 10;
+    private static final int MP_PER_INT_POINT = 10;
 
     static {
         currHero = GameScreen.getHero();
@@ -44,35 +63,480 @@ public class StatTracker {
 
         stats = new CharacterStatsObject(GameScreen.getHero());
 
-        basicStats = new HashMap<>();
         currStats = new HashMap<>();
-        StatisticEnum[] allEnums = StatisticEnum.values();
-        for (StatisticEnum s : allEnums) basicStats.put(s, SavedInfoManager.getCharacterStat(currHero, s));
-        for (StatisticEnum s : allEnums) currStats.put(s, SavedInfoManager.getCharacterStat(currHero, s));
-    }
 
-    public static int getLvl() {
-        return lvl;
+        refreshWholeCharacter();
     }
 
     public static CharacterEnum getHero() {
         return currHero;
     }
 
-    public static void refreshEq() {
-
-    }
 
     public static void lvlUp() {
         ItemGenerator.refresh();
     }
 
-    public static int getBasicStat(StatisticEnum statisticEnum) {
-        return basicStats.get(statisticEnum);
+    public static void refreshWholeCharacter() {
+        refreshBonuses();
+        init();
     }
 
-    public static int getCurrentStat(StatisticEnum statisticEnum) {
-        return currStats.get(statisticEnum);
+    public static void init() {
+        currStats.put(CompleteHeroStatsEnum.HP, currStats.get(CompleteHeroStatsEnum.MAX_HP));
+        currStats.put(CompleteHeroStatsEnum.MP, currStats.get(CompleteHeroStatsEnum.MAX_MP));
+        currStats.put(CompleteHeroStatsEnum.EXP, (float)SavedInfoManager.getCharacterExp(currHero));
+    }
+
+    public static void refreshBonuses() {
+        currStats.put(CompleteHeroStatsEnum.LVL, (float)SavedInfoManager.getCharacterLvl(currHero));
+        currStats.put(CompleteHeroStatsEnum.MAX_EXP, (float)HeroStats.getExpCap(SavedInfoManager.getCharacterLvl(currHero)));
+
+        HashMap<CompleteHeroStatsEnum, Float> itemBonuses = getItemEffects();
+
+        currStats.put(
+                CompleteHeroStatsEnum.STR,
+                (SavedInfoManager.getCharacterStat(currHero, StatisticEnum.STR)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.STR, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.STR));
+
+        currStats.put(CompleteHeroStatsEnum.VIT,
+                (SavedInfoManager.getCharacterStat(currHero, StatisticEnum.VIT)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.VIT, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.VIT));
+
+        currStats.put(CompleteHeroStatsEnum.DEX,
+                (SavedInfoManager.getCharacterStat(currHero, StatisticEnum.DEX)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DEX, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.DEX));
+
+        currStats.put(CompleteHeroStatsEnum.LCK,
+                (SavedInfoManager.getCharacterStat(currHero, StatisticEnum.LCK)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.LCK, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.LCK));
+
+        currStats.put(CompleteHeroStatsEnum.INT,
+                (SavedInfoManager.getCharacterStat(currHero, StatisticEnum.INT)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.INT, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.INT));
+
+        currStats.put(CompleteHeroStatsEnum.MAX_HP,
+                (currStats.get(CompleteHeroStatsEnum.VIT) * HP_PER_INT_POINT)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAX_HP, itemBonuses)
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MAX_HP));
+
+        currStats.put(CompleteHeroStatsEnum.MAX_MP,
+                (currStats.get(CompleteHeroStatsEnum.INT)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAX_MP, itemBonuses)
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MAX_MP))
+
+                        * MP_PER_INT_POINT);
+
+        currStats.put(CompleteHeroStatsEnum.CRIT_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.LCK) * 0.02f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CRIT_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CRIT_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.MISS_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.DEX) * 0.02f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MISS_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MISS_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.LCK) * 0.01f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.LCK) * 0.01f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.GOLD_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.GOLD_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.GOLD_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.EXP_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.EXP_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.EXP_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAGICAL_DMG_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MAGICAL_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.HP_RESTORE_ROOM,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.HP_RESTORE_ROOM, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.HP_RESTORE_ROOM));
+
+        currStats.put(CompleteHeroStatsEnum.HP_RESTORE_KILL,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.HP_RESTORE_KILL, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.HP_RESTORE_KILL));
+
+        currStats.put(CompleteHeroStatsEnum.POISON_DURATION_EFFECT,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.POISON_DURATION_EFFECT, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.POISON_DURATION_EFFECT));
+
+        currStats.put(CompleteHeroStatsEnum.MAGICAL_RESIST,
+                (currStats.get(CompleteHeroStatsEnum.INT) * 0.02f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAGICAL_RESIST, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MAGICAL_RESIST));
+
+        currStats.put(CompleteHeroStatsEnum.INSTAKILL_ENEMY_CHANCE,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.INSTAKILL_ENEMY_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.INSTAKILL_ENEMY_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP,
+                (   0.1f
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_MISS_STAGE,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_MISS_STAGE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_MISS_STAGE));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,
+                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR,
+                (currStats.get(CompleteHeroStatsEnum.INT) * 0.01f / currStats.get(CompleteHeroStatsEnum.LVL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR));
+
+        currStats.put(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP));
+
+        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY,
+                (   0.02f
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY));
+
+        currStats.put(CompleteHeroStatsEnum.RANGE,
+                (   1
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.RANGE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.RANGE));
+
+        currStats.put(CompleteHeroStatsEnum.ARMOR,
+                (getItemStats(CompleteHeroStatsEnum.ARMOR)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.ARMOR, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.ARMOR));
+
+        currStats.put(CompleteHeroStatsEnum.MELE_DMG,
+                (currStats.get(CompleteHeroStatsEnum.STR)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MELE_DMG, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.BOW_DMG,
+                (getItemStats(CompleteHeroStatsEnum.BOW_DMG)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.BOW_DMG, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG,
+                (getItemStats(CompleteHeroStatsEnum.MAGICAL_DMG)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAGICAL_DMG, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.MAGICAL_DMG_MULTIPLIER));
+
+        currStats.put(CompleteHeroStatsEnum.SPEED,
+                (currStats.get(CompleteHeroStatsEnum.DEX)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.SPEED, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.SPEED));
+
+        currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE,
+                (currStats.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE));
+
+        currStats.put(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL,
+                (currStats.get(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL));
+
+        currStats.put(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE));
+
+        currStats.put(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE, itemBonuses))
+                        * getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE));
+
+    }
+
+    private static int getItemAndPerkEffectsValue(CompleteHeroStatsEnum statsEnum, HashMap<CompleteHeroStatsEnum, Float> itemBonusesValue) {
+        int result = 0;
+
+        switch (statsEnum) {
+            case MAX_HP:
+            case MAX_MP:
+            case MELE_DMG_MULTIPLIER:
+            case BOW_DMG_MULTIPLIER:
+            case MAGICAL_DMG_MULTIPLIER:
+            case ARMOR:
+            case RANGE:
+            case PERCENT_ANY_DROP_CHANCE:
+            case PERCENT_SPELL_CHANCE:
+                return result;
+
+
+            case STR:
+                if (selectedPerk == PerkEnum.STR_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.STR);
+                return result;
+            case VIT:
+                if (selectedPerk == PerkEnum.VIT_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.VIT);
+                return result;
+            case DEX:
+                if (selectedPerk == PerkEnum.DEX_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.DEX);
+                return result;
+            case LCK:
+                result = 0;
+                if (selectedPerk == PerkEnum.LCK_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.LCK);
+                return result;
+            case INT:
+                result = 0;
+                if (selectedPerk == PerkEnum.INT_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.INT);
+                return result;
+            case CRIT_CHANCE:
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.CRIT_CHANCE);
+                return result;
+            case HP_RESTORE_KILL:
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.HP_RESTORE_KILL);
+                return result;
+            case PERCENT_CHANCE_FOR_DOUBLE_MOVE:
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE);
+                return result;
+            case PERCENT_HP_REGEN_KILL:
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL);
+                return result;
+            case HP_RESTORE_ROOM:
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.HP_RESTORE_ROOM);
+                return result;
+            case CHANCE_FOR_RANDOM_KEY:
+                result = 0;
+                if (selectedPerk == PerkEnum.KEY_FINDER) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case DOUBLE_ATTACK_CHANCE:
+                result = 0;
+                if (selectedPerk == PerkEnum.DOUBLE_ATTACK) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE);
+                return result;
+            case DOUBLE_MOVE_CHANCE:
+                result = 0;
+                if (selectedPerk == PerkEnum.DOUBLE_MOVE) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE);
+                return result;
+            case GOLD_MULTIPLIER:
+                result = 0;
+                if (selectedPerk == PerkEnum.GOLD_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                if (SavedInfoManager.getNpcLvl(CampUpgradeEnum.MOUNTAIN_KING) > 0) result += CampUpgradeStats.getCampUpgradeStat(CampUpgradeEnum.MOUNTAIN_KING, SavedInfoManager.getNpcLvl(CampUpgradeEnum.MOUNTAIN_KING) - 1);
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.GOLD_MULTIPLIER);
+                return result;
+            case EXP_MULTIPLIER:
+                result = 0;
+                if (selectedPerk == PerkEnum.EXP_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                if (SavedInfoManager.getNpcLvl(CampUpgradeEnum.PRINCESS) > 0) result += CampUpgradeStats.getCampUpgradeStat(CampUpgradeEnum.PRINCESS, SavedInfoManager.getNpcLvl(CampUpgradeEnum.PRINCESS) - 1);
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.EXP_MULTIPLIER);
+                return result;
+            case POISON_DURATION_EFFECT:
+                result = 0;
+                if (selectedPerk == PerkEnum.POISON_DURATION_DECREASE) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case MAGICAL_RESIST:
+                result = 0;
+                if (selectedPerk == PerkEnum.MAGICAL_RESIST) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case INSTAKILL_ENEMY_CHANCE:
+                result = 0;
+                if (selectedPerk == PerkEnum.INSTAKILL_ENEMY) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case CHANCE_FOR_ANY_DROP:
+                result = 0;
+                if (selectedPerk == PerkEnum.CHANCE_FOR_ANY_DROP) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                result += itemBonusesValue.get(CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP);
+                return result;
+            case CHANCE_FOR_MISS_STAGE:
+                result = 0;
+                if (selectedPerk == PerkEnum.MISS_STAGE) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case CHANCE_FOR_RANDOM_APPLE:
+                result = 0;
+                if (selectedPerk == PerkEnum.APPLE_FINDER) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case CHANCE_FOR_SECOND_REVIVE:
+                result = 0;
+                if (selectedPerk == PerkEnum.THIRD_CHANCE) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case CHANCE_FOR_MAGIC_MIRROR:
+                result = 0;
+                if (selectedPerk == PerkEnum.MAGIC_MIRROR) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case ENEMY_POWER_MULTIPLIER:
+                result = 0;
+                if (selectedPerk == PerkEnum.STRONGER_ENEMIES) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP:
+                result = 0;
+                if (selectedPerk == PerkEnum.BERSERKER) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                return result;
+            default:
+                return 1;
+        }
+
+    }
+
+    private static float getItemAndPerkEffectsMultipier(CompleteHeroStatsEnum statsEnum) {
+        float result = 1;
+
+        switch (statsEnum) {
+            case STR:
+            case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP:
+            case ENEMY_POWER_MULTIPLIER:
+            case CHANCE_FOR_MAGIC_MIRROR:
+            case CHANCE_FOR_SECOND_REVIVE:
+            case CHANCE_FOR_RANDOM_APPLE:
+            case CHANCE_FOR_MISS_STAGE:
+            case CHANCE_FOR_ANY_DROP:
+            case INSTAKILL_ENEMY_CHANCE:
+            case MAGICAL_RESIST:
+            case POISON_DURATION_EFFECT:
+            case HP_RESTORE_KILL:
+            case HP_RESTORE_ROOM:
+            case DOUBLE_MOVE_CHANCE:
+            case ARMOR:
+            case RANGE:
+            case CHANCE_FOR_RANDOM_KEY:
+            case CRIT_CHANCE:
+            case MAX_MP:
+            case MAX_HP:
+            case INT:
+            case LCK:
+            case DEX:
+            case VIT:
+            case PERCENT_CHANCE_FOR_DOUBLE_MOVE:
+            case PERCENT_HP_REGEN_KILL:
+            case PERCENT_ANY_DROP_CHANCE:
+            case PERCENT_SPELL_CHANCE:
+                return result;
+
+            case GOLD_MULTIPLIER:
+                if (selectedPerk == PerkEnum.GOLD_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                if (SavedInfoManager.getNpcLvl(CampUpgradeEnum.MOUNTAIN_KING) > 0) result += CampUpgradeStats.getCampUpgradeStat(CampUpgradeEnum.MOUNTAIN_KING, SavedInfoManager.getNpcLvl(CampUpgradeEnum.MOUNTAIN_KING) - 1);
+                if (currHero == CharacterEnum.HERO_PIRATE) result += 0.25f;
+                return result;
+            case EXP_MULTIPLIER:
+                if (selectedPerk == PerkEnum.EXP_BONUS) result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+                if (SavedInfoManager.getNpcLvl(CampUpgradeEnum.PRINCESS) > 0) result += CampUpgradeStats.getCampUpgradeStat(CampUpgradeEnum.PRINCESS, SavedInfoManager.getNpcLvl(CampUpgradeEnum.PRINCESS) - 1);
+                if (currHero == CharacterEnum.HERO_BABY) result += 0.5f;
+                return result;
+            case MELE_DMG_MULTIPLIER:
+                if (currHero == CharacterEnum.HERO_KNIGHT) result += 0.25f;
+                return result;
+            case MAGICAL_DMG_MULTIPLIER:
+                if (currHero == CharacterEnum.HERO_WIZZARD) result += 0.25f;
+                return result;
+            case BOW_DMG_MULTIPLIER:
+                if (currHero == CharacterEnum.HERO_ELF) result += 0.25f;
+                return result;
+            default:
+                return 1;
+        }
+
+    }
+
+    private static float getItemStats(CompleteHeroStatsEnum statsEnum) {
+        float result = 0;
+
+        switch (statsEnum) {
+            case ARMOR:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.ARMOR)
+                        result += ((Armor) item).getArmor();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.HELMET)
+                        result += ((Helmet) item).getArmor();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.SHIELD)
+                        result += ((Shield) item).getArmor();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.RING)
+                        result += ((Ring) item).getArmor();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.NECKLACE)
+                        result += ((Necklace) item).getArmor();
+                }
+                break;
+
+            case RANGE:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.BOW)
+                        result += ((Bow) item).getRange();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.ARROW)
+                        result += ((Arrow) item).getRangeEffect();
+                }
+                break;
+
+            case MELE_DMG:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.MELE)
+                        result += ((MeleWeapon) item).getDmg();
+                }
+                break;
+
+            case BOW_DMG:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.BOW)
+                        result += ((Bow) item).getDmg();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.ARROW)
+                        result += ((Arrow) item).getDmgEffect();
+                }
+                break;
+
+            case MAGICAL_DMG:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.STAFF)
+                        result += ((Staff) item).getDmg();
+                }
+                break;
+
+            case SPEED:
+                for (AbstractItem item : equippedItems) {
+                    if (item.getItemTypeEnum() == ItemTypeEnum.ARMOR)
+                        result += ((Armor) item).getMoveSpeedCost();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.MELE)
+                        result += ((MeleWeapon) item).getSpeedEffect();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.SHIELD)
+                        result += ((Shield) item).getSpeedEffect();
+                }
+                break;
+
+        }
+
+        return result;
     }
 
     public static PerkEnum getPerk() {
@@ -81,24 +545,105 @@ public class StatTracker {
 
     public static void itemUsed(AbstractItem item) {
         if (item.getItemTypeEnum() == ItemTypeEnum.BOOK) {
-            expEffect(((Book)item).getExpEffect());
-        }
-        else if (item.getItemTypeEnum() == ItemTypeEnum.FOOD) {
-            hpEffect(((Food)item).getHpEffect());
-            hpEffect(((Food)item).getMpEffect());
+            expEffect(((Book) item).getExpEffect());
+        } else if (item.getItemTypeEnum() == ItemTypeEnum.FOOD) {
+            hpEffect(((Food) item).getHpEffect());
+            hpEffect(((Food) item).getMpEffect());
         }
     }
 
     public static void hpEffect(int hpEffect) {
-        hp += hpEffect;
-    }
-    public static void mpEffect(int mpEffect) {
-        mp += mpEffect;
-    }
-    public static void expEffect(int expEffect) {
-        exp += expEffect;
+        Float curr = currStats.get(CompleteHeroStatsEnum.HP);
+        Float max = currStats.get(CompleteHeroStatsEnum.MAX_HP);
+        curr += hpEffect;
+        if (curr > max) curr = max;
+        currStats.put(CompleteHeroStatsEnum.HP, curr);
     }
 
+    public static void mpEffect(int mpEffect) {
+        Float curr = currStats.get(CompleteHeroStatsEnum.MP);
+        Float max = currStats.get(CompleteHeroStatsEnum.MAX_MP);
+        curr += mpEffect;
+        if (curr > max) curr = max;
+        currStats.put(CompleteHeroStatsEnum.MP, curr);
+    }
+
+    public static void expEffect(int expEffect) {
+        Float curr = currStats.get(CompleteHeroStatsEnum.EXP);
+        Float max = currStats.get(CompleteHeroStatsEnum.MAX_EXP);
+        if (curr >= max) {
+            curr -= max;
+            lvlUp();
+        }
+        currStats.put(CompleteHeroStatsEnum.EXP, curr);
+    }
+
+    private static HashMap<CompleteHeroStatsEnum, Float> getItemEffects() {
+        HashMap<CompleteHeroStatsEnum, Float> result = new HashMap<>();
+
+        CompleteHeroStatsEnum[] allStats = CompleteHeroStatsEnum.values();
+        for (CompleteHeroStatsEnum c : allStats) result.put(c, 0f);
+
+        for (AbstractItem item : equippedItems) {
+            for (ItemEffect effect : item.getEffects()) {
+                switch (effect.getEffectEnum()) {
+                    case DMG_BONUS:
+                        result.put(CompleteHeroStatsEnum.MELE_DMG, result.get(CompleteHeroStatsEnum.MELE_DMG) + effect.getPower());
+                        break;
+                    case STR_BONUS:
+                        result.put(CompleteHeroStatsEnum.STR, result.get(CompleteHeroStatsEnum.STR) + effect.getPower());
+                        break;
+                    case DEX_BONUS:
+                        result.put(CompleteHeroStatsEnum.DEX, result.get(CompleteHeroStatsEnum.DEX) + effect.getPower());
+                        break;
+                    case LCK_BONUS:
+                        result.put(CompleteHeroStatsEnum.LCK, result.get(CompleteHeroStatsEnum.LCK) + effect.getPower());
+                        break;
+                    case INT_BONUS:
+                        result.put(CompleteHeroStatsEnum.INT, result.get(CompleteHeroStatsEnum.INT) + effect.getPower());
+                        break;
+                    case VIT_BONUS:
+                        result.put(CompleteHeroStatsEnum.VIT, result.get(CompleteHeroStatsEnum.VIT) + effect.getPower());
+                        break;
+                    case PERCENT_HP_REGEN_CLEAN_ROOM:
+                        result.put(CompleteHeroStatsEnum.HP_RESTORE_ROOM, result.get(CompleteHeroStatsEnum.HP_RESTORE_ROOM) + effect.getPower());
+                        break;
+                    case PERCENT_GOLD_COLLECTED_BONUS:
+                        result.put(CompleteHeroStatsEnum.GOLD_MULTIPLIER, result.get(CompleteHeroStatsEnum.GOLD_MULTIPLIER) + effect.getPower());
+                        break;
+                    case PERCENT_EXP_COLLECTED_BONUS:
+                        result.put(CompleteHeroStatsEnum.EXP_MULTIPLIER, result.get(CompleteHeroStatsEnum.EXP_MULTIPLIER) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_DOUBLE_ATTACK:
+                        result.put(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE, result.get(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_POISONING:
+                        result.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_POISONING, result.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_POISONING) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_BURNING:
+                        result.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING, result.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_DOUBLE_MOVE:
+                        result.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE, result.get(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE) + effect.getPower());
+                        break;
+                    case PERCENT_HP_REGEN_KILL:
+                        result.put(CompleteHeroStatsEnum.HP_RESTORE_KILL, result.get(CompleteHeroStatsEnum.HP_RESTORE_KILL) + effect.getPower());
+                        break;
+                    case PERCENT_ANY_DROP_CHANCE:
+                        result.put(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE, result.get(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE) + effect.getPower());
+                        break;
+                    case PERCENT_SPELL_CHANCE:
+                        result.put(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE, result.get(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE) + effect.getPower());
+                        break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static float getCurrentStat(CompleteHeroStatsEnum stat) {
+        return currStats.get(stat);
+    }
 
     public HashMap<CharacterEnum, Boolean> getLvlUps() {
         return lvlUps;

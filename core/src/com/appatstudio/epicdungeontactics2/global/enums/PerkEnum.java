@@ -14,7 +14,7 @@ public enum PerkEnum {
     EXP_BONUS,
 
     //more chance for unique loot
-    UNIQUE_LOOT,
+    //UNIQUE_LOOT,
 
     //mele dmg bonus
     MELE_DMG,
@@ -89,7 +89,7 @@ public enum PerkEnum {
     KEY_FINDER,
 
     //more elemental effect chance
-    ELEMENTALIST,
+    //ELEMENTALIST,
 
     //starts with few extra items
     EXPERIENCED_ADVENTURER,
