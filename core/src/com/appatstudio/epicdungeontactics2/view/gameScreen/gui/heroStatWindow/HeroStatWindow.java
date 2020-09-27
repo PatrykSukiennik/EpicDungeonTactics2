@@ -58,10 +58,16 @@ public class HeroStatWindow {
     private Image hpBarBg, mpBarBg, expBarBg;
     private TextObject hpStat, mpStat, expStat;
 
-    private final int ROWS = 7;
+    private final int ROWS = 8;
 
-    public HeroStatWindow(CharacterEnum hero) {
+    public HeroStatWindow() {
+
+    }
+
+    public void init(CharacterEnum hero) {
         this.hero = hero;
+
+        StatTracker.init(hero, GameScreen.getPerk());
 
         bgSize = new CoordsFloat(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getWidth() * 0.7f * 2f);
         bgPos = new CoordsFloat(Gdx.graphics.getWidth()/2f - bgSize.x/2f, Gdx.graphics.getHeight()/2f - bgSize.y/2f);
@@ -75,11 +81,11 @@ public class HeroStatWindow {
 
         title = new TextObject(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getCharacterName(hero) + " lvl." + StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL),
+                StringsManager.getCharacterName(hero) + " lvl." + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL),
                 bgPos.x + heroSize.x + (bgSize.x - (heroSize.x * 1.1f))/2f,
                 heroPos.y + heroSize.y * 0.6f,
                 Align.center
-                );
+        );
 
         StatisticEnum[] allStats = {StatisticEnum.VIT, StatisticEnum.STR, StatisticEnum.DEX, StatisticEnum.INT, StatisticEnum.LCK};
         CompleteHeroStatsEnum[] heroStatsEnums = {CompleteHeroStatsEnum.VIT, CompleteHeroStatsEnum.STR, CompleteHeroStatsEnum.DEX, CompleteHeroStatsEnum.INT, CompleteHeroStatsEnum.LCK};
@@ -143,14 +149,31 @@ public class HeroStatWindow {
 
 
         leftColumn = new TextWithIcon[ROWS];
+        String[] leftTexts = {
+                StringsManager.getGuiString(GuiStringEnum.MELE_DMG) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MELE_DMG),
+                StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + 2,
+                StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.ARMOR),
+                StringsManager.getGuiString(GuiStringEnum.CRIT_CHANCE) + " " + (int)(StatTracker.getCurrentStat(CompleteHeroStatsEnum.CRIT_CHANCE)*100) + "%",
+                StringsManager.getGuiString(GuiStringEnum.MISS_CHANCE) + " " + (int)(StatTracker.getCurrentStat(CompleteHeroStatsEnum.MISS_CHANCE)*100) + "%",
+                StringsManager.getGuiString(GuiStringEnum.SPEED) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.SPEED)
+
+        };
+        SpriteDrawable[] leftIcons = {
+                GraphicsManager.getGuiElement(GuiElementEnum.MELE_DMG_ICON),
+                GraphicsManager.getGuiElement(GuiElementEnum.ARMOR_ICON),
+                GraphicsManager.getGuiElement(GuiElementEnum.ARMOR_ICON),
+                GraphicsManager.getGuiElement(GuiElementEnum.CRIT_CHANCE_ICON),
+                GraphicsManager.getGuiElement(GuiElementEnum.CRIT_CHANCE_ICON),
+                GraphicsManager.getGuiElement(GuiElementEnum.CRIT_CHANCE_ICON)
+        };
         for (int i = 0; i < ROWS-2; i++) {
             leftColumn[i] = new TextWithIcon(
-                    GraphicsManager.getStatIcon(StatisticEnum.STR),
+                    leftIcons[i],
                     FontsManager.getFont(FontEnum.STAT_DESC),
-                    "test",
+                    leftTexts[i],
                     bgPos.x + bgSize.x * 0.1f,
-                    firstSeparator.getY() - firstSeparator.getHeight() -
-                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 3f,
+                    firstSeparator.getY() - firstSeparator.getHeight()*0.4f -
+                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
                     Align.left
             );
         }
@@ -158,32 +181,40 @@ public class HeroStatWindow {
         rightColumn = new TextWithIcon[ROWS];
         for (int i = 0; i < ROWS; i++) {
             rightColumn[i] = new TextWithIcon(
-                    GraphicsManager.getStatIcon(StatisticEnum.STR),
+                    GraphicsManager.getGuiElement(GuiElementEnum.NONE),
                     FontsManager.getFont(FontEnum.STAT_DESC),
-                    "test",
+                    "",
                     bgPos.x + bgSize.x * 0.9f,
-                    firstSeparator.getY() - firstSeparator.getHeight() -
-                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 3f,
+                    firstSeparator.getY() - firstSeparator.getHeight()*0.4f -
+                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
                     Align.right
             );
         }
 
+
+        String descEnd = StringsManager.getPerkDescription(StatTracker.getPerk());
+        float perkStat = PerkStats.getPerkStat(StatTracker.getPerk(), (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL));
+        String descString =
+                perkStat > 1 ?
+                        (int) perkStat + " " + descEnd :
+                        (int) (perkStat * 100) + "% " + descEnd;
+
         perkTextObject = new MultiLineTextWithIcon(
-                GraphicsManager.getGuiElement(GuiElementEnum.RED_DOT),
+                GraphicsManager.getPerkIcon(StatTracker.getPerk()),
                 FontsManager.getFont(FontEnum.STAT_DESC),
-                "test",
+                descString,
                 bgPos.x + bgSize.x * 0.1f,
                 bgSize.x * 0.45f,
-                firstSeparator.getY() - firstSeparator.getHeight() -
-                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * ((ROWS-2)-0.2f) * 3f
+                firstSeparator.getY() - firstSeparator.getHeight()*0.4f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * ((ROWS-2)-0.2f) * 2.5f
         );
 
         secondSeparator = new Image(GraphicsManager.getGuiElement(GuiElementEnum.HERO_STAT_SEPARATOR));
         secondSeparator.setSize(bgSize.x * 0.8f, (10f/120f) * bgSize.x * 0.8f);
         secondSeparator.setPosition(
                 bgPos.x + bgSize.x/2f - firstSeparator.getWidth()/2f,
-                firstSeparator.getY() - firstSeparator.getHeight() -
-                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * (ROWS + 1) * 3f);
+                firstSeparator.getY() - firstSeparator.getHeight()*0.2f -
+                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * (ROWS + 1) * 2.5f);
 
         hpBarBg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.STATUS_BAR_BG));
         mpBarBg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.STATUS_BAR_BG));
@@ -205,32 +236,31 @@ public class HeroStatWindow {
         mpBar.setPosition(hpBarBg.getX() + hpBarBg.getWidth() * (8f/100f), mpBarBg.getY() + hpBarBg.getHeight() * (2f/9f));
         expBar.setPosition(hpBarBg.getX() + hpBarBg.getWidth() * (8f/100f), expBarBg.getY() + hpBarBg.getHeight() * (2f/9f));
 
-        hpBar.setSize(hpBarBg.getWidth() * (84f/100f), hpBarBg.getHeight() * (5f/9f));
-        mpBar.setSize(hpBarBg.getWidth() * (84f/100f), hpBarBg.getHeight() * (5f/9f));
-        expBar.setSize(hpBarBg.getWidth() * (84f/100f), hpBarBg.getHeight() * (5f/9f));
+        hpBar.setSize(hpBarBg.getWidth() * (84f/100f) * (StatTracker.getCurrentStat(CompleteHeroStatsEnum.HP) / StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_HP)), hpBarBg.getHeight() * (5f/9f));
+        mpBar.setSize(hpBarBg.getWidth() * (84f/100f) * (StatTracker.getCurrentStat(CompleteHeroStatsEnum.MP) / StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_MP)), hpBarBg.getHeight() * (5f/9f));
+        expBar.setSize(hpBarBg.getWidth() * (84f/100f) * (StatTracker.getCurrentStat(CompleteHeroStatsEnum.EXP) / StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_EXP)), hpBarBg.getHeight() * (5f/9f));
 
         hpStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_HP),
-                "hp: 100/100",
+                "hp: " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.HP) + "/" + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_HP),
                 hpBarBg.getX() + hpBarBg.getWidth() * 0.9f,
                 hpBarBg.getY() - hpBarBg.getHeight() * 0.35f,
                 Align.right
         );
         mpStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_MP),
-                "mp: 100/100",
+                "mp: " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MP) + "/" + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_MP),
                 mpBarBg.getX() + mpBarBg.getWidth() * 0.9f,
                 mpBarBg.getY() - mpBarBg.getHeight() * 0.35f,
                 Align.right
         );
         expStat = new TextObject(
                 FontsManager.getFont(FontEnum.STAT_EXP),
-                "exp: 100/100",
+                "exp: " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.EXP) + "/" + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAX_EXP),
                 expBarBg.getX() + expBarBg.getWidth() * 0.9f,
                 expBarBg.getY() - expBarBg.getHeight() * 0.35f,
                 Align.right
         );
-
     }
 
     public void draw(Batch batch) {

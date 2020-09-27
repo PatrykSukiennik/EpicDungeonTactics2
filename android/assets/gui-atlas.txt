@@ -1480,6 +1480,13 @@ item-effect-icons/LCK_BONUS
   orig: 28, 28
   offset: 0, 0
   index: -1
+item-effect-icons/PERCENT_ANY_DROP_CHANCE
+  rotate: false
+  xy: 56, 247
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
 item-effect-icons/PERCENT_CHANCE_FOR_BURNING
   rotate: false
   xy: 56, 247
@@ -1494,9 +1501,23 @@ item-effect-icons/PERCENT_CHANCE_FOR_DOUBLE_ATTACK
   orig: 28, 28
   offset: 0, 0
   index: -1
+item-effect-icons/PERCENT_CHANCE_FOR_DOUBLE_MOVE
+  rotate: false
+  xy: 377, 219
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
 item-effect-icons/PERCENT_CHANCE_FOR_POISONING
   rotate: false
   xy: 56, 275
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+item-effect-icons/PERCENT_CRIT_CHANCE
+  rotate: false
+  xy: 56, 247
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
@@ -1511,6 +1532,27 @@ item-effect-icons/PERCENT_EXP_COLLECTED_BONUS
 item-effect-icons/PERCENT_GOLD_COLLECTED_BONUS
   rotate: false
   xy: 140, 247
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+item-effect-icons/PERCENT_HP_REGEN_CLEAN_ROOM
+  rotate: false
+  xy: 308, 247
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+item-effect-icons/PERCENT_HP_REGEN_KILL
+  rotate: false
+  xy: 56, 247
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+item-effect-icons/PERCENT_SPELL_CHANCE
+  rotate: false
+  xy: 56, 247
   size: 28, 28
   orig: 28, 28
   offset: 0, 0

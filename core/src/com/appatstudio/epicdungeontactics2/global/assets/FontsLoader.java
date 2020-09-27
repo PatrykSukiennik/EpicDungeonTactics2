@@ -12,6 +12,7 @@ final class FontsLoader {
 
     private static final Color COLOR_WHITE_TEXT = new Color(0.95f, 0.95f, 0.95f, 1f);
     private static final Color COLOR_GRAY_TEXT = new Color(0.45f, 0.45f, 0.45f, 1f);
+    private static final Color COLOR_DARK_GRAY_TEXT = new Color(0.35f, 0.35f, 0.35f, 1f);
     private static final Color COLOR_BLUE_TEXT = new Color(0.1f, 0.1f, 0.6f, 1f);
     private static final Color COLOR_RED_TEXT = new Color(0.6f, 0.1f, 0.1f, 1f);
     private static final Color COLOR_YELLOW_TEXT = new Color(0.1f, 0.75f, 0.75f, 1f);
@@ -40,8 +41,8 @@ final class FontsLoader {
         int itemTitleSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.035f) : (int) (Gdx.graphics.getWidth() * 0.04f);
         int itemDescSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.03f) : (int) (Gdx.graphics.getWidth() * 0.035f);
 
-        int statsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.022f) : (int) (Gdx.graphics.getWidth() * 0.027f);
-        int smallStatsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.016f) : (int) (Gdx.graphics.getWidth() * 0.026f);
+        int statsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.025f) : (int) (Gdx.graphics.getWidth() * 0.032f);
+        int smallStatsFontSize = isTablet ? (int) (Gdx.graphics.getWidth() * 0.021f) : (int) (Gdx.graphics.getWidth() * 0.034f);
 
 
         //MENU HERO TITLE
@@ -115,18 +116,18 @@ final class FontsLoader {
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = MAP_FONT_PATH;
         parms.fontParameters.size = statsFontSize;
-        parms.fontParameters.color = COLOR_GRAY_TEXT;
+        parms.fontParameters.color = COLOR_DARK_GRAY_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        //parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_DESC.toString() + ".ttf", BitmapFont.class, parms);
 
         parms = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
         parms.fontFileName = MAP_FONT_PATH;
         parms.fontParameters.size = smallStatsFontSize;
-        parms.fontParameters.color = COLOR_GRAY_TEXT;
+        parms.fontParameters.color = Color.BLACK;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        //parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.SMALL_STAT_DESC.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -135,7 +136,7 @@ final class FontsLoader {
         parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_BLUE_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        //parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_MP.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -144,7 +145,7 @@ final class FontsLoader {
         parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_RED_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        //parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_HP.toString() + ".ttf", BitmapFont.class, parms);
 
@@ -153,7 +154,7 @@ final class FontsLoader {
         parms.fontParameters.size = statsFontSize;
         parms.fontParameters.color = COLOR_GREEN_TEXT;
         parms.fontParameters.borderColor = Color.BLACK;
-        parms.fontParameters.borderWidth = 1;
+        //parms.fontParameters.borderWidth = 1;
         parms.fontParameters.characters = CHARACTERS;
         assetManager.load(FontEnum.STAT_EXP.toString() + ".ttf", BitmapFont.class, parms);
 

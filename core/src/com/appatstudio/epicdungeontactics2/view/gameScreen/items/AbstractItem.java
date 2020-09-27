@@ -41,4 +41,44 @@ public abstract class AbstractItem {
     public ItemRarityEnum getRarity() {
         return rarity;
     }
+
+    public static ItemTypeEnum getItemTypeEnum(ItemEnum itemEnum) {
+        if (itemEnum.toString().startsWith("MELE")) {
+            return ItemTypeEnum.MELE;
+        }
+        else if (itemEnum.toString().startsWith("ARROW")) {
+            return ItemTypeEnum.ARROW;
+        }
+        else if (itemEnum.toString().startsWith("BOW")) {
+            return ItemTypeEnum.BOW;
+        }
+        else if (itemEnum.toString().startsWith("ARMOR")) {
+            return ItemTypeEnum.ARMOR;
+        }
+        else if (itemEnum.toString().startsWith("STAFF")) {
+            return ItemTypeEnum.STAFF;
+        }
+        else if (itemEnum.toString().startsWith("HELMET")) {
+            return ItemTypeEnum.HELMET;
+        }
+        else if (itemEnum.toString().startsWith("FOOD")) {
+            return ItemTypeEnum.FOOD;
+        }
+        else if (itemEnum.toString().startsWith("BOOK")) {
+            return ItemTypeEnum.BOOK;
+        }
+        else if (itemEnum.toString().startsWith("OTHER")) {
+            return ItemTypeEnum.OTHER;
+        }
+        else if (itemEnum.toString().startsWith("SHIELD")) {
+            return ItemTypeEnum.SHIELD;
+        }
+        else if (itemEnum.toString().startsWith("NECKLACE")) {
+            return ItemTypeEnum.NECKLACE;
+        }
+        else if (itemEnum.toString().startsWith("RING")) {
+            return ItemTypeEnum.RING;
+        }
+        return ItemTypeEnum.MELE;
+    }
 }

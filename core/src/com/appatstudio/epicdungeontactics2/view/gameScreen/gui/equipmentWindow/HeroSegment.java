@@ -8,6 +8,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.HeroEqItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -41,7 +42,7 @@ public class HeroSegment extends AbstractSegment {
 
     private Animation<SpriteDrawable> heroAnimation;
 
-    private Array<HeroEqItemBlock> eqItemBlocks;
+    private static Array<HeroEqItemBlock> eqItemBlocks;
 
     static {
         posY = Gdx.graphics.getHeight() / 2f - AbstractSegment.getFullHeight() / 2f + AbstractSegment.fullHeight;
@@ -68,6 +69,16 @@ public class HeroSegment extends AbstractSegment {
         heroY = posY + fullHeight / 2f - heroSize / 3f;
 
         createHeroSpecifiedEquipment(hero);
+    }
+
+    public static Array<AbstractItem> getItems() {
+        Array<AbstractItem> items = new Array<>();
+
+        for (ItemBlock item : eqItemBlocks) {
+            if (item.getItem() != null) items.add(item.getItem());
+        }
+
+        return items;
     }
 
     void draw(Batch batch, AbstractItem selectedItem) {
@@ -118,7 +129,7 @@ public class HeroSegment extends AbstractSegment {
                 if (b.isTap(x, y)) {
                     EquipmentWindow.equipped(item, b.getItem());
                     b.setItem(item);
-                    StatTracker.refreshEq();
+                    StatTracker.refreshWholeCharacter();
                     return true;
                 }
             }

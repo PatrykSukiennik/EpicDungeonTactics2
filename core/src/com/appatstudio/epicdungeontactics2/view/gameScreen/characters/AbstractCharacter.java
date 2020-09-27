@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightConfigObject;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
@@ -44,11 +45,11 @@ public abstract class AbstractCharacter {
         this.stats = new HashMap<>();
         CharacterPrototype basicPrototype = CharacterStats.getPrototype(characterEnum);
         CharacterPrototype lvlPrototype = CharacterStats.getEnemeyLvlUpStats(characterEnum);
-        this.stats.put(STR, basicPrototype.getSTR() + StatTracker.getLvl() * lvlPrototype.getSTR());
-        this.stats.put(INT, basicPrototype.getINT() + StatTracker.getLvl() * lvlPrototype.getINT());
-        this.stats.put(VIT, basicPrototype.getVIT() + StatTracker.getLvl() * lvlPrototype.getVIT());
-        this.stats.put(DEX, basicPrototype.getDEX() + StatTracker.getLvl() * lvlPrototype.getDEX());
-        this.stats.put(LCK, basicPrototype.getLCK() + StatTracker.getLvl() * lvlPrototype.getLCK());
+        this.stats.put(STR, basicPrototype.getSTR() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getSTR());
+        this.stats.put(INT, basicPrototype.getINT() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getINT());
+        this.stats.put(VIT, basicPrototype.getVIT() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getVIT());
+        this.stats.put(DEX, basicPrototype.getDEX() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getDEX());
+        this.stats.put(LCK, basicPrototype.getLCK() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getLCK());
 
     }
 

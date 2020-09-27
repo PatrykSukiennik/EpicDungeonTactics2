@@ -1,11 +1,13 @@
 package com.appatstudio.epicdungeontactics2.global.stats.itemGenerator;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.appatstudio.epicdungeontactics2.global.stats.items.ArmorPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.items.ArrowPrototype;
@@ -18,6 +20,7 @@ import com.appatstudio.epicdungeontactics2.global.stats.items.NecklacePrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.items.RingPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.items.ShieldPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.items.StaffPrototype;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Armor;
@@ -32,6 +35,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Necklace;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Ring;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Shield;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Staff;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
@@ -50,13 +54,17 @@ public class ItemGenerator {
         return createItem(getItemEnum(type), type, true);
     }
 
+    public static AbstractItem getItem(ItemEnum itemEnum) {
+        return createItem(itemEnum, AbstractItem.getItemTypeEnum(itemEnum), true);
+    }
+
     public static AbstractItem getItemNoPerks(ItemEnum item, ItemTypeEnum type) {
         return createItem(getItemEnum(type), type, false);
     }
 
     public static void refresh() {
         itemTypeSum = 0;
-        lvl = StatTracker.getLvl();
+        lvl = (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL);
 
         for (Integer i : ItemGeneratorConfig.basicTypeChance.get(StatTracker.getHero()).values()) {
             itemTypeSum += i;
@@ -304,7 +312,7 @@ public class ItemGenerator {
             case RING:
             case NECKLACE:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.12f * StatTracker.getLvl()) {
+                    if (EpicDungeonTactics.random.nextFloat() < 0.12f * StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL)) {
                         effects.add(getEffect(effects, type));
                     }
                 }
@@ -316,15 +324,15 @@ public class ItemGenerator {
             case HELMET:
             case BOW:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.06f * StatTracker.getLvl()) {
-                        effects.add(getEffect(effects, type));
+                    if (EpicDungeonTactics.random.nextFloat() < 0.06f * SavedInfoManager.getPerkLvl(GameScreen.getPerk())) {
+                        //effects.add(getEffect(effects, type));
                     }
                 }
                 break;
             case ARROW:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.03f * StatTracker.getLvl()) {
-                        effects.add(getEffect(effects, type));
+                    if (EpicDungeonTactics.random.nextFloat() < 0.03f * SavedInfoManager.getCharacterLvl(GameScreen.getHero())) {
+                        //effects.add(getEffect(effects, type));
                     }
                 }
             case BOOK:
@@ -339,10 +347,12 @@ public class ItemGenerator {
             if (itemEffectSum == 0) refresh();
             int temp = 0;
             int result = Math.abs(EpicDungeonTactics.random.nextInt()) % itemEffectSum;
-            ItemEffectEnum effectEnum = null;
+            ItemEffectEnum effectEnum = ItemEffectEnum.DEX_BONUS;
             ItemEffectEnum[] allEffects = ItemEffectEnum.values();
 
             for (ItemEffectEnum effect : allEffects) {
+                System.out.println(typeEnum.toString());
+                System.out.println(effect.toString());
                 temp += ItemEffectsConfig.effectChance.get(typeEnum).get(effect);
 
                 if (result <= temp && !isEffectInArray(effects, effect)) {
@@ -350,13 +360,13 @@ public class ItemGenerator {
                     break;
                 }
             }
-            if (effectEnum == null) effectEnum = ItemEffectEnum.HP_BONUS;
+            if (effectEnum == null) effectEnum = ItemEffectEnum.PERCENT_HP_REGEN_KILL;
 
             return new ItemEffect(
                     effectEnum,
                     EpicDungeonTactics.random.nextFloat()
                             * (ItemEffectsConfig.basicEffectPower.get(effectEnum)
-                            + StatTracker.getLvl() * ItemEffectsConfig.lvlEffectPower.get(effectEnum))
+                            + StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * ItemEffectsConfig.lvlEffectPower.get(effectEnum))
             );
     }
 

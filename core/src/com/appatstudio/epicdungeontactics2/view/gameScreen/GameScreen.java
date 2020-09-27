@@ -60,43 +60,27 @@ public final class GameScreen extends Actor {
 
     private static float freshRunTextDelay = 0f;
 
-    public GameScreen(CharacterEnum currHero, PerkEnum currPerk) {
-        hero = currHero;
-        perk = currPerk;
-        stage = 1;
+    private static StatTracker statTracker;
 
-        currStage = MapGenerator.createStage(stage);
-        currRoom = currStage.getFirstRoom();
+    public GameScreen(CharacterEnum newHero, PerkEnum newPerk) {
+        hero = newHero;
+        perk = newPerk;
 
         gameBatch = new SpriteBatch();
         mapGuiBatch = new SpriteBatch();
-
-        guiContainer = new GuiContainer(this);
-
-        guiContainer.setMapStage(currStage);
-
-        freshRunInit();
-
-        guiContainer.roomChanged(null, currRoom);
     }
 
     public void startGame(CharacterEnum hero, PerkEnum perk) {
-        this.hero = hero;
-        this.perk = perk;
+        StatTracker.init(hero, perk);
         stage = 1;
-
-        currStage = MapGenerator.createStage(stage);
-        currRoom = currStage.getFirstRoom();
-
-        gameBatch = new SpriteBatch();
-        mapGuiBatch = new SpriteBatch();
-
-        guiContainer = new GuiContainer(this);
-
-        guiContainer.setMapStage(currStage);
 
         freshRunInit();
 
+        guiContainer = new GuiContainer();
+
+        currStage = MapGenerator.createStage(stage);
+        currRoom = currStage.getFirstRoom();
+        guiContainer.setMapStage(currStage);
         guiContainer.roomChanged(null, currRoom);
     }
 
@@ -104,20 +88,7 @@ public final class GameScreen extends Actor {
         CameraHandler.freshRun();
         newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " 1");
         freshRunTextDelay = 2f;
-
-
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-        EquipmentWindow.pickItem(ItemGenerator.getItem());
-
-        StatTracker.setSelectedPerk(perk);
-        guiContainer.refreshStats();
+        //guiContainer.refreshStats();
     }
 
     public CharacterEnum getCurrHero() {
@@ -169,7 +140,7 @@ public final class GameScreen extends Actor {
         return hero;
     }
 
-    public PerkEnum getPerk() {
+    public static PerkEnum getPerk() {
         return perk;
     }
 

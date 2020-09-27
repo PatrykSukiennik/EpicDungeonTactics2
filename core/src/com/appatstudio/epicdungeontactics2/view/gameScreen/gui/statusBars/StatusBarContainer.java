@@ -43,12 +43,12 @@ public final class StatusBarContainer {
         barsBorder.setPosition(heroHead.getX() + heroHead.getWidth(), heroHead.getY() + heroHead.getHeight() * (8f/16));
 
         hpBar = new Image(GraphicsManager.getGuiElement(GuiElementEnum.HP_BAR));
-        hpBar.setSize(barsBg.getWidth() * (63f/72f), barsBg.getHeight() * (2f/7));
-        hpBar.setPosition(barsBg.getX() + barsBg.getX() * (1f/72f), barsBg.getY() + barsBg.getHeight() * (4f/7));
+        hpBar.setSize(barsBg.getWidth() * (63f/72f), barsBg.getHeight() * (5f/16));
+        hpBar.setPosition(barsBg.getX() + barsBg.getX() * (1f/72f), barsBg.getY() + barsBg.getHeight() * (9f/16));
 
         expBar = new Image(GraphicsManager.getGuiElement(GuiElementEnum.EXP_BAR));
-        expBar.setSize(barsBg.getWidth() * (53f/72f), barsBg.getHeight() * (2f/7));
-        expBar.setPosition(barsBg.getX() + barsBg.getX() * (1f/72f), barsBg.getY() + barsBg.getHeight() * (1f/7));
+        expBar.setSize(barsBg.getWidth() * (53f/72f), barsBg.getHeight() * (5f/16));
+        expBar.setPosition(barsBg.getX() + barsBg.getX() * (1f/72f), barsBg.getY() + barsBg.getHeight() * (3f/16));
     }
 
     static {
@@ -68,12 +68,12 @@ public final class StatusBarContainer {
     }
 
     public static void setHp(float hpPercent) {
-        hpBar.setSize((barsBg.getWidth() * (225f/240)) * hpPercent, barsBg.getHeight() * (2f/7));
+        hpBar.setSize((barsBg.getWidth() * (225f/240)) * hpPercent, barsBg.getHeight() * (5f/16));
         hpBar.act(Gdx.graphics.getDeltaTime());
     }
 
     public static void setExp(float expPercent) {
-        expBar.setSize((barsBg.getWidth() * (195f/240)) * expPercent, barsBg.getHeight() * (2f/7));
+        expBar.setSize((barsBg.getWidth() * (195f/240)) * expPercent, barsBg.getHeight() * (5f/16));
         expBar.act(Gdx.graphics.getDeltaTime());
     }
 

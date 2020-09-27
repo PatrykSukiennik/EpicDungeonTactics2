@@ -47,23 +47,18 @@ public final class GuiContainer {
     public static final float guiButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
     public static final float guiMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
 
-    public GuiContainer(GameScreen gameScreen) {
+    public GuiContainer() {
         batch = new SpriteBatch();
         batch.enableBlending();
 
         runQuitWindow = new RunQuitWindow();
 
         communicatePrinter = new CommunicatePrinter();
-        statusBarContainer = new StatusBarContainer(gameScreen.getHero());
+        statusBarContainer = new StatusBarContainer(GameScreen.getHero());
 
-        equipmentWindow = new EquipmentWindow(gameScreen.getHero());
-        heroStatWindow = new HeroStatWindow(gameScreen.getHero());
+        equipmentWindow = new EquipmentWindow(GameScreen.getHero());
+        heroStatWindow = new HeroStatWindow();
         mapWindow = new MapWindow();
-
-        statusBarContainer.addEffect(EffectEnum.POISON, 4);
-        statusBarContainer.addEffect(EffectEnum.POISON, 3);
-        statusBarContainer.addEffect(EffectEnum.POISON, 2);
-        statusBarContainer.addEffect(EffectEnum.POISON, 11);
 
         goldStatus = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.COINS),
@@ -87,6 +82,7 @@ public final class GuiContainer {
         eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f);
         mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
 
+        heroStatWindow.init(GameScreen.getHero());
     }
 
     public void draw() {
@@ -190,5 +186,9 @@ public final class GuiContainer {
 
     public void refreshStats() {
         heroStatWindow.refreshStats();
+    }
+
+    public void init() {
+        //heroStatWindow.init(GameScreen.getHero());
     }
 }
