@@ -7,13 +7,18 @@ import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
 public final class EquipmentWindow {
+
+    private GameScreen gameScreen;
 
     private static boolean isUp = false;
 
@@ -27,10 +32,12 @@ public final class EquipmentWindow {
     private static float notPossibleCommunicateTimer = -1;
     private static ButtonWithText notPossibleInFightCommunicate;
 
-    public EquipmentWindow(CharacterEnum characterEnum) {
+    public EquipmentWindow(CharacterEnum characterEnum, GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
+
         heroSegment = new HeroSegment(characterEnum);
         backpackSegment = new BackpackSegment(characterEnum);
-        itemSegment = new ItemSegment();
+        itemSegment = new ItemSegment(Gdx.graphics.getHeight() / 2f - AbstractSegment.getFullHeight() / 2f - AbstractSegment.fullHeight);
 
         notPossibleInFightCommunicate = new ButtonWithText(
                 GraphicsManager.getGuiElement(GuiElementEnum.WOODEN_BUTTON_WIDE),
@@ -41,11 +48,31 @@ public final class EquipmentWindow {
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.NOT_POSSIBLE_IN_FIGHT)
         );
+
+        AbstractItem tempItem;
+        Array<AbstractItem> items = StatTracker.getEqItems();
+        for (AbstractItem item : items) {
+            tempItem = item;
+            pickItem(item);
+
+            switch (tempItem.getItemTypeEnum()) {
+                case ARMOR:
+                case ARROW:
+                case NECKLACE:
+                case SHIELD:
+                case STAFF:
+                case MELE:
+                case RING:
+                case HELMET:
+                case BOW:
+                    equipped(null, tempItem);
+            }
+        }
     }
 
     public static void itemUsed(AbstractItem item) {
         backpackSegment.itemUsed(item);
-
+        backpackSegment.cleanUp();
         currItem = null;
         //play sound or whatever
     }
@@ -53,7 +80,7 @@ public final class EquipmentWindow {
     public void draw(Batch batch) {
         heroSegment.draw(batch, currItem);
         backpackSegment.draw(batch, currItem);
-        if (currItem != null) itemSegment.draw(batch);
+        if (currItem != null) itemSegment.draw(batch, true);
         if (notPossibleCommunicateTimer > 0) notPossibleInFightCommunicate.draw(batch, 1f);
     }
 
@@ -62,7 +89,8 @@ public final class EquipmentWindow {
     }
 
     public static void equipped(AbstractItem toReplace, AbstractItem newItem) {
-        backpackSegment.replace(toReplace, newItem);
+        if (toReplace == null) heroSegment.justEquip(newItem);
+        else backpackSegment.replace(toReplace, newItem);
     }
 
     public boolean tap(float x, float y) {
@@ -92,11 +120,17 @@ public final class EquipmentWindow {
                 }
             }
         }
-        else if (currItem != null && itemSegment.isTap(x, y)) {
+        else if (currItem != null && itemSegment.isTap(x, y, true)) {
             if (itemSegment.isDrop(x, y)) {
+                gameScreen.itemDropped(currItem);
+
+                backpackSegment.itemDropped(currItem);
+                heroSegment.itemDropped(currItem);
+
                 currItem = null;
                 backpackSegment.selectItem(null);
                 heroSegment.selectItem(null);
+
             }
         }
         else {
@@ -117,7 +151,7 @@ public final class EquipmentWindow {
 
     public static void show() {
         isUp = true;
-        cleanUp();
+        //cleanUp();
     }
 
     public static void cleanUp() {

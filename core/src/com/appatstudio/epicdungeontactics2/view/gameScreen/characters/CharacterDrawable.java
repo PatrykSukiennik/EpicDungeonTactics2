@@ -12,8 +12,10 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
+import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -54,6 +56,7 @@ public class CharacterDrawable extends Image {
     private CoordsFloat lightOffset;
 
     private MapTile tileStandingOn;
+    private MapTile targetTile;
 
     private boolean isRotation = EpicDungeonTactics.random.nextBoolean();
 
@@ -148,8 +151,11 @@ public class CharacterDrawable extends Image {
         pointLight.remove(true);
     }
 
-    public void setTileStandingOn(MapTile tileStandingOn) {
+    public void setTileStandingOn(MapTile tileStandingOn, boolean heroFlag) {
         this.tileStandingOn = tileStandingOn;
+        if (heroFlag) {
+            //GuiContainer.setItemsToPick(tileStandingOn.getItemsToPick());
+        }
     }
 
     public void moveToMapTile(MapTile tile) {
@@ -157,6 +163,7 @@ public class CharacterDrawable extends Image {
         this.addAction(way.getSequenceAction());
         this.state = CharacterStateEnum.RUN;
         this.actionTime = way.getDuration();
+        this.targetTile = tile;
     }
 
     public boolean isReady() {
@@ -207,5 +214,13 @@ public class CharacterDrawable extends Image {
 
     public void drawTop(Batch guiBatch) {
         //override me
+    }
+
+    protected CharacterStateEnum getState() {
+        return this.state;
+    }
+
+    protected boolean isOnTarget() {
+        return this.getTileStandingOn() == targetTile;
     }
 }

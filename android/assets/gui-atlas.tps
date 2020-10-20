@@ -181,6 +181,47 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">gui/ARMOR_ICON.png</key>
+            <key type="filename">gui/CRIT_CHANCE_ICON.png</key>
+            <key type="filename">gui/CRIT_DMG_ICON.png</key>
+            <key type="filename">gui/DOT.png</key>
+            <key type="filename">gui/MELE_DMG_ICON.png</key>
+            <key type="filename">gui/QUEUE_BG_BOSS.png</key>
+            <key type="filename">gui/QUEUE_BG_HERO.png</key>
+            <key type="filename">gui/QUEUE_BG_PET.png</key>
+            <key type="filename">gui/QUEUE_BORDER.png</key>
+            <key type="filename">gui/RANGE_DMG_ICON.png</key>
+            <key type="filename">gui/RANGE_ICON.png</key>
+            <key type="filename">gui/RED_DOT.png</key>
+            <key type="filename">gui/SELECTED_ITEM.png</key>
+            <key type="filename">gui/STAT_PLUS.png</key>
+            <key type="filename">gui/finances-icons/CARAVAN.png</key>
+            <key type="filename">gui/finances-icons/CASTLE.png</key>
+            <key type="filename">gui/finances-icons/FARM.png</key>
+            <key type="filename">gui/finances-icons/HIRED_MERCHANT.png</key>
+            <key type="filename">gui/finances-icons/MUSEUM.png</key>
+            <key type="filename">gui/finances-icons/TAVERN.png</key>
+            <key type="filename">gui/finances-icons/VILLAGE.png</key>
+            <key type="filename">gui/item-rarity-bg/BLUE.png</key>
+            <key type="filename">gui/item-rarity-bg/GREEN.png</key>
+            <key type="filename">gui/item-rarity-bg/ORANGE.png</key>
+            <key type="filename">gui/item-rarity-bg/RED.png</key>
+            <key type="filename">gui/item-rarity-bg/VIOLET.png</key>
+            <key type="filename">gui/item-rarity-bg/WHITE.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/ARROW_LEFT.png</key>
             <key type="filename">gui/ARROW_RIGHT.png</key>
             <struct type="IndividualSpriteSettings">
@@ -240,12 +281,115 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/BAR_DISTANCE.png</key>
+            <key type="filename">gui/BAR_MELE.png</key>
+            <key type="filename">gui/effect-icons/APPLE_FINDER.png</key>
+            <key type="filename">gui/effect-icons/CHANCE_FOR_ANY_DROP.png</key>
+            <key type="filename">gui/effect-icons/DEX_BONUS.png</key>
+            <key type="filename">gui/effect-icons/ELEMENTALIST.png</key>
+            <key type="filename">gui/effect-icons/EXPERIENCED_ADVENTURER.png</key>
+            <key type="filename">gui/effect-icons/FROZE.png</key>
+            <key type="filename">gui/effect-icons/GLASS_CANNON.png</key>
+            <key type="filename">gui/effect-icons/HP_RESTORATION_KILL.png</key>
+            <key type="filename">gui/effect-icons/HP_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/effect-icons/INSTAKILL_ENEMY.png</key>
+            <key type="filename">gui/effect-icons/INT_BONUS.png</key>
+            <key type="filename">gui/effect-icons/KEY_FINDER.png</key>
+            <key type="filename">gui/effect-icons/LCK_BONUS.png</key>
+            <key type="filename">gui/effect-icons/MAGICAL_DMG_BONUS.png</key>
+            <key type="filename">gui/effect-icons/MAGICAL_RESIST.png</key>
+            <key type="filename">gui/effect-icons/MANA_RESTORATION_KILL.png</key>
+            <key type="filename">gui/effect-icons/MANA_RESTORATION_ROOM.png</key>
+            <key type="filename">gui/effect-icons/MISS_STAGE.png</key>
+            <key type="filename">gui/effect-icons/POISON_DURATION_DECREASE.png</key>
+            <key type="filename">gui/effect-icons/SKILL_COOLDOWN.png</key>
+            <key type="filename">gui/effect-icons/STRONGER_ENEMIES.png</key>
+            <key type="filename">gui/effect-icons/STR_BONUS.png</key>
+            <key type="filename">gui/effect-icons/SUGAR_LOVER.png</key>
+            <key type="filename">gui/effect-icons/TANK.png</key>
+            <key type="filename">gui/effect-icons/THIRD_CHANCE.png</key>
+            <key type="filename">gui/effect-icons/UNIQUE_LOOT.png</key>
+            <key type="filename">gui/effect-icons/VIT_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/DEX_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/DMG_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/HP_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/HP_REGEN.png</key>
+            <key type="filename">gui/item-effect-icons/INT_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/LCK_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_ANY_DROP_CHANCE.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_CHANCE_FOR_BURNING.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_CHANCE_FOR_DOUBLE_ATTACK.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_CHANCE_FOR_DOUBLE_MOVE.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_CHANCE_FOR_POISONING.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_CRIT_CHANCE.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_EXP_COLLECTED_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_GOLD_COLLECTED_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_HP_REGEN_CLEAN_ROOM.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_HP_REGEN_KILL.png</key>
+            <key type="filename">gui/item-effect-icons/PERCENT_SPELL_CHANCE.png</key>
+            <key type="filename">gui/item-effect-icons/RANGE_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/SPEED_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/STR_BONUS.png</key>
+            <key type="filename">gui/item-effect-icons/VIT_BONUS.png</key>
+            <key type="filename">gui/perk-icons/BLESS.png</key>
+            <key type="filename">gui/skill_icons/ELF_DOUBLE_SHOT.png</key>
+            <key type="filename">gui/skill_icons/ELF_IMMOBILIZATION.png</key>
+            <key type="filename">gui/skill_icons/ELF_INSIDE_OUT.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_BREAK_WEAPON.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_SHIELD_HIT.png</key>
+            <key type="filename">gui/skill_icons/KNIGHT_TORNADO.png</key>
+            <key type="filename">gui/skill_icons/MAGE_ICE_BOLT.png</key>
+            <key type="filename">gui/skill_icons/MAGE_MEDITATION.png</key>
+            <key type="filename">gui/skill_icons/MAGE_MULTIPLE_FIREBALLS.png</key>
+            <key type="filename">gui/spell_icon/BACK_TO_PREVIOUS ROOM.png</key>
+            <key type="filename">gui/spell_icon/BIG_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/BOW_IMMOBILIZATION.png</key>
+            <key type="filename">gui/spell_icon/BOW_INSIDE_OUT.png</key>
+            <key type="filename">gui/spell_icon/DESTROY_WEAK.png</key>
+            <key type="filename">gui/spell_icon/DOUBLE_ARMOR.png</key>
+            <key type="filename">gui/spell_icon/DOUBLE_SHOT_BOW.png</key>
+            <key type="filename">gui/spell_icon/FIRE_COAT.png</key>
+            <key type="filename">gui/spell_icon/FIRE_RAIN.png</key>
+            <key type="filename">gui/spell_icon/FIRE_SPOT.png</key>
+            <key type="filename">gui/spell_icon/FROZING.png</key>
+            <key type="filename">gui/spell_icon/GAS_CLOUD.png</key>
+            <key type="filename">gui/spell_icon/GIANT_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/HEALTH_HALF_ALL.png</key>
+            <key type="filename">gui/spell_icon/LASER.png</key>
+            <key type="filename">gui/spell_icon/MAGE_ICE_BOLT.png</key>
+            <key type="filename">gui/spell_icon/MELE_BREAK_WEAPON.png</key>
+            <key type="filename">gui/spell_icon/MELE_TORNADO.png</key>
+            <key type="filename">gui/spell_icon/METEOR.png</key>
+            <key type="filename">gui/spell_icon/POSITION_CHANGE.png</key>
+            <key type="filename">gui/spell_icon/REROLL_POSITIONS.png</key>
+            <key type="filename">gui/spell_icon/RESTORATION.png</key>
+            <key type="filename">gui/spell_icon/SILVER_EXPLODE.png</key>
+            <key type="filename">gui/spell_icon/SILVER_HIT.png</key>
+            <key type="filename">gui/spell_icon/SILVER_IMPLODE.png</key>
+            <key type="filename">gui/spell_icon/SMALL_SHOCK.png</key>
+            <key type="filename">gui/spell_icon/TELEPORT.png</key>
+            <key type="filename">gui/spell_icon/WEAKNESS.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>7,7,14,14</rect>
+                <key>scale9Paddings</key>
+                <rect>7,7,14,14</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/BLACK.png</key>
             <key type="filename">gui/BLACK_ALPHA_50percent.png</key>
             <key type="filename">gui/DAY_LIGHT_TEXTURE.png</key>
             <key type="filename">gui/EXP_BAR.png</key>
             <key type="filename">gui/HP_BAR.png</key>
             <key type="filename">gui/NIGHT_LIGHT_TEXTURE.png</key>
+            <key type="filename">gui/NONE.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -257,6 +401,42 @@
                 <rect>0,0,1,1</rect>
                 <key>scale9Paddings</key>
                 <rect>0,0,1,1</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/BOSS_BAR.png</key>
+            <key type="filename">gui/ENEMY_BAR.png</key>
+            <key type="filename">gui/EXP_BAR — kopia.png</key>
+            <key type="filename">gui/MP_BAR.png</key>
+            <key type="filename">gui/PET_BAR.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>0,1,1,3</rect>
+                <key>scale9Paddings</key>
+                <rect>0,1,1,3</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/BOSS_BAR_BG.png</key>
+            <key type="filename">gui/ENEMY_BAR_BG.png</key>
+            <key type="filename">gui/PET_BAR_BG.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>20,2,40,5</rect>
+                <key>scale9Paddings</key>
+                <rect>20,2,40,5</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -596,6 +776,39 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/CATEGORY_BUTTON.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,6,36,12</rect>
+                <key>scale9Paddings</key>
+                <rect>18,6,36,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/CATEGORY_BUTTON_ARMOR.png</key>
+            <key type="filename">gui/CATEGORY_BUTTON_DISTANCE.png</key>
+            <key type="filename">gui/CATEGORY_BUTTON_FOOD.png</key>
+            <key type="filename">gui/CATEGORY_BUTTON_MELE.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,8,50,17</rect>
+                <key>scale9Paddings</key>
+                <rect>25,8,50,17</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/FINANCES_BG.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -627,6 +840,36 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">gui/HERO_STAT_BG.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>31,62,62,124</rect>
+                <key>scale9Paddings</key>
+                <rect>31,62,62,124</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/HERO_STAT_SEPARATOR.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>31,3,61,5</rect>
+                <key>scale9Paddings</key>
+                <rect>31,3,61,5</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">gui/IDLE_INCOME_BANNER.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -639,6 +882,21 @@
                 <rect>21,4,43,8</rect>
                 <key>scale9Paddings</key>
                 <rect>21,4,43,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/LVL_POINTS_BUTTON.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,10,20,20</rect>
+                <key>scale9Paddings</key>
+                <rect>10,10,20,20</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -674,71 +932,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">gui/effect-icons/APPLE_FINDER.png</key>
-            <key type="filename">gui/effect-icons/CHANCE_FOR_ANY_DROP.png</key>
-            <key type="filename">gui/effect-icons/DEX_BONUS.png</key>
-            <key type="filename">gui/effect-icons/ELEMENTALIST.png</key>
-            <key type="filename">gui/effect-icons/EXPERIENCED_ADVENTURER.png</key>
-            <key type="filename">gui/effect-icons/FROZE.png</key>
-            <key type="filename">gui/effect-icons/GLASS_CANNON.png</key>
-            <key type="filename">gui/effect-icons/HP_RESTORATION_KILL.png</key>
-            <key type="filename">gui/effect-icons/HP_RESTORATION_ROOM.png</key>
-            <key type="filename">gui/effect-icons/INSTAKILL_ENEMY.png</key>
-            <key type="filename">gui/effect-icons/INT_BONUS.png</key>
-            <key type="filename">gui/effect-icons/KEY_FINDER.png</key>
-            <key type="filename">gui/effect-icons/LCK_BONUS.png</key>
-            <key type="filename">gui/effect-icons/MAGICAL_DMG_BONUS.png</key>
-            <key type="filename">gui/effect-icons/MAGICAL_RESIST.png</key>
-            <key type="filename">gui/effect-icons/MANA_RESTORATION_KILL.png</key>
-            <key type="filename">gui/effect-icons/MANA_RESTORATION_ROOM.png</key>
-            <key type="filename">gui/effect-icons/MISS_STAGE.png</key>
-            <key type="filename">gui/effect-icons/POISON_DURATION_DECREASE.png</key>
-            <key type="filename">gui/effect-icons/SKILL_COOLDOWN.png</key>
-            <key type="filename">gui/effect-icons/STRONGER_ENEMIES.png</key>
-            <key type="filename">gui/effect-icons/STR_BONUS.png</key>
-            <key type="filename">gui/effect-icons/SUGAR_LOVER.png</key>
-            <key type="filename">gui/effect-icons/TANK.png</key>
-            <key type="filename">gui/effect-icons/THIRD_CHANCE.png</key>
-            <key type="filename">gui/effect-icons/UNIQUE_LOOT.png</key>
-            <key type="filename">gui/effect-icons/VIT_BONUS.png</key>
-            <key type="filename">gui/perk-icons/BLESS.png</key>
-            <key type="filename">gui/skill_icons/ELF_DOUBLE_SHOT.png</key>
-            <key type="filename">gui/skill_icons/ELF_IMMOBILIZATION.png</key>
-            <key type="filename">gui/skill_icons/ELF_INSIDE_OUT.png</key>
-            <key type="filename">gui/skill_icons/KNIGHT_BREAK_WEAPON.png</key>
-            <key type="filename">gui/skill_icons/KNIGHT_SHIELD_HIT.png</key>
-            <key type="filename">gui/skill_icons/KNIGHT_TORNADO.png</key>
-            <key type="filename">gui/skill_icons/MAGE_ICE_BOLT.png</key>
-            <key type="filename">gui/skill_icons/MAGE_MEDITATION.png</key>
-            <key type="filename">gui/skill_icons/MAGE_MULTIPLE_FIREBALLS.png</key>
-            <key type="filename">gui/spell_icon/BACK_TO_PREVIOUS ROOM.png</key>
-            <key type="filename">gui/spell_icon/BIG_SHOCK.png</key>
-            <key type="filename">gui/spell_icon/BOW_IMMOBILIZATION.png</key>
-            <key type="filename">gui/spell_icon/BOW_INSIDE_OUT.png</key>
-            <key type="filename">gui/spell_icon/DESTROY_WEAK.png</key>
-            <key type="filename">gui/spell_icon/DOUBLE_ARMOR.png</key>
-            <key type="filename">gui/spell_icon/DOUBLE_SHOT_BOW.png</key>
-            <key type="filename">gui/spell_icon/FIRE_COAT.png</key>
-            <key type="filename">gui/spell_icon/FIRE_RAIN.png</key>
-            <key type="filename">gui/spell_icon/FIRE_SPOT.png</key>
-            <key type="filename">gui/spell_icon/FROZING.png</key>
-            <key type="filename">gui/spell_icon/GAS_CLOUD.png</key>
-            <key type="filename">gui/spell_icon/GIANT_SHOCK.png</key>
-            <key type="filename">gui/spell_icon/HEALTH_HALF_ALL.png</key>
-            <key type="filename">gui/spell_icon/LASER.png</key>
-            <key type="filename">gui/spell_icon/MAGE_ICE_BOLT.png</key>
-            <key type="filename">gui/spell_icon/MELE_BREAK_WEAPON.png</key>
-            <key type="filename">gui/spell_icon/MELE_TORNADO.png</key>
-            <key type="filename">gui/spell_icon/METEOR.png</key>
-            <key type="filename">gui/spell_icon/POSITION_CHANGE.png</key>
-            <key type="filename">gui/spell_icon/REROLL_POSITIONS.png</key>
-            <key type="filename">gui/spell_icon/RESTORATION.png</key>
-            <key type="filename">gui/spell_icon/SILVER_EXPLODE.png</key>
-            <key type="filename">gui/spell_icon/SILVER_HIT.png</key>
-            <key type="filename">gui/spell_icon/SILVER_IMPLODE.png</key>
-            <key type="filename">gui/spell_icon/SMALL_SHOCK.png</key>
-            <key type="filename">gui/spell_icon/TELEPORT.png</key>
-            <key type="filename">gui/spell_icon/WEAKNESS.png</key>
+            <key type="filename">gui/STATUS_BAR_BG.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -747,19 +941,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>7,7,14,14</rect>
+                <rect>25,2,50,5</rect>
                 <key>scale9Paddings</key>
-                <rect>7,7,14,14</rect>
+                <rect>25,2,50,5</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">gui/finances-icons/CARAVAN.png</key>
-            <key type="filename">gui/finances-icons/CASTLE.png</key>
-            <key type="filename">gui/finances-icons/FARM.png</key>
-            <key type="filename">gui/finances-icons/HIRED_MERCHANT.png</key>
-            <key type="filename">gui/finances-icons/MUSEUM.png</key>
-            <key type="filename">gui/finances-icons/TAVERN.png</key>
-            <key type="filename">gui/finances-icons/VILLAGE.png</key>
+            <key type="filename">gui/WOODEN_BUTTON_WIDE.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -768,9 +956,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
+                <rect>31,6,63,13</rect>
                 <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
+                <rect>31,6,63,13</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -811,6 +999,23 @@
                 <rect>3,3,6,6</rect>
                 <key>scale9Paddings</key>
                 <rect>3,3,6,6</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">gui/map-room-icons/ENEMY_ROOM.png</key>
+            <key type="filename">gui/map-room-icons/GOING_DOWN_ROOM.png</key>
+            <key type="filename">gui/map-room-icons/ITEM_ROOM.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

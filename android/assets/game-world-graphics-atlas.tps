@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.3.0</string>
+        <string>5.4.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -189,6 +189,30 @@
             <key type="filename">game-world-graphics/characters/BEAR/run_2.png</key>
             <key type="filename">game-world-graphics/characters/BEAR/run_3.png</key>
             <key type="filename">game-world-graphics/characters/BEAR/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/idle_0.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/run_0.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_BIG_DEMON/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/idle_4.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/run_3.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_FOREST_GUARDIAN/run_4.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/idle_0.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/idle_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/idle_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/idle_3.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/run_0.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/run_1.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/run_2.png</key>
+            <key type="filename">game-world-graphics/characters/BOSS_OGRE/run_3.png</key>
             <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/CENTAUR_FEMALE/idle_3.png</key>
@@ -237,14 +261,6 @@
             <key type="filename">game-world-graphics/characters/ENT/run_2.png</key>
             <key type="filename">game-world-graphics/characters/ENT/run_3.png</key>
             <key type="filename">game-world-graphics/characters/ENT/run_4.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/idle_4.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_3.png</key>
-            <key type="filename">game-world-graphics/characters/FOREST_GUARDIAN/run_4.png</key>
             <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/GNOLL_BRUTE/idle_3.png</key>
@@ -411,14 +427,6 @@
             <key type="filename">game-world-graphics/characters/NPC_THIEF/run_2.png</key>
             <key type="filename">game-world-graphics/characters/NPC_THIEF/run_3.png</key>
             <key type="filename">game-world-graphics/characters/NPC_THIEF/run_4.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_0.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_0.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/OGRE/run_3.png</key>
             <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_1.png</key>
             <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_2.png</key>
             <key type="filename">game-world-graphics/characters/PET_HUNTER/idle_3.png</key>
@@ -451,8 +459,6 @@
             <key type="filename">game-world-graphics/characters/WOLF/run_2.png</key>
             <key type="filename">game-world-graphics/characters/WOLF/run_3.png</key>
             <key type="filename">game-world-graphics/characters/WOLF/run_4.png</key>
-            <key type="filename">game-world-graphics/map-elements/doors/CLOSED.png</key>
-            <key type="filename">game-world-graphics/map-elements/doors/OPEN.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -464,28 +470,6 @@
                 <rect>8,8,16,16</rect>
                 <key>scale9Paddings</key>
                 <rect>8,8,16,16</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_0.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_1.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_2.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/idle_3.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/run_0.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/run_1.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/run_2.png</key>
-            <key type="filename">game-world-graphics/characters/BIG_DEMON/run_3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,9,16,18</rect>
-                <key>scale9Paddings</key>
-                <rect>8,9,16,18</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -621,15 +605,17 @@
             <key type="filename">game-world-graphics/characters/ZOMBIE/run_1.png</key>
             <key type="filename">game-world-graphics/characters/ZOMBIE/run_2.png</key>
             <key type="filename">game-world-graphics/characters/ZOMBIE/run_3.png</key>
-            <key type="filename">game-world-graphics/map-elements/chest/closed.png</key>
-            <key type="filename">game-world-graphics/map-elements/chest/empty_0.png</key>
-            <key type="filename">game-world-graphics/map-elements/chest/empty_1.png</key>
-            <key type="filename">game-world-graphics/map-elements/chest/full_1.png</key>
-            <key type="filename">game-world-graphics/map-elements/chest/full__0.png</key>
-            <key type="filename">game-world-graphics/map-elements/floor_spikes/spikes_0.png</key>
-            <key type="filename">game-world-graphics/map-elements/floor_spikes/spikes_1.png</key>
-            <key type="filename">game-world-graphics/map-elements/floor_spikes/spikes_2.png</key>
-            <key type="filename">game-world-graphics/map-elements/floor_spikes/spikes_3.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CHEST_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CHEST_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CHEST_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/TORCH_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/TORCH_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/TORCH_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/TORCH_3.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CHEST_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CHEST_EMPTY.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CHEST_EMPTY_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TORCH_BROKEN.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -744,7 +730,54 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">game-world-graphics/map-elements/crate.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CANDLE_BROKEN.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>2,5,4,9</rect>
+                <key>scale9Paddings</key>
+                <rect>2,5,4,9</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_BIG_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_BIG_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/CANDLE_BIG_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/LAVA_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/LAVA_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/LAVA_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/WATER_0.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/WATER_1.png</key>
+            <key type="filename">game-world-graphics/map-elements/animations/WATER_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CANDLE_BIG_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/LAVA_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/WATER_BROKEN.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>4,12,8,24</rect>
+                <key>scale9Paddings</key>
+                <rect>4,12,8,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">game-world-graphics/map-elements/sprites/CRATE.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/CRATE_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/ITEMS.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/ITEMS_BROKEN.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -759,12 +792,12 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/lava_0.png</key>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/lava_1.png</key>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/lava_2.png</key>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/water_0.png</key>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/water_1.png</key>
-            <key type="filename">game-world-graphics/map-elements/wall_fountain/water_2.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_GREEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_GREEN_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_RED.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_RED_BROKEN.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_YELLOW.png</key>
+            <key type="filename">game-world-graphics/map-elements/sprites/TILE_YELLOW_BROKEN.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -773,9 +806,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>4,12,8,24</rect>
+                <rect>0,0,1,1</rect>
                 <key>scale9Paddings</key>
-                <rect>4,12,8,24</rect>
+                <rect>0,0,1,1</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

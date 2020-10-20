@@ -66,7 +66,7 @@ public class StatTracker {
         currHero = hero;
         selectedPerk = perk;
 
-        stats = new CharacterStatsObject(GameScreen.getHero());
+        stats = new CharacterStatsObject(GameScreen.getInstance().getHero());
         if (currStats == null) currStats = new HashMap<>();
         else currStats.clear();
 
@@ -660,5 +660,13 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.MELE_DMG, 0.05f);
         currStats.put(CompleteHeroStatsEnum.BOW_DMG, 0.05f);
         currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG, 0.05f);
+    }
+
+    public static Array<AbstractItem> getEqItems() {
+        return eqItems;
+    }
+
+    public static Array<AbstractItem> getEquippedItems() {
+        return equippedItems;
     }
 }

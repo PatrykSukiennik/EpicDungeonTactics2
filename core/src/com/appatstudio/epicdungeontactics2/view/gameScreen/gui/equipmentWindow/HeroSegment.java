@@ -217,4 +217,22 @@ public class HeroSegment extends AbstractSegment {
     }
 
 
+    public void justEquip(AbstractItem newItem) {
+        for (HeroEqItemBlock b : eqItemBlocks) {
+            if (b.getRequiredItem() == newItem.getItemTypeEnum()) {
+                    EquipmentWindow.equipped(newItem, b.getItem());
+                    b.setItem(newItem);
+                    break;
+            }
+        }
+    }
+
+    public void itemDropped(AbstractItem currItem) {
+        for (HeroEqItemBlock b : eqItemBlocks) {
+            if (b.getItem() == currItem) {
+                b.setItem(null);
+                break;
+            }
+        }
+    }
 }

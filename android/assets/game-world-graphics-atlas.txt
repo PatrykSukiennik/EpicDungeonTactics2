@@ -1,5 +1,5 @@
 game-world-graphics-atlas.png
-size: 986, 492
+size: 1009, 492
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -3363,65 +3363,79 @@ map-elements/sprites/CRATE_BROKEN
   orig: 16, 22
   offset: 0, 0
   index: -1
-map-elements/sprites/LAVA_BROKEN
+map-elements/sprites/ITEMS
   rotate: false
   xy: 897, 443
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+map-elements/sprites/ITEMS_BROKEN
+  rotate: false
+  xy: 861, 443
+  size: 16, 22
+  orig: 16, 22
+  offset: 0, 0
+  index: -1
+map-elements/sprites/LAVA_BROKEN
+  rotate: false
+  xy: 947, 443
   size: 16, 48
   orig: 16, 48
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_GREEN
   rotate: false
-  xy: 915, 443
+  xy: 965, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_GREEN_BROKEN
   rotate: false
-  xy: 915, 443
+  xy: 965, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_RED
   rotate: false
-  xy: 918, 443
+  xy: 968, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_RED_BROKEN
   rotate: false
-  xy: 918, 443
+  xy: 968, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_YELLOW
   rotate: false
-  xy: 921, 443
+  xy: 971, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TILE_YELLOW_BROKEN
   rotate: false
-  xy: 921, 443
+  xy: 971, 443
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 map-elements/sprites/TORCH_BROKEN
   rotate: false
-  xy: 924, 443
+  xy: 974, 443
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 map-elements/sprites/WATER_BROKEN
   rotate: false
-  xy: 942, 443
+  xy: 992, 443
   size: 16, 48
   orig: 16, 48
   offset: 0, 0

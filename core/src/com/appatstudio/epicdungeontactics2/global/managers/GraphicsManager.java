@@ -245,6 +245,7 @@ public final class GraphicsManager {
         MapElementSpriteEnum[] allSprites = MapElementSpriteEnum.values();
 
         for (MapElementSpriteEnum s : allSprites) {
+            System.out.println(s.toString());
             mapElementSprites.put(
                     s,
                     new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString()))));

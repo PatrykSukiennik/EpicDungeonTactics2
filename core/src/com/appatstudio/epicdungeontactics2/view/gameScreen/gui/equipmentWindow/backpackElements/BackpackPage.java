@@ -73,9 +73,10 @@ public class BackpackPage {
     }
 
     public void cleanUp() {
-        for (int i = ROWS * COLS - 2; i >= 0; i--) {
+        for (int i=0; i < ROWS * COLS - 1; i++) {
             if (items[i].getItem() == null && items[i + 1].getItem() != null)
-                items[i] = items[i + 1];
+                items[i].setItem(items[i+1].getItem());
+                items[i+1].setItem(null);
         }
     }
 
@@ -89,13 +90,6 @@ public class BackpackPage {
             items[i].setItem(item);
             return;
         }
-    }
-
-    public void drop(AbstractItem item) {
-        for (ItemBlock ib : items) {
-            if (ib.getItem() == item) ib.setItem(null);
-        }
-        cleanUp();
     }
 
     public AbstractItem tap(float x, float y) {
@@ -124,6 +118,7 @@ public class BackpackPage {
         for (ItemBlock i : items) {
             if (i != null && i.getItem() == toReplace) {
                 i.setItem(toReplace);
+                return;
             }
         }
     }
@@ -132,6 +127,17 @@ public class BackpackPage {
         for (ItemBlock i : items) {
             if (i != null && i.getItem() == item) {
                 i.setItem(null);
+                return;
+            }
+        }
+    }
+
+    public void dropItem(AbstractItem currItem) {
+        for (ItemBlock i : items) {
+            if (i != null && i.getItem() == currItem) {
+                i.setItem(null);
+                cleanUp();
+                return;
             }
         }
     }

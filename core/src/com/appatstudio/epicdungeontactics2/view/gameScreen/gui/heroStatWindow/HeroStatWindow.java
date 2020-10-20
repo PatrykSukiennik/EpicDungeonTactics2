@@ -67,7 +67,7 @@ public class HeroStatWindow {
     public void init(CharacterEnum hero) {
         this.hero = hero;
 
-        StatTracker.init(hero, GameScreen.getPerk());
+        StatTracker.init(hero, GameScreen.getInstance().getPerk());
 
         bgSize = new CoordsFloat(Gdx.graphics.getWidth() * 0.7f, Gdx.graphics.getWidth() * 0.7f * 2f);
         bgPos = new CoordsFloat(Gdx.graphics.getWidth()/2f - bgSize.x/2f, Gdx.graphics.getHeight()/2f - bgSize.y/2f);

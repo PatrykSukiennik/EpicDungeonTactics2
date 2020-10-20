@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
@@ -51,7 +52,8 @@ public class Hero extends CharacterDrawable {
     @Override
     public void setPosition(CoordsInt coords) {
         super.setPosition(coords);
-        setTileStandingOn(room.getTiles()[coords.x][coords.y]);
+        setTileStandingOn(room.getTiles()[coords.x][coords.y], true);
+        if (this.isOnTarget()) GuiContainer.setItemsToPick(room.getTiles()[coords.x][coords.y].getItemsToPick());
 
         if (getTileStandingOn().getFlag() == MapPathFindingFlags.ROOM_NODE) {
             if (coords.x == 0) {

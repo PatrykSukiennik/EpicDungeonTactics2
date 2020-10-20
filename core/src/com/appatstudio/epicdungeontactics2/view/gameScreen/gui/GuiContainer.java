@@ -2,7 +2,6 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.GlobalValues;
-import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
@@ -14,8 +13,10 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinte
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow.HeroStatWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.pickupItemWindow.PickupItemWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
@@ -25,6 +26,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 
 public final class GuiContainer {
 
@@ -41,23 +43,37 @@ public final class GuiContainer {
     private EquipmentWindow equipmentWindow;
     private MapWindow mapWindow;
     private HeroStatWindow heroStatWindow;
+    private PickupItemWindow pickupItemWindow;
 
-    private GuiButton eqButton, mapButton;
+    private GuiButton eqButton, mapButton, pickingButton;
+
+    private static Array<AbstractItem> itemsToPick;
 
     public static final float guiButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
     public static final float guiMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
 
-    public GuiContainer() {
+    private static GuiContainer INSTANCE;
+
+    public static GuiContainer getInstance() {
+        if(INSTANCE == null) {
+            INSTANCE = new GuiContainer(GameScreen.getInstance());
+        }
+        return INSTANCE;
+    }
+
+
+    private GuiContainer(GameScreen gameScreen) {
         batch = new SpriteBatch();
         batch.enableBlending();
 
         runQuitWindow = new RunQuitWindow();
 
         communicatePrinter = new CommunicatePrinter();
-        statusBarContainer = new StatusBarContainer(GameScreen.getHero());
+        statusBarContainer = new StatusBarContainer(gameScreen.getHero());
 
-        equipmentWindow = new EquipmentWindow(GameScreen.getHero());
+        equipmentWindow = new EquipmentWindow(gameScreen.getHero(), gameScreen);
         heroStatWindow = new HeroStatWindow();
+        pickupItemWindow = new PickupItemWindow();
         mapWindow = new MapWindow();
 
         goldStatus = new TextWithIcon(
@@ -81,8 +97,9 @@ public final class GuiContainer {
 
         eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f);
         mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
+        pickingButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.ITEM_PICK_BUTTON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f - guiButtonSize);
 
-        heroStatWindow.init(GameScreen.getHero());
+        heroStatWindow.init(gameScreen.getHero());
     }
 
     public void draw() {
@@ -97,6 +114,12 @@ public final class GuiContainer {
             eqButton.draw(batch, 0.5f);
         }
         else eqButton.draw(batch);
+
+        if (itemsToPick != null && itemsToPick.size > 0) {
+            if (PickupItemWindow.isUp()) {
+                pickingButton.draw(batch, 0.5f);
+            } else pickingButton.draw(batch);
+        }
 
 
         mapButton.draw(batch);
@@ -116,6 +139,9 @@ public final class GuiContainer {
 
         else if (heroStatWindow.isUp()) {
             heroStatWindow.draw(batch);
+        }
+        else if (PickupItemWindow.isUp()) {
+            pickupItemWindow.draw(batch);
         }
 
 
@@ -139,8 +165,16 @@ public final class GuiContainer {
             heroStatWindow.tap(x, y);
             return true;
         }
+        else if (PickupItemWindow.isUp()) {
+            pickupItemWindow.tap(x, y);
+            return true;
+        }
         else if (eqButton.isTap(x, y)) {
             EquipmentWindow.show();
+            return true;
+        }
+        else if (itemsToPick != null && itemsToPick.size > 0 && pickingButton.isTap(x, y)) {
+            PickupItemWindow.show(itemsToPick);
             return true;
         }
         else if (mapButton.isTap(x, y)) {
@@ -164,6 +198,9 @@ public final class GuiContainer {
         else if (heroStatWindow.isUp()) {
             heroStatWindow.hide();
         }
+        else if (PickupItemWindow.isUp()) {
+            PickupItemWindow.hide();
+        }
         else runQuitWindow.show();
     }
 
@@ -184,11 +221,27 @@ public final class GuiContainer {
         mapWindow.setCurrRoom(oldRoom, newRoom);
     }
 
+    public static void setItemsToPick(Array<AbstractItem> newItemsToPick) {
+        if (newItemsToPick == null || newItemsToPick.size == 0) {
+            PickupItemWindow.hide();
+            itemsToPick = null;
+        }
+        else {
+            if (PickupItemWindow.isUp()) PickupItemWindow.show(newItemsToPick);
+            itemsToPick = newItemsToPick;
+        }
+
+    }
+
     public void refreshStats() {
         heroStatWindow.refreshStats();
     }
 
     public void init() {
         //heroStatWindow.init(GameScreen.getHero());
+    }
+
+    public void refreshGui() {
+        INSTANCE = new GuiContainer(GameScreen.getInstance());
     }
 }

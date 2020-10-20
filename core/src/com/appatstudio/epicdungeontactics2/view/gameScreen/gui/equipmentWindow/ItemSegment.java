@@ -47,8 +47,8 @@ public class ItemSegment extends AbstractSegment {
 
     private static float posY;
 
-    ItemSegment() {
-        posY = Gdx.graphics.getHeight() / 2f - AbstractSegment.getFullHeight() / 2f - AbstractSegment.fullHeight;
+    public ItemSegment(float y) {
+        posY = y;
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_ITEM);
 
         itemDrawable = new Image();
@@ -112,11 +112,11 @@ public class ItemSegment extends AbstractSegment {
         }
     }
 
-    void draw(Batch batch) {
+    public void draw(Batch batch, boolean showDrop) {
         super.draw(batch);
         bg.draw(batch, posX, posY, fullWidth, fullHeight);
         itemDrawable.draw(batch, 1f);
-        dropButton.draw(batch, 1f);
+        if (showDrop) dropButton.draw(batch, 1f);
         titles.get(selectedItem.getRarity()).draw(batch);
 
         for (int i = 0; i < ROWS; i++) {
@@ -130,7 +130,7 @@ public class ItemSegment extends AbstractSegment {
                 && y > posY && posY < posY + fullHeight;
     }
 
-    void selectItem(AbstractItem item) {
+    public void selectItem(AbstractItem item) {
         this.selectedItem = item;
         if (item != null) {
             itemDrawable.setDrawable(GraphicsManager.getItemImage(item.getItemEnum()));
@@ -148,7 +148,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsArmor != null && i < effectsArmor.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsArmor.get(i).getEffectEnum()),
-                                    effectsArmor.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsArmor.get(i).getEffectEnum()));
+                                    effectsArmor.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsArmor.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsArmor.get(i).getEffectEnum()) :
+                                            (int)effectsArmor.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsArmor.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -167,7 +170,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsArrow != null && i < effectsArrow.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsArrow.get(i).getEffectEnum()),
-                                    effectsArrow.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsArrow.get(i).getEffectEnum()));
+                                    effectsArrow.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsArrow.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsArrow.get(i).getEffectEnum()) :
+                                            (int)effectsArrow.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsArrow.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -193,7 +199,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsBow != null && i < effectsBow.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsBow.get(i).getEffectEnum()),
-                                    effectsBow.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsBow.get(i).getEffectEnum()));
+                                    effectsBow.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsBow.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsBow.get(i).getEffectEnum()) :
+                                            (int)effectsBow.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsBow.get(i).getEffectEnum())
+                                    );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -219,7 +228,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsHelmet != null && i < effectsHelmet.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsHelmet.get(i).getEffectEnum()),
-                                    effectsHelmet.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsHelmet.get(i).getEffectEnum()));
+                                    effectsHelmet.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsHelmet.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsHelmet.get(i).getEffectEnum()) :
+                                            (int)effectsHelmet.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsHelmet.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -237,7 +249,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsNecklace != null && i < effectsNecklace.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsNecklace.get(i).getEffectEnum()),
-                                    effectsNecklace.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsNecklace.get(i).getEffectEnum()));
+                                    effectsNecklace.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsNecklace.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsNecklace.get(i).getEffectEnum()) :
+                                            (int)effectsNecklace.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsNecklace.get(i).getEffectEnum())
+                            );
                         } else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                             break;
@@ -254,7 +269,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsRing != null && i < effectsRing.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsRing.get(i).getEffectEnum()),
-                                    effectsRing.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsRing.get(i).getEffectEnum()));
+                                    effectsRing.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsRing.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsRing.get(i).getEffectEnum()) :
+                                            (int)effectsRing.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsRing.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -272,7 +290,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsShield != null && i < effectsShield.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsShield.get(i).getEffectEnum()),
-                                    effectsShield.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsShield.get(i).getEffectEnum()));
+                                    effectsShield.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsShield.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsShield.get(i).getEffectEnum()) :
+                                            (int)effectsShield.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsShield.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -290,7 +311,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsStaff != null && i < effectsStaff.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsStaff.get(i).getEffectEnum()),
-                                    effectsStaff.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsStaff.get(i).getEffectEnum()));
+                                    effectsStaff.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsStaff.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsStaff.get(i).getEffectEnum()) :
+                                            (int)effectsStaff.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsStaff.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -308,7 +332,10 @@ public class ItemSegment extends AbstractSegment {
                         if (effectsMele != null && i < effectsMele.size) {
                             rightColumn[i].setIconAndFont(
                                     GraphicsManager.getItemEffectIcon(effectsMele.get(i).getEffectEnum()),
-                                    effectsMele.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsMele.get(i).getEffectEnum()));
+                                    effectsMele.get(i).getEffectEnum().toString().startsWith("PERCENT") ?
+                                            (int)(effectsMele.get(i).getPower() * 100) + "% " + StringsManager.getItemEffectDescription(effectsMele.get(i).getEffectEnum()) :
+                                            (int)effectsMele.get(i).getPower() + " " + StringsManager.getItemEffectDescription(effectsMele.get(i).getEffectEnum())
+                            );
                         }
                         else {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
@@ -328,8 +355,8 @@ public class ItemSegment extends AbstractSegment {
     }
 
 
-    public boolean isTap(float x, float y) {
-        return x > posX && x < posX + fullWidth
+    public boolean isTap(float x, float y, boolean showDrop) {
+        return showDrop && x > posX && x < posX + fullWidth
                 && y > posY && y < posY + fullHeight;
     }
 }

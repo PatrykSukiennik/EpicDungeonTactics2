@@ -37,7 +37,6 @@ public class MapWindow {
         blackBg = GraphicsManager.getGuiElement(GuiElementEnum.BLACK_ALPHA_50percent);
 
         int arraySize = WorldConfig.STAGE_MAX_ROOMS + 1;
-        float size = Gdx.graphics.getWidth() / (float)arraySize;
 
     }
 
@@ -89,7 +88,7 @@ public class MapWindow {
         int w = maxX - minX + 1;
         int h = maxY - minY + 1;
 
-        float size = h >= w * 1.5f ?
+        float size = h >= w * 2f ?
                 (Gdx.graphics.getHeight() * 0.7f) / h :
                 (Gdx.graphics.getWidth() * 0.8f) / w;
 

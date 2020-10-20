@@ -73,4 +73,31 @@ public class TextObject {
         }
     }
 
+    public void setPos(float x, float y) {
+        this.posX = x;
+        this.posY = y;
+
+        objectHeight = FontsManager.getTextHeight(font, "0") * 1.2f;
+        wholeWidth = FontsManager.getTextWidth(font, text);
+
+        switch (alignment) {
+            case Align.center: {
+                textX = posX - wholeWidth / 2f;
+                textY = posY + objectHeight / 2f;
+                break;
+
+            }
+            case Align.left: {
+                textX = posX;
+                textY = posY + objectHeight / 2f;
+                break;
+            }
+            case Align.right: {
+                textX = posX - wholeWidth;
+                textY = posY + objectHeight / 2f;
+                break;
+            }
+        }
+    }
+
 }

@@ -312,7 +312,7 @@ public class ItemGenerator {
             case RING:
             case NECKLACE:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.12f * StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL)) {
+                    if (EpicDungeonTactics.random.nextFloat() < 1){//0.08f * StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL)) {
                         effects.add(getEffect(effects, type));
                     }
                 }
@@ -324,15 +324,15 @@ public class ItemGenerator {
             case HELMET:
             case BOW:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.06f * SavedInfoManager.getPerkLvl(GameScreen.getPerk())) {
-                        //effects.add(getEffect(effects, type));
+                    if (EpicDungeonTactics.random.nextFloat() < 1){//0.06f * SavedInfoManager.getPerkLvl(GameScreen.getPerk())) {
+                        effects.add(getEffect(effects, type));
                     }
                 }
                 break;
             case ARROW:
                 for (int i=0; i<4; i++) {
-                    if (EpicDungeonTactics.random.nextFloat() < 0.03f * SavedInfoManager.getCharacterLvl(GameScreen.getHero())) {
-                        //effects.add(getEffect(effects, type));
+                    if (EpicDungeonTactics.random.nextFloat() < 1){//0.03f * SavedInfoManager.getCharacterLvl(GameScreen.getHero())) {
+                        effects.add(getEffect(effects, type));
                     }
                 }
             case BOOK:
@@ -360,13 +360,14 @@ public class ItemGenerator {
                     break;
                 }
             }
-            if (effectEnum == null) effectEnum = ItemEffectEnum.PERCENT_HP_REGEN_KILL;
+            //if (effectEnum == null) effectEnum = ItemEffectEnum.PERCENT_HP_REGEN_KILL;
 
+            System.out.println(effectEnum.toString());
             return new ItemEffect(
                     effectEnum,
                     EpicDungeonTactics.random.nextFloat()
                             * (ItemEffectsConfig.basicEffectPower.get(effectEnum)
-                            + StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * ItemEffectsConfig.lvlEffectPower.get(effectEnum))
+                            + SavedInfoManager.getCharacterLvl(GameScreen.getInstance().getHero()) * ItemEffectsConfig.lvlEffectPower.get(effectEnum))
             );
     }
 

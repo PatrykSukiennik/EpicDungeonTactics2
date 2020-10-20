@@ -6,6 +6,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackSh
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.BackpackPage;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumn;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -97,10 +98,6 @@ public class BackpackSegment extends AbstractSegment {
                 pages.get(ItemBackpackShelfEnum.DISTANCE).replace(toReplace, newItem);
                 break;
         }
-    }
-
-    void dropItem(AbstractItem item) {
-        pages.get(currShelf).drop(item);
     }
 
     void pickItem(AbstractItem item) {
@@ -202,5 +199,31 @@ public class BackpackSegment extends AbstractSegment {
 
     public void cleanUp() {
         for (BackpackPage bp : pages.values()) bp.cleanUp();
+    }
+
+    public void itemDropped(AbstractItem currItem) {
+        switch (currItem.getItemTypeEnum()) {
+            case STAFF:
+            case MELE:
+                currShelf = ItemBackpackShelfEnum.MELE;
+                break;
+            case HELMET:
+            case NECKLACE:
+            case SHIELD:
+            case RING:
+            case ARMOR:
+                currShelf = ItemBackpackShelfEnum.ARMOR;
+                break;
+            case BOOK:
+            case FOOD:
+            case OTHER:
+                currShelf = ItemBackpackShelfEnum.FOOD;
+                break;
+            case ARROW:
+            case BOW:
+                currShelf = ItemBackpackShelfEnum.DISTANCE;
+                break;
+        }
+        pages.get(currShelf).dropItem(currItem);
     }
 }

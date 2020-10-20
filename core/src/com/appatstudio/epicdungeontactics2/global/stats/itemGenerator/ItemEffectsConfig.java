@@ -256,6 +256,7 @@ public class ItemEffectsConfig {
         basicEffectPower.put(ItemEffectEnum.DEX_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 2f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 2f);
         basicEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
         basicEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 2f);
         basicEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 2f);;
@@ -275,6 +276,7 @@ public class ItemEffectsConfig {
         lvlEffectPower.put(ItemEffectEnum.DEX_BONUS, 2f);
         lvlEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 2f);
         lvlEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 2f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 2f);
         lvlEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
         lvlEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 2f);
         lvlEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 2f);;

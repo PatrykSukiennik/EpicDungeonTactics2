@@ -6,17 +6,19 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.ItemOnMapDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.Array;
 
 public class MapTile {
 
     private AnimatedElement animatedElement = null;
     private SpriteElement spriteElement = null;
     private CharacterDrawable character = null;
-    private ItemOnMapDrawable item = null;
+    private ItemOnMapDrawable items = null;
     private boolean isWalkable;
 
     private CoordsFloat positionFloat;
@@ -35,6 +37,7 @@ public class MapTile {
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
         if (character != null) character.draw(mapBatch);
+        if (items != null) items.draw(mapBatch);
     }
 
     public void setAnimatedElement(AnimatedElement animatedElement) {
@@ -78,7 +81,7 @@ public class MapTile {
 
     public void setFlag(MapPathFindingFlags flag, int pathFindingIndex) {
         if (flag == MapPathFindingFlags.MOVABLE) {
-            if (item != null) this.flag = MapPathFindingFlags.ITEM_MOVABLE;
+            if (items != null && items.getItems().size > 0) this.flag = MapPathFindingFlags.ITEM_MOVABLE;
             else this.flag = MapPathFindingFlags.MOVABLE;
 
             this.pathFindingIndex = pathFindingIndex;
@@ -101,5 +104,19 @@ public class MapTile {
         if (character != null) {
             character.drawTop(guiBatch);
         }
+        if (items != null) items.drawTop(guiBatch);
+    }
+
+    public void dropItem(AbstractItem item) {
+        if (items == null) items = new ItemOnMapDrawable(positionInt);
+        items.addItem(item);
+    }
+
+    public Array<AbstractItem> getItemsToPick() {
+        return items == null ? null : items.getItems();
+    }
+
+    public void removeItem(AbstractItem item) {
+        if (items != null) items.removeItem(item);
     }
 }

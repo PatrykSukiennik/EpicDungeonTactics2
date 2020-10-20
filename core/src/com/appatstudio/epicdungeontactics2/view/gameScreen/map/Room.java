@@ -26,7 +26,9 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.TurnFinished;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.AutonomousCharacter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
 import com.appatstudio.epicdungeontactics2.view.viewElements.game.BossHpBar;
@@ -57,6 +59,8 @@ public class Room {
     private HashMap<DirectionEnum, Room> roomNodes;
     private Stage stageObject;
 
+    private static GuiContainer guiContainer;
+
     private CharacterDrawable currentCharacterMoving;
     private Hero heroInRoom;
     private Array<CharacterDrawable> charactersInRoom;
@@ -73,6 +77,10 @@ public class Room {
     private static BossHpBar bossHpBar;
 
     private boolean freezeTime = false;
+
+    static {
+        guiContainer = GuiContainer.getInstance();
+    }
 
     public Room(RoomTypeEnum type, int stage, CoordsInt position, Stage stageObject) {
         roomNodes = new HashMap<>();
@@ -491,7 +499,7 @@ public class Room {
 
     public void heroMovedIntoRoom(DirectionEnum dir, CoordsInt coords) {
         mapTiles[coords.x][coords.y].setCharacter(heroInRoom);
-        heroInRoom.setTileStandingOn(mapTiles[coords.x][coords.y]);
+        heroInRoom.setTileStandingOn(mapTiles[coords.x][coords.y], true);
 
         if (dir == DirectionEnum.RIGHT) {
             heroInRoom.setPosition(0, coords.y);
@@ -522,5 +530,17 @@ public class Room {
 
     public void newStage() {
         GameScreen.nextStageInit();
+    }
+
+    public void itemDropped(AbstractItem item) {
+        CoordsInt pos = heroInRoom.getTileStandingOn().getPositionInt();
+        mapTiles[pos.x][pos.y].dropItem(item);
+        GuiContainer.setItemsToPick(mapTiles[pos.x][pos.y].getItemsToPick());
+    }
+
+    public void itemPickedUp(AbstractItem selectedItem) {
+        MapTile tile = heroInRoom.getTileStandingOn();
+        tile.getItemsToPick().removeValue(selectedItem, true);
+        GuiContainer.setItemsToPick(tile.getItemsToPick());
     }
 }

@@ -13,7 +13,9 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.ItemSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.AlphaTextObject;
@@ -29,8 +31,8 @@ import static java.lang.Thread.sleep;
 
 public final class GameScreen extends Actor {
 
-    private static CharacterEnum hero;
-    private static PerkEnum perk;
+    private CharacterEnum hero;
+    private PerkEnum perk;
 
     private Room currRoom;
     private Stage currStage;
@@ -62,21 +64,34 @@ public final class GameScreen extends Actor {
 
     private static StatTracker statTracker;
 
-    public GameScreen(CharacterEnum newHero, PerkEnum newPerk) {
-        hero = newHero;
-        perk = newPerk;
+    private static GameScreen INSTANCE;
 
+    public static GameScreen getInstance() {
+        if(INSTANCE == null) {
+            INSTANCE = new GameScreen();
+        }
+        return INSTANCE;
+    }
+
+    private GameScreen() {
         gameBatch = new SpriteBatch();
         mapGuiBatch = new SpriteBatch();
     }
 
+    public void itemDropped(AbstractItem item) {
+        currRoom.itemDropped(item);
+    }
+
     public void startGame(CharacterEnum hero, PerkEnum perk) {
+        this.hero = hero;
+        this.perk = perk;
+
         StatTracker.init(hero, perk);
         stage = 1;
 
         freshRunInit();
-
-        guiContainer = new GuiContainer();
+        guiContainer = GuiContainer.getInstance();
+        guiContainer.refreshGui();
 
         currStage = MapGenerator.createStage(stage);
         currRoom = currStage.getFirstRoom();
@@ -136,11 +151,11 @@ public final class GameScreen extends Actor {
         handleRoomChanges();
     }
 
-    public static CharacterEnum getHero() {
+    public CharacterEnum getHero() {
         return hero;
     }
 
-    public static PerkEnum getPerk() {
+    public PerkEnum getPerk() {
         return perk;
     }
 
@@ -186,4 +201,7 @@ public final class GameScreen extends Actor {
         }
     }
 
+    public void itemPickedUp(AbstractItem selectedItem) {
+        currRoom.itemPickedUp(selectedItem);
+    }
 }
