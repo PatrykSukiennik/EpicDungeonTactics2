@@ -16,6 +16,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoElementsLo
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoEnemy;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
@@ -124,7 +125,7 @@ public class Room {
                         rayHandler,
                         world,
                         this,
-                        mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][(int)(WorldConfig.ROOM_HEIGHT/2f)]));
+                        mapTiles[(int) (WorldConfig.ROOM_WIDTH / 2f)][(int) (WorldConfig.ROOM_HEIGHT / 2f)]));
 
         heroInRoom = (Hero) charactersInRoom.get(0);
 
@@ -150,7 +151,9 @@ public class Room {
                             new CoordsInt(x, y),
                             rayHandler, world, this, mapTiles[x][y]);
 
-                    mapTiles[x][y].setCharacter(newCharacter);
+                    for (int i = 0; i < CharacterStats.getCharacterSize(newCharacter.getCharacterEnum()); i++) {
+                        mapTiles[x + i][y].setCharacter(newCharacter, i == 0);
+                    }
                     charactersInRoom.add(newCharacter);
                 }
 
@@ -162,7 +165,7 @@ public class Room {
 
         if (type == RoomTypeEnum.FIRST_ROOM) {
             mapTiles[WorldConfig.ROOM_WIDTH / 2][WorldConfig.ROOM_HEIGHT / 2]
-                    .setCharacter(heroInRoom);
+                    .setCharacter(heroInRoom, true);
         }
 
         if (type == RoomTypeEnum.FIRST_ROOM) {
@@ -186,6 +189,14 @@ public class Room {
     }
 
     public boolean tap(float x, float y) { //todo
+        CharacterDrawable tappedQueue = queue.getTapCharacter(x, y);
+        if (tappedQueue != null) {
+            CameraHandler.centerOnCoords(
+                    tappedQueue.getX() + tappedQueue.getWidth() / 2f,
+                    tappedQueue.getY() + tappedQueue.getHeight() / 2f);
+            return true;
+        }
+
         queue.tick();
 
         MapTile tapped = getTouchTile(x, y);
@@ -227,8 +238,8 @@ public class Room {
 
         mapBatch.begin();
         mapDrawable.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
-        for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
-            for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
+        for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
+            for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
                 mapTiles[x][y].draw(mapBatch);
             }
         }
@@ -239,8 +250,8 @@ public class Room {
         b2dr.render(world, camera.combined.scl(1f));
 
         guiBatch.begin();
-        for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
-            for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
+        for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
+            for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
                 mapTiles[x][y].drawTop(guiBatch);
             }
         }
@@ -261,20 +272,20 @@ public class Room {
 
     private void createNodes() {
         if (roomNodes.get(DirectionEnum.TOP) != null) {
-            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][ WorldConfig.ROOM_HEIGHT-1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
-            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f) -1][ WorldConfig.ROOM_HEIGHT-1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int) (WorldConfig.ROOM_WIDTH / 2f)][WorldConfig.ROOM_HEIGHT - 1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int) (WorldConfig.ROOM_WIDTH / 2f) - 1][WorldConfig.ROOM_HEIGHT - 1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
         }
         if (roomNodes.get(DirectionEnum.BOTTOM) != null) {
-            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f)][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
-            mapTiles[(int)(WorldConfig.ROOM_WIDTH/2f) -1][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int) (WorldConfig.ROOM_WIDTH / 2f)][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[(int) (WorldConfig.ROOM_WIDTH / 2f) - 1][0].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
         }
         if (roomNodes.get(DirectionEnum.LEFT) != null) {
-            mapTiles[0][(int)(WorldConfig.ROOM_HEIGHT/2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
-            mapTiles[0][(int)(WorldConfig.ROOM_HEIGHT/2f) -1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[0][(int) (WorldConfig.ROOM_HEIGHT / 2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[0][(int) (WorldConfig.ROOM_HEIGHT / 2f) - 1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
         }
         if (roomNodes.get(DirectionEnum.RIGHT) != null) {
-            mapTiles[WorldConfig.ROOM_WIDTH-1][(int)(WorldConfig.ROOM_HEIGHT/2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
-            mapTiles[WorldConfig.ROOM_WIDTH-1][(int)(WorldConfig.ROOM_HEIGHT/2f) -1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[WorldConfig.ROOM_WIDTH - 1][(int) (WorldConfig.ROOM_HEIGHT / 2f)].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
+            mapTiles[WorldConfig.ROOM_WIDTH - 1][(int) (WorldConfig.ROOM_HEIGHT / 2f) - 1].setFlag(MapPathFindingFlags.ROOM_NODE, -2);
         }
     }
 
@@ -427,12 +438,13 @@ public class Room {
 
         int maxSpeed = 0;
         for (CharacterDrawable character : charactersInRoom) {
-            if (character.getStats().getSpeed() > maxSpeed) maxSpeed = character.getStats().getSpeed();
+            if (character.getStats().getSpeed() > maxSpeed)
+                maxSpeed = character.getStats().getSpeed();
         }
 
         maxSpeed *= 2;
 
-        for (int i=1; i<maxSpeed; i++) {
+        for (int i = 1; i < maxSpeed; i++) {
             for (CharacterDrawable character : charactersInRoom) {
                 if ((maxSpeed - character.getStats().getSpeed()) % i == 0) result.add(character);
             }
@@ -457,7 +469,7 @@ public class Room {
 
         for (MapTile mapTile : path) {
             newTile = mapTile;
-            coords = mapTile.getPositionFloat();
+            coords = mapTile.getPositionCharacterDrawingFloat();
 
             result.addAction(new SwitchMapTile(
                     oldTile,
@@ -498,21 +510,21 @@ public class Room {
     }
 
     public void heroMovedIntoRoom(DirectionEnum dir, CoordsInt coords) {
-        mapTiles[coords.x][coords.y].setCharacter(heroInRoom);
+        mapTiles[coords.x][coords.y].setCharacter(heroInRoom, true);
         heroInRoom.setTileStandingOn(mapTiles[coords.x][coords.y], true);
 
-        if (dir == DirectionEnum.RIGHT) {
-            heroInRoom.setPosition(0, coords.y);
-        }
-        else if (dir == DirectionEnum.BOTTOM) {
-            heroInRoom.setPosition(coords.x, 0);
-        }
-        else if (dir == DirectionEnum.LEFT) {
-            heroInRoom.setPosition(WorldConfig.ROOM_WIDTH - 1, coords.y);
-        }
-        else if (dir == DirectionEnum.TOP) {
-            heroInRoom.setPosition(coords.x, WorldConfig.ROOM_HEIGHT - 1);
-        }
+//        if (dir == DirectionEnum.RIGHT) {
+//            heroInRoom.setPosition(0, coords.y);
+//        }
+//        else if (dir == DirectionEnum.BOTTOM) {
+//            heroInRoom.setPosition(coords.x, 0);
+//        }
+//        else if (dir == DirectionEnum.LEFT) {
+//            heroInRoom.setPosition(WorldConfig.ROOM_WIDTH - 1, coords.y);
+//        }
+//        else if (dir == DirectionEnum.TOP) {
+//            heroInRoom.setPosition(coords.x, WorldConfig.ROOM_HEIGHT - 1);
+//        }
     }
 
 

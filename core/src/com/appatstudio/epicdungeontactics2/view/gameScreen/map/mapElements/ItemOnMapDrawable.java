@@ -29,7 +29,7 @@ public class ItemOnMapDrawable extends Image {
         super(GraphicsManager.getMapElementSprite(MapElementSpriteEnum.ITEMS));
         super.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
         CoordsFloat coords = WorldConfig.getTileCoord(coordsInt.x, coordsInt.y);
-        super.setPosition(coords.x + WorldConfig.TILE_SIZE/2f, coords.y - WorldConfig.TILE_SIZE/3f);
+        super.setPosition(coords.x, coords.y + WorldConfig.TILE_SIZE/24f);
 
         lineH = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MAP_ITEM_WHITE), "0") * 1.5f;
 

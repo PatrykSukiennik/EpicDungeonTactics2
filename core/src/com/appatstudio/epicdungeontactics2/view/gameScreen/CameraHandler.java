@@ -210,4 +210,11 @@ public class CameraHandler extends Actor {
     public static float getZoom() {
         return camera.zoom;
     }
+
+    public static void centerOnCoords(float x, float y) {
+        currentZoom = WorldConfig.CAMERA_ZOOM_LIMIT_MIN;
+        camera.zoom = WorldConfig.CAMERA_ZOOM_LIMIT_MIN;
+        camera.position.x = x;
+        camera.position.y = y;
+    }
 }

@@ -7,7 +7,6 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.HashMap;
@@ -39,6 +38,7 @@ public class WorldConfig {
     public static final float MOVE_SPEED_FIGHT = 0.12f;
 
     public static final CoordsFloat[][] tileCoords;
+    public static final CoordsFloat[][] characterDrawingCoords;
 
     public static final HashMap<MapElementAnimationEnum, CoordsInt> mapElementAnimationsSize;
     public static final HashMap<MapElementSpriteEnum, CoordsInt> mapElementSpritesSize;
@@ -47,7 +47,13 @@ public class WorldConfig {
         tileCoords = new CoordsFloat[ROOM_WIDTH][ROOM_HEIGHT];
         for (int x = 0; x < ROOM_WIDTH; x++) {
             for (int y = 0; y < ROOM_HEIGHT; y++) {
-                tileCoords[x][y] = new CoordsFloat(-TILE_SIZE/2f + x * TILE_SIZE, TILE_SIZE/4f + y * TILE_SIZE);
+                tileCoords[x][y] = new CoordsFloat(x * TILE_SIZE, y * TILE_SIZE);
+            }
+        }
+        characterDrawingCoords = new CoordsFloat[ROOM_WIDTH][ROOM_HEIGHT];
+        for (int x = 0; x < ROOM_WIDTH; x++) {
+            for (int y = 0; y < ROOM_HEIGHT; y++) {
+                characterDrawingCoords[x][y] = new CoordsFloat(-TILE_SIZE/2f + x * TILE_SIZE, TILE_SIZE/4f + y * TILE_SIZE);
             }
         }
 
@@ -66,6 +72,10 @@ public class WorldConfig {
 
     public static CoordsFloat getTileCoord(int x, int y) {
         return tileCoords[x][y];
+    }
+
+    public static CoordsFloat getDrawingCoord(int x, int y) {
+        return characterDrawingCoords[x][y];
     }
 
     public static CoordsInt getIntCoordsFromFloatPoint(float x, float y) {

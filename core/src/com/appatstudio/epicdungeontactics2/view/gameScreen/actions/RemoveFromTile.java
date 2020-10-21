@@ -14,7 +14,7 @@ public class RemoveFromTile extends Action {
 
     @Override
     public boolean act(float delta) {
-        tile.setCharacter(null);
+        tile.setCharacter(null, false);
         return true;
     }
 }

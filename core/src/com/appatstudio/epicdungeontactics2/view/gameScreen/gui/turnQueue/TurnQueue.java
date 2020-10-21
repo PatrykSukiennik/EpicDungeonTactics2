@@ -79,5 +79,11 @@ public class TurnQueue {
         return counter;
     }
 
+    public CharacterDrawable getTapCharacter(float x, float y) {
+        for (TurnQueueIcon t : queueIcons) {
+            if (t.isTap(x, y)) return t.getRepresentedCharacter();
+        }
+        return null;
+    }
 
 }

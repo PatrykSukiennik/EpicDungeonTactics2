@@ -185,6 +185,7 @@ public final class GuiContainer {
             heroStatWindow.show();
             return true;
         }
+
         return false;
     }
 

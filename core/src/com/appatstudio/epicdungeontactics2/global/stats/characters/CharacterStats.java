@@ -220,7 +220,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.ORC_WARRIOR,1);
         characterSizes.put(CharacterEnum.SWAMPY, 1);
 
-        characterSizes.put(CharacterEnum.BOSS_OGRE, 2);
+        characterSizes.put(CharacterEnum.BOSS_OGRE, 3);
 
 
         //tier3
@@ -230,7 +230,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.SKELET, 1);
         characterSizes.put(CharacterEnum.WOGOL, 1);
 
-        characterSizes.put(CharacterEnum.BOSS_BIG_DEMON, 2);
+        characterSizes.put(CharacterEnum.BOSS_BIG_DEMON, 3);
 
     }
 

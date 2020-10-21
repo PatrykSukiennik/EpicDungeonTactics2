@@ -71,10 +71,11 @@ public class CharacterDrawable extends Image {
         this.state = CharacterStateEnum.IDLE;
         this.room = room;
 
-        CoordsFloat coords = WorldConfig.getTileCoord(position.x, position.y);
-        this.setPosition(coords.x, coords.y);
+
         int size = CharacterStats.getCharacterSize(characterEnum);
-        this.setSize(2f * size * WorldConfig.TILE_SIZE, 2f * size * WorldConfig.TILE_SIZE);
+        CoordsFloat coords = WorldConfig.getDrawingCoord(position.x, position.y);
+        this.setPosition(coords.x, coords.y);
+        this.setSize(2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE, 2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE);
 
         LightConfigObject lightConfigObject = LightsConfig.getCharacterLights(characterEnum);
         lightOffset = lightConfigObject.getOffset();
@@ -92,7 +93,7 @@ public class CharacterDrawable extends Image {
         if (BodyConfig.getCharacterBodyDef(characterEnum) != null) {
             this.body = world.createBody(BodyConfig.getCharacterBodyDef(characterEnum));
             this.body.createFixture(BodyConfig.getCharacterFixtureDef(characterEnum));
-            bodyOffset = new CoordsFloat((size * WorldConfig.TILE_SIZE), (size * WorldConfig.TILE_SIZE)/2f);
+            bodyOffset = new CoordsFloat((size * WorldConfig.TILE_SIZE) + ((int)(size/2f)*(-1) * WorldConfig.TILE_SIZE), (size * WorldConfig.TILE_SIZE)/2f);
             this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
             pointLight.attachToBody(this.body);
         }
@@ -100,6 +101,8 @@ public class CharacterDrawable extends Image {
         createStatsObject();
 
         this.tileStandingOn = tile;
+
+
     }
 
     protected void createStatsObject() {
@@ -184,8 +187,10 @@ public class CharacterDrawable extends Image {
 
         this.position = coords;
 
-        tileStandingOn = room.getTiles()[coords.x][coords.y];
-        tileStandingOn.setCharacter(this);
+        for (int i=CharacterStats.getCharacterSize(characterEnum)-1; i>=0; i--) {
+            tileStandingOn = room.getTiles()[coords.x + i][coords.y];
+            tileStandingOn.setCharacter(this, i==0);
+        }
     }
 
     public void setPossibleMovements(Array<Array<MapTile>> possibleMovements) {
@@ -223,4 +228,6 @@ public class CharacterDrawable extends Image {
     protected boolean isOnTarget() {
         return this.getTileStandingOn() == targetTile;
     }
+
+
 }

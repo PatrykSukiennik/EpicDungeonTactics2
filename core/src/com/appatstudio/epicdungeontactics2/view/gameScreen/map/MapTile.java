@@ -1,7 +1,9 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
@@ -18,6 +20,7 @@ public class MapTile {
     private AnimatedElement animatedElement = null;
     private SpriteElement spriteElement = null;
     private CharacterDrawable character = null;
+    private boolean shouldDrawCharacter = false;
     private ItemOnMapDrawable items = null;
     private boolean isWalkable;
 
@@ -34,9 +37,10 @@ public class MapTile {
     }
 
     public void draw(Batch mapBatch) {
+        //GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
-        if (character != null) character.draw(mapBatch);
+        if (character != null && shouldDrawCharacter) character.draw(mapBatch);
         if (items != null) items.draw(mapBatch);
     }
 
@@ -48,8 +52,9 @@ public class MapTile {
         this.spriteElement = spriteElement;
     }
 
-    public void setCharacter(CharacterDrawable character) {
+    public void setCharacter(CharacterDrawable character, boolean shouldDrawCharacter) {
         this.character = character;
+        this.shouldDrawCharacter = shouldDrawCharacter;
     }
 
     public void destroyElements() {
@@ -118,5 +123,9 @@ public class MapTile {
 
     public void removeItem(AbstractItem item) {
         if (items != null) items.removeItem(item);
+    }
+
+    public CoordsFloat getPositionCharacterDrawingFloat() {
+        return WorldConfig.getDrawingCoord(positionInt.x, positionInt.y);
     }
 }

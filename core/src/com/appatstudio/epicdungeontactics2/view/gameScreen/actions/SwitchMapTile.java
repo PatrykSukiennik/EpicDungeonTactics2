@@ -18,8 +18,8 @@ public class SwitchMapTile extends Action {
 
     @Override
     public boolean act(float delta) {
-        if (oldTile != null) oldTile.setCharacter(null);
-        newTile.setCharacter(characterDrawable);
+        if (oldTile != null) oldTile.setCharacter(null, false);
+        newTile.setCharacter(characterDrawable, true);
         this.characterDrawable.setPosition(newTile.getPositionInt());
         return true;
     }

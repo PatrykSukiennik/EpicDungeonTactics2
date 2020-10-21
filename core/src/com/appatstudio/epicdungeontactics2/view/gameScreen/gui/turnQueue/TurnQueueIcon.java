@@ -117,4 +117,9 @@ public class TurnQueueIcon extends Image {
         topSprite = GraphicsManager.getCharactersAnimation(
                 character.getCharacterEnum(), CharacterStateEnum.IDLE).getKeyFrame(0);
     }
+
+    boolean isTap(float x, float y) {
+        return x > this.getX() && x < this.getX() + this.getWidth()
+                && y > this.getY() && y < this.getY() + this.getHeight();
+    }
 }
