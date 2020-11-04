@@ -73,7 +73,7 @@ public class LightsConfig {
 
     private static final Color[] ambientColors = new Color[]
             {
-            new Color(0.32f, 0.26f, 0.38f, 0.45f), //forest day
+            new Color(0.84f, 0.84f, 0.84f, 0.75f), //forest day
             new Color(0.32f, 0.26f, 0.38f, 0.45f), //forest night
             new Color(0.32f, 0.26f, 0.38f, 0.45f)
             };

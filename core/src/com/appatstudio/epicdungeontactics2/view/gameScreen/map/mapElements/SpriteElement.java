@@ -9,15 +9,19 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoElementsLocations;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Array;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
 public class SpriteElement {
+
+    private MapElementSpriteEnum type;
     private SpriteDrawable sprite;
     private CoordsInt size;
     private boolean isActive =  true;
@@ -30,6 +34,7 @@ public class SpriteElement {
     private boolean isWalkable = false;
 
     public SpriteElement(MapElementSpriteEnum spriteEnum, CoordsFloat coords, RayHandler rayHandler, World world) {
+        this.type = spriteEnum;
         this.sprite = GraphicsManager.getMapElementSprite(spriteEnum);
         this.size = WorldConfig.getMapElementSpriteSize(spriteEnum);
         this.destroyedSprite = GraphicsManager.getMapElementInactiveSprite(spriteEnum);
@@ -54,6 +59,7 @@ public class SpriteElement {
             this.body.setTransform(coords.x + size.x / 2f, coords.y + size.y / 2f, 0);
             if (pointLight != null) pointLight.attachToBody(this.body);
         }
+
     }
     
     public void draw(Batch batch) {

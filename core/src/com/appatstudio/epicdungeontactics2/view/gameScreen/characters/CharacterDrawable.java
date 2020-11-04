@@ -230,4 +230,7 @@ public class CharacterDrawable extends Image {
     }
 
 
+    public int getSpeed() {
+        return stats.getSpeed();
+    }
 }

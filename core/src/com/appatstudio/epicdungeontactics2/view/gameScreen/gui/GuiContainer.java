@@ -102,6 +102,14 @@ public final class GuiContainer {
         heroStatWindow.init(gameScreen.getHero());
     }
 
+    public boolean canCameraMove() {
+        return  !runQuitWindow.isUp() &&
+                !EquipmentWindow.isUp() &&
+                !mapWindow.isUp() &&
+                !heroStatWindow.isUp() &&
+                !PickupItemWindow.isUp();
+    }
+
     public void draw() {
         batch.begin();
         communicatePrinter.draw(batch);

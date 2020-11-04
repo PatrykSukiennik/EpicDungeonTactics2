@@ -76,6 +76,10 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         return currentScreen == GAME_SCREEN;
     }
 
+    public static boolean canCameraMove() {
+        return gameScreen != null && gameScreen.canCameraMove();
+    }
+
     @Override
     public void create() {
         Gdx.input.setCatchKey(Input.Keys.BACK, true);

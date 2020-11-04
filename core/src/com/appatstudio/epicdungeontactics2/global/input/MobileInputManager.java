@@ -45,7 +45,7 @@ public final class MobileInputManager implements GestureDetector.GestureListener
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
-        if (EpicDungeonTactics.isGame()) {
+        if (EpicDungeonTactics.isGame() && EpicDungeonTactics.canCameraMove()) {
             CameraHandler.moveCamera(x, y, deltaX, deltaY);
         }
         return false;

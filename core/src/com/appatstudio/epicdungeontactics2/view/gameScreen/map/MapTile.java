@@ -2,6 +2,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
@@ -13,9 +14,14 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.Anima
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.ItemOnMapDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.mapElements.SpriteElement;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.HashMap;
+
 public class MapTile {
+
+    private static final HashMap<MapPathFindingFlags, SpriteDrawable> pathfindingFlagSprites;
 
     private AnimatedElement animatedElement = null;
     private SpriteElement spriteElement = null;
@@ -30,14 +36,27 @@ public class MapTile {
     private MapPathFindingFlags flag = MapPathFindingFlags.NONE;
     private int pathFindingIndex = 0;
 
+    static {
+        pathfindingFlagSprites = new HashMap<>();
+        pathfindingFlagSprites.put(MapPathFindingFlags.ITEM_MOVABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_YELLOW));
+        pathfindingFlagSprites.put(MapPathFindingFlags.ATTACKABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_RED));
+        pathfindingFlagSprites.put(MapPathFindingFlags.MOVABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
+        pathfindingFlagSprites.put(MapPathFindingFlags.NEW_STAGE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
+        pathfindingFlagSprites.put(MapPathFindingFlags.ROOM_NODE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
+        pathfindingFlagSprites.put(MapPathFindingFlags.NONE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
+    }
+
     public MapTile(int x, int y, boolean isWalkable) {
         this.positionFloat = WorldConfig.getTileCoord(x, y);
         this.positionInt = new CoordsInt(x, y);
         this.isWalkable = isWalkable;
     }
 
-    public void draw(Batch mapBatch) {
+    public void draw(Batch mapBatch, boolean isFight) {
         //GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+        if (isFight) {
+            if (flag != MapPathFindingFlags.NONE) pathfindingFlagSprites.get(flag);
+        }
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
         if (character != null && shouldDrawCharacter) character.draw(mapBatch);

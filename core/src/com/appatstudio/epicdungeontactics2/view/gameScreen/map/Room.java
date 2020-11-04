@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
@@ -53,6 +54,10 @@ import box2dLight.RayHandler;
 public class Room {
 
     private SpriteDrawable mapDrawable;
+
+    private static SpriteDrawable mapBorder;
+    private static SpriteDrawable grid;
+
     private MapTile[][] mapTiles;
     private CoordsInt position;
     private RoomTypeEnum type;
@@ -81,6 +86,8 @@ public class Room {
 
     static {
         guiContainer = GuiContainer.getInstance();
+        mapBorder = new SpriteDrawable(new Sprite(new Texture("maps/BORDER.png")));
+        grid = new SpriteDrawable(new Sprite(new Texture("maps/GRID.png")));
     }
 
     public Room(RoomTypeEnum type, int stage, CoordsInt position, Stage stageObject) {
@@ -211,8 +218,14 @@ public class Room {
                         moveStarted();
                     }
                 }
-            } else {
-
+            } else if (roomState == RoomStateEnum.FIGHT) {
+                if (heroInRoom.isReady()) {
+                    if (tapped.getFlag() == MapPathFindingFlags.MOVABLE ||
+                            tapped.getFlag() == MapPathFindingFlags.ITEM_MOVABLE) {
+                        heroInRoom.moveToMapTile(tapped);
+                        moveStarted();
+                    }
+                }
             }
         }
 
@@ -231,6 +244,12 @@ public class Room {
                             heroInRoom.getPosition(),
                             -1
                     ));
+        } else if (roomState == RoomStateEnum.FIGHT) {
+            heroInRoom.setPossibleMovements(
+                    findWays(
+                            heroInRoom.getPosition(),
+                            (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.SPEED)
+                    ));
         }
     }
 
@@ -238,11 +257,16 @@ public class Room {
 
         mapBatch.begin();
         mapDrawable.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
+        grid.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
+
         for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
             for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
-                mapTiles[x][y].draw(mapBatch);
+                mapTiles[x][y].draw(mapBatch, roomState == RoomStateEnum.FIGHT);
             }
         }
+
+        mapBorder.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
+
         mapBatch.end();
 
         rayHandler.setCombinedMatrix(camera);
@@ -260,8 +284,10 @@ public class Room {
             bossHpBar.draw(guiBatch);
         }
 
-        queue.draw(guiBatch);
+        if (roomState != RoomStateEnum.CLEAN) queue.draw(guiBatch);
         guiBatch.end();
+
+
     }
 
     public MapTile getTouchTile(float x, float y) {

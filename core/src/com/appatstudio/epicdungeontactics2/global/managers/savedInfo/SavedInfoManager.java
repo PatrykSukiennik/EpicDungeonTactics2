@@ -95,8 +95,6 @@ public class SavedInfoManager {
         isCharacterUnlocked.put(CharacterEnum.HERO_NINJA, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_NINJA.toString(), false));
         isCharacterUnlocked.put(CharacterEnum.HERO_PIRATE, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_PIRATE.toString(), false));
         isCharacterUnlocked.put(CharacterEnum.HERO_BABY, preferences.getBoolean("isUnlocked" + CharacterEnum.HERO_BABY.toString(), false));
-
-        checkChangeDay();
     }
 
     public static boolean isUnlocked(CharacterEnum characterEnum) {
@@ -213,6 +211,7 @@ public class SavedInfoManager {
     }
 
     public static void checkChangeDay() {
+
         saved_date = preferences.getLong("date", -1);
         if (saved_date == -1) {
             preferences.putLong("date", TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()));

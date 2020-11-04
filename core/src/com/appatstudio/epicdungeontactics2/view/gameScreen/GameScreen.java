@@ -204,4 +204,8 @@ public final class GameScreen extends Actor {
     public void itemPickedUp(AbstractItem selectedItem) {
         currRoom.itemPickedUp(selectedItem);
     }
+
+    public boolean canCameraMove() {
+        return guiContainer.canCameraMove();
+    }
 }

@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.menuScreen;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.view.MenuBgContainer;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
