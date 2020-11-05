@@ -1,0 +1,1 @@
+#script that generates map info and write it into sourcecode
