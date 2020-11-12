@@ -21,6 +21,7 @@ import box2dLight.RayHandler;
 
 public class AnimatedElement {
 
+    private MapElementAnimationEnum animationEnum;
     private Animation<SpriteDrawable> animation;
     private float stateTime = EpicDungeonTactics.random.nextFloat();
     private CoordsInt size;
@@ -36,8 +37,9 @@ public class AnimatedElement {
     public AnimatedElement(MapElementAnimationEnum animationEnum, CoordsFloat coords, RayHandler rayHandler, World world) {
         animation = GraphicsManager.getMapElementAnimation(animationEnum);
         this.size = WorldConfig.getMapElementAnimationSize(animationEnum);
-        this.destroyedSprite = GraphicsManager.getMapElementInactiveSprite(animationEnum);
+        //this.destroyedSprite = GraphicsManager.getMapElementInactiveSprite(animationEnum);
 
+        this.animationEnum = animationEnum;
         this.coords = coords;
 
         LightConfigObject lightConfigObject = LightsConfig.getMapElementAnimationLights(animationEnum);
@@ -64,9 +66,10 @@ public class AnimatedElement {
     public void draw(Batch batch) {
         if (isActive) {
             stateTime += Gdx.graphics.getDeltaTime();
-            animation.getKeyFrame(stateTime).draw(batch, this.coords.x, this.coords.y, this.size.x, this.size.y);
+            System.out.println("siusiak: " + animationEnum.toString());
+            animation.getKeyFrame(stateTime).draw(batch, this.coords.x - this.size.x/2f, this.coords.y, this.size.x, this.size.y);
         }
-        else destroyedSprite.draw(batch, this.coords.x, this.coords.y, this.size.x, this.size.y);
+        else destroyedSprite.draw(batch, this.coords.x - this.size.x/2f, this.coords.y, this.size.x, this.size.y);
     }
 
     public void destroy() {

@@ -64,10 +64,30 @@ public class WorldConfig {
         mapElementAnimationsSize.put(MapElementAnimationEnum.CANDLE, new CoordsInt(16, 16));
         mapElementAnimationsSize.put(MapElementAnimationEnum.CANDLE_BIG, new CoordsInt(16, 48));
         mapElementAnimationsSize.put(MapElementAnimationEnum.TORCH, new CoordsInt(16, 16));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_1, new CoordsInt(70, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_2, new CoordsInt(70, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_3, new CoordsInt(70, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_4, new CoordsInt(70, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_5, new CoordsInt(64, 82));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_6, new CoordsInt(64, 82));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_7, new CoordsInt(64, 82));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_8, new CoordsInt(64, 82));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_9, new CoordsInt(64, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_10, new CoordsInt(64, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_11, new CoordsInt(64, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.TREE_12, new CoordsInt(64, 80));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_1, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_2, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_3, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_4, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.GLOWING_STONE_1, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.GLOWING_STONE_2, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.GLOWING_STONE_3, new CoordsInt(32, 32));
+        mapElementAnimationsSize.put(MapElementAnimationEnum.GLOWING_STONE_4, new CoordsInt(32, 32));
 
         mapElementSpritesSize = new HashMap<>();
-        mapElementSpritesSize.put(MapElementSpriteEnum.CHEST_EMPTY, new CoordsInt(16, 16));
-        mapElementSpritesSize.put(MapElementSpriteEnum.CRATE, new CoordsInt(16, 16));
+//        mapElementSpritesSize.put(MapElementSpriteEnum.CHEST_EMPTY, new CoordsInt(16, 16));
+//        mapElementSpritesSize.put(MapElementSpriteEnum.CRATE, new CoordsInt(16, 16));
     }
 
     public static CoordsFloat getTileCoord(int x, int y) {

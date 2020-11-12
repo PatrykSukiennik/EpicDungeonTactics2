@@ -114,7 +114,6 @@ public class BodyConfig {
         characterBodyDef.put(NPC_KING, smallBody);
         characterBodyDef.put(NPC_KNIGHT_ELITE, smallBody);
         characterBodyDef.put(PET_KNIGHT, smallBody);
-        characterBodyDef.put(PET_DOG, smallBody);
         characterBodyDef.put(PET_HUNTER, smallBody);
 
 
@@ -173,7 +172,6 @@ public class BodyConfig {
         characterFixtureDef.put(NPC_KING, smallFixtureDef);
         characterFixtureDef.put(NPC_KNIGHT_ELITE, smallFixtureDef);
         characterFixtureDef.put(PET_KNIGHT, smallFixtureDef);
-        characterFixtureDef.put(PET_DOG, smallFixtureDef);
         characterFixtureDef.put(PET_HUNTER, smallFixtureDef);
 
 
@@ -194,18 +192,18 @@ public class BodyConfig {
         mapElementsAnimationFixtureDef.put(MapElementAnimationEnum.CHEST, smallFixtureDef);
 
         mapElementsSpriteBodyDef = new HashMap<>();
-        mapElementsSpriteBodyDef.put(MapElementSpriteEnum.CRATE, smallBody);
+//        mapElementsSpriteBodyDef.put(MapElementSpriteEnum.CRATE, smallBody);
         mapElementsSpriteBodyDef.put(MapElementSpriteEnum.TILE_YELLOW, smallBody);
         mapElementsSpriteBodyDef.put(MapElementSpriteEnum.TILE_RED, smallBody);
         mapElementsSpriteBodyDef.put(MapElementSpriteEnum.TILE_GREEN, smallBody);
-        mapElementsSpriteBodyDef.put(MapElementSpriteEnum.CHEST_EMPTY, smallBody);
-
+//        mapElementsSpriteBodyDef.put(MapElementSpriteEnum.CHEST_EMPTY, smallBody);
+//
         mapElementsSpriteFixtureDef = new HashMap<>();
-        mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.CRATE, smallFixtureDef);
+//        mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.CRATE, smallFixtureDef);
         mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.TILE_YELLOW, smallFixtureDef);
         mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.TILE_RED, smallFixtureDef);
         mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.TILE_GREEN, smallFixtureDef);
-        mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.CHEST_EMPTY, smallFixtureDef);
+//        mapElementsSpriteFixtureDef.put(MapElementSpriteEnum.CHEST_EMPTY, smallFixtureDef);
 
     }
 

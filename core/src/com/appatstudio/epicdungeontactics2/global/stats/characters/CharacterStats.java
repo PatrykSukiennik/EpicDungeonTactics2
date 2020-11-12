@@ -56,7 +56,6 @@ public final class CharacterStats {
         characterPrototypes.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
 
         //pets
-        characterPrototypes.put(CharacterEnum.PET_DOG, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.PET_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
         characterPrototypes.put(CharacterEnum.PET_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
 
@@ -124,7 +123,6 @@ public final class CharacterStats {
         enemyLvlUpStats.put(CharacterEnum.NPC_KNIGHT_ELITE, new CharacterPrototype(3, 3, 3, 3, 3));
 
         //pets
-        enemyLvlUpStats.put(CharacterEnum.PET_DOG, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.PET_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
         enemyLvlUpStats.put(CharacterEnum.PET_HUNTER, new CharacterPrototype(3, 3, 3, 3, 3));
 
@@ -198,9 +196,10 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.NPC_BLACKSMITH, 1);
         characterSizes.put(CharacterEnum.NPC_KING, 1);
         characterSizes.put(CharacterEnum.NPC_KNIGHT_ELITE, 1);
+        characterSizes.put(CharacterEnum.NPC_MOUNTAIN_KING, 1);
+        characterSizes.put(CharacterEnum.NPC_BUTCHER, 1);
 
         //pets
-        characterSizes.put(CharacterEnum.PET_DOG, 1);
         characterSizes.put(CharacterEnum.PET_KNIGHT, 1);
         characterSizes.put(CharacterEnum.PET_HUNTER, 1);
 
@@ -242,6 +241,7 @@ public final class CharacterStats {
     }
 
     public static int getCharacterSize(CharacterEnum characterEnum) {
+        System.out.println("eve: " + characterEnum.toString());
         return characterSizes.get(characterEnum);
     }
 

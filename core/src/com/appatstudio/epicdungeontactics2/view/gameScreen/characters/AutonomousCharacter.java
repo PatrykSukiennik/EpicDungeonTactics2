@@ -14,10 +14,10 @@ public class AutonomousCharacter extends CharacterDrawable {
 
     private StatBar statBar;
 
-    public AutonomousCharacter(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
-        super(characterEnum, position, rayHandler, world, room, tile);
+    public AutonomousCharacter(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile, boolean isRotated) {
+        super(characterEnum, position, rayHandler, world, room, tile, isRotated);
 
-        statBar = new StatBar(this);
+        if (!characterEnum.toString().startsWith("NPC")) statBar = new StatBar(this);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class AutonomousCharacter extends CharacterDrawable {
     @Override
     public void drawTop(Batch guiBatch) {
         super.drawTop(guiBatch);
-        statBar.draw(guiBatch);
+        if (statBar != null)statBar.draw(guiBatch);
     }
 }

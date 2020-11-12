@@ -56,6 +56,7 @@ public class Room {
     private SpriteDrawable mapDrawable;
 
     private static SpriteDrawable mapBorder;
+    private static CoordsFloat borderCoords, borderSize;
     private static SpriteDrawable grid;
 
     private MapTile[][] mapTiles;
@@ -88,6 +89,15 @@ public class Room {
         guiContainer = GuiContainer.getInstance();
         mapBorder = new SpriteDrawable(new Sprite(new Texture("maps/BORDER.png")));
         grid = new SpriteDrawable(new Sprite(new Texture("maps/GRID.png")));
+
+        borderCoords = new CoordsFloat(
+                WorldConfig.ROOM_POS_X - WorldConfig.ROOM_WIDTH_RES/2f,
+                WorldConfig.ROOM_POS_Y - WorldConfig.ROOM_HEIGHT_RES/2f
+        );
+        borderSize = new CoordsFloat(
+                WorldConfig.ROOM_WIDTH_RES * 2f,
+                WorldConfig.ROOM_HEIGHT_RES * 2f
+        );
     }
 
     public Room(RoomTypeEnum type, int stage, CoordsInt position, Stage stageObject) {
@@ -112,7 +122,7 @@ public class Room {
         rayHandler.setAmbientLight(LightsConfig.getAmbientColor(stage));
         b2dr = new Box2DDebugRenderer(); //todo
 
-        mapDrawable = new SpriteDrawable(new Sprite(new Texture("maps/1_FOREST_1.jpg")));
+        mapDrawable = new SpriteDrawable(new Sprite(new Texture("maps/STAGE_3_FIRST_1.png")));
 
         mapTiles = new MapTile[WorldConfig.ROOM_WIDTH][WorldConfig.ROOM_HEIGHT];
 
@@ -138,28 +148,28 @@ public class Room {
 
         for (int x = 0; x < WorldConfig.ROOM_WIDTH; x++) {
             for (int y = 0; y < WorldConfig.ROOM_HEIGHT; y++) {
-                if (animatedElements[x][y] != null) mapTiles[x][y].setAnimatedElement(
-                        new AnimatedElement(animatedElements[x][y],
+                if (animatedElements[y][x] != null) mapTiles[x][WorldConfig.ROOM_HEIGHT - y - 1].setAnimatedElement(
+                        new AnimatedElement(animatedElements[y][x],
                                 new CoordsFloat(
-                                        WorldConfig.getTileCoord(x, y).x,
-                                        WorldConfig.getTileCoord(x, y).y),
+                                        WorldConfig.getTileCoord(x, WorldConfig.ROOM_HEIGHT - y - 1).x,
+                                        WorldConfig.getTileCoord(x, WorldConfig.ROOM_HEIGHT - y - 1).y),
                                 rayHandler, world));
 
-                else if (spriteElements[x][y] != null) mapTiles[x][y].setSpriteElement(
-                        new SpriteElement(spriteElements[x][y],
-                                new CoordsFloat(
-                                        WorldConfig.getTileCoord(x, y).x,
-                                        WorldConfig.getTileCoord(x, y).y),
-                                rayHandler, world));
+//                else if (spriteElements[y][x] != null) mapTiles[x][WorldConfig.ROOM_HEIGHT-y-1].setSpriteElement(
+//                        new SpriteElement(spriteElements[y][x],
+//                                new CoordsFloat(
+//                                        WorldConfig.getTileCoord(x, y).x,
+//                                        WorldConfig.getTileCoord(x, y).y),
+//                                rayHandler, world));
 
-                else if (characters[x][y] != null) {
+                else if (characters[y][x] != null) {
                     CharacterDrawable newCharacter = new AutonomousCharacter(
-                            characters[x][y],
-                            new CoordsInt(x, y),
-                            rayHandler, world, this, mapTiles[x][y]);
+                            characters[y][x],
+                            new CoordsInt(x, WorldConfig.ROOM_HEIGHT-y-1),
+                            rayHandler, world, this, mapTiles[x][y], x>heroInRoom.getPosition().x);
 
                     for (int i = 0; i < CharacterStats.getCharacterSize(newCharacter.getCharacterEnum()); i++) {
-                        mapTiles[x + i][y].setCharacter(newCharacter, i == 0);
+                        mapTiles[x + i][WorldConfig.ROOM_HEIGHT-y-1].setCharacter(newCharacter, i == 0);
                     }
                     charactersInRoom.add(newCharacter);
                 }
@@ -265,7 +275,7 @@ public class Room {
             }
         }
 
-        mapBorder.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
+        mapBorder.draw(mapBatch, borderCoords.x, borderCoords.y, borderSize.x, borderSize.y);
 
         mapBatch.end();
 

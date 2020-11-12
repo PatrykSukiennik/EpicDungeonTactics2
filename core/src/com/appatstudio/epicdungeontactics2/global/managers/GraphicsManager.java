@@ -60,6 +60,26 @@ public final class GraphicsManager {
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.WATER, 0.2f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CANDLE, 0.15f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.CANDLE_BIG, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_1, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_2, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_3, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_4, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_5, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_6, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_7, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_8, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_9, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_10, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_11, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.TREE_12, 0.2f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.GLOWING_STONE_1, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.GLOWING_STONE_2, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.GLOWING_STONE_3, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.GLOWING_STONE_4, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_1, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_2, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_3, 0.15f);
+        MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_4, 0.15f);
     }
 
     private static void loadItems(TextureAtlas atlas) {
@@ -259,32 +279,32 @@ public final class GraphicsManager {
                     a,
                     createAnimation(
                             atlas,
-                            "map-elements/animations/" + a.toString(),
+                            "map-elements/animations/" + a.toString() + "/frame",
                             MAP_ELEMENT_ANIMATION_FRAMETIME.get(a)
                     )
             );
         }
 
-        //broken
-
-        mapElementSpritesBroken = new HashMap<>();
-        MapElementSpriteEnum[] allSpritesBroken = MapElementSpriteEnum.values();
-
-        for (MapElementSpriteEnum s : allSpritesBroken) {
-            mapElementSpritesBroken.put(
-                    s,
-                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString() + "_BROKEN"))));
-        }
-
-        mapElementAnimationsBroken = new HashMap<>();
-        MapElementAnimationEnum[] allAnimationsBroken = MapElementAnimationEnum.values();
-
-        for (MapElementAnimationEnum a : allAnimationsBroken) {
-            System.out.println("wdvewve:   " + a.toString());
-            mapElementAnimationsBroken.put(
-                    a,
-                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + a.toString() + "_BROKEN"))));
-        }
+//        //broken
+//
+//        mapElementSpritesBroken = new HashMap<>();
+//        MapElementSpriteEnum[] allSpritesBroken = MapElementSpriteEnum.values();
+//
+//        for (MapElementSpriteEnum s : allSpritesBroken) {
+//            mapElementSpritesBroken.put(
+//                    s,
+//                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString() + "_BROKEN"))));
+//        }
+//
+//        mapElementAnimationsBroken = new HashMap<>();
+//        MapElementAnimationEnum[] allAnimationsBroken = MapElementAnimationEnum.values();
+//
+//        for (MapElementAnimationEnum a : allAnimationsBroken) {
+//            System.out.println("wdvewve:   " + a.toString());
+//            mapElementAnimationsBroken.put(
+//                    a,
+//                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + a.toString() + "_BROKEN"))));
+//        }
     }
 
     private static Animation<SpriteDrawable> createAnimation(TextureAtlas atlas, String path, float frameTime) {
@@ -369,9 +389,9 @@ public final class GraphicsManager {
         return mapElementAnimations.get(animationEnum);
     }
 
-    public static SpriteDrawable getMapElementInactiveSprite(MapElementAnimationEnum animationEnum) {
-        return mapElementAnimationsBroken.get(animationEnum);
-    }
+//    public static SpriteDrawable getMapElementInactiveSprite(MapElementAnimationEnum animationEnum) {
+//        return mapElementAnimationsBroken.get(animationEnum);
+//    }
 
     public static SpriteDrawable getMapElementInactiveSprite(MapElementSpriteEnum spriteEnum) {
         return mapElementSpritesBroken.get(spriteEnum);

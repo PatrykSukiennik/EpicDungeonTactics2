@@ -60,7 +60,7 @@ public class CharacterDrawable extends Image {
 
     private boolean isRotation = EpicDungeonTactics.random.nextBoolean();
 
-    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile) {
+    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile, boolean isRotation) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
 
@@ -70,7 +70,7 @@ public class CharacterDrawable extends Image {
         this.position = position;
         this.state = CharacterStateEnum.IDLE;
         this.room = room;
-
+        this.isRotation = isRotation;
 
         int size = CharacterStats.getCharacterSize(characterEnum);
         CoordsFloat coords = WorldConfig.getDrawingCoord(position.x, position.y);
@@ -78,6 +78,7 @@ public class CharacterDrawable extends Image {
         this.setSize(2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE, 2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE);
 
         LightConfigObject lightConfigObject = LightsConfig.getCharacterLights(characterEnum);
+        System.out.println(characterEnum.toString());
         lightOffset = lightConfigObject.getOffset();
         this.pointLight = new PointLight(
                 rayHandler,

@@ -47,6 +47,7 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_CITIZEN_MALE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_KING;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_KNIGHT_ELITE;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MAGIC_SHOP;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MOUNTAIN_KING;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_NUN_FAT;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_NUN_NORMAL;
@@ -55,7 +56,6 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BOSS_OGRE;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_SHAMAN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_WARRIOR;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.PET_DOG;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.PET_HUNTER;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.PET_KNIGHT;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.SKELET;
@@ -73,9 +73,9 @@ public class LightsConfig {
 
     private static final Color[] ambientColors = new Color[]
             {
-            new Color(0.84f, 0.84f, 0.84f, 0.75f), //forest day
+            new Color(0.84f, 0.44f, 0.44f, 0.55f), //forest day
             new Color(0.32f, 0.26f, 0.38f, 0.45f), //forest night
-            new Color(0.32f, 0.26f, 0.38f, 0.45f)
+            new Color(0.62f, 0.26f, 0.38f, 0.45f)
             };
 
     private static final HashMap<CharacterEnum, LightConfigObject> characterLights;
@@ -416,6 +416,13 @@ public class LightsConfig {
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
+        characterLights.put(NPC_MAGIC_SHOP,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
         characterLights.put(NPC_PRINCESS,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
@@ -466,13 +473,6 @@ public class LightsConfig {
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
         characterLights.put(PET_KNIGHT,
-                new LightConfigObject(
-                        SMALL_CHARACTER_RADIUS,
-                        SMALL_SOFTNESS,
-                        LIGHT_COLOR,
-                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
-                ));
-        characterLights.put(PET_DOG,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
                         SMALL_SOFTNESS,
@@ -538,15 +538,187 @@ public class LightsConfig {
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
 
-        mapElementsSpriteLightConfig = new HashMap<>();
-        mapElementsSpriteLightConfig.put(
-                MapElementSpriteEnum.CHEST_EMPTY,
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_1,
                 new LightConfigObject(
                         SMALL_CHARACTER_RADIUS,
                         SMALL_SOFTNESS,
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
+
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_2,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_3,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_4,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_5,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_6,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_7,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_8,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_9,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_10,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_11,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.TREE_12,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.LAVA_ROCK_SMOKE_1,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.LAVA_ROCK_SMOKE_2,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.LAVA_ROCK_SMOKE_3,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.LAVA_ROCK_SMOKE_4,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.GLOWING_STONE_1,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.GLOWING_STONE_2,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.GLOWING_STONE_3,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        mapElementsAnimationLightConfig.put(
+                MapElementAnimationEnum.GLOWING_STONE_4,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+
+
+
+
+
+
+
+
+
+        //_______________________________________________
+
+        mapElementsSpriteLightConfig = new HashMap<>();
+//        mapElementsSpriteLightConfig.put(
+//                MapElementSpriteEnum.CHEST_EMPTY,
+//                new LightConfigObject(
+//                        SMALL_CHARACTER_RADIUS,
+//                        SMALL_SOFTNESS,
+//                        LIGHT_COLOR,
+//                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+//                ));
         mapElementsSpriteLightConfig.put(
                 MapElementSpriteEnum.TILE_GREEN,
                 new LightConfigObject(
@@ -571,14 +743,14 @@ public class LightsConfig {
                         LIGHT_COLOR,
                         new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
                 ));
-        mapElementsSpriteLightConfig.put(
-                MapElementSpriteEnum.CRATE,
-                new LightConfigObject(
-                        SMALL_CHARACTER_RADIUS,
-                        SMALL_SOFTNESS,
-                        LIGHT_COLOR,
-                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
-                ));
+//        mapElementsSpriteLightConfig.put(
+//                MapElementSpriteEnum.CRATE,
+//                new LightConfigObject(
+//                        SMALL_CHARACTER_RADIUS,
+//                        SMALL_SOFTNESS,
+//                        LIGHT_COLOR,
+//                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+//                ));
     }
 
     public static Color getAmbientColor(int stage) {
