@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.badlogic.gdx.Gdx;
@@ -34,15 +35,7 @@ public final class MenuBgContainer {
         bg1x = 0;
         bg2x = bgW;
 
-        Date date = new Date(TimeUtils.millis());
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-
-        if (hour < 6) {
-            lightTexture = GraphicsManager.getGuiElement(GuiElementEnum.NIGHT_LIGHT_TEXTURE);
-        }
-        else if (hour < 21) {
+        if (EpicDungeonTactics.isDay()) {
             lightTexture = GraphicsManager.getGuiElement(GuiElementEnum.DAY_LIGHT_TEXTURE);
         }
         else {

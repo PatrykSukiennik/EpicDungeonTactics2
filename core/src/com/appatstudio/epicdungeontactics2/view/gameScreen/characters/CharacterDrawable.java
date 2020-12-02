@@ -74,8 +74,11 @@ public class CharacterDrawable extends Image {
 
         int size = CharacterStats.getCharacterSize(characterEnum);
         CoordsFloat coords = WorldConfig.getDrawingCoord(position.x, position.y);
+        if (size > 1) {
+            coords.x -= (size/4f) * WorldConfig.TILE_SIZE;
+        }
         this.setPosition(coords.x, coords.y);
-        this.setSize(2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE, 2f * (1+(int)(size/2f)) * WorldConfig.TILE_SIZE);
+        this.setSize(2f * WorldConfig.TILE_SIZE, 2f * WorldConfig.TILE_SIZE);
 
         LightConfigObject lightConfigObject = LightsConfig.getCharacterLights(characterEnum);
         System.out.println(characterEnum.toString());
@@ -192,6 +195,23 @@ public class CharacterDrawable extends Image {
             tileStandingOn = room.getTiles()[coords.x + i][coords.y];
             tileStandingOn.setCharacter(this, i==0);
         }
+    }
+
+    public void setPositionForce(CoordsInt coords) {
+        if (coords.x < WorldConfig.ROOM_WIDTH/2f) isRotation = false;
+        else if (coords.x > WorldConfig.ROOM_WIDTH/2f) isRotation = true;
+
+        this.position = coords;
+        CoordsFloat newCoords = WorldConfig.getDrawingCoord(position.x, position.y);
+        this.setPosition(newCoords.x, newCoords.y);
+        this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
+
+        for (int i=CharacterStats.getCharacterSize(characterEnum)-1; i>=0; i--) {
+            tileStandingOn = room.getTiles()[coords.x + i][coords.y];
+            tileStandingOn.setCharacter(this, i==0);
+        }
+
+
     }
 
     public void setPossibleMovements(Array<Array<MapTile>> possibleMovements) {

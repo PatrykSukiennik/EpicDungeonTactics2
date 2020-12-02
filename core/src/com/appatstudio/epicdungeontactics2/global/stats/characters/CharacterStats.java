@@ -173,7 +173,7 @@ public final class CharacterStats {
         characterSizes.put(CharacterEnum.MUSHROOM_SMALL, 1);
         characterSizes.put(CharacterEnum.MUSHROOM_NORMAL,1);
         characterSizes.put(CharacterEnum.MUSHROOM_LARGE, 1);
-        characterSizes.put(CharacterEnum.BEAR, 1);
+        characterSizes.put(CharacterEnum.BEAR, 2);
         characterSizes.put(CharacterEnum.BOSS_FOREST_GUARDIAN, 1);
         characterSizes.put(CharacterEnum.ELVEN_PRINCESS, 1);
         characterSizes.put(CharacterEnum.ELVEN_KING, 1);

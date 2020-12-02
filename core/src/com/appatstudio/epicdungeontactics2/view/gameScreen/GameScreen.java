@@ -6,16 +6,20 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.ItemSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.AlphaTextObject;
@@ -27,15 +31,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.HashMap;
+
 import static java.lang.Thread.sleep;
 
 public final class GameScreen extends Actor {
 
-    private CharacterEnum hero;
-    private PerkEnum perk;
+    private static CharacterEnum hero;
+    private static PerkEnum perk;
 
-    private Room currRoom;
-    private Stage currStage;
+    private static Room currRoom;
+    private static Stage currStage;
     private static int stage = 1;
 
     private static GuiContainer guiContainer;
@@ -78,6 +84,13 @@ public final class GameScreen extends Actor {
         mapGuiBatch = new SpriteBatch();
     }
 
+    public static MapPathFindingFlags canChangeRoom() {
+        MapTile tile = currRoom.getRoomCharacters().get(0).getTileStandingOn();
+        if (tile.isNode()) return MapPathFindingFlags.ROOM_NODE;
+        else if (tile.isGoingDown()) return MapPathFindingFlags.NEW_STAGE;
+        else return null;
+    }
+
     public void itemDropped(AbstractItem item) {
         currRoom.itemDropped(item);
     }
@@ -97,6 +110,7 @@ public final class GameScreen extends Actor {
         currRoom = currStage.getFirstRoom();
         guiContainer.setMapStage(currStage);
         guiContainer.roomChanged(null, currRoom);
+        guiContainer.refreshRoom();
     }
 
     public void freshRunInit() {
@@ -114,6 +128,24 @@ public final class GameScreen extends Actor {
         CameraHandler.changeRoom(direction);
         switchRoomDelay = 0.8f;
         switchRoomDirection = direction;
+    }
+
+    public static void changeRoom() {
+        CoordsInt heroPos = currRoom.getRoomCharacters().get(0).getPosition();
+        HashMap<DirectionEnum, Room> nodes = currRoom.getRoomNodes();
+        if (heroPos.x == 0)
+            currStage.changeRoom(DirectionEnum.LEFT, nodes.get(DirectionEnum.LEFT), heroPos);
+
+        else if (heroPos.x == WorldConfig.ROOM_WIDTH - 1)
+            currStage.changeRoom(DirectionEnum.RIGHT, nodes.get(DirectionEnum.RIGHT), heroPos);
+
+        else if (heroPos.y == 0)
+            currStage.changeRoom(DirectionEnum.BOTTOM, nodes.get(DirectionEnum.BOTTOM), heroPos);
+
+        else if (heroPos.y == WorldConfig.ROOM_HEIGHT - 1)
+            currStage.changeRoom(DirectionEnum.TOP, nodes.get(DirectionEnum.TOP), heroPos);
+
+        else nextStageInit();
     }
 
     public static void nextStageInit() {
@@ -201,6 +233,10 @@ public final class GameScreen extends Actor {
         }
     }
 
+    public Room getCurrRoom() {
+        return currRoom;
+    }
+
     public void itemPickedUp(AbstractItem selectedItem) {
         currRoom.itemPickedUp(selectedItem);
     }
@@ -208,4 +244,5 @@ public final class GameScreen extends Actor {
     public boolean canCameraMove() {
         return guiContainer.canCameraMove();
     }
+
 }

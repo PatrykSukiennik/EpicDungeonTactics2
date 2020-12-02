@@ -55,19 +55,5 @@ public class Hero extends CharacterDrawable {
         setTileStandingOn(room.getTiles()[coords.x][coords.y], true);
         if (this.isOnTarget()) GuiContainer.setItemsToPick(room.getTiles()[coords.x][coords.y].getItemsToPick());
 
-        if (getTileStandingOn().getFlag() == MapPathFindingFlags.ROOM_NODE) {
-            if (coords.x == 0) {
-                room.changeRoom(LEFT, coords);
-            } else if (coords.x == WorldConfig.ROOM_WIDTH - 1) {
-                room.changeRoom(RIGHT, coords);
-            } else if (coords.y == WorldConfig.ROOM_HEIGHT - 1) {
-                room.changeRoom(TOP, coords);
-            } else if (coords.y == 0) {
-                room.changeRoom(BOTTOM, coords);
-            }
-        }
-        else if (getTileStandingOn().getFlag() == MapPathFindingFlags.NEW_STAGE) {
-            room.newStage();
-        }
     }
 }

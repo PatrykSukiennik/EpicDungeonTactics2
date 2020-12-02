@@ -29,6 +29,8 @@ public class MapTile {
     private boolean shouldDrawCharacter = false;
     private ItemOnMapDrawable items = null;
     private boolean isWalkable;
+    private boolean isNode;
+    private boolean isGoingDown;
 
     private CoordsFloat positionFloat;
     private CoordsInt positionInt;
@@ -50,12 +52,39 @@ public class MapTile {
         this.positionFloat = WorldConfig.getTileCoord(x, y);
         this.positionInt = new CoordsInt(x, y);
         this.isWalkable = isWalkable;
+        this.isNode = false;
+        this.isGoingDown = false;
     }
 
     public void draw(Batch mapBatch, boolean isFight) {
         //GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
         if (isFight) {
-            if (flag != MapPathFindingFlags.NONE) pathfindingFlagSprites.get(flag);
+            if (flag != MapPathFindingFlags.NONE) pathfindingFlagSprites.get(flag).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+        }
+        else {
+            if (isNode) {
+                pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
+                        mapBatch,
+                        positionFloat.x,
+                        positionFloat.y,
+                        WorldConfig.TILE_SIZE,
+                        WorldConfig.TILE_SIZE);
+            }
+            else if (flag == MapPathFindingFlags.MOVABLE && isGoingDown) {
+                pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
+                        mapBatch,
+                        positionFloat.x,
+                        positionFloat.y,
+                        WorldConfig.TILE_SIZE,
+                        WorldConfig.TILE_SIZE);
+            }
+            else if (flag == MapPathFindingFlags.ITEM_MOVABLE)
+                        pathfindingFlagSprites.get(flag).draw(
+                        mapBatch,
+                        positionFloat.x,
+                        positionFloat.y,
+                        WorldConfig.TILE_SIZE,
+                        WorldConfig.TILE_SIZE);
         }
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
@@ -146,5 +175,21 @@ public class MapTile {
 
     public CoordsFloat getPositionCharacterDrawingFloat() {
         return WorldConfig.getDrawingCoord(positionInt.x, positionInt.y);
+    }
+
+    public void setIsNode(boolean node) {
+        isNode = node;
+    }
+
+    public void setIsGoingDown(boolean goingDown) {
+        isGoingDown = goingDown;
+    }
+
+    public boolean isNode() {
+        return isNode;
+    }
+
+    public boolean isGoingDown() {
+        return isGoingDown;
     }
 }

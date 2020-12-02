@@ -5,13 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 
 import java.util.HashMap;
 
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_ALCHEMIST;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BLACKSMITH;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BUTCHER;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_CITIZEN_MALE;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MAGIC_SHOP;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MOUNTAIN_KING;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_PRINCESS;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.*;
 
 public class MapInfoEnemy {
 
@@ -40,6 +34,52 @@ charactersInfoMap.put(RoomEnum.STAGE_1_FIRST_1, new CharacterEnum[][] {
 {  null, NPC_MAGIC_SHOP, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null }
+});
+charactersInfoMap.put(RoomEnum.STAGE_1_REGULAR_1, new CharacterEnum[][] { 
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, BEAR, null, null, null, ZOMBIE, null, ENT, null },
+{  null, null, null, null, null, null, null, null, null, ZOMBIE, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, WOLF, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, WOLF, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, WOLF, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null }
+});
+charactersInfoMap.put(RoomEnum.STAGE_1_BOSS_1, new CharacterEnum[][] { 
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, MUSHROOM_NORMAL, null },
+{  null, null, ELVEN_KNIGHT, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, BOSS_FOREST_GUARDIAN, null, null, null, null, null },
+{  null, null, ELVEN_KNIGHT, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, ELVEN_KNIGHT, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, CENTAUR_MALE, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, MUSHROOM_SMALL, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null }
 });

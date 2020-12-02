@@ -43,6 +43,7 @@ public class TurnQueueIcon extends Image {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
+        topSprite.getSprite().setFlip(false, false);
         topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);
         topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);
         topSprite.draw(batch, topX, this.getY() + this.getHeight()/3f, topSize, topSize);

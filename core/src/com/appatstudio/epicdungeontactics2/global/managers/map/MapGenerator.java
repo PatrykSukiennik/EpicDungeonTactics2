@@ -5,13 +5,17 @@ import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGeneratorConfig;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.RoomEnum.*;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.BOSS_ROOM;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.FIRST_ROOM;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.REGULAR_ROOM;
@@ -19,7 +23,9 @@ import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.REGU
 public class MapGenerator {
 
     private static final HashMap<Integer, HashMap<RoomTypeEnum, Integer>> mapCounter;
-
+    private static final HashMap<Integer, HashMap<RoomTypeEnum, Integer>> mapChanceSums;
+    private static final HashMap<Integer, HashMap<RoomTypeEnum, RoomEnum[]>> mapEnums;
+    private static final HashMap<RoomEnum, Integer> mapChances;
 
     static {
         mapCounter = new HashMap<>();
@@ -27,10 +33,12 @@ public class MapGenerator {
         mapCounter.put(2, new HashMap<RoomTypeEnum, Integer>());
         mapCounter.put(3, new HashMap<RoomTypeEnum, Integer>());
 
+        mapChances = new HashMap<>();
+
 //python-include-map-counter
 mapCounter.get(1).put(FIRST_ROOM, 1);
-mapCounter.get(1).put(REGULAR_ROOM, 0);
-mapCounter.get(1).put(BOSS_ROOM, 0);
+mapCounter.get(1).put(REGULAR_ROOM, 1);
+mapCounter.get(1).put(BOSS_ROOM, 1);
 mapCounter.get(2).put(FIRST_ROOM, 1);
 mapCounter.get(2).put(REGULAR_ROOM, 0);
 mapCounter.get(2).put(BOSS_ROOM, 0);
@@ -38,6 +46,52 @@ mapCounter.get(3).put(FIRST_ROOM, 1);
 mapCounter.get(3).put(REGULAR_ROOM, 0);
 mapCounter.get(3).put(BOSS_ROOM, 0);
 //python-include-map-counter-end
+
+//python-include-map-chances
+mapChances.put(STAGE_1_FIRST_1, 100);
+mapChances.put(STAGE_1_REGULAR_1, 100);
+mapChances.put(STAGE_1_BOSS_1, 100);
+mapChances.put(STAGE_2_FIRST_1, 100);
+mapChances.put(STAGE_3_FIRST_1, 100);
+//python-include-map-chances-end
+
+        mapEnums = new HashMap<>();
+        mapEnums.put(1, new HashMap<RoomTypeEnum, RoomEnum[]>());
+        mapEnums.put(2, new HashMap<RoomTypeEnum, RoomEnum[]>());
+        mapEnums.put(3, new HashMap<RoomTypeEnum, RoomEnum[]>());
+
+        mapChanceSums = new HashMap<>();
+        mapChanceSums.put(1, new HashMap<RoomTypeEnum, Integer>());
+        mapChanceSums.put(2, new HashMap<RoomTypeEnum, Integer>());
+        mapChanceSums.put(3, new HashMap<RoomTypeEnum, Integer>());
+
+        for (int stage = 1; stage <= 3; stage++) {
+            int temp = 0;
+            mapEnums.get(stage).put(FIRST_ROOM, new RoomEnum[mapCounter.get(stage).get(FIRST_ROOM)]);
+            for (int fr = 1; fr <= mapCounter.get(stage).get(FIRST_ROOM); fr++) {
+                temp += mapChances.get(RoomEnum.valueOf("STAGE_"+stage+"_FIRST_"+fr));
+                mapEnums.get(stage).get(FIRST_ROOM)[fr-1] = RoomEnum.valueOf("STAGE_"+stage+"_FIRST_"+fr);
+            }
+            mapChanceSums.get(stage).put(FIRST_ROOM, temp);
+            temp = 0;
+
+            mapEnums.get(stage).put(REGULAR_ROOM, new RoomEnum[mapCounter.get(stage).get(REGULAR_ROOM)]);
+            for (int rr = 1; rr <= mapCounter.get(stage).get(REGULAR_ROOM); rr++) {
+                temp += mapChances.get(RoomEnum.valueOf("STAGE_"+stage+"_REGULAR_"+rr));
+                mapEnums.get(stage).get(REGULAR_ROOM)[rr-1] = RoomEnum.valueOf("STAGE_"+stage+"_REGULAR_"+rr);
+            }
+            mapChanceSums.get(stage).put(REGULAR_ROOM, temp);
+            temp = 0;
+
+            mapEnums.get(stage).put(BOSS_ROOM, new RoomEnum[mapCounter.get(stage).get(BOSS_ROOM)]);
+            for (int br = 1; br <= mapCounter.get(stage).get(BOSS_ROOM); br++) {
+                temp += mapChances.get(RoomEnum.valueOf("STAGE_"+stage+"_BOSS_"+br));
+                mapEnums.get(stage).get(BOSS_ROOM)[br-1] = RoomEnum.valueOf("STAGE_"+stage+"_BOSS_"+br);
+            }
+            mapChanceSums.get(stage).put(BOSS_ROOM, temp);
+        }
+
+
 
     }
 
@@ -137,23 +191,28 @@ mapCounter.get(3).put(BOSS_ROOM, 0);
 
                     result.get(i).getRoomNodes().put(DirectionEnum.RIGHT, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.LEFT, result.get(i));
+                    result.get(j).createNodes();
                 } else if (currectCoords.x - result.get(j).getPosition().x == 1
                         && currectCoords.y == result.get(j).getPosition().y) {
 
                     result.get(i).getRoomNodes().put(DirectionEnum.LEFT, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.RIGHT, result.get(i));
+                    result.get(j).createNodes();
                 } else if (currectCoords.y - result.get(j).getPosition().y == -1
                         && currectCoords.x == result.get(j).getPosition().x) {
 
                     result.get(i).getRoomNodes().put(DirectionEnum.TOP, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.BOTTOM, result.get(i));
+                    result.get(j).createNodes();
                 } else if (currectCoords.y - result.get(j).getPosition().y == 1
                         && currectCoords.x == result.get(j).getPosition().x) {
 
                     result.get(i).getRoomNodes().put(DirectionEnum.BOTTOM, result.get(j));
                     result.get(j).getRoomNodes().put(DirectionEnum.TOP, result.get(i));
+                    result.get(j).createNodes();
                 }
             }
+            result.get(i).createNodes();
         }
         stageResult.setRooms(result);
         return stageResult;
@@ -169,6 +228,16 @@ mapCounter.get(3).put(BOSS_ROOM, 0);
     }
 
     public static RoomEnum getRandomRoom(RoomTypeEnum type, int stage) {
-        return RoomEnum.STAGE_3_FIRST_1;
+
+        int temp = 0;
+        int result = Math.abs(EpicDungeonTactics.random.nextInt()) % mapChanceSums.get(stage).get(type);
+
+        for (int i=0; i<mapCounter.get(stage).get(type); i++) {
+            temp += mapChances.get(mapEnums.get(stage).get(type)[i]);
+
+            if (result <= temp) return mapEnums.get(stage).get(type)[i];
+        }
+        return mapEnums.get(stage).get(type)[0];
+
     }
 }

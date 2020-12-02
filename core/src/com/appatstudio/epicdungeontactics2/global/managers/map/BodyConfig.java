@@ -91,7 +91,7 @@ public class BodyConfig {
         characterBodyDef.put(MUSHROOM_SMALL, smallBody);
         characterBodyDef.put(MUSHROOM_NORMAL, smallBody);
         characterBodyDef.put(MUSHROOM_LARGE, smallBody);
-        characterBodyDef.put(BEAR, smallBody);
+        characterBodyDef.put(BEAR, mediumBody);
         characterBodyDef.put(BOSS_FOREST_GUARDIAN, smallBody);
         characterBodyDef.put(ELVEN_PRINCESS, smallBody);
         characterBodyDef.put(ELVEN_KING, smallBody);
@@ -149,7 +149,7 @@ public class BodyConfig {
         characterFixtureDef.put(MUSHROOM_SMALL, smallFixtureDef);
         characterFixtureDef.put(MUSHROOM_NORMAL, smallFixtureDef);
         characterFixtureDef.put(MUSHROOM_LARGE, smallFixtureDef);
-        characterFixtureDef.put(BEAR, smallFixtureDef);
+        characterFixtureDef.put(BEAR, mediumFixtureDef);
         characterFixtureDef.put(BOSS_FOREST_GUARDIAN, smallFixtureDef);
         characterFixtureDef.put(ELVEN_PRINCESS, smallFixtureDef);
         characterFixtureDef.put(ELVEN_KING, smallFixtureDef);

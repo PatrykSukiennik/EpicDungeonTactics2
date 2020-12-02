@@ -126,11 +126,21 @@ counter_text = ''
 chars_text = ''
 anim_text = ''
 walkable_text = ''
+map_chances_text = ''
 
 for stage in range(1, 4):
     for mode in ('FIRST', 'REGULAR', 'BOSS'):
         index = 1
+        mode_text = ''
+
         while True:
+            if mode == 'FIRST':
+                mode_text = 'FIRST_ROOM'
+            elif mode == 'BOSS':
+                mode_text = 'BOSS_ROOM'
+            else:
+                mode_text = 'REGULAR_ROOM'
+
             try:
                 curr_file_tree = ET.parse('../world_creating_elements/maps/STAGE_'
                                           + str(stage) + '_'
@@ -141,16 +151,10 @@ for stage in range(1, 4):
 
             except FileNotFoundError:
                 map_counter[stage][mode] = index
-                mode_text = ''
-                if mode == 'FIRST':
-                    mode_text = 'FIRST_ROOM'
-                elif mode == 'BOSS':
-                    mode_text = 'BOSS_ROOM'
-                else:
-                    mode_text = 'REGULAR_ROOM'
 
                 counter_text = counter_text + 'mapCounter.get(' + str(stage) + ').put(' + mode_text + ', ' \
                                + str(index - 1) + ');\n'
+
                 index = 1
                 break
 
@@ -169,7 +173,8 @@ for stage in range(1, 4):
                 elif layer.get('name') == 'characters':
                     for data in layer.iterfind('data'):  # only one
                         d = data.text
-                        d = d.replace('0', ' null')
+                        d = d.replace('0,', ' null,')
+                        d = d.replace(',0', ', null')
                         for v in character_map.keys():
                             d = d.replace(str(v + 1), ' ' + character_map.get(v))
 
@@ -189,7 +194,13 @@ for stage in range(1, 4):
                             index) + ', new MapPathFindingFlags[][] { \n' + d + '\n});\n'
 
             enums_text = enums_text + ', STAGE_' + str(stage) + '_' + mode + '_' + str(index) + '\n'
+
+            map_chances_text = map_chances_text + 'mapChances.put('\
+                               'STAGE_' + str(stage) + '_' + mode + '_' + str(index) + ', ' \
+                               + '100' + ');\n'
+
             index = index + 1
+
     enums_text = enums_text + '\n'
 
 enums_text = enums_text[2:]
@@ -204,17 +215,27 @@ f_enums = open(file_room_enum, 'w')
 f_enums.write("".join(file_text))
 f_enums.close()
 
-f_counter = open(file_room_map_generator, 'r')
-file_text = f_counter.readlines()
-f_counter.close()
+f_generator = open(file_room_map_generator, 'r')
+file_text = f_generator.readlines()
+f_generator.close()
 insert_index = file_text.index('//python-include-map-counter\n')
 delete_index = file_text.index('//python-include-map-counter-end\n')
 del file_text[insert_index + 1:delete_index]
 file_text.insert(insert_index + 1, counter_text)
-f_counter = open(file_room_map_generator, 'w')
-f_counter.write("".join(file_text))
-f_counter.close()
+f_generator = open(file_room_map_generator, 'w')
+f_generator.write("".join(file_text))
+f_generator.close()
 
+f_generator = open(file_room_map_generator, 'r')
+file_text = f_generator.readlines()
+f_generator.close()
+insert_index = file_text.index('//python-include-map-chances\n')
+delete_index = file_text.index('//python-include-map-chances-end\n')
+del file_text[insert_index + 1:delete_index]
+file_text.insert(insert_index + 1, map_chances_text)
+f_generator = open(file_room_map_generator, 'w')
+f_generator.write("".join(file_text))
+f_generator.close()
 
 f_char = open(file_characters, 'r')
 file_text = f_char.readlines()

@@ -6,7 +6,9 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.FinancesStats;
 import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
@@ -21,7 +23,11 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.TimeUtils;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.GAME_SCREEN;
@@ -270,5 +276,17 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             if (idleGoldCollectedBanner == null) idleGoldCollectedBanner = new IdleGoldCollectedBanner();
             idleGoldCollectedBanner.show(income);
         }
+    }
+
+    public static boolean isDay() {
+        Date date = new Date(TimeUtils.millis());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
+        if (hour < 6) {
+            return false;
+        }
+        else return hour < 21;
     }
 }

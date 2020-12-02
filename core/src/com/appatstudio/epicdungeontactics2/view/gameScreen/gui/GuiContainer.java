@@ -2,13 +2,19 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.GlobalValues;
+import com.appatstudio.epicdungeontactics2.global.WorldConfig;
+import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow.HeroStatWindow;
@@ -19,9 +25,12 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.Status
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
+import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
+import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,22 +39,28 @@ import com.badlogic.gdx.utils.Array;
 
 public final class GuiContainer {
 
-    private Batch batch;
+    private final Batch batch;
 
-    private RunQuitWindow runQuitWindow;
+    private final RunQuitWindow runQuitWindow;
 
-    private TextWithIcon goldStatus;
-    private TextObject stageStatus;
+    private final TextWithIcon goldStatus;
+    private final TextObject stageStatus;
 
-    private CommunicatePrinter communicatePrinter;
-    private StatusBarContainer statusBarContainer;
+    private final CommunicatePrinter communicatePrinter;
+    private final StatusBarContainer statusBarContainer;
 
-    private EquipmentWindow equipmentWindow;
-    private MapWindow mapWindow;
-    private HeroStatWindow heroStatWindow;
-    private PickupItemWindow pickupItemWindow;
+    private final EquipmentWindow equipmentWindow;
+    private final MapWindow mapWindow;
+    private final HeroStatWindow heroStatWindow;
+    private final PickupItemWindow pickupItemWindow;
 
-    private GuiButton eqButton, mapButton, pickingButton;
+    private final GuiButton eqButton, mapButton, pickingButton;
+
+    private final ButtonWithText changeRoomButton;
+    private final ButtonWithText goingDownButton;
+
+    private static Room currRoom;
+    private static CharacterDrawable heroInRoom;
 
     private static Array<AbstractItem> itemsToPick;
 
@@ -94,6 +109,26 @@ public final class GuiContainer {
                         - Gdx.graphics.getWidth() * 0.05f,
                 Align.right
         );
+        changeRoomButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE),
+                Gdx.graphics.getWidth() * 0.25f,
+                Gdx.graphics.getHeight() * 0.1f,
+                MenuScreen.BOTTOM_BUTTON_WIDTH,
+                MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                StringsManager.getGuiString(GuiStringEnum.CHANGE_ROOM)
+        );
+        goingDownButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
+                Gdx.graphics.getWidth() * 0.25f,
+                Gdx.graphics.getHeight() * 0.1f,
+                MenuScreen.BOTTOM_BUTTON_WIDTH,
+                MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                StringsManager.getGuiString(GuiStringEnum.GO_DOWN)
+        );
+        changeRoomButton.getColor().a = 0.8f;
+        goingDownButton.getColor().a = 0.8f;
 
         eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f);
         mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
@@ -129,6 +164,17 @@ public final class GuiContainer {
             } else pickingButton.draw(batch);
         }
 
+        MapPathFindingFlags flag = GameScreen.canChangeRoom();
+        if (flag != null) {
+            switch (flag) {
+                case NEW_STAGE:
+                    goingDownButton.draw(batch, 1f);
+                    break;
+                case ROOM_NODE:
+                    changeRoomButton.draw(batch, 1f);
+                    break;
+            }
+        }
 
         mapButton.draw(batch);
 
@@ -152,7 +198,6 @@ public final class GuiContainer {
             pickupItemWindow.draw(batch);
         }
 
-
         batch.end();
     }
 
@@ -175,6 +220,10 @@ public final class GuiContainer {
         }
         else if (PickupItemWindow.isUp()) {
             pickupItemWindow.tap(x, y);
+            return true;
+        }
+        else if (GameScreen.canChangeRoom() != null && changeRoomButton.tap(x, y)) {
+            GameScreen.changeRoom();
             return true;
         }
         else if (eqButton.isTap(x, y)) {
@@ -248,6 +297,11 @@ public final class GuiContainer {
 
     public void init() {
         //heroStatWindow.init(GameScreen.getHero());
+    }
+
+    public void refreshRoom() {
+        currRoom = GameScreen.getInstance().getCurrRoom();
+        heroInRoom = GameScreen.getInstance().getCurrRoom().getRoomCharacters().get(0);
     }
 
     public void refreshGui() {

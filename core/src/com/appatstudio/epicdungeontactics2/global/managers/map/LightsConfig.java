@@ -1,9 +1,11 @@
 package com.appatstudio.epicdungeontactics2.global.managers.map;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.badlogic.gdx.graphics.Color;
 
@@ -73,9 +75,10 @@ public class LightsConfig {
 
     private static final Color[] ambientColors = new Color[]
             {
-            new Color(0.84f, 0.44f, 0.44f, 0.55f), //forest day
-            new Color(0.32f, 0.26f, 0.38f, 0.45f), //forest night
-            new Color(0.62f, 0.26f, 0.38f, 0.45f)
+            new Color(0.84f, 0.84f, 0.84f, 0.95f), //forest day
+            new Color(0.62f, 0.56f, 0.68f, 0.85f), //forest night
+            new Color(0.62f, 0.26f, 0.38f, 0.45f), //stage 2
+            new Color(0.84f, 0.44f, 0.44f, 0.55f)  //stage 3
             };
 
     private static final HashMap<CharacterEnum, LightConfigObject> characterLights;
@@ -754,7 +757,18 @@ public class LightsConfig {
     }
 
     public static Color getAmbientColor(int stage) {
-        return ambientColors[0];
+        switch (stage) {
+            case 2:
+                return ambientColors[2];
+            case 3:
+                return ambientColors[3];
+            default:
+                if (EpicDungeonTactics.isDay()) {
+                    return ambientColors[0];
+                }
+                else return ambientColors[1];
+
+        }
     }
 
     public static LightConfigObject getCharacterLights(CharacterEnum characterEnum) {
