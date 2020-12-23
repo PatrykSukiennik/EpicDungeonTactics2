@@ -75,9 +75,7 @@ public class ItemGenerator {
 
         for (ItemTypeEnum t : ItemTypeEnum.values()) {
             itemSums.put(t, 0);
-            System.out.println(t.toString());
             for (ItemEnum i : ItemGeneratorConfig.basicItemChance.get(t).keySet()) {
-                System.out.println(i.toString());
                 itemSums.put(t, itemSums.get(t) + ItemGeneratorConfig.basicItemChance.get(t).get(i));
             }
         }
@@ -282,7 +280,6 @@ public class ItemGenerator {
 
 
             default: {
-                System.out.println("CHUJ: " + itemEnum.toString() + "  " + typeEnum.toString() + "  " +  withPerks);
                 return null;
             }
         }
@@ -351,8 +348,6 @@ public class ItemGenerator {
             ItemEffectEnum[] allEffects = ItemEffectEnum.values();
 
             for (ItemEffectEnum effect : allEffects) {
-                System.out.println(typeEnum.toString());
-                System.out.println(effect.toString());
                 temp += ItemEffectsConfig.effectChance.get(typeEnum).get(effect);
 
                 if (result <= temp && !isEffectInArray(effects, effect)) {
@@ -362,7 +357,6 @@ public class ItemGenerator {
             }
             //if (effectEnum == null) effectEnum = ItemEffectEnum.PERCENT_HP_REGEN_KILL;
 
-            System.out.println(effectEnum.toString());
             return new ItemEffect(
                     effectEnum,
                     EpicDungeonTactics.random.nextFloat()

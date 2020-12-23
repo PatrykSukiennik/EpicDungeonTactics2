@@ -7,9 +7,9 @@ import java.util.Map;
 
 public final class CampUpgradeStats {
 
-    private static Map<CampUpgradeEnum, int[]> campUpgradeStats;
-    private static Map<CampUpgradeEnum, int[]> campUpgradeCost;
-    private static Map<CampUpgradeEnum, Integer> campUnlockStage;
+    private final static Map<CampUpgradeEnum, int[]> campUpgradeStats;
+    private final static Map<CampUpgradeEnum, int[]> campUpgradeCost;
+    private final static Map<CampUpgradeEnum, Integer> campUnlockStage;
 
     static {
         campUpgradeStats = new HashMap<>();

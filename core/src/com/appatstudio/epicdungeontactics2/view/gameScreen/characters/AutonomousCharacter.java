@@ -21,11 +21,6 @@ public class AutonomousCharacter extends CharacterDrawable {
     }
 
     @Override
-    public void getPossibleWays() {
-        this.setPossibleMovements(room.findWays(this.getPosition(), stats.getSpeed()));
-    }
-
-    @Override
     protected void createStatsObject() {
         this.stats = new CharacterStatsObject(getCharacterEnum());
     }

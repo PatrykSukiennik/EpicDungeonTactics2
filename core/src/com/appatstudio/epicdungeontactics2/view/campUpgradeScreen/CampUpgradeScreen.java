@@ -169,7 +169,7 @@ public final class CampUpgradeScreen {
 
         for (CampUpgradeButton c : buttons) {
             if (selectedUpgrade != null) {
-                if (selectedUpgrade.getUpgradeEnum() == c.getEnum()) {
+                if (selectedUpgrade.getUpgradeEnum() == c.getUpgradeEnum()) {
                     batch.getColor().a = 0.6f;
                     c.draw(batch);
                     batch.getColor().a = 1f;
@@ -261,10 +261,10 @@ public final class CampUpgradeScreen {
                 for (CampUpgradeButton button : buttons) {
                     if (button.tap(x, y)) {
                         if (selectedUpgrade != null) {
-                            if (selectedUpgrade.getUpgradeEnum() == button.getEnum())
+                            if (selectedUpgrade.getUpgradeEnum() == button.getUpgradeEnum())
                                 selectedUpgrade = null;
-                            else selectedUpgrade = upgradeCards.get(button.getEnum());
-                        } else selectedUpgrade = upgradeCards.get(button.getEnum());
+                            else selectedUpgrade = upgradeCards.get(button.getUpgradeEnum());
+                        } else selectedUpgrade = upgradeCards.get(button.getUpgradeEnum());
                         return true;
                     }
                 }
@@ -293,10 +293,10 @@ public final class CampUpgradeScreen {
                 for (CampUpgradeButton button : buttons) {
                     if (button.tap(x, y)) {
                         if (selectedUpgrade != null) {
-                            if (selectedUpgrade.getUpgradeEnum() == button.getEnum())
+                            if (selectedUpgrade.getUpgradeEnum() == button.getUpgradeEnum())
                                 selectedUpgrade = null;
-                            else selectedUpgrade = upgradeCards.get(button.getEnum());
-                        } else selectedUpgrade = upgradeCards.get(button.getEnum());
+                            else selectedUpgrade = upgradeCards.get(button.getUpgradeEnum());
+                        } else selectedUpgrade = upgradeCards.get(button.getUpgradeEnum());
                         return true;
                     }
                 }
@@ -307,10 +307,10 @@ public final class CampUpgradeScreen {
             for (int i = 0; i < buttons.length; i++) {
                 if (buttons[i].tap(x, y)) {
                     if (selectedUpgrade != null) {
-                        if (selectedUpgrade.getUpgradeEnum() == buttons[i].getEnum()) selectedUpgrade = null;
-                        else selectedUpgrade = upgradeCards.get(buttons[i].getEnum());
+                        if (selectedUpgrade.getUpgradeEnum() == buttons[i].getUpgradeEnum()) selectedUpgrade = null;
+                        else selectedUpgrade = upgradeCards.get(buttons[i].getUpgradeEnum());
                     }
-                    else selectedUpgrade = upgradeCards.get(buttons[i].getEnum());
+                    else selectedUpgrade = upgradeCards.get(buttons[i].getUpgradeEnum());
                     return true;
                 }
             }

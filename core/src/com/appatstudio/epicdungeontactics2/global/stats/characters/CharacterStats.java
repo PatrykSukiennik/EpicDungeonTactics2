@@ -241,7 +241,6 @@ public final class CharacterStats {
     }
 
     public static int getCharacterSize(CharacterEnum characterEnum) {
-        System.out.println("eve: " + characterEnum.toString());
         return characterSizes.get(characterEnum);
     }
 

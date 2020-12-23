@@ -66,7 +66,6 @@ public class AnimatedElement {
     public void draw(Batch batch) {
         if (isActive) {
             stateTime += Gdx.graphics.getDeltaTime();
-            System.out.println("siusiak: " + animationEnum.toString());
             animation.getKeyFrame(stateTime).draw(batch, this.coords.x - this.size.x/2f, this.coords.y, this.size.x, this.size.y);
         }
         else destroyedSprite.draw(batch, this.coords.x - this.size.x/2f, this.coords.y, this.size.x, this.size.y);

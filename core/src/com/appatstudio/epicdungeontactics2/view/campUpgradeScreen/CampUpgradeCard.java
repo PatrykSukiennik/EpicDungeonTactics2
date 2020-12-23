@@ -25,6 +25,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import lombok.Getter;
+
 public final class CampUpgradeCard {
 
     private static SpriteDrawable blackAlpha = GraphicsManager.getGuiElement(GuiElementEnum.BLACK_ALPHA_50percent);
@@ -34,7 +36,7 @@ public final class CampUpgradeCard {
     private static float stateTime = 0;
     private Animation<SpriteDrawable> animation;
 
-    private int lvl;
+    @Getter private int lvl;
     private int upgradeCost;
     private int unlockCap;
 
@@ -159,10 +161,6 @@ public final class CampUpgradeCard {
 
     CampUpgradeEnum getUpgradeEnum() {
         return upgradeEnum;
-    }
-
-    public int getLvl() {
-        return lvl;
     }
 
     boolean isMaxedOut() {

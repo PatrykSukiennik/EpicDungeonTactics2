@@ -34,6 +34,10 @@ public class CharacterStatsObject {
         return 5;
     }
 
+    public int getMeleDmg() {
+        return 2;
+    }
+
     public int getMaxHp() {
         return maxHp;
     }

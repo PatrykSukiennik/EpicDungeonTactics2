@@ -18,17 +18,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import lombok.Getter;
+
 import static com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum.CURR_INCOME;
 import static com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum.DAY;
 
 public final class FinanceUpgradeIcon extends Image {
 
     private static final float X, ICON_SIZE, WIDTH;
-    private float y;
-    private TextWithIcon upgradeCostText;
-    private FinanceUpgradeEnum financeEnum;
-    private MultiLineText title, description;
-    private int upgradeCost, lvl;
+    private final float y;
+    private final TextWithIcon upgradeCostText;
+    private final FinanceUpgradeEnum financeEnum;
+    private final MultiLineText title, description;
+    @Getter private int upgradeCost, lvl;
     private static SpriteDrawable bgAlpha = GraphicsManager.getGuiElement(GuiElementEnum.BLACK_ALPHA_50percent);
 
     static {
@@ -101,6 +103,11 @@ public final class FinanceUpgradeIcon extends Image {
 
             GlobalValues.minusGold(upgradeCost);
             SavedInfoManager.saveFinancesLvl(financeEnum, SavedInfoManager.getFinancesLvl(financeEnum) + 1);
+            this.lvl = SavedInfoManager.getFinancesLvl(financeEnum);
+            this.upgradeCost = FinancesStats.getCost(financeEnum) * ((lvl/2) + 1);
+            lvl++;
+            upgradeCost = FinancesStats.getCost(financeEnum) * ((lvl/2) + 1);
+            upgradeCostText.setText(Integer.toString(upgradeCost));
             FinancesUpgradeScreen.updateFinances();
             return false;
         }
@@ -112,11 +119,6 @@ public final class FinanceUpgradeIcon extends Image {
     static float getIconHeight() {
         return ICON_SIZE;
     }
-
-    public int getUpgradeCost() {
-        return upgradeCost;
-    }
-
     public static float getIconSize() {
         return ICON_SIZE;
     }

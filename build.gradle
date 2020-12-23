@@ -12,7 +12,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.7'
-        
 
     }
 }
@@ -50,7 +49,7 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        
+
     }
 }
 
@@ -89,7 +88,8 @@ project(":android") {
 
 
         implementation 'com.google.android.gms:play-services-ads:19.3.0'
-
+        compileOnly "org.projectlombok:lombok:1.18.16"
+        annotationProcessor 'org.projectlombok:lombok:1.18.16'
     }
 }
 
@@ -102,7 +102,8 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        
+        annotationProcessor 'org.projectlombok:lombok:1.18.16'
+        compileOnly "org.projectlombok:lombok:1.18.16"
     }
 }
 

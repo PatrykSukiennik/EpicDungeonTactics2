@@ -5,12 +5,14 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
+import lombok.Getter;
+
 public class StaffPrototype extends ItemPrototype {
 
-    private final int SPEED_EFFECT;
-    private final SpellEnum SPELL;
-    private final int DMG;
-    private final float SPELL_CHANCE;
+    @Getter private final int SPEED_EFFECT;
+    @Getter private final SpellEnum SPELL;
+    @Getter private final int DMG;
+    @Getter private final float SPELL_CHANCE;
 
     public StaffPrototype(ItemEnum id, ItemTypeEnum type, int value, int speed, SpellEnum spell, int dmg, float spellChance, ItemRarityEnum rarityEnum) {
         super(id, type, value, rarityEnum);
@@ -21,19 +23,4 @@ public class StaffPrototype extends ItemPrototype {
         this.SPELL_CHANCE = spellChance;
     }
 
-    public int getSPEED_EFFECT() {
-        return SPEED_EFFECT;
-    }
-
-    public int getDMG() {
-        return DMG;
-    }
-
-    public SpellEnum getSPELL() {
-        return SPELL;
-    }
-
-    public float getSPELL_CHANCE() {
-        return SPELL_CHANCE;
-    }
 }

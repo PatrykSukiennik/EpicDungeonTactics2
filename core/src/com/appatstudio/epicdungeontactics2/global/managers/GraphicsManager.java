@@ -45,6 +45,7 @@ public final class GraphicsManager {
     private static Map<ItemRarityEnum, SpriteDrawable> itemRarityIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
+    private static Map<CharacterEnum, SpriteDrawable> characterProjectiles;
 
     private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
     private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSprites;
@@ -209,7 +210,6 @@ public final class GraphicsManager {
         effectsIconMap = new HashMap<>();
         EffectEnum[] allEffects = EffectEnum.values();
         for (EffectEnum ef : allEffects) {
-            System.out.println(ef.toString());
             effectsIconMap.put(ef, new SpriteDrawable(new Sprite(atlas.findRegion("effect-icons/" + ef.toString()))));
         }
 
@@ -234,6 +234,7 @@ public final class GraphicsManager {
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
+        characterProjectiles = new HashMap<>();
         charactersAnimations = new HashMap<>();
         CharacterEnum[] allCharacters = CharacterEnum.values();
 
@@ -257,6 +258,13 @@ public final class GraphicsManager {
                             "characters/" + c.toString() + "/run",
                             CHARACTER_RUN_FRAMETIME
                     ));
+
+            TextureAtlas.AtlasRegion projectile = atlas.findRegion("characters/" + c.toString() + "/projectile");
+            if (projectile != null) {
+                characterProjectiles.put(
+                        c,
+                        new SpriteDrawable(new Sprite(projectile)));
+            }
         }
     }
 
@@ -265,7 +273,6 @@ public final class GraphicsManager {
         MapElementSpriteEnum[] allSprites = MapElementSpriteEnum.values();
 
         for (MapElementSpriteEnum s : allSprites) {
-            System.out.println(s.toString());
             mapElementSprites.put(
                     s,
                     new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString()))));
@@ -399,5 +406,9 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getItemRaritySprite(ItemRarityEnum rarityEnum) {
         return itemRarityIconsMap.get(rarityEnum);
+    }
+
+    public static SpriteDrawable getProjectile(CharacterEnum characterEnum) {
+        return characterProjectiles.get(characterEnum);
     }
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class ChangeAlphaAction extends Action {
 
     private float targetAlpha = 1f;
-    private Actor actor;
+    private final Actor actor;
 
     public ChangeAlphaAction(float target, Actor actor) {
         this.targetAlpha = target;

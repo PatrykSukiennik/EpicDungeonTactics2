@@ -11,30 +11,29 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.MoveToMapTile;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.MoveToMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
-import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
+import lombok.Getter;
+import lombok.Setter;
 
 public class CharacterDrawable extends Image {
 
     private final Animation<SpriteDrawable> idleAnimation;
     private final Animation<SpriteDrawable> runAnimation;
+    private final Image projectile;
 
     private CharacterEnum characterEnum;
 
@@ -48,7 +47,10 @@ public class CharacterDrawable extends Image {
     private float actionTime;
 
     protected Room room;
-    private Array<Array<MapTile>> possibleMovements;
+    @Getter @Setter private Array<Array<MapTile>> possibleMovements;
+    @Getter @Setter private Array<MapTile> possibleMoveToTiles;
+    @Getter @Setter private Array<MapTile> rangeTiles;
+    @Getter @Setter private Array<MapTile> attackableTiles;
 
     protected CharacterStatsObject stats;
 
@@ -58,11 +60,20 @@ public class CharacterDrawable extends Image {
     private MapTile tileStandingOn;
     private MapTile targetTile;
 
+    protected boolean isHero = false;
+    protected boolean isPet = false;
+    protected boolean isEnemy = false;
+
+
+
     private boolean isRotation = EpicDungeonTactics.random.nextBoolean();
 
     public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile, boolean isRotation) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
+
+        projectile = new Image(GraphicsManager.getProjectile(characterEnum));
+        projectile.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
 
         stateTime = EpicDungeonTactics.random.nextFloat();
 
@@ -81,7 +92,6 @@ public class CharacterDrawable extends Image {
         this.setSize(2f * WorldConfig.TILE_SIZE, 2f * WorldConfig.TILE_SIZE);
 
         LightConfigObject lightConfigObject = LightsConfig.getCharacterLights(characterEnum);
-        System.out.println(characterEnum.toString());
         lightOffset = lightConfigObject.getOffset();
         this.pointLight = new PointLight(
                 rayHandler,
@@ -160,25 +170,27 @@ public class CharacterDrawable extends Image {
 
     public void setTileStandingOn(MapTile tileStandingOn, boolean heroFlag) {
         this.tileStandingOn = tileStandingOn;
+        if (tileStandingOn != null) tileStandingOn.setCharacterStandingOn(this);
+
         if (heroFlag) {
             //GuiContainer.setItemsToPick(tileStandingOn.getItemsToPick());
         }
     }
 
+    public void getMoveInfo() {
+        room.getMoveInfo(this);
+    }
+
     public void moveToMapTile(MapTile tile) {
-        MoveToMapTile way = room.getWay(possibleMovements, tile, this);
-        this.addAction(way.getSequenceAction());
-        this.state = CharacterStateEnum.RUN;
-        this.actionTime = way.getDuration();
-        this.targetTile = tile;
+//        MoveToMapTile way = room.getWay(possibleMovements, tile, this);
+//        this.addAction(way.getSequenceAction());
+//        this.state = CharacterStateEnum.RUN;
+//        this.actionTime = way.getDuration();
+//        this.targetTile = tile;
     }
 
     public boolean isReady() {
         return !this.hasActions();
-    }
-
-    public void getPossibleMovement() {
-
     }
 
     public float getActionTime() {
@@ -214,18 +226,6 @@ public class CharacterDrawable extends Image {
 
     }
 
-    public void setPossibleMovements(Array<Array<MapTile>> possibleMovements) {
-        this.possibleMovements = possibleMovements;
-    }
-
-    public void getPossibleWays() {
-        //override me
-    }
-
-    public void getPossibleWays(int range) {
-
-    }
-
     public CharacterStatsObject getStats() {
         return stats;
     }
@@ -253,5 +253,54 @@ public class CharacterDrawable extends Image {
 
     public int getSpeed() {
         return stats.getSpeed();
+    }
+
+    public boolean isHero() {
+        return isHero;
+    }
+
+    public boolean isEnemy() {
+        return isEnemy;
+    }
+
+    public boolean isPet() {
+        return isPet;
+    }
+
+    public void shot(MapTile tile) {
+        CharacterDrawable target = tile.getCharacterStandingOn();
+        CoordsFloat targetDestination = new CoordsFloat(target.getX() + target.getWidth()/2f,
+                                                        target.getY() + target.getHeight()/2f);
+
+        CoordsFloat startCoords = new CoordsFloat(this.getX() + this.getWidth()/2f,
+                                                        this.getY() + this.getHeight()/2f);
+
+        float projectileRotation = (float) Math.toDegrees(Math.atan2(
+                targetDestination.y - startCoords.y,
+                targetDestination.x - startCoords.x));
+        if (projectileRotation < 0) projectileRotation += 360;
+
+        projectile.setRotation(projectileRotation);
+        projectile.setPosition(
+                startCoords.x - projectile.getWidth()/2f,
+                startCoords.y - projectile.getHeight()/2f);
+
+        isRotation =  targetDestination.x > startCoords.x;
+
+        //add action
+    }
+
+
+    public int getMeleDamage() {
+        return 2;
+    }
+
+    public int getShotDamage() {
+        return 2;
+    }
+
+
+    public boolean canMoveTo(MapTile tapped) {
+        return possibleMoveToTiles.contains(tapped, false);
     }
 }

@@ -4,9 +4,11 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
+import lombok.Getter;
+
 public class NecklacePrototype extends ItemPrototype {
 
-    private final int EFFECTS;
+    @Getter private final int EFFECTS;
 
     public NecklacePrototype(ItemEnum id, ItemTypeEnum type, int value, int effects, ItemRarityEnum rarityEnum) {
         super(id, type, value, rarityEnum);
@@ -14,7 +16,4 @@ public class NecklacePrototype extends ItemPrototype {
         this.EFFECTS = effects;
     }
 
-    public int getEFFECTS() {
-        return EFFECTS;
-    }
 }

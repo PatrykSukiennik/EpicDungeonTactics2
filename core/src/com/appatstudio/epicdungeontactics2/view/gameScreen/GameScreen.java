@@ -155,6 +155,7 @@ public final class GameScreen extends Actor {
     }
 
     public static void mapLongPress(float x, float y) {
+        currRoom.longPress(x, y);
     }
 
     public void backPressed() {

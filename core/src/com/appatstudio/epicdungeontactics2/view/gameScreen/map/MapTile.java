@@ -35,6 +35,9 @@ public class MapTile {
     private CoordsFloat positionFloat;
     private CoordsInt positionInt;
 
+    private CharacterDrawable characterStandingOn = null; //one character can stand on few tiles,
+                                                            // thats place for marking that
+
     private MapPathFindingFlags flag = MapPathFindingFlags.NONE;
     private int pathFindingIndex = 0;
 
@@ -57,35 +60,6 @@ public class MapTile {
     }
 
     public void draw(Batch mapBatch, boolean isFight) {
-        //GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
-        if (isFight) {
-            if (flag != MapPathFindingFlags.NONE) pathfindingFlagSprites.get(flag).draw(mapBatch, positionFloat.x, positionFloat.y, WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
-        }
-        else {
-            if (isNode) {
-                pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
-                        mapBatch,
-                        positionFloat.x,
-                        positionFloat.y,
-                        WorldConfig.TILE_SIZE,
-                        WorldConfig.TILE_SIZE);
-            }
-            else if (flag == MapPathFindingFlags.MOVABLE && isGoingDown) {
-                pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
-                        mapBatch,
-                        positionFloat.x,
-                        positionFloat.y,
-                        WorldConfig.TILE_SIZE,
-                        WorldConfig.TILE_SIZE);
-            }
-            else if (flag == MapPathFindingFlags.ITEM_MOVABLE)
-                        pathfindingFlagSprites.get(flag).draw(
-                        mapBatch,
-                        positionFloat.x,
-                        positionFloat.y,
-                        WorldConfig.TILE_SIZE,
-                        WorldConfig.TILE_SIZE);
-        }
         if (animatedElement != null) animatedElement.draw(mapBatch);
         if (spriteElement != null) spriteElement.draw(mapBatch);
         if (character != null && shouldDrawCharacter) character.draw(mapBatch);
@@ -192,4 +166,22 @@ public class MapTile {
     public boolean isGoingDown() {
         return isGoingDown;
     }
+
+    public void setCharacterStandingOn(CharacterDrawable characterDrawable) {
+        characterStandingOn = characterDrawable;
+    }
+
+    public CharacterDrawable getCharacterStandingOn() {
+        return characterStandingOn;
+    }
+
+    public void drawWalkable() {
+
+    }
+
+    public void drawAttackable() {
+
+    }
+
+
 }

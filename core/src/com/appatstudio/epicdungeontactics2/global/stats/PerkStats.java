@@ -16,14 +16,11 @@ public final class PerkStats {
         perkStats.put(PerkEnum.EXP_BONUS, new float[]{0.2f, 0.4f, 0.6f});
         perkStats.put(PerkEnum.DOUBLE_MOVE, new float[]{0.3f, 0.6f, 0.9f});
         perkStats.put(PerkEnum.DOUBLE_ATTACK, new float[]{0.15f, 0.3f, 0.5f});
-        //perkStats.put(PerkEnum.UNIQUE_LOOT, new float[]{0.1f, 0.2f, 0.3f});
         perkStats.put(PerkEnum.MELE_DMG, new float[]{0.2f, 0.4f, 0.6f});
         perkStats.put(PerkEnum.BOW_DMG, new float[]{0.2f, 0.4f, 0.6f});
         perkStats.put(PerkEnum.MAGICAL_DMG_BONUS, new float[]{0.2f, 0.4f, 0.6f});
         perkStats.put(PerkEnum.HP_RESTORATION_ROOM, new float[]{0.1f, 0.2f, 0.3f});
         perkStats.put(PerkEnum.HP_RESTORATION_KILL, new float[]{0.02f, 0.04f, 0.06f});
-        //perkStats.put(PerkEnum.MANA_RESTORATION_ROOM, new float[]{0.15f, 0.3f, 0.5f});
-        //perkStats.put(PerkEnum.MANA_RESTORATION_KILL, new float[]{0.05f, 0.1f, 0.15f});
         perkStats.put(PerkEnum.POISON_DURATION_DECREASE, new float[]{2f, 4f, 6f});
         perkStats.put(PerkEnum.MAGICAL_RESIST, new float[]{0.15f, 0.3f, 0.45f});
         perkStats.put(PerkEnum.INSTAKILL_ENEMY, new float[]{0.01f, 0.02f, 0.03f});
@@ -41,7 +38,6 @@ public final class PerkStats {
         perkStats.put(PerkEnum.DEX_BONUS, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.STRONGER_ENEMIES, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.KEY_FINDER, new float[]{2f, 6f, 10f});
-        //perkStats.put(PerkEnum.ELEMENTALIST, new float[]{0.2f, 0.6f, 0.8f});
         perkStats.put(PerkEnum.EXPERIENCED_ADVENTURER, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.SUGAR_LOVER, new float[]{2f, 6f, 10f});
         perkStats.put(PerkEnum.BERSERKER, new float[]{2f, 6f, 10f});
@@ -51,14 +47,11 @@ public final class PerkStats {
         perkUpgradeCosts.put(PerkEnum.EXP_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.DOUBLE_MOVE, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.DOUBLE_ATTACK, new int[]{500, 2500, 10000});
-        //perkUpgradeCosts.put(PerkEnum.UNIQUE_LOOT, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.MELE_DMG, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.BOW_DMG, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.MAGICAL_DMG_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.HP_RESTORATION_ROOM, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.HP_RESTORATION_KILL, new int[]{500, 2500, 10000});
-        //perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_ROOM, new int[]{500, 2500, 10000});
-        //perkUpgradeCosts.put(PerkEnum.MANA_RESTORATION_KILL, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.POISON_DURATION_DECREASE, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.MAGICAL_RESIST, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.INSTAKILL_ENEMY, new int[]{500, 2500, 10000});
@@ -76,7 +69,6 @@ public final class PerkStats {
         perkUpgradeCosts.put(PerkEnum.DEX_BONUS, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.STRONGER_ENEMIES, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.KEY_FINDER, new int[]{500, 2500, 10000});
-        //perkUpgradeCosts.put(PerkEnum.ELEMENTALIST, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.EXPERIENCED_ADVENTURER, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.SUGAR_LOVER, new int[]{500, 2500, 10000});
         perkUpgradeCosts.put(PerkEnum.BERSERKER, new int[]{500, 2500, 10000});

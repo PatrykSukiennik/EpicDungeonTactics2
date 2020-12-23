@@ -13,13 +13,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import lombok.Getter;
+
 final class CampUpgradeButton {
 
-    private static float size = (Gdx.graphics.getWidth()*1.001f)/ CampUpgradeEnum.values().length;
+    private static final float size = (Gdx.graphics.getWidth()*1.001f)/ CampUpgradeEnum.values().length;
+    private final float x;
+    @Getter private final CampUpgradeEnum upgradeEnum;
 
     private SpriteDrawable bg;
-    private float x;
-    private CampUpgradeEnum upgradeEnum;
     private TextObject lvlText;
 
     CampUpgradeButton(int index, CampUpgradeEnum upgradeEnum) {
@@ -93,11 +95,6 @@ final class CampUpgradeButton {
         if (lvlText != null) {
             lvlText.draw(batch);
         }
-    }
-
-
-    public CampUpgradeEnum getEnum() {
-        return upgradeEnum;
     }
 
 }

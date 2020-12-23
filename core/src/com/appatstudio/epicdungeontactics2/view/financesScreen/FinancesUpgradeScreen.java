@@ -34,8 +34,8 @@ public final class FinancesUpgradeScreen {
 
     private static FinanceUpgradeEnum selectedEnum = null;
 
-    private Image campUpgradeButton, financesUpgradeButton;
-    private static HashMap<FinanceUpgradeEnum, FinanceUpgradeIcon> financeUpgradeIcons = new HashMap<>();
+    private final Image campUpgradeButton, financesUpgradeButton;
+    private final static HashMap<FinanceUpgradeEnum, FinanceUpgradeIcon> financeUpgradeIcons = new HashMap<>();
 
     public FinancesUpgradeScreen() {
 

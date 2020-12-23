@@ -4,9 +4,11 @@ import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 
+import lombok.Getter;
+
 public final class GlobalValues {
 
-    private static int gold;
+    @Getter private static int gold;
 
     static {
         gold = SavedInfoManager.getIntFromFlag(SavedInfoFlagsEnum.GOLD);
@@ -16,11 +18,6 @@ public final class GlobalValues {
         }
         gold = 5000;
     }
-
-    public static int getGold() {
-        return gold;
-    }
-
 
     public static void setGold(int v) {
         SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, v);

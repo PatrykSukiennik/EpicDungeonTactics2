@@ -4,10 +4,12 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
+import lombok.Getter;
+
 public class ArmorPrototype extends ItemPrototype {
 
-    private final int ARMOR;
-    private final int MOVE_SPEED_COST;
+    @Getter private final int ARMOR;
+    @Getter private final int MOVE_SPEED_COST;
 
     public ArmorPrototype(ItemEnum id, ItemTypeEnum type, int value, int armor, int moveSpeedCost, ItemRarityEnum rarityEnum) {
         super(id, type, value, rarityEnum);
@@ -15,11 +17,5 @@ public class ArmorPrototype extends ItemPrototype {
         this.MOVE_SPEED_COST = moveSpeedCost;
     }
 
-    public int getARMOR() {
-        return ARMOR;
-    }
 
-    public int getMOVE_SPEED_COST() {
-        return MOVE_SPEED_COST;
-    }
 }

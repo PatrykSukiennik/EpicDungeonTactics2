@@ -20,6 +20,7 @@ import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
 import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.IdleGoldCollectedBanner;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -224,6 +225,12 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 gameScreen.tap(x, y);
         }
 
+    }
+
+    public static void longPress(float x, float y) {
+        if (currentScreen == GAME_SCREEN) {
+            GameScreen.mapLongPress(x, y);
+        }
     }
 
     public static void setSelectedHero(CharacterEnum selectedHero) {

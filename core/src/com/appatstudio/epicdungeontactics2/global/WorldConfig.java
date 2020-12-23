@@ -13,6 +13,8 @@ import java.util.HashMap;
 
 public class WorldConfig {
 
+    public static final float SHOT_DURATION = 0.5f;
+
     public static final int ROOM_WIDTH = 11;
     public static final int ROOM_HEIGHT = 21;
     public static final float TILE_SIZE = 16;

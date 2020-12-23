@@ -4,9 +4,11 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
+import lombok.Getter;
+
 public class HelmetPrototype extends ItemPrototype {
 
-    private final int ARMOR;
+    @Getter private final int ARMOR;
 
     public HelmetPrototype(ItemEnum id, ItemTypeEnum type, int value, int armor, ItemRarityEnum rarityEnum) {
         super(id, type, value, rarityEnum);
@@ -14,7 +16,4 @@ public class HelmetPrototype extends ItemPrototype {
         this.ARMOR = armor;
     }
 
-    public int getARMOR() {
-        return ARMOR;
-    }
 }

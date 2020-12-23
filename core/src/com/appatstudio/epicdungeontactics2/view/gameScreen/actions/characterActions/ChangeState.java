@@ -1,11 +1,11 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.actions;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-public class ChangeState extends Action {
+public class ChangeState extends AbstractCharacterAction {
 
     private CharacterDrawable characterDrawable;
     private CharacterStateEnum targetState;

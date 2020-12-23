@@ -25,7 +25,7 @@ public class TurnQueue {
     public static final float QUEUE_START_Y =
             Gdx.graphics.getHeight() - (QUEUE_SIZE - 2) * QUEUE_ICON_SIZE;
 
-    private int currentTurn = 1;
+    private int currentTurn = 0;
     private int maxSpeed;
 
     private Room room;
@@ -69,6 +69,11 @@ public class TurnQueue {
         for (TurnQueueIcon icon : queueIcons) {
             icon.tick();
         }
+        currentTurn++;
+    }
+
+    public CharacterDrawable getCurrentCharacter() {
+        return queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter();
     }
 
     private int countNotDestroyed() {

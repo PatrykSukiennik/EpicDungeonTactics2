@@ -578,7 +578,6 @@ public class StatTracker {
     }
 
     public static float getCurrentStat(CompleteHeroStatsEnum stat) {
-        System.out.println(stat.toString());
         return currStats.get(stat);
     }
 
