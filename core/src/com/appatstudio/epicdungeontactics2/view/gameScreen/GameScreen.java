@@ -1,6 +1,5 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
-import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
@@ -12,12 +11,8 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
-import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.ItemSegment;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
@@ -25,9 +20,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
 import com.appatstudio.epicdungeontactics2.view.viewElements.AlphaTextObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 

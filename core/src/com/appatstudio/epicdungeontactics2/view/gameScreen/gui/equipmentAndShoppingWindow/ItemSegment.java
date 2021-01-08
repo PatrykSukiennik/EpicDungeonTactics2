@@ -1,8 +1,9 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.ItemSegmentMode;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
@@ -24,7 +25,6 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Staff;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -36,7 +36,7 @@ public class ItemSegment extends AbstractSegment {
 
     private AbstractItem selectedItem;
     private Image itemDrawable;
-    private ButtonWithText dropButton;
+    private ButtonWithText dropButton, buyButton, sellButton;
 
     private HashMap<ItemRarityEnum, TextObject> titles;
 
@@ -63,6 +63,24 @@ public class ItemSegment extends AbstractSegment {
                 itemDrawable.getWidth(),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getGuiString(GuiStringEnum.DROP)
+        );
+        buyButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.NONE),
+                itemDrawable.getX() - itemDrawable.getWidth() * 0.25f,
+                posY + fullHeight * 0.1f,
+                itemDrawable.getWidth() * 1.5f,
+                itemDrawable.getWidth(),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                StringsManager.getGuiString(GuiStringEnum.BUY)
+        );
+        sellButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.NONE),
+                itemDrawable.getX() - itemDrawable.getWidth() * 0.25f,
+                posY + fullHeight * 0.1f,
+                itemDrawable.getWidth() * 1.5f,
+                itemDrawable.getWidth(),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                StringsManager.getGuiString(GuiStringEnum.SELL)
         );
 
         titles = new HashMap<>();
@@ -112,11 +130,25 @@ public class ItemSegment extends AbstractSegment {
         }
     }
 
-    public void draw(Batch batch, boolean showDrop) {
+    public void draw(Batch batch, boolean showButton, ItemSegmentMode mode) {
         super.draw(batch);
         bg.draw(batch, posX, posY, fullWidth, fullHeight);
         itemDrawable.draw(batch, 1f);
-        if (showDrop) dropButton.draw(batch, 1f);
+        switch (mode) {
+            case NORMAL: {
+                if (showButton) dropButton.draw(batch, 1f);
+                break;
+            }
+            case BUY: {
+                if (showButton) buyButton.draw(batch, 1f);
+                break;
+            }
+            case SELL: {
+                if (showButton) sellButton.draw(batch, 1f);
+                break;
+            }
+        }
+
         titles.get(selectedItem.getRarity()).draw(batch);
 
         for (int i = 0; i < ROWS; i++) {
@@ -130,7 +162,7 @@ public class ItemSegment extends AbstractSegment {
                 && y > posY && posY < posY + fullHeight;
     }
 
-    public void selectItem(AbstractItem item) {
+    public void selectItem(AbstractItem item, ItemSegmentMode mode) {
         this.selectedItem = item;
         if (item != null) {
             itemDrawable.setDrawable(GraphicsManager.getItemImage(item.getItemEnum()));
@@ -141,7 +173,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Armor)item).getArmor());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Armor)item).getMoveSpeedCost());
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f)); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsArmor = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -163,7 +195,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DMG_EFFECT) + " " + ((Arrow)item).getDmgEffect());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.RANGE_EFFECT) + " " + ((Arrow)item).getRangeEffect());
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsArrow = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -184,7 +216,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.EXP_EFFECT) + " " + ((Book)item).getExpEffect());
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     for (TextWithIcon t1 : rightColumn) t1.setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                     break;
@@ -192,7 +224,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + ((Bow)item).getDmg());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.RANGE_EFFECT) + " " + ((Bow)item).getRange());
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsBow = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -213,7 +245,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.HP_EFFECT) + " " + (((Food)item).getHpEffect() != 0 ? ((Food)item).getHpEffect() : ""));
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MP_EFFECT) + " " + (((Food)item).getMpEffect() != 0 ? ((Food)item).getMpEffect() : ""));
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     for (TextWithIcon t2 : rightColumn) t2.setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                     break;
@@ -221,7 +253,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Helmet)item).getArmor());
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " "  + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsHelmet = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -242,7 +274,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Necklace)item).getArmor());
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsNecklace = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -262,7 +294,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Ring)item).getArmor());
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsRing = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -283,7 +315,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Shield)item).getArmor());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Shield)item).getSpeedEffect());
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsShield = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -304,7 +336,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + ((Staff)item).getDmg());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Staff)item).getSpeedEffect());
                     leftColumn[2].setText((int)(((Staff)item).getSpellChance() * 100) + "% " + StringsManager.getGuiString(GuiStringEnum.CHANCE_FOR) + " " + StringsManager.getSpellName(((Staff)item).getSpell()));
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsStaff = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -325,7 +357,7 @@ public class ItemSegment extends AbstractSegment {
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.MELE_DMG) + " " + ((MeleWeapon)item).getDmg());
                     leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((MeleWeapon)item).getSpeedEffect());
                     leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue());
+                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
                     Array<ItemEffect> effectsMele = item.getEffects();
                     for (int i=0; i<ROWS; i++) {
@@ -350,7 +382,7 @@ public class ItemSegment extends AbstractSegment {
         }
     }
 
-    boolean isDrop(float x, float y) {
+    boolean isButtonClicked(float x, float y) {
         return dropButton.tap(x, y);
     }
 

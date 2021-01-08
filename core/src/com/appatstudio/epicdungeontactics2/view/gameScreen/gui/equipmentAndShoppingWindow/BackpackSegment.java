@@ -1,12 +1,11 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackShelfEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.BackpackPage;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.CategoryColumn;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.BackpackPage;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.CategoryColumn;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;

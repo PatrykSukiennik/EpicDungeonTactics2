@@ -13,10 +13,10 @@ public final class CampUpgradeStats {
 
     static {
         campUpgradeStats = new HashMap<>();
-        campUpgradeStats.put(CampUpgradeEnum.ALCHEMIST, new int[]{3, 6, 9});
-        campUpgradeStats.put(CampUpgradeEnum.BLACKSMITH, new int[]{3, 6, 9});
-        campUpgradeStats.put(CampUpgradeEnum.MAGIC_SHOP, new int[]{3, 6, 9});
-        campUpgradeStats.put(CampUpgradeEnum.BUTCHER, new int[]{3, 6, 9});
+        campUpgradeStats.put(CampUpgradeEnum.ALCHEMIST, new int[]{3, 6, 8});
+        campUpgradeStats.put(CampUpgradeEnum.BLACKSMITH, new int[]{3, 6, 8});
+        campUpgradeStats.put(CampUpgradeEnum.MAGIC_SHOP, new int[]{3, 6, 8});
+        campUpgradeStats.put(CampUpgradeEnum.BUTCHER, new int[]{3, 6, 8});
         campUpgradeStats.put(CampUpgradeEnum.LUGGAGE_CARRIAGE, new int[]{3, 6, 9});
         campUpgradeStats.put(CampUpgradeEnum.MOUNTAIN_KING, new int[]{3, 6, 9});
         campUpgradeStats.put(CampUpgradeEnum.PRINCESS, new int[]{3, 6, 9});

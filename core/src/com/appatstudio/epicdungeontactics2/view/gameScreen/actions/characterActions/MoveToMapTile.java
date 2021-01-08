@@ -1,4 +1,4 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions;
+ package com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions;
 
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
@@ -16,5 +16,9 @@ public class MoveToMapTile extends AbstractCharacterAction {
     @Override
     public boolean act(float delta) {
         return sequenceAction.act(delta);
+    }
+
+    public SequenceAction getSequence() {
+        return sequenceAction;
     }
 }

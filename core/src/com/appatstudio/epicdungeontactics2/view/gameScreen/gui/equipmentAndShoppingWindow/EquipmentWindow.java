@@ -1,9 +1,10 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.ItemSegmentMode;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
@@ -13,7 +14,6 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 public final class EquipmentWindow {
@@ -80,7 +80,7 @@ public final class EquipmentWindow {
     public void draw(Batch batch) {
         heroSegment.draw(batch, currItem);
         backpackSegment.draw(batch, currItem);
-        if (currItem != null) itemSegment.draw(batch, true);
+        if (currItem != null) itemSegment.draw(batch, true, ItemSegmentMode.NORMAL);
         if (notPossibleCommunicateTimer > 0) notPossibleInFightCommunicate.draw(batch, 1f);
     }
 
@@ -108,20 +108,20 @@ public final class EquipmentWindow {
                     currItem = null;
                     heroSegment.selectItem(null);
                     backpackSegment.selectItem(null);
-                    itemSegment.selectItem(null);
+                    itemSegment.selectItem(null, ItemSegmentMode.NORMAL);
                 }
                 else {
                     currItem = backpackSegment.getTapItem(x, y);
                     if (currItem != null) {
                         heroSegment.selectItem(currItem);
                         backpackSegment.selectItem(currItem);
-                        itemSegment.selectItem(currItem);
+                        itemSegment.selectItem(currItem, ItemSegmentMode.NORMAL);
                     }
                 }
             }
         }
         else if (currItem != null && itemSegment.isTap(x, y, true)) {
-            if (itemSegment.isDrop(x, y)) {
+            if (itemSegment.isButtonClicked(x, y)) {
                 gameScreen.itemDropped(currItem);
 
                 backpackSegment.itemDropped(currItem);
@@ -164,5 +164,9 @@ public final class EquipmentWindow {
 
     public static void showNotPossibleInFight() {
         notPossibleCommunicateTimer = NOT_POSSIBLE_IN_FIGHT_TIMER;
+    }
+
+    public static BackpackSegment getBackpackSegment() {
+        return backpackSegment;
     }
 }

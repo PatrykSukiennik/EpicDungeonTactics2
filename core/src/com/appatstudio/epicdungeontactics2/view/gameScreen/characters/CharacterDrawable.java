@@ -47,10 +47,10 @@ public class CharacterDrawable extends Image {
     private float actionTime;
 
     protected Room room;
-    @Getter @Setter private Array<Array<MapTile>> possibleMovements;
-    @Getter @Setter private Array<MapTile> possibleMoveToTiles;
-    @Getter @Setter private Array<MapTile> rangeTiles;
-    @Getter @Setter private Array<MapTile> attackableTiles;
+    private Array<Array<MapTile>> possibleMovements;
+    private Array<MapTile> possibleMoveToTiles;
+    private Array<MapTile> rangeTiles;
+    private Array<MapTile> attackableTiles;
 
     protected CharacterStatsObject stats;
 
@@ -302,5 +302,45 @@ public class CharacterDrawable extends Image {
 
     public boolean canMoveTo(MapTile tapped) {
         return possibleMoveToTiles.contains(tapped, false);
+    }
+
+    public void setPossibleMovements(Array<Array<MapTile>> allPaths) {
+        possibleMovements = allPaths;
+    }
+
+    public void setAttackableTiles(Array<MapTile> attackableTiles) {
+        this.attackableTiles = attackableTiles;
+    }
+
+    public void setPossibleMoveToTiles(Array<MapTile> possibleMoveToTiles) {
+        this.possibleMoveToTiles = possibleMoveToTiles;
+    }
+
+    public void setRangeTiles(Array<MapTile> rangeTiles) {
+        this.rangeTiles = rangeTiles;
+    }
+
+    public Array<MapTile> getRangeTiles() {
+        return rangeTiles;
+    }
+
+    public Array<Array<MapTile>> getPossibleMovements() {
+        return possibleMovements;
+    }
+
+    public Array<MapTile> getPossibleMoveToTiles() {
+        return possibleMoveToTiles;
+    }
+
+    public Array<MapTile> getAttackableTiles() {
+        return attackableTiles;
+    }
+
+    public Animation<SpriteDrawable> getIdleAnimation() {
+        return idleAnimation;
+    }
+
+    public Animation<SpriteDrawable> getRunAnimation() {
+        return runAnimation;
     }
 }

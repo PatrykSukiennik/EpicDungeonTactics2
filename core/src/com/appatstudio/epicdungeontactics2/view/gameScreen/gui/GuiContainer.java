@@ -2,21 +2,22 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.gui;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.GlobalValues;
-import com.appatstudio.epicdungeontactics2.global.WorldConfig;
-import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
-import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.ShopWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow.HeroStatWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.pickupItemWindow.PickupItemWindow;
@@ -30,12 +31,14 @@ import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.GuiButton;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.HashMap;
 
 public final class GuiContainer {
 
@@ -53,11 +56,13 @@ public final class GuiContainer {
     private final MapWindow mapWindow;
     private final HeroStatWindow heroStatWindow;
     private final PickupItemWindow pickupItemWindow;
+    private final ShopWindow shopWindow;
 
     private final GuiButton eqButton, mapButton, pickingButton;
 
     private final ButtonWithText changeRoomButton;
     private final ButtonWithText goingDownButton;
+    private final HashMap<CharacterEnum, ButtonWithText> npcButtons;
 
     private static Room currRoom;
     private static CharacterDrawable heroInRoom;
@@ -90,6 +95,114 @@ public final class GuiContainer {
         heroStatWindow = new HeroStatWindow();
         pickupItemWindow = new PickupItemWindow();
         mapWindow = new MapWindow();
+
+
+        SpriteDrawable bgAlchemist = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        SpriteDrawable bgButcher = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        SpriteDrawable bgBlacksmith = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+        SpriteDrawable bgMagicShop = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+
+        switch (SavedInfoManager.getNpcLvl(CampUpgradeEnum.ALCHEMIST)) {
+            case 1: {
+                bgAlchemist = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+                break;
+            }
+            case 2: {
+                bgAlchemist = GraphicsManager.getGuiElement(GuiElementEnum.SILVER_BUTTON_WIDE);
+                break;
+            }
+            case 3: {
+                bgAlchemist = GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE);
+                break;
+            }
+        }
+
+        switch (SavedInfoManager.getNpcLvl(CampUpgradeEnum.BUTCHER)) {
+            case 1: {
+                bgButcher = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+                break;
+            }
+            case 2: {
+                bgButcher = GraphicsManager.getGuiElement(GuiElementEnum.SILVER_BUTTON_WIDE);
+                break;
+            }
+            case 3: {
+                bgButcher = GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE);
+                break;
+            }
+        }
+
+        switch (SavedInfoManager.getNpcLvl(CampUpgradeEnum.BLACKSMITH)) {
+            case 1: {
+                bgBlacksmith = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+                break;
+            }
+            case 2: {
+                bgBlacksmith = GraphicsManager.getGuiElement(GuiElementEnum.SILVER_BUTTON_WIDE);
+                break;
+            }
+            case 3: {
+                bgBlacksmith = GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE);
+                break;
+            }
+        }
+
+        switch (SavedInfoManager.getNpcLvl(CampUpgradeEnum.MAGIC_SHOP)) {
+            case 1: {
+                bgMagicShop = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
+                break;
+            }
+            case 2: {
+                bgMagicShop = GraphicsManager.getGuiElement(GuiElementEnum.SILVER_BUTTON_WIDE);
+                break;
+            }
+            case 3: {
+                bgMagicShop = GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE);
+                break;
+            }
+        }
+
+        npcButtons = new HashMap<>();
+        npcButtons.put(
+                CharacterEnum.NPC_ALCHEMIST,
+                new ButtonWithText(
+                        bgAlchemist,
+                        Gdx.graphics.getWidth() * 0.25f,
+                        Gdx.graphics.getHeight() * 0.1f,
+                        MenuScreen.BOTTOM_BUTTON_WIDTH,
+                        MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                        FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                        StringsManager.getCharacterName(CharacterEnum.NPC_ALCHEMIST)));
+        npcButtons.put(
+                CharacterEnum.NPC_BUTCHER,
+                new ButtonWithText(
+                        bgButcher,
+                        Gdx.graphics.getWidth() * 0.25f,
+                        Gdx.graphics.getHeight() * 0.1f,
+                        MenuScreen.BOTTOM_BUTTON_WIDTH,
+                        MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                        FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                        StringsManager.getCharacterName(CharacterEnum.NPC_BUTCHER)));
+        npcButtons.put(
+                CharacterEnum.NPC_BLACKSMITH,
+                new ButtonWithText(
+                        bgBlacksmith,
+                        Gdx.graphics.getWidth() * 0.25f,
+                        Gdx.graphics.getHeight() * 0.1f,
+                        MenuScreen.BOTTOM_BUTTON_WIDTH,
+                        MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                        FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                        StringsManager.getCharacterName(CharacterEnum.NPC_BLACKSMITH)));
+        npcButtons.put(
+                CharacterEnum.NPC_MAGIC_SHOP,
+                new ButtonWithText(
+                        bgMagicShop,
+                        Gdx.graphics.getWidth() * 0.25f,
+                        Gdx.graphics.getHeight() * 0.1f,
+                        MenuScreen.BOTTOM_BUTTON_WIDTH,
+                        MenuScreen.BOTTOM_BUTTON_HEIGHT,
+                        FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
+                        StringsManager.getCharacterName(CharacterEnum.NPC_MAGIC_SHOP)));
 
         goldStatus = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.COINS),
@@ -133,6 +246,7 @@ public final class GuiContainer {
         eqButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.EQUIPMENT_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f);
         mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
         pickingButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.ITEM_PICK_BUTTON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f - guiButtonSize);
+        shopWindow = new ShopWindow(StatTracker.getHero());
 
         heroStatWindow.init(gameScreen.getHero());
     }
@@ -142,7 +256,8 @@ public final class GuiContainer {
                 !EquipmentWindow.isUp() &&
                 !mapWindow.isUp() &&
                 !heroStatWindow.isUp() &&
-                !PickupItemWindow.isUp();
+                !PickupItemWindow.isUp() &&
+                !shopWindow.isUp();
     }
 
     public void draw() {
@@ -198,12 +313,31 @@ public final class GuiContainer {
             pickupItemWindow.draw(batch);
         }
 
+        if (currRoom.getNpcMode() != null) {
+            if (shopWindow.isUp()) {
+                shopWindow.draw(batch, currRoom.getNpcMode());
+            }
+            else npcButtons.get(currRoom.getNpcMode()).draw(batch, 1f);
+        }
+
         batch.end();
     }
 
     public boolean tap(float x, float y) {
         if (runQuitWindow.isUp()) {
             runQuitWindow.tap(x, y);
+            return true;
+        }
+        else if (shopWindow.isUp()) {
+            if (shopWindow.tap(x, y, currRoom.getNpcMode())) {
+            }
+            else {
+                shopWindow.hide();
+            }
+            return true;
+        }
+        else if (currRoom.getNpcMode() != null && npcButtons.get(CharacterEnum.NPC_ALCHEMIST).tap(x, y)) {
+            shopWindow.show();
             return true;
         }
         else if (mapWindow.isUp()) {
@@ -306,5 +440,9 @@ public final class GuiContainer {
 
     public void refreshGui() {
         INSTANCE = new GuiContainer(GameScreen.getInstance());
+    }
+
+    public void createOrRefreshShop(CharacterEnum shop) {
+        shopWindow.addOrRefreshShop(shop);
     }
 }

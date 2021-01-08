@@ -1,4 +1,4 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
@@ -7,8 +7,8 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.HeroEqItemBlock;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.HeroEqItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;

@@ -1,13 +1,12 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.pickupItemWindow;
 
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.AbstractSegment;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements.ItemBlock;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.AbstractSegment;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.ItemBlock;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
 public class ItemsBar {

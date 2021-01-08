@@ -1,4 +1,4 @@
-package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.backpackElements;
+package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
@@ -6,11 +6,10 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackSh
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.AbstractSegment;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentWindow.BackpackSegment;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.AbstractSegment;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.BackpackSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class BackpackPage {

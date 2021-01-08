@@ -23,5 +23,5 @@ public enum GuiStringEnum {
 
     ITEMS_TO_PICK, NO_SPACE,
 
-    CHANGE_ROOM, GO_DOWN
+    CHANGE_ROOM, GO_DOWN , BUY , SELL
 }

@@ -58,6 +58,11 @@ public class ItemGenerator {
         return createItem(itemEnum, AbstractItem.getItemTypeEnum(itemEnum), true);
     }
 
+    public static AbstractItem getItem(ItemTypeEnum typeEnum) {
+        ItemEnum item = getItemEnum(typeEnum);
+        return createItem(item, typeEnum, true);
+    }
+
     public static AbstractItem getItemNoPerks(ItemEnum item, ItemTypeEnum type) {
         return createItem(getItemEnum(type), type, false);
     }

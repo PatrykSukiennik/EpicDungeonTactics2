@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.map;
 
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
+import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
@@ -77,6 +78,7 @@ public class MapTile {
     public void setCharacter(CharacterDrawable character, boolean shouldDrawCharacter) {
         this.character = character;
         this.shouldDrawCharacter = shouldDrawCharacter;
+        this.characterStandingOn = character;
     }
 
     public void destroyElements() {
@@ -184,4 +186,15 @@ public class MapTile {
     }
 
 
+    public void drawFlag(MapPathFindingFlags flag, Batch batch) {
+        switch (flag) {
+            case MOVABLE: {
+                pathfindingFlagSprites.get(MapPathFindingFlags.MOVABLE).draw(
+                        batch,
+                        this.positionFloat.x, this.positionFloat.y,
+                        WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+                break;
+            }
+        }
+    }
 }
