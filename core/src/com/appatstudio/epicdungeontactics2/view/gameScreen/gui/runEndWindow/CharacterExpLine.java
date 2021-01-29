@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 
@@ -40,7 +41,7 @@ public class CharacterExpLine {
         );
     }
 
-    void draw(SpriteBatch batch) {
+    void draw(Batch batch) {
         iconAndName.draw(batch);
         expAndLvl.draw(batch);
     }

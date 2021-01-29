@@ -11,7 +11,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.MoveToMapTile;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.badlogic.gdx.Gdx;
@@ -26,14 +26,12 @@ import com.badlogic.gdx.utils.Array;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
-import lombok.Getter;
-import lombok.Setter;
 
 public class CharacterDrawable extends Image {
 
-    private final Animation<SpriteDrawable> idleAnimation;
-    private final Animation<SpriteDrawable> runAnimation;
-    private final Image projectile;
+    private Animation<SpriteDrawable> idleAnimation;
+    private Animation<SpriteDrawable> runAnimation;
+    private Image projectile;
 
     private CharacterEnum characterEnum;
 
@@ -116,7 +114,9 @@ public class CharacterDrawable extends Image {
 
         this.tileStandingOn = tile;
 
-
+        if (characterEnum.toString().startsWith("PET")) isPet = true;
+        else if (characterEnum.toString().startsWith("HERO")) isHero = true;
+        else if (!characterEnum.toString().startsWith("NPC")) isEnemy = true;
     }
 
     protected void createStatsObject() {
@@ -133,6 +133,11 @@ public class CharacterDrawable extends Image {
         if (hasActions()) {
             this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
             //this.pointLight.setPosition(getX() + lightOffset.x, getY() + lightOffset.y);
+        }
+
+        if (projectile.hasActions()) {
+            this.projectile.act(Gdx.graphics.getDeltaTime());
+            this.projectile.draw(mapBatch, 1f);
         }
 
         stateTime += Gdx.graphics.getDeltaTime();
@@ -161,7 +166,10 @@ public class CharacterDrawable extends Image {
     }
 
     public void dead() {
+        System.out.println(characterEnum.toString() + "________");
         pointLight.remove(true);
+        room.getRoomCharacters().removeValue(this, false);
+        this.remove();
     }
 
     public void dispose() {
@@ -269,34 +277,16 @@ public class CharacterDrawable extends Image {
 
     public void shot(MapTile tile) {
         CharacterDrawable target = tile.getCharacterStandingOn();
-        CoordsFloat targetDestination = new CoordsFloat(target.getX() + target.getWidth()/2f,
-                                                        target.getY() + target.getHeight()/2f);
 
-        CoordsFloat startCoords = new CoordsFloat(this.getX() + this.getWidth()/2f,
-                                                        this.getY() + this.getHeight()/2f);
-
-        float projectileRotation = (float) Math.toDegrees(Math.atan2(
-                targetDestination.y - startCoords.y,
-                targetDestination.x - startCoords.x));
-        if (projectileRotation < 0) projectileRotation += 360;
-
-        projectile.setRotation(projectileRotation);
-        projectile.setPosition(
-                startCoords.x - projectile.getWidth()/2f,
-                startCoords.y - projectile.getHeight()/2f);
-
-        isRotation =  targetDestination.x > startCoords.x;
-
-        //add action
     }
 
 
     public int getMeleDamage() {
-        return 2;
+        return stats.getMeleDmg(GameScreen.getInstance().getLvl());
     }
 
     public int getShotDamage() {
-        return 2;
+        return stats.getShotDmg(GameScreen.getInstance().getLvl());
     }
 
 
@@ -342,5 +332,30 @@ public class CharacterDrawable extends Image {
 
     public Animation<SpriteDrawable> getRunAnimation() {
         return runAnimation;
+    }
+
+    public void setRotationX(boolean targetRotation) {
+        this.isRotation = targetRotation;
+    }
+
+    public void dmgGet(int dmg) {
+        //override me
+    }
+
+    public Image getProjectile() {
+        return this.projectile;
+    }
+
+    public void newCharacter(CharacterEnum characterEnum) {
+        this.characterEnum = characterEnum;
+        this.state = CharacterStateEnum.IDLE;
+
+        idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
+        runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
+
+        projectile = new Image(GraphicsManager.getProjectile(characterEnum));
+        projectile.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+
+        stateTime = EpicDungeonTactics.random.nextFloat();
     }
 }

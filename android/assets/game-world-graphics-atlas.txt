@@ -3153,6 +3153,13 @@ characters/ZOMBIE/idle
   orig: 32, 32
   offset: 0, 0
   index: 3
+characters/ZOMBIE/projectile
+  rotate: false
+  xy: 715, 443
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 characters/ZOMBIE/run
   rotate: false
   xy: 715, 443

@@ -14,6 +14,9 @@ public final class CommunicatePrinter {
     private static final float[] TEXT_Y;
     private static CommunicateObject[] communicates;
 
+    private static final float CLEARING_TIME = 3f;
+    private static float clearingTimer;
+
     static  {
 
         TEXT_Y = new float[COMMUNICATE_LIMIT];
@@ -25,6 +28,8 @@ public final class CommunicatePrinter {
                     + FontsManager.getTextHeight(FontsManager.getFont(FontEnum.COMMUNICATE_WHITE), "0") * 1.5f * (i+1);
         }
 
+        clearingTimer = CLEARING_TIME;
+
     }
 
     private static void print(CommunicateObject communicate) {
@@ -32,6 +37,7 @@ public final class CommunicatePrinter {
             if (communicates[i] != null) communicates[i+1] = communicates[i];
         }
         communicates[0] = communicate;
+        clearingTimer = CLEARING_TIME;
     }
 
     public static void dmgGot(int dmg, String enemyName, boolean isCrit) {
@@ -95,6 +101,17 @@ public final class CommunicatePrinter {
     public void draw(Batch batch) {
         for (int i=0; i<COMMUNICATE_LIMIT; i++) {
             if (communicates[i] != null) communicates[i].draw(batch, TEXT_Y[i]);
+        }
+
+        clearingTimer -= Gdx.graphics.getDeltaTime();
+        if (clearingTimer <= 0) {
+            for (int i=communicates.length -1; i>=0; i--) {
+                if (communicates[i] != null) {
+                    communicates[i] = null;
+                    break;
+                }
+            }
+            clearingTimer = 5f;
         }
     }
 

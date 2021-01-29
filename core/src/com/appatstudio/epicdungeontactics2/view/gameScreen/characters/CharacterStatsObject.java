@@ -1,12 +1,11 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
-import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
-
-import java.util.HashMap;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 
 public class CharacterStatsObject {
     private CharacterPrototype baseStats;
@@ -17,25 +16,30 @@ public class CharacterStatsObject {
     private int currHp;
 
     private int range;
+    private int speed;
 
     public CharacterStatsObject(CharacterEnum characterEnum) {
         baseStats = CharacterStats.getPrototype(characterEnum);
-        lvlStats = CharacterStats.getEnemeyLvlUpStats(characterEnum);
+        lvlStats = CharacterStats.getEnemyLvlUpStats(characterEnum);
 
-        maxHp = 20;
-        currHp = 14;
+        range = CharacterStats.getRange(characterEnum);
+        speed = CharacterStats.getSpeed(characterEnum);
 
-        range = 3;
+        if (!characterEnum.toString().startsWith("NPC") && !characterEnum.toString().startsWith("HERO")) {
+            maxHp = CharacterStats.getBasicHeroStat(characterEnum, StatisticEnum.VIT)
+                    + CharacterStats.getEnemyLvlUpStats(characterEnum).getVIT()
+                    * (int) StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL);
+            currHp = maxHp;
+        }
     }
 
 
-    public int getSpeed() {
-        //return baseStats.getDEX() + lvlStats.getDEX() + bonusStats.getDEX();
-        return 5;
+    public int getMeleDmg(int lvl) {
+        return (baseStats.getSTR() + lvlStats.getSTR() * lvl);
     }
 
-    public int getMeleDmg() {
-        return 2;
+    public int getShotDmg(int lvl) {
+        return (baseStats.getSTR() + lvlStats.getSTR() * lvl);
     }
 
     public int getMaxHp() {
@@ -48,5 +52,13 @@ public class CharacterStatsObject {
 
     public int getRange() {
         return range;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void dmgGot(int dmg) {
+        currHp -= dmg;
     }
 }

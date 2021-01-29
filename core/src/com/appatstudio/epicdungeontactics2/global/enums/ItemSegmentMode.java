@@ -1,5 +1,5 @@
 package com.appatstudio.epicdungeontactics2.global.enums;
 
 public enum ItemSegmentMode {
-    NORMAL, SELL, BUY
+    NORMAL, SELL, KEEP, WASTE, BUY
 }

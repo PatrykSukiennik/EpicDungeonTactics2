@@ -7,6 +7,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.CampUpgradeStats;
 import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
@@ -14,6 +15,8 @@ import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
 import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterStatsObject;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Armor;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Arrow;
@@ -26,6 +29,7 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Necklace;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Ring;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Shield;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Staff;
+import com.appatstudio.epicdungeontactics2.view.viewElements.game.StatBar;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
@@ -50,12 +54,17 @@ public class StatTracker {
 
     private static PerkEnum selectedPerk;
 
-    private static final int HP_PER_INT_POINT = 10;
+    private static final int HP_PER_VIT_POINT = 10;
     private static final int MP_PER_INT_POINT = 10;
 
     public StatTracker() {
-        usedCharacters = new Array<>();
         eqItems = new Array<>();
+    }
+
+    static {
+        usedCharacters = new Array<>();
+        expCollected = new HashMap<>();
+        lvlUps = new HashMap<>();
     }
 
     public static void init(CharacterEnum hero, PerkEnum perk) {
@@ -65,6 +74,14 @@ public class StatTracker {
         stats = new CharacterStatsObject(GameScreen.getInstance().getHero());
         if (currStats == null) currStats = new HashMap<>();
         else currStats.clear();
+
+        if (!usedCharacters.contains(hero, false)) {
+            usedCharacters.add(hero);
+            expCollected.put(hero, 0);
+            lvlUps.put(hero, false);
+        }
+
+
 
         getStartItems(hero);
 
@@ -108,6 +125,7 @@ public class StatTracker {
 
     public static void lvlUp() {
         ItemGenerator.refresh();
+        CommunicatePrinter.lvlUp();
     }
 
     public static void refreshWholeCharacter() {
@@ -147,7 +165,7 @@ public class StatTracker {
                         + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.INT, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.MAX_HP,
-                (currStats.get(CompleteHeroStatsEnum.VIT) * HP_PER_INT_POINT)
+                (currStats.get(CompleteHeroStatsEnum.VIT) * HP_PER_VIT_POINT)
                         + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAX_HP, itemBonuses));
 
         currStats.put(CompleteHeroStatsEnum.MAX_MP,
@@ -285,6 +303,9 @@ public class StatTracker {
             default:
                 return result;
 
+            case RANGE:
+                result += 1 + getItemStats(CompleteHeroStatsEnum.RANGE);
+                break;
             case MAGICAL_DMG_MULTIPLIER:
                 if (currHero == CharacterEnum.HERO_WIZZARD) result += 0.25f;
                 break;
@@ -482,6 +503,8 @@ public class StatTracker {
             hpEffect(((Food) item).getHpEffect());
             hpEffect(((Food) item).getMpEffect());
         }
+        CommunicatePrinter.usedItem(
+                StringsManager.getItemName(item.getItemEnum()));
     }
 
     public static void hpEffect(int hpEffect) {
@@ -489,7 +512,12 @@ public class StatTracker {
         Float max = currStats.get(CompleteHeroStatsEnum.MAX_HP);
         curr += hpEffect;
         if (curr > max) curr = max;
+        if (curr <= 0) {
+            curr = 0f;
+            GameScreen.heroDied();
+        }
         currStats.put(CompleteHeroStatsEnum.HP, curr);
+        StatusBarContainer.setHp(currStats.get(CompleteHeroStatsEnum.HP) / currStats.get(CompleteHeroStatsEnum.MAX_HP));
     }
 
     public static void mpEffect(int mpEffect) {
@@ -506,6 +534,7 @@ public class StatTracker {
         if (curr >= max) {
             curr -= max;
             lvlUp();
+            lvlUps.put(currHero, true);
         }
         currStats.put(CompleteHeroStatsEnum.EXP, curr);
     }
@@ -577,11 +606,27 @@ public class StatTracker {
         return currStats.get(stat);
     }
 
-    public HashMap<CharacterEnum, Boolean> getLvlUps() {
+    public static AbstractItem getRangedWeapon() {
+        for (AbstractItem item : equippedItems) {
+            if (
+                    item.getItemTypeEnum() == ItemTypeEnum.BOW
+                            || item.getItemTypeEnum() == ItemTypeEnum.STAFF) return item;
+        }
+        return null;
+    }
+
+    public static AbstractItem getMeleWeapon() {
+        for (AbstractItem item : equippedItems)
+            if (item.getItemTypeEnum() == ItemTypeEnum.MELE) return item;
+        return null;
+    }
+
+
+    public static HashMap<CharacterEnum, Boolean> getLvlUps() {
         return lvlUps;
     }
 
-    public HashMap<CharacterEnum, Integer> getExpCollected() {
+    public static HashMap<CharacterEnum, Integer> getExpCollected() {
         return expCollected;
     }
 
@@ -593,7 +638,7 @@ public class StatTracker {
         return roomsCleared;
     }
 
-    public Array<CharacterEnum> getUsedCharacters() {
+    public static Array<CharacterEnum> getUsedCharacters() {
         return usedCharacters;
     }
 

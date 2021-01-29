@@ -11,6 +11,8 @@ public final class CharacterStats {
     private static final Map<CharacterEnum, CharacterPrototype> characterPrototypes;
     private static final Map<CharacterEnum, CharacterPrototype> enemyLvlUpStats;
     private static final Map<CharacterEnum, Integer> characterSizes;
+    private static final Map<CharacterEnum, Integer> characterSpeeds;
+    private static final Map<CharacterEnum, Integer> characterRanges;
 
     static {
         characterPrototypes = new HashMap<>();
@@ -231,12 +233,165 @@ public final class CharacterStats {
 
         characterSizes.put(CharacterEnum.BOSS_BIG_DEMON, 3);
 
+
+        characterSpeeds = new HashMap<>();
+        characterSpeeds.put(CharacterEnum.HERO_ELF, 5);
+        characterSpeeds.put(CharacterEnum.HERO_KNIGHT, 5);
+        characterSpeeds.put(CharacterEnum.HERO_WIZZARD, 5);
+        characterSpeeds.put(CharacterEnum.HERO_LIZARD, 5);
+        characterSpeeds.put(CharacterEnum.HERO_NINJA, 5);
+        characterSpeeds.put(CharacterEnum.HERO_PIRATE, 5);
+        characterSpeeds.put(CharacterEnum.HERO_BABY, 5);
+
+        //forest
+        characterSpeeds.put(CharacterEnum.CENTAUR_MALE, 8);
+        characterSpeeds.put(CharacterEnum.CENTAUR_FEMALE, 8);
+        characterSpeeds.put(CharacterEnum.ENT, 5);
+        characterSpeeds.put(CharacterEnum.TROLL, 5);
+        characterSpeeds.put(CharacterEnum.WOLF, 5);
+        characterSpeeds.put(CharacterEnum.MUSHROOM_SMALL, 5);
+        characterSpeeds.put(CharacterEnum.MUSHROOM_NORMAL,5);
+        characterSpeeds.put(CharacterEnum.MUSHROOM_LARGE, 5);
+        characterSpeeds.put(CharacterEnum.BEAR, 5);
+        characterSpeeds.put(CharacterEnum.BOSS_FOREST_GUARDIAN, 5);
+        characterSpeeds.put(CharacterEnum.ELVEN_PRINCESS, 5);
+        characterSpeeds.put(CharacterEnum.ELVEN_KING, 5);
+        characterSpeeds.put(CharacterEnum.ELVEN_KNIGHT, 5);
+        characterSpeeds.put(CharacterEnum.GNOLL_BRUTE, 5);
+        characterSpeeds.put(CharacterEnum.GNOLL_OVERSEER, 5);
+        characterSpeeds.put(CharacterEnum.GNOLL_SCOUT, 5);
+        characterSpeeds.put(CharacterEnum.GNOLL_SHAMAN, 5);
+
+        //npcs
+        characterSpeeds.put(CharacterEnum.NPC_ALCHEMIST, 1);
+        characterSpeeds.put(CharacterEnum.NPC_CITIZEN_FEMALE, 1);
+        characterSpeeds.put(CharacterEnum.NPC_CITIZEN_MALE, 1);
+        characterSpeeds.put(CharacterEnum.NPC_PRINCESS, 1);
+        characterSpeeds.put(CharacterEnum.NPC_THIEF, 1);
+        characterSpeeds.put(CharacterEnum.NPC_BISHOP, 1);
+        characterSpeeds.put(CharacterEnum.NPC_NUN_FAT, 1);
+        characterSpeeds.put(CharacterEnum.NPC_NUN_NORMAL, 1);
+        characterSpeeds.put(CharacterEnum.NPC_MAGIC_SHOP, 1);
+        characterSpeeds.put(CharacterEnum.NPC_BLACKSMITH, 1);
+        characterSpeeds.put(CharacterEnum.NPC_KING, 1);
+        characterSpeeds.put(CharacterEnum.NPC_KNIGHT_ELITE, 1);
+        characterSpeeds.put(CharacterEnum.NPC_MOUNTAIN_KING, 1);
+        characterSpeeds.put(CharacterEnum.NPC_BUTCHER, 1);
+
+        //pets
+        characterSpeeds.put(CharacterEnum.PET_KNIGHT, 5);
+        characterSpeeds.put(CharacterEnum.PET_HUNTER, 8);
+
+        //tier1
+        characterSpeeds.put(CharacterEnum.TINY_ZOMBIE, 7);
+        characterSpeeds.put(CharacterEnum.ZOMBIE, 7);
+        characterSpeeds.put(CharacterEnum.MUDDY, 4);
+        characterSpeeds.put(CharacterEnum.ICE_ZOMBIE, 7);
+        characterSpeeds.put(CharacterEnum.GOBLIN, 6);
+
+        characterSpeeds.put(CharacterEnum.BIG_ZOMBIE, 9);
+
+
+        //tier2
+        characterSpeeds.put(CharacterEnum.ORC_SHAMAN, 5);
+        characterSpeeds.put(CharacterEnum.MASKED_ORC, 8);
+        characterSpeeds.put(CharacterEnum.ORC_WARRIOR,7);
+        characterSpeeds.put(CharacterEnum.SWAMPY, 5);
+
+        characterSpeeds.put(CharacterEnum.BOSS_OGRE, 9);
+
+
+        //tier3
+        characterSpeeds.put(CharacterEnum.CHORT, 9);
+        characterSpeeds.put(CharacterEnum.IMP, 8);
+        characterSpeeds.put(CharacterEnum.NECROMANCER, 4);
+        characterSpeeds.put(CharacterEnum.SKELET, 6);
+        characterSpeeds.put(CharacterEnum.WOGOL, 9);
+
+        characterSpeeds.put(CharacterEnum.BOSS_BIG_DEMON, 5);
+
+
+        characterRanges = new HashMap<>();
+        characterRanges.put(CharacterEnum.HERO_ELF, 1);
+        characterRanges.put(CharacterEnum.HERO_KNIGHT, 1);
+        characterRanges.put(CharacterEnum.HERO_WIZZARD, 1);
+        characterRanges.put(CharacterEnum.HERO_LIZARD, 1);
+        characterRanges.put(CharacterEnum.HERO_NINJA, 1);
+        characterRanges.put(CharacterEnum.HERO_PIRATE, 1);
+        characterRanges.put(CharacterEnum.HERO_BABY, 1);
+
+        //forest
+        characterRanges.put(CharacterEnum.CENTAUR_MALE, 1);
+        characterRanges.put(CharacterEnum.CENTAUR_FEMALE, 7);
+        characterRanges.put(CharacterEnum.ENT, 1);
+        characterRanges.put(CharacterEnum.TROLL, 1);
+        characterRanges.put(CharacterEnum.WOLF, 1);
+        characterRanges.put(CharacterEnum.MUSHROOM_SMALL, 1);
+        characterRanges.put(CharacterEnum.MUSHROOM_NORMAL,1);
+        characterRanges.put(CharacterEnum.MUSHROOM_LARGE, 1);
+        characterRanges.put(CharacterEnum.BEAR, 1);
+        characterRanges.put(CharacterEnum.BOSS_FOREST_GUARDIAN, 1);
+        characterRanges.put(CharacterEnum.ELVEN_PRINCESS, 8);
+        characterRanges.put(CharacterEnum.ELVEN_KING, 1);
+        characterRanges.put(CharacterEnum.ELVEN_KNIGHT, 1);
+        characterRanges.put(CharacterEnum.GNOLL_BRUTE, 1);
+        characterRanges.put(CharacterEnum.GNOLL_OVERSEER, 1);
+        characterRanges.put(CharacterEnum.GNOLL_SCOUT, 1);
+        characterRanges.put(CharacterEnum.GNOLL_SHAMAN, 9);
+
+        //npcs
+        characterRanges.put(CharacterEnum.NPC_ALCHEMIST, 1);
+        characterRanges.put(CharacterEnum.NPC_CITIZEN_FEMALE, 1);
+        characterRanges.put(CharacterEnum.NPC_CITIZEN_MALE, 1);
+        characterRanges.put(CharacterEnum.NPC_PRINCESS, 1);
+        characterRanges.put(CharacterEnum.NPC_THIEF, 1);
+        characterRanges.put(CharacterEnum.NPC_BISHOP, 1);
+        characterRanges.put(CharacterEnum.NPC_NUN_FAT, 1);
+        characterRanges.put(CharacterEnum.NPC_NUN_NORMAL, 1);
+        characterRanges.put(CharacterEnum.NPC_MAGIC_SHOP, 1);
+        characterRanges.put(CharacterEnum.NPC_BLACKSMITH, 1);
+        characterRanges.put(CharacterEnum.NPC_KING, 1);
+        characterRanges.put(CharacterEnum.NPC_KNIGHT_ELITE, 1);
+        characterRanges.put(CharacterEnum.NPC_MOUNTAIN_KING, 1);
+        characterRanges.put(CharacterEnum.NPC_BUTCHER, 1);
+
+        //pets
+        characterRanges.put(CharacterEnum.PET_KNIGHT, 1);
+        characterRanges.put(CharacterEnum.PET_HUNTER, 9);
+
+        //tier1
+        characterRanges.put(CharacterEnum.TINY_ZOMBIE, 1);
+        characterRanges.put(CharacterEnum.ZOMBIE, 7);
+        characterRanges.put(CharacterEnum.MUDDY, 1);
+        characterRanges.put(CharacterEnum.ICE_ZOMBIE, 7);
+        characterRanges.put(CharacterEnum.GOBLIN, 1);
+
+        characterRanges.put(CharacterEnum.BIG_ZOMBIE, 1);
+
+
+        //tier2
+        characterRanges.put(CharacterEnum.ORC_SHAMAN, 7);
+        characterRanges.put(CharacterEnum.MASKED_ORC, 1);
+        characterRanges.put(CharacterEnum.ORC_WARRIOR,1);
+        characterRanges.put(CharacterEnum.SWAMPY, 1);
+
+        characterRanges.put(CharacterEnum.BOSS_OGRE, 3);
+
+
+        //tier3
+        characterRanges.put(CharacterEnum.CHORT, 1);
+        characterRanges.put(CharacterEnum.IMP, 1);
+        characterRanges.put(CharacterEnum.NECROMANCER, 1);
+        characterRanges.put(CharacterEnum.SKELET, 8);
+        characterRanges.put(CharacterEnum.WOGOL, 1);
+
+        characterRanges.put(CharacterEnum.BOSS_BIG_DEMON, 9);
     }
 
     public static CharacterPrototype getPrototype(CharacterEnum characterEnum) {
         return characterPrototypes.get(characterEnum);
     }
-    public static CharacterPrototype getEnemeyLvlUpStats(CharacterEnum characterEnum) {
+    public static CharacterPrototype getEnemyLvlUpStats(CharacterEnum characterEnum) {
         return enemyLvlUpStats.get(characterEnum);
     }
 
@@ -253,5 +408,13 @@ public final class CharacterStats {
             case LCK: return characterPrototypes.get(c).getLCK();
             default: return 0;
         }
+    }
+
+    public static int getRange(CharacterEnum characterEnum) {
+        return characterRanges.get(characterEnum);
+    }
+
+    public static int getSpeed(CharacterEnum characterEnum) {
+        return characterSpeeds.get(characterEnum);
     }
 }

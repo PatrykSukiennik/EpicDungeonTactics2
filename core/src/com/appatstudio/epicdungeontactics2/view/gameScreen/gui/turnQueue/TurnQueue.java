@@ -25,7 +25,7 @@ public class TurnQueue {
     public static final float QUEUE_START_Y =
             Gdx.graphics.getHeight() - (QUEUE_SIZE - 2) * QUEUE_ICON_SIZE;
 
-    private int currentTurn = 0;
+    private int currentTurn = 1;
     private int maxSpeed;
 
     private Room room;
@@ -51,8 +51,7 @@ public class TurnQueue {
         queueIcons = new TurnQueueIcon[QUEUE_SIZE];
         for (int i = 0; i < QUEUE_SIZE; i++) {
             queueIcons[i] = new TurnQueueIcon(i, COORDS[i]);
-            System.out.println(queue.size);
-            queueIcons[i].setRepresentedCharacter(queue.get( (i+1) % queue.size ));
+            queueIcons[i].setRepresentedCharacter(queue.get( (i + 1) % queue.size ));
         }
 
     }
@@ -73,6 +72,7 @@ public class TurnQueue {
     }
 
     public CharacterDrawable getCurrentCharacter() {
+        System.out.println("CURRENT CHARACTER TO MOVE: " +  queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter().getCharacterEnum().toString());
         return queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter();
     }
 

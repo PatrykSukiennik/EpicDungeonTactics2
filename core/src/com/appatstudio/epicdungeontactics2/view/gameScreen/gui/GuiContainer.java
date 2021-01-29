@@ -4,10 +4,12 @@ import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
@@ -15,14 +17,19 @@ import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoMa
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.ShopWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.heroStatWindow.HeroStatWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.pickupItemWindow.PickupItemWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runEndWindow.RunEndWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.runQuitWindow.RunQuitWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.selectItemsForNextHeroWindow.SelectItemsForNextHeroWindow;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.selectNextHeroWindow.SelectNextHeroWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.weaponSelector.WeaponSelector;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
@@ -49,14 +56,18 @@ public final class GuiContainer {
     private final TextWithIcon goldStatus;
     private final TextObject stageStatus;
 
-    private final CommunicatePrinter communicatePrinter;
-    private final StatusBarContainer statusBarContainer;
+    private CommunicatePrinter communicatePrinter;
+    private StatusBarContainer statusBarContainer;
 
-    private final EquipmentWindow equipmentWindow;
+    private EquipmentWindow equipmentWindow;
     private final MapWindow mapWindow;
-    private final HeroStatWindow heroStatWindow;
-    private final PickupItemWindow pickupItemWindow;
-    private final ShopWindow shopWindow;
+    private HeroStatWindow heroStatWindow;
+    private PickupItemWindow pickupItemWindow;
+    private ShopWindow shopWindow;
+    private WeaponSelector weaponSelector;
+    private SelectNextHeroWindow selectNextHeroWindow;
+    private SelectItemsForNextHeroWindow selectItemsForNextHeroWindow;
+    private RunEndWindow runEndWindow;
 
     private final GuiButton eqButton, mapButton, pickingButton;
 
@@ -73,6 +84,8 @@ public final class GuiContainer {
     public static final float guiMargin = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.03f : Gdx.graphics.getWidth() * 0.05f;
 
     private static GuiContainer INSTANCE;
+
+    private GameScreen gameScreen;
 
     public static GuiContainer getInstance() {
         if(INSTANCE == null) {
@@ -96,6 +109,7 @@ public final class GuiContainer {
         pickupItemWindow = new PickupItemWindow();
         mapWindow = new MapWindow();
 
+        this.gameScreen = gameScreen;
 
         SpriteDrawable bgAlchemist = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
         SpriteDrawable bgButcher = GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE);
@@ -247,8 +261,24 @@ public final class GuiContainer {
         mapButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.MAP_ICON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f + guiButtonSize);
         pickingButton = new GuiButton(GraphicsManager.getGuiElement(GuiElementEnum.ITEM_PICK_BUTTON), guiButtonSize, 0, Gdx.graphics.getHeight() * 0.7f - guiButtonSize);
         shopWindow = new ShopWindow(StatTracker.getHero());
+        selectNextHeroWindow = new SelectNextHeroWindow();
+        selectItemsForNextHeroWindow = new SelectItemsForNextHeroWindow();
+        weaponSelector = new WeaponSelector();
 
         heroStatWindow.init(gameScreen.getHero());
+    }
+
+    public void newHero() {
+        communicatePrinter = new CommunicatePrinter();
+        statusBarContainer = new StatusBarContainer(gameScreen.getHero());
+
+        equipmentWindow = new EquipmentWindow(gameScreen.getHero(), gameScreen);
+        heroStatWindow = new HeroStatWindow();
+        shopWindow = new ShopWindow(StatTracker.getHero());
+        selectNextHeroWindow = new SelectNextHeroWindow();
+        selectItemsForNextHeroWindow = new SelectItemsForNextHeroWindow();
+        weaponSelector = new WeaponSelector();
+
     }
 
     public boolean canCameraMove() {
@@ -257,7 +287,8 @@ public final class GuiContainer {
                 !mapWindow.isUp() &&
                 !heroStatWindow.isUp() &&
                 !PickupItemWindow.isUp() &&
-                !shopWindow.isUp();
+                !shopWindow.isUp() &&
+                !selectNextHeroWindow.isUp();
     }
 
     public void draw() {
@@ -297,6 +328,18 @@ public final class GuiContainer {
             runQuitWindow.act(Gdx.graphics.getDeltaTime());
             runQuitWindow.draw(batch, 1f);
         }
+        else if (selectNextHeroWindow.isUp()) {
+            selectNextHeroWindow.draw(batch);
+        }
+        else if (selectItemsForNextHeroWindow.isUp()) {
+            selectItemsForNextHeroWindow.draw(batch);
+        }
+        else if (runEndWindow != null && runEndWindow.isUp()) {
+            runEndWindow.draw(batch);
+        }
+        else if (weaponSelector.isUp()) {
+            weaponSelector.draw(batch);
+        }
 
         else if (EquipmentWindow.isUp()) {
             equipmentWindow.draw(batch);
@@ -328,6 +371,34 @@ public final class GuiContainer {
             runQuitWindow.tap(x, y);
             return true;
         }
+        else if (selectNextHeroWindow.isUp()) {
+            CharacterEnum selectedHero = selectNextHeroWindow.tap(x, y);
+            if (selectedHero != null) {
+                selectItemsForNextHeroWindow.show(selectedHero);
+                selectNextHeroWindow.hide();
+            }
+            return true;
+        }
+        else if (selectItemsForNextHeroWindow.isUp()) {
+            selectItemsForNextHeroWindow.tap(x, y);
+            return true;
+        }
+        else if (runEndWindow != null && runEndWindow.isUp()) {
+            if (runEndWindow.tap(x, y)) {
+                EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
+            }
+            return true;
+        }
+        else if (weaponSelector.isUp()) {
+            ItemTypeEnum weaponSelected = weaponSelector.tap(x, y);
+            if (weaponSelected == ItemTypeEnum.MELE) {
+                currRoom.setMeleTarget(weaponSelector.getTarget());
+            }
+            else if (weaponSelected == ItemTypeEnum.BOW) {
+                currRoom.shotSelected(weaponSelector.getTarget());
+            }
+            return true;
+        }
         else if (shopWindow.isUp()) {
             if (shopWindow.tap(x, y, currRoom.getNpcMode())) {
             }
@@ -336,7 +407,8 @@ public final class GuiContainer {
             }
             return true;
         }
-        else if (currRoom.getNpcMode() != null && npcButtons.get(CharacterEnum.NPC_ALCHEMIST).tap(x, y)) {
+        else if (currRoom.getNpcMode() != null
+                && npcButtons.get(CharacterEnum.NPC_ALCHEMIST).tap(x, y)) {
             shopWindow.show();
             return true;
         }
@@ -387,12 +459,26 @@ public final class GuiContainer {
         else if (mapWindow.isUp()) {
             mapWindow.hide();
         }
+        else if (weaponSelector.isUp()) {
+            weaponSelector.hide();
+        }
         else if (heroStatWindow.isUp()) {
             heroStatWindow.hide();
         }
         else if (PickupItemWindow.isUp()) {
             PickupItemWindow.hide();
         }
+        else if (shopWindow.isUp()) {
+            shopWindow.hide();
+        }
+        else if (selectNextHeroWindow.isUp()) {
+            runQuitWindow.show();
+        }
+        else if (selectItemsForNextHeroWindow.isUp()) {
+            selectNextHeroWindow.hide();
+            selectNextHeroWindow.show();
+        }
+
         else runQuitWindow.show();
     }
 
@@ -411,6 +497,10 @@ public final class GuiContainer {
 
     public void roomChanged(Room oldRoom, Room newRoom) {
         mapWindow.setCurrRoom(oldRoom, newRoom);
+    }
+
+    public WeaponSelector getWeaponSelector() {
+        return weaponSelector;
     }
 
     public static void setItemsToPick(Array<AbstractItem> newItemsToPick) {
@@ -444,5 +534,22 @@ public final class GuiContainer {
 
     public void createOrRefreshShop(CharacterEnum shop) {
         shopWindow.addOrRefreshShop(shop);
+    }
+
+    public void showWeaponSelector(Hero heroInRoom, CharacterDrawable characterStandingOn) {
+        weaponSelector.show(heroInRoom, characterStandingOn);
+    }
+
+    public void heroDied() {
+        System.out.println("CHUJ: 1 " + StatTracker.getUsedCharacters().size);
+        System.out.println("CHUJ: 2 " + SavedInfoManager.getAllUnlockedCharacters().length);
+
+        if (StatTracker.getUsedCharacters().size == SavedInfoManager.getAllUnlockedCharacters().length) {
+            runEndWindow = new RunEndWindow();
+            runEndWindow.show();
+        }
+        else {
+            selectNextHeroWindow.show();
+        }
     }
 }

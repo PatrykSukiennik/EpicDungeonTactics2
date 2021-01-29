@@ -5,6 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.badlogic.gdx.utils.Array;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum.BOTTOM;
 import static com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum.LEFT;
 import static com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum.RIGHT;
 import static com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum.TOP;
@@ -37,7 +38,7 @@ public class Stage {
     public void changeRoom(DirectionEnum dir, Room newRoom, CoordsInt heroCoords) {
         if (dir == LEFT) newRoom.heroMovedIntoRoom(LEFT, heroCoords);
         if (dir == TOP) newRoom.heroMovedIntoRoom(TOP, heroCoords);
-        if (dir == LEFT) newRoom.heroMovedIntoRoom(LEFT, heroCoords);
+        if (dir == BOTTOM) newRoom.heroMovedIntoRoom(BOTTOM, heroCoords);
         if (dir == RIGHT) newRoom.heroMovedIntoRoom(RIGHT, heroCoords);
         GameScreen.switchRoomInit(dir);
     }

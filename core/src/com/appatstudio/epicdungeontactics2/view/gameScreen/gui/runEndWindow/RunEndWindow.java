@@ -15,12 +15,15 @@ import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 
 public class RunEndWindow {
     private Image bg;
+    private boolean isUp = false;
 
     private TextObject title;
     private TextWithIcon stage;
@@ -30,22 +33,22 @@ public class RunEndWindow {
     private CharacterExpLine[] expLines;
     private ButtonWithText finishButton;
 
-    public RunEndWindow(StatTracker statTracker) {
+    public RunEndWindow() {
         bg = new Image(GraphicsManager.getGuiElement(GuiElementEnum.BLACK_ALPHA_50percent));
         bg.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         bg.setPosition(0, 0);
 
-        CharacterEnum[] usedCharacters = (CharacterEnum[]) statTracker.getExpCollected().keySet().toArray();
-        expLines = new CharacterExpLine[usedCharacters.length];
+        Array<CharacterEnum> usedCharacters = StatTracker.getUsedCharacters();
+        expLines = new CharacterExpLine[usedCharacters.size];
 
         float segmentHeight = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f;
         float fullHeight = (4 + expLines.length) * segmentHeight;
         float startY = Gdx.graphics.getHeight()/2f - fullHeight/2f;
 
-        for (int i=0; i<usedCharacters.length; i++) {
-            expLines[i] = new CharacterExpLine(usedCharacters[i],
-                    statTracker.getExpCollected().get(usedCharacters[i]),
-                    statTracker.getLvlUps().get(usedCharacters[i]),
+        for (int i=0; i<usedCharacters.size; i++) {
+            expLines[i] = new CharacterExpLine(usedCharacters.get(i),
+                    StatTracker.getExpCollected().get(usedCharacters.get(i)),
+                    StatTracker.getLvlUps().get(usedCharacters.get(i)),
                     startY + i * segmentHeight);
         }
 
@@ -106,15 +109,14 @@ public class RunEndWindow {
     }
 
     public boolean tap(float x, float y) {
-        if (x > bg.getX() && x < bg.getX() + bg.getWidth() &&
-                y > bg.getY() && y < bg.getY() + bg.getHeight() && finishButton.tap(x, y)) {
+        if (finishButton.tap(x, y)) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
             return true;
         }
         else return false;
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(Batch batch) {
         bg.draw(batch, 1f);
 
         title.draw(batch);
@@ -127,6 +129,18 @@ public class RunEndWindow {
         for (CharacterExpLine l : expLines) {
             l.draw(batch);
         }
+    }
+
+    public void show() {
+        isUp = true;
+    }
+
+    public void hide() {
+        isUp = false;
+    }
+
+    public boolean isUp() {
+        return isUp;
     }
 }
 

@@ -73,9 +73,10 @@ public class BackpackPage {
 
     public void cleanUp() {
         for (int i=0; i < ROWS * COLS - 1; i++) {
-            if (items[i].getItem() == null && items[i + 1].getItem() != null)
-                items[i].setItem(items[i+1].getItem());
-                items[i+1].setItem(null);
+            if (items[i].getItem() == null && items[i + 1].getItem() != null) {
+                items[i].setItem(items[i + 1].getItem());
+                items[i + 1].setItem(null);
+            }
         }
     }
 

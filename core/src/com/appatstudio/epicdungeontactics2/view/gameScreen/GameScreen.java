@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen;
 
+import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
@@ -7,11 +8,14 @@ import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
@@ -23,6 +27,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
@@ -65,6 +70,8 @@ public final class GameScreen extends Actor {
 
     private static GameScreen INSTANCE;
 
+    private static boolean isStop = false;
+
     public static GameScreen getInstance() {
         if(INSTANCE == null) {
             INSTANCE = new GameScreen();
@@ -79,9 +86,30 @@ public final class GameScreen extends Actor {
 
     public static MapPathFindingFlags canChangeRoom() {
         MapTile tile = currRoom.getRoomCharacters().get(0).getTileStandingOn();
-        if (tile.isNode()) return MapPathFindingFlags.ROOM_NODE;
-        else if (tile.isGoingDown()) return MapPathFindingFlags.NEW_STAGE;
+        if (currRoom.getRoomState() == RoomStateEnum.CLEAN) {
+            if (tile.isNode()) return MapPathFindingFlags.ROOM_NODE;
+            else if (tile.isGoingDown()) return MapPathFindingFlags.NEW_STAGE;
+            else return null;
+        }
         else return null;
+    }
+
+    public static void heroDied() {
+        guiContainer.heroDied();
+        isStop = true;
+    }
+
+    public static void newHero(CharacterEnum newHero, Array<AbstractItem> items) {
+        hero = newHero;
+        StatTracker.init(hero, perk);
+
+        for (Room r : currStage.getRooms()) {
+            r.newHero(newHero);
+        }
+
+        guiContainer.newHero();
+        isStop = false;
+        currRoom.moveFinished();
     }
 
     public void itemDropped(AbstractItem item) {
@@ -233,10 +261,19 @@ public final class GameScreen extends Actor {
 
     public void itemPickedUp(AbstractItem selectedItem) {
         currRoom.itemPickedUp(selectedItem);
+        CommunicatePrinter.itemPickedUp(
+                StringsManager.getItemName(selectedItem.getItemEnum()));
     }
 
     public boolean canCameraMove() {
         return guiContainer.canCameraMove();
     }
 
+    public int getLvl() {
+        return SavedInfoManager.getCharacterLvl(getCurrHero());
+    }
+
+    public static boolean isStop() {
+        return isStop;
+    }
 }

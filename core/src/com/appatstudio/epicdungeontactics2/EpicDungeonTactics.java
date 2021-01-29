@@ -6,7 +6,6 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
@@ -20,7 +19,6 @@ import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
 import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.IdleGoldCollectedBanner;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
@@ -170,6 +168,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case MENU_SCREEN:
                 if (menuScreen == null) menuScreen = new MenuScreen();
                 if (idleGoldCollectedBanner == null) idleGoldCollectedBanner = new IdleGoldCollectedBanner();
+                GraphicsManager.setRotationXforHeroes(false);
                 menuScreen.draw();
                 SavedInfoManager.checkChangeDay();
                 break;

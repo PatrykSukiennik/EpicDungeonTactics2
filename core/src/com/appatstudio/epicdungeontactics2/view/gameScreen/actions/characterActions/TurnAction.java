@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.utils.Array;
 
 import lombok.Getter;
 
@@ -33,6 +34,12 @@ public class TurnAction extends SequenceAction {
 
     public void addSequenceAction(MoveToMapTile moveToMapTile) {
         for (Action a : moveToMapTile.getSequence().getActions()) {
+            turn.addAction(a);
+        }
+    }
+
+    public void addSequenceAction(Array<Action> actions) {
+        for (Action a : actions) {
             turn.addAction(a);
         }
     }

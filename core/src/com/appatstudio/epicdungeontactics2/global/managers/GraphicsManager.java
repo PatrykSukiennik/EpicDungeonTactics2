@@ -17,6 +17,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.EffectIcon;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -46,6 +47,7 @@ public final class GraphicsManager {
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
 
     private static Map<CharacterEnum, SpriteDrawable> characterProjectiles;
+    private static Map<CharacterEnum, SpriteDrawable> heroHeads;
 
     private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
     private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSprites;
@@ -231,6 +233,15 @@ public final class GraphicsManager {
         for (ItemRarityEnum r : allRarities) {
             itemRarityIconsMap.put(r, new SpriteDrawable(new Sprite(atlas.findRegion("item-rarity-bg/" + r.toString()))));
         }
+
+        heroHeads = new HashMap<>();
+        heroHeads.put(CharacterEnum.HERO_ELF, guiElements.get(GuiElementEnum.HEAD_ELF));
+        heroHeads.put(CharacterEnum.HERO_KNIGHT, guiElements.get(GuiElementEnum.HEAD_KNIGHT));
+        heroHeads.put(CharacterEnum.HERO_WIZZARD, guiElements.get(GuiElementEnum.HEAD_WIZARD));
+        heroHeads.put(CharacterEnum.HERO_LIZARD, guiElements.get(GuiElementEnum.HEAD_LIZARD));
+        heroHeads.put(CharacterEnum.HERO_PIRATE, guiElements.get(GuiElementEnum.HEAD_PIRATE));
+        heroHeads.put(CharacterEnum.HERO_NINJA, guiElements.get(GuiElementEnum.HEAD_NINJA));
+        heroHeads.put(CharacterEnum.HERO_BABY, guiElements.get(GuiElementEnum.HEAD_BABY));
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
@@ -410,5 +421,39 @@ public final class GraphicsManager {
 
     public static SpriteDrawable getProjectile(CharacterEnum characterEnum) {
         return characterProjectiles.get(characterEnum);
+    }
+
+    public static void setRotationXforHeroes(boolean b) {
+        CharacterEnum[] characters = {
+                CharacterEnum.HERO_ELF,
+                CharacterEnum.HERO_KNIGHT,
+                CharacterEnum.HERO_LIZARD,
+                CharacterEnum.HERO_WIZZARD,
+                CharacterEnum.HERO_NINJA,
+                CharacterEnum.HERO_PIRATE,
+                CharacterEnum.HERO_PIRATE,
+                CharacterEnum.HERO_BABY};
+
+        CharacterStateEnum[] states = {
+                CharacterStateEnum.IDLE,
+                CharacterStateEnum.RUN
+        };
+
+        for (CharacterEnum character : characters) {
+            for (CharacterStateEnum state : states) {
+                Object[] frames =
+                        GraphicsManager.getCharactersAnimation(character, state).getKeyFrames();
+
+                for (int i=0; i<frames.length; i++) {
+                    SpriteDrawable sd = (SpriteDrawable) frames[i];
+                    sd.getSprite().setFlip(false, false);
+                }
+            }
+        }
+
+    }
+
+    public static SpriteDrawable getHead(CharacterEnum characterEnum) {
+        return heroHeads.get(characterEnum);
     }
 }

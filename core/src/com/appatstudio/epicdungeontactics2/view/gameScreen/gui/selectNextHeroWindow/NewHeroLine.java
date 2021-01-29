@@ -1,73 +1,87 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.selectNextHeroWindow;
-
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.GlobalValues;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
-import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
+import com.appatstudio.epicdungeontactics2.global.stats.FinancesStats;
+import com.appatstudio.epicdungeontactics2.view.financesScreen.FinancesUpgradeScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 
-public class NewHeroLine {
 
-    private static final float x = Gdx.graphics.getWidth() * 0.2f;
-    private static final float width = Gdx.graphics.getWidth() * 0.6f;
+public final class NewHeroLine extends Image {
 
-    private TextWithIcon iconAndName;
-    private TextWithIcon lvl;
+    private static final float X, ICON_SIZE, WIDTH;
+    private final float y;
+    private boolean isAvailable;
+    private final CharacterEnum characterEnum;
+    private final MultiLineText title;
+    private static SpriteDrawable bgAlpha = GraphicsManager.getGuiElement(GuiElementEnum.BLACK_ALPHA_50percent);
 
-    private CharacterEnum characterEnum;
-    private boolean isOk;
+    static {
+        X = Gdx.graphics.getWidth() * 0.2f;
+        WIDTH = Gdx.graphics.getWidth() * 0.6f;
+        ICON_SIZE = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth() * 0.15f;
+    }
 
-    NewHeroLine(CharacterEnum hero, int lvl, float y, boolean isOk) {
-        this.isOk = isOk;
-        this.characterEnum = hero;
+    NewHeroLine(CharacterEnum characterEnum, float y) {
+        super(GraphicsManager.getHead(characterEnum));
+        this.y = y;
+        this.characterEnum = characterEnum;
 
-        iconAndName = new TextWithIcon(
-                GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE).getKeyFrame(0),
+        this.setPosition(X, y);
+        this.setSize(ICON_SIZE, ICON_SIZE);
+
+        title = new MultiLineText(
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getCharacterName(hero),
-                x,
-                y,
+                StringsManager.getCharacterName(characterEnum) + " lvl." + SavedInfoManager.getCharacterLvl(characterEnum),
+                X + ICON_SIZE * 1.2f,
+                WIDTH - ICON_SIZE * 1.2f,
+                this.y + ICON_SIZE * 0.8f,
                 Align.left
         );
 
-        this.lvl = new TextWithIcon(
-                GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
-                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
-                lvl + "lvl",
-                x + width,
-                y,
-                Align.right
-        );
-    }
+        isAvailable = ! (StatTracker.getUsedCharacters().contains(characterEnum, false));
 
-    void setUsed() {
-        isOk = false;
-        iconAndName.setFont(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED));
-    }
-
-    void draw(SpriteBatch batch) {
-        if (isOk) batch.getColor().a = 1f;
-        else batch.getColor().a = 0.5f;
-
-        iconAndName.draw(batch);
-
-        batch.getColor().a = 1;
-
-        lvl.draw(batch);
-    }
-
-    boolean tap(float tapX, float tapY) {
-        return x > tapX && tapX < x + width &&
-                tapY > iconAndName.getIconY() && tapY < iconAndName.getIconY() + iconAndName.getIconHeight() && isOk;
+        if (!isAvailable) {
+            this.getColor().a = 0.3f;
+        }
     }
 
     CharacterEnum getCharacterEnum() {
         return characterEnum;
+    }
+
+    public void draw(Batch batch, float parentAlpha, boolean isSelected) {
+        if (isSelected) bgAlpha.draw(batch, this.getX(), this.getY(), Gdx.graphics.getWidth() * 0.60f, this.getHeight());
+        super.draw(batch, parentAlpha);
+        title.draw(batch);
+        batch.getColor().a = 1f;
+    }
+
+    public boolean tap(float x, float y) {
+        return x > X && x < X + WIDTH &&
+                y > this.y && y < this.y + ICON_SIZE;
+    }
+
+    static float getIconHeight() {
+        return ICON_SIZE;
+    }
+    public static float getIconSize() {
+        return ICON_SIZE;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 }

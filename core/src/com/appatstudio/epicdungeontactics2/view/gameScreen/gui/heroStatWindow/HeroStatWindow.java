@@ -16,6 +16,7 @@ import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.StatusBarContainer;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineTextWithIcon;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
@@ -335,6 +336,19 @@ public class HeroStatWindow {
                 perkText
         );
 
+    }
+
+    public void refreshBars() {
+        float currHp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.HP);
+        float currMp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.MP);
+        float currExp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.EXP);
+        float maxHp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.HP);
+        float maxMp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.MP);
+        float maxExp = StatTracker.getCurrentStat(CompleteHeroStatsEnum.EXP);
+
+        hpStat.setText("hp: " + currHp + "/" + maxHp);
+        hpStat.setText("hp: " + currMp + "/" + maxMp);
+        hpStat.setText("hp: " + currExp + "/" + maxExp);
     }
 
     public boolean isUp() {

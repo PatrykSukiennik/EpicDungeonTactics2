@@ -195,6 +195,21 @@ public class MapTile {
                         WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
                 break;
             }
+            case ATTACKABLE: {
+                pathfindingFlagSprites.get(MapPathFindingFlags.ATTACKABLE).draw(
+                        batch,
+                        this.positionFloat.x, this.positionFloat.y,
+                        WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+                break;
+            }
+            case ROOM_NODE:
+            case NEW_STAGE: {
+                pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
+                        batch,
+                        this.positionFloat.x, this.positionFloat.y,
+                        WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+                break;
+            }
         }
     }
 }

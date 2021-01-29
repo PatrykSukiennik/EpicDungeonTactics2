@@ -119,6 +119,8 @@ public class ShopWindow {
                     if (shopSegment.get(shop).hasSpace()) {
                         shopSegment.get(shop).addItem(currItem);
                         backpackSegment.itemDropped(currItem);
+                        GlobalValues.addGold(currItem.getValue());
+                        HeroSegment.itemDropped(currItem);
                         currItem = null;
                         backpackSegment.selectItem(null);
                         shopSegment.get(shop).selectItem(null);
@@ -127,6 +129,9 @@ public class ShopWindow {
                     if (backpackSegment.isSpaceFor(currItem)
                             && GlobalValues.getGold() >= currItem.getValue() * BUY_VALUE_MULTIPLIER) {
                         EquipmentWindow.pickItem(currItem);
+                        GlobalValues.minusGold((int)(currItem.getValue() * BUY_VALUE_MULTIPLIER));
+                        shopSegment.get(shop).deleteItem(currItem);
+                        HeroSegment.equipIfIsSpace(currItem);
                         currItem = null;
                         backpackSegment.selectItem(null);
                         shopSegment.get(shop).selectItem(null);

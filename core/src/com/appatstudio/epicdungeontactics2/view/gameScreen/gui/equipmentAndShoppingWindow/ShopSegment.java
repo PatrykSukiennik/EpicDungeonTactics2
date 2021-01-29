@@ -196,4 +196,23 @@ public class ShopSegment extends AbstractSegment {
             }
         }
     }
+
+    public void deleteItem(AbstractItem currItem) {
+        for (int i=0; i<8; i++) {
+            if (itemsToBuy[i].getItem() == currItem) {
+                itemsToBuy[i].setItem(null);
+                cleanUp();
+                break;
+            }
+        }
+    }
+
+    private void cleanUp() {
+        for (int i=0; i < 7; i++) {
+            if (itemsToBuy[i].getItem() == null && itemsToBuy[i + 1].getItem() != null) {
+                itemsToBuy[i].setItem(itemsToBuy[i + 1].getItem());
+                itemsToBuy[i + 1].setItem(null);
+            }
+        }
+    }
 }

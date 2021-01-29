@@ -22,7 +22,7 @@ public class BackpackSegment extends AbstractSegment {
 
     private static float posY = Gdx.graphics.getHeight()/2f - AbstractSegment.getFullHeight()/2f;
 
-    BackpackSegment(CharacterEnum hero) {
+    public BackpackSegment(CharacterEnum hero) {
         currShelf = ItemBackpackShelfEnum.MELE;
 
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_BACKPACK);
@@ -38,7 +38,7 @@ public class BackpackSegment extends AbstractSegment {
     }
 
 
-    boolean isSpaceFor(AbstractItem item) {
+    public boolean isSpaceFor(AbstractItem item) {
         switch (item.getItemTypeEnum()) {
             case MELE:
                 return pages.get(ItemBackpackShelfEnum.MELE).isSpace();
@@ -60,13 +60,13 @@ public class BackpackSegment extends AbstractSegment {
         }
     }
 
-    void draw(Batch batch, AbstractItem currItem) {
+    public void draw(Batch batch, AbstractItem currItem) {
         bg.draw(batch, posX, getPosY(), fullWidth, fullHeight);
         pages.get(currShelf).draw(batch, currItem);
         categoryColumn.draw(batch, currShelf);
     }
 
-    AbstractItem getTapItem(float x, float y) {
+    public AbstractItem getTapItem(float x, float y) {
         if (x < posX + CategoryColumn.getW()) {
             currShelf = categoryColumn.getCategory(y);
             return null;
@@ -126,7 +126,7 @@ public class BackpackSegment extends AbstractSegment {
 
     }
 
-    void selectItem(AbstractItem item) {
+    public void selectItem(AbstractItem item) {
         if (item != null) {
             switch (item.getItemTypeEnum()) {
                 case STAFF:

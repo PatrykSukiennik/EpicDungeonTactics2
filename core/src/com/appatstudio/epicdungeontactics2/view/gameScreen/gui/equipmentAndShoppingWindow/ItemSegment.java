@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.Armor;
@@ -36,7 +37,7 @@ public class ItemSegment extends AbstractSegment {
 
     private AbstractItem selectedItem;
     private Image itemDrawable;
-    private ButtonWithText dropButton, buyButton, sellButton;
+    private ButtonWithText dropButton, buyButton, sellButton, keepButton, wasteButton;
 
     private HashMap<ItemRarityEnum, TextObject> titles;
 
@@ -81,6 +82,24 @@ public class ItemSegment extends AbstractSegment {
                 itemDrawable.getWidth(),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 StringsManager.getGuiString(GuiStringEnum.SELL)
+        );
+        keepButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.NONE),
+                itemDrawable.getX() - itemDrawable.getWidth() * 0.25f,
+                posY + fullHeight * 0.1f,
+                itemDrawable.getWidth() * 1.5f,
+                itemDrawable.getWidth(),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                StringsManager.getGuiString(GuiStringEnum.KEEP)
+        );
+        wasteButton = new ButtonWithText(
+                GraphicsManager.getGuiElement(GuiElementEnum.NONE),
+                itemDrawable.getX() - itemDrawable.getWidth() * 0.25f,
+                posY + fullHeight * 0.1f,
+                itemDrawable.getWidth() * 1.5f,
+                itemDrawable.getWidth(),
+                FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
+                StringsManager.getGuiString(GuiStringEnum.WASTE)
         );
 
         titles = new HashMap<>();
@@ -145,6 +164,14 @@ public class ItemSegment extends AbstractSegment {
             }
             case SELL: {
                 if (showButton) sellButton.draw(batch, 1f);
+                break;
+            }
+            case WASTE: {
+                if (showButton) wasteButton.draw(batch, 1f);
+                break;
+            }
+            case KEEP: {
+                if (showButton) keepButton.draw(batch, 1f);
                 break;
             }
         }
@@ -382,7 +409,7 @@ public class ItemSegment extends AbstractSegment {
         }
     }
 
-    boolean isButtonClicked(float x, float y) {
+    public boolean isButtonClicked(float x, float y) {
         return dropButton.tap(x, y);
     }
 
@@ -391,4 +418,5 @@ public class ItemSegment extends AbstractSegment {
         return showDrop && x > posX && x < posX + fullWidth
                 && y > posY && y < posY + fullHeight;
     }
+
 }

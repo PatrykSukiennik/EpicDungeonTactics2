@@ -125,7 +125,7 @@ public class CameraHandler extends Actor {
                 movingPoint.addAction(
                         Actions.sequence(
                         Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() + WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
-                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f,  WorldConfig.TILE_SIZE * 2f, 0.0001f),
+                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f,  WorldConfig.TILE_SIZE * 2f, 0),
                                 Actions.moveBy(0, -WorldConfig.TILE_SIZE, 0.8f))
                 );
                 break;
@@ -152,7 +152,7 @@ public class CameraHandler extends Actor {
                 movingPoint.addAction(
                         Actions.sequence(
                                 Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, movingPoint.getY() - WorldConfig.ROOM_HEIGHT_RES/2f, 0.8f),
-                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES - WorldConfig.TILE_SIZE * 2f, 0.0001f),
+                                Actions.moveTo(WorldConfig.ROOM_WIDTH_RES/2f, WorldConfig.ROOM_HEIGHT_RES - WorldConfig.TILE_SIZE * 2f, 0),
                                 Actions.moveBy(0, WorldConfig.TILE_SIZE, 0.8f))
                 );
                 break;

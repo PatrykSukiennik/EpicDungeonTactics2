@@ -4,8 +4,6 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
-import com.appatstudio.epicdungeontactics2.global.managers.map.LightConfigObject;
-import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
@@ -14,9 +12,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.HashMap;
-
-import box2dLight.PointLight;
-import box2dLight.RayHandler;
 
 import static com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum.DEX;
 import static com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum.INT;
@@ -44,7 +39,7 @@ public abstract class AbstractCharacter {
 
         this.stats = new HashMap<>();
         CharacterPrototype basicPrototype = CharacterStats.getPrototype(characterEnum);
-        CharacterPrototype lvlPrototype = CharacterStats.getEnemeyLvlUpStats(characterEnum);
+        CharacterPrototype lvlPrototype = CharacterStats.getEnemyLvlUpStats(characterEnum);
         this.stats.put(STR, basicPrototype.getSTR() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getSTR());
         this.stats.put(INT, basicPrototype.getINT() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getINT());
         this.stats.put(VIT, basicPrototype.getVIT() + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL) * lvlPrototype.getVIT());
@@ -77,4 +72,5 @@ public abstract class AbstractCharacter {
     public int getStat(StatisticEnum stat) {
         return stats.get(stat);
     }
+
 }

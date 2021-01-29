@@ -33,6 +33,6 @@ public class AutonomousCharacter extends CharacterDrawable {
     @Override
     public void drawTop(Batch guiBatch) {
         super.drawTop(guiBatch);
-        if (statBar != null)statBar.draw(guiBatch);
+        if (statBar != null) statBar.draw(guiBatch);
     }
 }

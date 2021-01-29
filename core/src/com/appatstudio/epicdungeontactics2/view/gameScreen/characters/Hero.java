@@ -38,4 +38,9 @@ public class Hero extends CharacterDrawable {
     public int getMeleDamage() {
         return (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MELE_DMG);
     }
+
+    @Override
+    public void dmgGet(int dmg) {
+        StatTracker.hpEffect(-dmg);
+    }
 }
