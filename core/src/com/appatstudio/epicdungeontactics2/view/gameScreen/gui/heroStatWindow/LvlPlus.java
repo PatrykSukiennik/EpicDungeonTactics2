@@ -52,7 +52,7 @@ public class LvlPlus extends Image {
             batch.getColor().a = 0.3f;
             super.getDrawable().draw(batch, this.getX(), this.getY(), this.getWidth(), this.getHeight());
             batch.getColor().a = 0.6f;
-            pointsObject.draw(batch);
+            //pointsObject.draw(batch);
         }
         else {
             act(Gdx.graphics.getDeltaTime());
@@ -61,5 +61,9 @@ public class LvlPlus extends Image {
             pointsObject.draw(batch);
             batch.getColor().a = 1f;
         }
+    }
+
+    public void minusPoint() {
+        this.availablePoints--;
     }
 }

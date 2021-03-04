@@ -100,7 +100,7 @@ mapChances.put(STAGE_3_FIRST_1, 100);
         Stage stageResult = new Stage();
 
         int roomCount =
-                (EpicDungeonTactics.random.nextInt() %
+                (Math.abs(EpicDungeonTactics.random.nextInt()) %
                         (WorldConfig.STAGE_MAX_ROOMS - WorldConfig.STAGE_MIN_ROOMS))
                         + WorldConfig.STAGE_MIN_ROOMS;
 
@@ -113,14 +113,14 @@ mapChances.put(STAGE_3_FIRST_1, 100);
         int generatedInThisLoop = 0;
 
 
-        for (int i = 1; i < roomCount; i++) {
+        while (result.size < roomCount) {
 
             for (int j = 0; j < generatedInLastLoop; j++) { //loop for "newest" rooms
 
                 CoordsInt tempCoords = result.get(result.size - generatedInLastLoop + j).getPosition();
 
                 if (isFree(result, tempCoords.x - 1, tempCoords.y)) { //left
-                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
+                    if (EpicDungeonTactics.random.nextFloat() <  ((Math.abs(tempCoords.y) % 2 == 0) ? 0.25f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -132,7 +132,7 @@ mapChances.put(STAGE_3_FIRST_1, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x + 1, tempCoords.y)) { //right
-                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.y) % 2 == 0) ? 0.25f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -144,7 +144,7 @@ mapChances.put(STAGE_3_FIRST_1, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y - 1)) { //bottom
-                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.25f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -156,7 +156,7 @@ mapChances.put(STAGE_3_FIRST_1, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y + 1)) { //top
-                    if (EpicDungeonTactics.random.nextFloat() < 0.25f) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.25f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -170,7 +170,9 @@ mapChances.put(STAGE_3_FIRST_1, 100);
 
             }
 
-            if (generatedInThisLoop == 0) i--;
+            if (generatedInThisLoop == 0) {
+                generatedInThisLoop = generatedInLastLoop;
+            }
             else {
                 generatedInLastLoop = generatedInThisLoop;
                 generatedInThisLoop = 0;
@@ -214,6 +216,7 @@ mapChances.put(STAGE_3_FIRST_1, 100);
             }
             result.get(i).createNodes();
         }
+
         stageResult.setRooms(result);
         return stageResult;
     }

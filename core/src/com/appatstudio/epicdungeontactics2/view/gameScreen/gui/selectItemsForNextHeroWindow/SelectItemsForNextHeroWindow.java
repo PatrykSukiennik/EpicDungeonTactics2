@@ -126,12 +126,13 @@ public class SelectItemsForNextHeroWindow {
             //GuiContainer.newHero();
             GameScreen.newHero(hero, itemsForNewHeroSegment.getItems());
             hide();
+            return true;
         }
         else {
             currItem = null;
-            isUp = false;
+            return false;
         }
-        return true;
+        return false;
     }
 
     public void show(CharacterEnum hero) {

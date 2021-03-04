@@ -33,8 +33,8 @@ public class WorldConfig {
     public static final float CAMERA_ZOOM_LIMIT_MIN = INIT_CAMERA_ZOOM * 0.6f;
     public static final float CAMERA_ZOOM_LIMIT_MAX = INIT_CAMERA_ZOOM * 1.4f;
 
-    public static final int STAGE_MIN_ROOMS = 15;
-    public static final int STAGE_MAX_ROOMS = 25;
+    public static final int STAGE_MIN_ROOMS = 7;
+    public static final int STAGE_MAX_ROOMS = 11;
 
     public static final float MOVE_SPEED_CLEAN = 0.04f;
     public static final float MOVE_SPEED_FIGHT = 0.12f;

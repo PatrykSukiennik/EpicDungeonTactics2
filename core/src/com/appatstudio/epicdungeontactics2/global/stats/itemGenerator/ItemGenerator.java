@@ -51,20 +51,25 @@ public class ItemGenerator {
 
     public static AbstractItem getItem() {
         ItemTypeEnum type = getType();
-        return createItem(getItemEnum(type), type, true);
+        return createItem(getItemEnum(type, false), type, true, false);
+    }
+
+    public static AbstractItem getItemUnique() {
+        ItemTypeEnum type = getType();
+        return createItem(getItemEnum(type, true), type, true, true);
     }
 
     public static AbstractItem getItem(ItemEnum itemEnum) {
-        return createItem(itemEnum, AbstractItem.getItemTypeEnum(itemEnum), true);
+        return createItem(itemEnum, AbstractItem.getItemTypeEnum(itemEnum), true, false);
     }
 
     public static AbstractItem getItem(ItemTypeEnum typeEnum) {
-        ItemEnum item = getItemEnum(typeEnum);
-        return createItem(item, typeEnum, true);
+        ItemEnum item = getItemEnum(typeEnum, false);
+        return createItem(item, typeEnum, true, false);
     }
 
     public static AbstractItem getItemNoPerks(ItemEnum item, ItemTypeEnum type) {
-        return createItem(getItemEnum(type), type, false);
+        return createItem(getItemEnum(type, false), type, false, false);
     }
 
     public static void refresh() {
@@ -109,22 +114,26 @@ public class ItemGenerator {
         return types[0];
     }
 
-    private static ItemEnum getItemEnum(ItemTypeEnum type) {
+    private static ItemEnum getItemEnum(ItemTypeEnum type, boolean isUnique) {
         int temp = 0;
         int result = Math.abs(EpicDungeonTactics.random.nextInt()) % itemTypeSum;
+        int lvlNow = isUnique ? lvl + 5 : lvl;
 
         Set<ItemEnum> items = ItemGeneratorConfig.basicItemChance.get(type).keySet();
 
         for (ItemEnum item : items) {
             temp += ItemGeneratorConfig.basicItemChance.get(type).get(item) +
-                    lvl * ItemGeneratorConfig.lvlItemChance.get(type).get(item);
+                    lvlNow * ItemGeneratorConfig.lvlItemChance.get(type).get(item);
 
             if (result <= temp) return item;
         }
         return (ItemEnum) items.toArray()[0];
     }
 
-    private static AbstractItem createItem(ItemEnum itemEnum, ItemTypeEnum typeEnum, boolean withPerks) {
+    private static AbstractItem createItem(ItemEnum itemEnum, ItemTypeEnum typeEnum, boolean withPerks, boolean isUnique) {
+        int lvlNow = isUnique ? lvl + 5 : lvl;
+
+
         switch (typeEnum) {
             case ARMOR:
                 ArmorPrototype prototypeArmor = ItemStatsConfig.basicArmorStats.get(itemEnum);
@@ -132,10 +141,10 @@ public class ItemGenerator {
                 return new Armor(
                         itemEnum,
                         typeEnum,
-                        prototypeArmor.getVALUE() + lvl * lvlPrototypeArmor.getVALUE(),
+                        prototypeArmor.getVALUE() + lvlNow * lvlPrototypeArmor.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeArmor.getARMOR() + lvl * lvlPrototypeArmor.getARMOR(),
-                        prototypeArmor.getMOVE_SPEED_COST() + lvl * lvlPrototypeArmor.getMOVE_SPEED_COST(),
+                        prototypeArmor.getARMOR() + lvlNow * lvlPrototypeArmor.getARMOR(),
+                        prototypeArmor.getMOVE_SPEED_COST() + lvlNow * lvlPrototypeArmor.getMOVE_SPEED_COST(),
                         prototypeArmor.getRARITY()
                 );
 
@@ -145,10 +154,10 @@ public class ItemGenerator {
                 return new Arrow(
                         itemEnum,
                         typeEnum,
-                        prototypeArrow.getVALUE() + lvl * lvlPrototypeArrow.getVALUE(),
+                        prototypeArrow.getVALUE() + lvlNow * lvlPrototypeArrow.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeArrow.getRANGE_EFFECT() + lvl * lvlPrototypeArrow.getRANGE_EFFECT(),
-                        prototypeArrow.getDMG_EFFECT() + lvl * lvlPrototypeArrow.getDMG_EFFECT(),
+                        prototypeArrow.getRANGE_EFFECT() + lvlNow * lvlPrototypeArrow.getRANGE_EFFECT(),
+                        prototypeArrow.getDMG_EFFECT() + lvlNow * lvlPrototypeArrow.getDMG_EFFECT(),
                         prototypeArrow.getRARITY()
                 );
 
@@ -158,10 +167,10 @@ public class ItemGenerator {
                 return new Bow(
                         itemEnum,
                         typeEnum,
-                        prototypeBow.getVALUE() + lvl * lvlPrototypeBow.getVALUE(),
+                        prototypeBow.getVALUE() + lvlNow * lvlPrototypeBow.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeBow.getRANGE() + lvl * prototypeBow.getRANGE(),
-                        prototypeBow.getDMG() + lvl * prototypeBow.getDMG(),
+                        prototypeBow.getRANGE() + lvlNow * prototypeBow.getRANGE(),
+                        prototypeBow.getDMG() + lvlNow * prototypeBow.getDMG(),
                         prototypeBow.getRARITY()
                 );
 
@@ -171,9 +180,9 @@ public class ItemGenerator {
                 return new Book(
                         itemEnum,
                         typeEnum,
-                        prototypeBook.getVALUE() + lvl * lvlPrototypeBook.getVALUE(),
+                        prototypeBook.getVALUE() + lvlNow * lvlPrototypeBook.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        (int)(prototypeBook.getEXP() + lvl * 0.1f * lvlPrototypeBook.getEXP()),
+                        (int)(prototypeBook.getEXP() + lvlNow * 0.1f * lvlPrototypeBook.getEXP()),
                         prototypeBook.getRARITY()
                 );
 
@@ -183,10 +192,10 @@ public class ItemGenerator {
                 return new Food(
                         itemEnum,
                         typeEnum,
-                        prototypeFood.getVALUE() + lvl * lvlPrototypeFood.getVALUE(),
+                        prototypeFood.getVALUE() + lvlNow * lvlPrototypeFood.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeFood.getHP_EFFECT() + lvl * lvlPrototypeFood.getHP_EFFECT(),
-                        prototypeFood.getMP_EFFECT() + lvl * lvlPrototypeFood.getMP_EFFECT(),
+                        prototypeFood.getHP_EFFECT() + lvlNow * lvlPrototypeFood.getHP_EFFECT(),
+                        prototypeFood.getMP_EFFECT() + lvlNow * lvlPrototypeFood.getMP_EFFECT(),
                         prototypeFood.getRARITY()
                 );
 
@@ -197,9 +206,9 @@ public class ItemGenerator {
                 return new Helmet(
                         itemEnum,
                         typeEnum,
-                        prototypeHelmet.getVALUE() + lvl * lvlPrototypeHelmet.getVALUE(),
+                        prototypeHelmet.getVALUE() + lvlNow * lvlPrototypeHelmet.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeHelmet.getARMOR() + lvl * lvlPrototypeHelmet.getARMOR(),
+                        prototypeHelmet.getARMOR() + lvlNow * lvlPrototypeHelmet.getARMOR(),
                         prototypeHelmet.getRARITY()
                 );
 
@@ -210,10 +219,10 @@ public class ItemGenerator {
                 return new MeleWeapon(
                         itemEnum,
                         typeEnum,
-                        prototypeMele.getVALUE() + lvl * lvlPrototypeMele.getVALUE(),
+                        prototypeMele.getVALUE() + lvlNow * lvlPrototypeMele.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeMele.getDMG() + lvl * lvlPrototypeMele.getDMG(),
-                        prototypeMele.getSPEED_EFFECT() + lvl * lvlPrototypeMele.getSPEED_EFFECT(),
+                        prototypeMele.getDMG() + lvlNow * lvlPrototypeMele.getDMG(),
+                        prototypeMele.getSPEED_EFFECT() + lvlNow * lvlPrototypeMele.getSPEED_EFFECT(),
                         prototypeMele.getRARITY()
                 );
 
@@ -224,9 +233,9 @@ public class ItemGenerator {
                 return new Necklace(
                         itemEnum,
                         typeEnum,
-                        prototypeNecklace.getVALUE() + lvl * lvlPrototypeNecklace.getVALUE(),
+                        prototypeNecklace.getVALUE() + lvlNow * lvlPrototypeNecklace.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeNecklace.getEFFECTS() + lvl * lvlPrototypeNecklace.getEFFECTS(),
+                        prototypeNecklace.getEFFECTS() + lvlNow * lvlPrototypeNecklace.getEFFECTS(),
                         prototypeNecklace.getRARITY()
                 );
 
@@ -237,9 +246,9 @@ public class ItemGenerator {
                 return new Ring(
                         itemEnum,
                         typeEnum,
-                        prototypeRing.getVALUE() + lvl * lvlPrototypeRing.getVALUE(),
+                        prototypeRing.getVALUE() + lvlNow * lvlPrototypeRing.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeRing.getEFFECTS() + lvl * lvlPrototypeRing.getEFFECTS(),
+                        prototypeRing.getEFFECTS() + lvlNow * lvlPrototypeRing.getEFFECTS(),
                         prototypeRing.getRARITY()
                 );
 
@@ -250,10 +259,10 @@ public class ItemGenerator {
                 return new Shield(
                         itemEnum,
                         typeEnum,
-                        prototypeShield.getVALUE() + lvl * lvlPrototypeShield.getVALUE(),
+                        prototypeShield.getVALUE() + lvlNow * lvlPrototypeShield.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
-                        prototypeShield.getARMOR() + lvl * lvlPrototypeShield.getARMOR(),
-                        prototypeShield.getSPEED_EFFECT() + lvl * lvlPrototypeShield.getSPEED_EFFECT(),
+                        prototypeShield.getARMOR() + lvlNow * lvlPrototypeShield.getARMOR(),
+                        prototypeShield.getSPEED_EFFECT() + lvlNow * lvlPrototypeShield.getSPEED_EFFECT(),
                         prototypeShield.getRARITY()
                 );
 
@@ -264,12 +273,12 @@ public class ItemGenerator {
                 return new Staff(
                         itemEnum,
                         typeEnum,
-                        prototypeStaff.getVALUE() + lvl * lvlPrototypeStaff.getVALUE(),
+                        prototypeStaff.getVALUE() + lvlNow * lvlPrototypeStaff.getVALUE(),
                         withPerks ? generateEffects(typeEnum) : new Array<ItemEffect>(),
                         prototypeStaff.getSPELL(),
-                        prototypeStaff.getDMG() + lvl * lvlPrototypeStaff.getDMG(),
-                        prototypeStaff.getSPELL_CHANCE() + lvl * lvlPrototypeStaff.getSPELL_CHANCE(),
-                        prototypeStaff.getSPEED_EFFECT() + lvl * lvlPrototypeStaff.getSPEED_EFFECT(),
+                        prototypeStaff.getDMG() + lvlNow * lvlPrototypeStaff.getDMG(),
+                        prototypeStaff.getSPELL_CHANCE() + lvlNow * lvlPrototypeStaff.getSPELL_CHANCE(),
+                        prototypeStaff.getSPEED_EFFECT() + lvlNow * lvlPrototypeStaff.getSPEED_EFFECT(),
                         prototypeStaff.getRARITY()
                 );
 

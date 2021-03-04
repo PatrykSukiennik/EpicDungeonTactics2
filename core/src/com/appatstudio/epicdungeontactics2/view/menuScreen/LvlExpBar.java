@@ -19,13 +19,13 @@ public final class LvlExpBar {
 
         bgW = iconW/2f;
         bgModifX = -bgW/2f;
-        barModifX = bgModifX + (1/75f) * bgW;
-        bgH = bgW / 15f;
+        barModifX = bgModifX + (8/100f) * bgW;
+        bgH = bgW * (9/100f);
         bgModifY = -bgH;
-        float maxBarW = bgW * (13/15f);
-        barH = (4/5f) * bgH;
+        float maxBarW = bgW * (84/100f);
+        barH = (5/9f) * bgH;
         barW = ((float) exp / expCap) * maxBarW;
-        barModifY = -(14/15f) * bgH;
+        barModifY = bgModifY + (2/9f) * bgH;
 
         bg = GraphicsManager.getGuiElement(GuiElementEnum.LVL_EXP_BAR_BG);
         bar = GraphicsManager.getGuiElement(GuiElementEnum.LVL_EXP_BAR);

@@ -6,6 +6,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackSh
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.AbstractSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.BackpackSegment;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
@@ -139,6 +140,13 @@ public class BackpackPage {
                 cleanUp();
                 return;
             }
+        }
+        StatTracker.refreshWholeCharacter();
+    }
+
+    public void clear() {
+        for (ItemBlock i : items) {
+            i.setItem(null);
         }
     }
 }

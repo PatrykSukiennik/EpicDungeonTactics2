@@ -18,11 +18,12 @@ public class DamageGiving extends AbstractCharacterAction{
 
     @Override
     public boolean act(float delta) {
-        target.dmgGet(dmg);
         if (target.isHero()) {
             CommunicatePrinter.dmgGot(dmg, StringsManager.getCharacterName(target.getCharacterEnum()), isCrit);
         }
         else CommunicatePrinter.dmgDealt(dmg, StringsManager.getCharacterName(target.getCharacterEnum()), isCrit);
+
+        target.dmgGet(dmg);
         return true;
     }
 }

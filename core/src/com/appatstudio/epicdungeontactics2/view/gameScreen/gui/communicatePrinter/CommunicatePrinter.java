@@ -43,7 +43,7 @@ public final class CommunicatePrinter {
     public static void dmgGot(int dmg, String enemyName, boolean isCrit) {
         BitmapFont font = FontsManager.getFont(
                 isCrit ? FontEnum.COMMUNICATE_DARK_RED : FontEnum.COMMUNICATE_RED);
-        String text = enemyName + StringsManager.getCommunicate(CommunicatesEnum.DMG_GET) + " " + dmg;
+        String text = enemyName + " " + StringsManager.getCommunicate(CommunicatesEnum.DMG_GET) + " " + dmg;
         if (isCrit) text += " " + StringsManager.getCommunicate(CommunicatesEnum.CRITICAL);
         print(new CommunicateObject(font, text));
     }
@@ -115,6 +115,11 @@ public final class CommunicatePrinter {
         }
     }
 
+    public void clear() {
+        for (int i=0; i<COMMUNICATE_LIMIT; i++) {
+            communicates[i] = null;
+        }
+    }
 
 
 }

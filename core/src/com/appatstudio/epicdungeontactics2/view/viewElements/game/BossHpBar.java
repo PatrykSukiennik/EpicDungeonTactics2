@@ -51,13 +51,15 @@ public class BossHpBar extends Image {
     }
 
     public void draw(Batch batch) {
-        super.draw(batch, 1f);
-        hpBar.draw(batch,
-                this.getX() + hpBarOffset.x,
-                this.getY() + hpBarOffset.y,
-                ((float)boss.getStats().getCurrHp() / (float)boss.getStats().getMaxHp()) * maxHpW,
-                hpH);
-        text.draw(batch);
+        if (boss.getStats().getCurrHp() > 0) {
+            super.draw(batch, 1f);
+            hpBar.draw(batch,
+                    this.getX() + hpBarOffset.x,
+                    this.getY() + hpBarOffset.y,
+                    ((float) boss.getStats().getCurrHp() / (float) boss.getStats().getMaxHp()) * maxHpW,
+                    hpH);
+            text.draw(batch);
+        }
     }
 
 }

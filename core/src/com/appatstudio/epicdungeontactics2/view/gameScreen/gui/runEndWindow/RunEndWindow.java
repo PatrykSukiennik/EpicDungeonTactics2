@@ -10,10 +10,14 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.viewElements.ButtonWithText;
+import com.appatstudio.epicdungeontactics2.view.viewElements.MultiLineText;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextObject;
 import com.appatstudio.epicdungeontactics2.view.viewElements.TextWithIcon;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,7 +29,7 @@ public class RunEndWindow {
     private Image bg;
     private boolean isUp = false;
 
-    private TextObject title;
+    private MultiLineText title;
     private TextWithIcon stage;
     private TextWithIcon roomsCleared;
     private TextWithIcon goldCollected;
@@ -41,21 +45,21 @@ public class RunEndWindow {
         Array<CharacterEnum> usedCharacters = StatTracker.getUsedCharacters();
         expLines = new CharacterExpLine[usedCharacters.size];
 
-        float segmentHeight = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 1.2f;
+        float segmentHeight = FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 3f;
         float fullHeight = (4 + expLines.length) * segmentHeight;
         float startY = Gdx.graphics.getHeight()/2f - fullHeight/2f;
 
-        for (int i=0; i<usedCharacters.size; i++) {
+        for (int i=usedCharacters.size-1; i>=0; i--) {
             expLines[i] = new CharacterExpLine(usedCharacters.get(i),
                     StatTracker.getExpCollected().get(usedCharacters.get(i)),
                     StatTracker.getLvlUps().get(usedCharacters.get(i)),
-                    startY + i * segmentHeight);
+                    startY + (usedCharacters.size - 1 - i) * segmentHeight);
         }
 
         killedEnemies = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.KILLED_ENEMIES) + killedEnemies,
+                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.KILLED_ENEMIES) + " " + GameScreen.getInstance().getKilledEnemies(),
                 Gdx.graphics.getWidth()/2f,
                 startY + (expLines.length) * segmentHeight + segmentHeight,
                 Align.center
@@ -64,7 +68,7 @@ public class RunEndWindow {
         goldCollected = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.GOLD_COLLECTED) + goldCollected,
+                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.GOLD_COLLECTED) + " " + GameScreen.getInstance().getGoldCollected(),
                 Gdx.graphics.getWidth()/2f,
                 startY + (expLines.length) * segmentHeight + segmentHeight * 2,
                 Align.center
@@ -73,7 +77,7 @@ public class RunEndWindow {
         roomsCleared = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED) + roomsCleared,
+                StringsManager.getPlayerStatDescription(PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED) + " " + GameScreen.getInstance().getRoomsCleared(),
                 Gdx.graphics.getWidth()/2f,
                 startY + (expLines.length) * segmentHeight + segmentHeight * 3,
                 Align.center
@@ -82,26 +86,27 @@ public class RunEndWindow {
         stage = new TextWithIcon(
                 GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
-                StringsManager.getGuiString(GuiStringEnum.STAGE) + stage,
+                StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + GameScreen.getCurrentStage(),
                 Gdx.graphics.getWidth()/2f,
                 startY + (expLines.length) * segmentHeight + segmentHeight * 4,
                 Align.center
         );
 
-        title = new TextObject(
+        title = new MultiLineText(
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.NO_HERO_LEFT),
                 Gdx.graphics.getWidth()/2f,
-                startY + (expLines.length) * segmentHeight + segmentHeight * 5.5f,
+                Gdx.graphics.getWidth() * 0.8f,
+                startY + (expLines.length) * segmentHeight + segmentHeight * 8f,
                 Align.center
         );
 
         finishButton = new ButtonWithText(
-                GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING),
-                Gdx.graphics.getWidth()/2f - segmentHeight * 1.5f,
-                startY - segmentHeight * 1.8f,
-                segmentHeight * 3,
-                segmentHeight * 1.5f,
+                GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_BUTTON_WIDE),
+                Gdx.graphics.getWidth()/2f - MenuScreen.BOTTOM_BUTTON_WIDTH/2f,
+                startY - MenuScreen.BOTTOM_BUTTON_HEIGHT * 1.8f,
+                MenuScreen.BOTTOM_BUTTON_WIDTH,
+                MenuScreen.BOTTOM_BUTTON_HEIGHT,
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.FINISH)
         );
@@ -110,7 +115,8 @@ public class RunEndWindow {
 
     public boolean tap(float x, float y) {
         if (finishButton.tap(x, y)) {
-            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
+            //EpicDungeonTactics.refreshMenu();
+            //EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
             return true;
         }
         else return false;

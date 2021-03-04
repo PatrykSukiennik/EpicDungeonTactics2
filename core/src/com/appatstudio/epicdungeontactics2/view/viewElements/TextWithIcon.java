@@ -101,10 +101,17 @@ public final class TextWithIcon {
                 iconX = posX - iconSize;
                 iconY = posY - iconSize / 2f;
                 textX = posX - wholeWidth;
-                textY = posY + iconSize;
+                textY = posY + iconSize / 2f;
                 break;
             }
+            case Align.topRight: {
+                iconX = posX + wholeWidth / 2f - iconSize;
+                iconY = posY - iconSize / 2f;
+                textX = posX - wholeWidth / 2f;
+                textY = posY + iconSize / 2f;
+            }
         }
+
     }
 
     public float getIconY() {

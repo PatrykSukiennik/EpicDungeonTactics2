@@ -37,7 +37,6 @@ public class BackpackSegment extends AbstractSegment {
         }
     }
 
-
     public boolean isSpaceFor(AbstractItem item) {
         switch (item.getItemTypeEnum()) {
             case MELE:
@@ -100,6 +99,9 @@ public class BackpackSegment extends AbstractSegment {
     }
 
     void pickItem(AbstractItem item) {
+        System.out.println("ITEM PICK: " + item.getItemEnum().toString());
+
+
         switch (item.getItemTypeEnum()) {
             case MELE:
                 pages.get(ItemBackpackShelfEnum.MELE).put(item);
@@ -224,5 +226,11 @@ public class BackpackSegment extends AbstractSegment {
                 break;
         }
         pages.get(currShelf).dropItem(currItem);
+    }
+
+    public void newRun() {
+        for (BackpackPage p : pages.values()) {
+            p.clear();
+        }
     }
 }

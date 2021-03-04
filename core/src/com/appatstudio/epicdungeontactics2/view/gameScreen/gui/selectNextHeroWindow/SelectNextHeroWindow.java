@@ -110,7 +110,10 @@ public final class SelectNextHeroWindow {
             return selectedEnum;
         }
 
-        return selectedEnum;
+        else {
+            selectedEnum = null;
+            return null;
+        }
     }
 
     public void show() {

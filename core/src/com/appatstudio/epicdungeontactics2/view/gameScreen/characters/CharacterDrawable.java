@@ -61,6 +61,7 @@ public class CharacterDrawable extends Image {
     protected boolean isHero = false;
     protected boolean isPet = false;
     protected boolean isEnemy = false;
+    protected boolean isBoss = false;
 
 
 
@@ -83,9 +84,9 @@ public class CharacterDrawable extends Image {
 
         int size = CharacterStats.getCharacterSize(characterEnum);
         CoordsFloat coords = WorldConfig.getDrawingCoord(position.x, position.y);
-        if (size > 1) {
-            coords.x -= (size/4f) * WorldConfig.TILE_SIZE;
-        }
+        //if (size > 1) {
+        //    coords.x -= (size/4f) * WorldConfig.TILE_SIZE;
+        //}
         this.setPosition(coords.x, coords.y);
         this.setSize(2f * WorldConfig.TILE_SIZE, 2f * WorldConfig.TILE_SIZE);
 
@@ -168,8 +169,9 @@ public class CharacterDrawable extends Image {
     public void dead() {
         System.out.println(characterEnum.toString() + "________");
         pointLight.remove(true);
-        room.getRoomCharacters().removeValue(this, false);
-        this.remove();
+        room.removeBody(body);
+        //room.getRoomCharacters().removeValue(this, false);
+        //this.remove();
     }
 
     public void dispose() {
@@ -211,10 +213,9 @@ public class CharacterDrawable extends Image {
 
         this.position = coords;
 
-        for (int i=CharacterStats.getCharacterSize(characterEnum)-1; i>=0; i--) {
-            tileStandingOn = room.getTiles()[coords.x + i][coords.y];
-            tileStandingOn.setCharacter(this, i==0);
-        }
+        tileStandingOn = room.getTiles()[coords.x][coords.y];
+        tileStandingOn.setCharacter(this, true);
+
     }
 
     public void setPositionForce(CoordsInt coords) {
@@ -226,11 +227,9 @@ public class CharacterDrawable extends Image {
         this.setPosition(newCoords.x, newCoords.y);
         this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
 
-        for (int i=CharacterStats.getCharacterSize(characterEnum)-1; i>=0; i--) {
-            tileStandingOn = room.getTiles()[coords.x + i][coords.y];
-            tileStandingOn.setCharacter(this, i==0);
-        }
 
+        tileStandingOn = room.getTiles()[coords.x][coords.y];
+        tileStandingOn.setCharacter(this, true);
 
     }
 
@@ -357,5 +356,13 @@ public class CharacterDrawable extends Image {
         projectile.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
 
         stateTime = EpicDungeonTactics.random.nextFloat();
+    }
+
+    public void setTargetTile(MapTile tapped) {
+        this.targetTile = tapped;
+    }
+
+    public boolean isBoss() {
+        return isBoss;
     }
 }

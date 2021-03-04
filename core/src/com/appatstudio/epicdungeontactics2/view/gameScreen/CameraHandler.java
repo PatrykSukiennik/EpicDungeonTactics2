@@ -194,6 +194,12 @@ public class CameraHandler extends Actor {
         blackOut.addAction(
                 Actions.fadeOut(4f)
         );
+
+        camera.zoom = WorldConfig.INIT_CAMERA_ZOOM;
+        currentZoom = WorldConfig.INIT_CAMERA_ZOOM;
+        camera.position.x = WorldConfig.ROOM_WIDTH_RES/2f;
+        camera.position.y = WorldConfig.ROOM_HEIGHT_RES/2f;
+        camera.update();
     }
 
     public static OrthographicCamera getCamera() {

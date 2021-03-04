@@ -1,13 +1,18 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import box2dLight.RayHandler;
 
@@ -23,6 +28,16 @@ public class Hero extends CharacterDrawable {
     }
 
     @Override
+    public void draw(Batch mapBatch) {
+        super.draw(mapBatch);
+
+        if (StatTracker.getProjectile().hasActions()) {
+            StatTracker.getProjectile().act(Gdx.graphics.getDeltaTime());
+            StatTracker.getProjectile().draw(mapBatch, 1f);
+        }
+    }
+
+    @Override
     protected void createStatsObject() {
         this.stats = new CharacterStatsObject(getCharacterEnum());
     }
@@ -31,6 +46,8 @@ public class Hero extends CharacterDrawable {
     public void setPosition(CoordsInt coords) {
         super.setPosition(coords);
         setTileStandingOn(room.getTiles()[coords.x][coords.y], true);
+
+        GuiContainer.setItemsToPick(null);
         if (this.isOnTarget()) GuiContainer.setItemsToPick(room.getTiles()[coords.x][coords.y].getItemsToPick());
     }
 
@@ -42,5 +59,15 @@ public class Hero extends CharacterDrawable {
     @Override
     public void dmgGet(int dmg) {
         StatTracker.hpEffect(-dmg);
+    }
+
+    @Override
+    public int getShotDamage() {
+        return (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.BOW_DMG);
+    }
+
+    @Override
+    public Image getProjectile() {
+        return StatTracker.getProjectile();
     }
 }

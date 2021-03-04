@@ -5,6 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiCharacterAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
@@ -15,9 +16,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.statusBars.EffectIcon;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -45,8 +44,10 @@ public final class GraphicsManager {
     private static Map<ItemTypeEnum, SpriteDrawable> itemCategoryIconsMap;
     private static Map<ItemRarityEnum, SpriteDrawable> itemRarityIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
+    private static Map<GuiCharacterAnimationEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> guiCharactersAnimations;
 
     private static Map<CharacterEnum, SpriteDrawable> characterProjectiles;
+    private static Map<ItemEnum, SpriteDrawable> weaponProjectiles;
     private static Map<CharacterEnum, SpriteDrawable> heroHeads;
 
     private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
@@ -87,6 +88,8 @@ public final class GraphicsManager {
 
     private static void loadItems(TextureAtlas atlas) {
         itemImages = new HashMap<>();
+        weaponProjectiles = new HashMap<>();
+
         ItemEnum[] allItems = ItemEnum.values();
         for (ItemEnum e : allItems) {
             String s = e.toString();
@@ -116,6 +119,11 @@ public final class GraphicsManager {
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("bows/" + s))));
+                weaponProjectiles.put(
+                        e,
+                        new SpriteDrawable(
+                                new Sprite(
+                                        atlas.findRegion("bows-projectile/" + s))));
 
             } else if (s.contains("FOOD")) {
                 itemImages.put(
@@ -158,6 +166,11 @@ public final class GraphicsManager {
                         new SpriteDrawable(
                                 new Sprite(
                                         atlas.findRegion("staffs/" + s))));
+                weaponProjectiles.put(
+                        e,
+                        new SpriteDrawable(
+                                new Sprite(
+                                        atlas.findRegion("staffs-projectile/" + s))));
 
             } else if (s.contains("SWORD")) {
                 itemImages.put(
@@ -279,6 +292,34 @@ public final class GraphicsManager {
         }
     }
 
+    private static void loadGuiHeroAnimations(TextureAtlas atlas) {
+        guiCharactersAnimations = new HashMap<>();
+        GuiCharacterAnimationEnum[] allAnimations = GuiCharacterAnimationEnum.values();
+
+        for (GuiCharacterAnimationEnum g : allAnimations) {
+
+            guiCharactersAnimations.put(g,
+                    new HashMap<CharacterStateEnum, Animation<SpriteDrawable>>());
+
+            guiCharactersAnimations.get(g).put(
+                    CharacterStateEnum.IDLE,
+                    createAnimation(
+                            atlas,
+                            "heroes/" + g.toString() + "/idle",
+                            CHARACTER_IDLE_FRAMETIME
+                    ));
+
+            guiCharactersAnimations.get(g).put(
+                    CharacterStateEnum.RUN,
+                    createAnimation(
+                            atlas,
+                            "heroes/" + g.toString() + "/run",
+                            CHARACTER_RUN_FRAMETIME
+                    ));
+
+        }
+    }
+
     private static void loadMapSprites(TextureAtlas atlas) {
         mapElementSprites = new HashMap<>();
         MapElementSpriteEnum[] allSprites = MapElementSpriteEnum.values();
@@ -340,6 +381,7 @@ public final class GraphicsManager {
 
         loadItems(guiAtlas);
         loadGuiElements(guiAtlas);
+        loadGuiHeroAnimations(guiAtlas);
 
         loadCharacters(worldAtlas);
         loadMapSprites(worldAtlas);
@@ -348,6 +390,10 @@ public final class GraphicsManager {
 
     public static Animation<SpriteDrawable> getCharactersAnimation(CharacterEnum c, CharacterStateEnum s) {
         return charactersAnimations.get(c).get(s);
+    }
+
+    public static Animation<SpriteDrawable> guiHeroAnimations(CharacterEnum c, CharacterStateEnum s) {
+        return guiCharactersAnimations.get(c).get(s);
     }
 
     public static SpriteDrawable getGuiElement(GuiElementEnum g) {
@@ -456,4 +502,9 @@ public final class GraphicsManager {
     public static SpriteDrawable getHead(CharacterEnum characterEnum) {
         return heroHeads.get(characterEnum);
     }
+
+    public static SpriteDrawable getProjectile(ItemEnum rangedWeapon) {
+        return weaponProjectiles.get(rangedWeapon);
+    }
+
 }

@@ -65,7 +65,7 @@ public class HeroSegment extends AbstractSegment {
 
     HeroSegment(CharacterEnum hero) {
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
-        heroAnimation = GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE);
+        heroAnimation = GraphicsManager.guiHeroAnimations(hero, CharacterStateEnum.IDLE);
         heroY = posY + fullHeight / 2f - heroSize / 3f;
 
         createHeroSpecifiedEquipment(hero);
@@ -74,11 +74,19 @@ public class HeroSegment extends AbstractSegment {
     public static Array<AbstractItem> getItems() {
         Array<AbstractItem> items = new Array<>();
 
-        for (ItemBlock item : eqItemBlocks) {
-            if (item.getItem() != null) items.add(item.getItem());
+        if (eqItemBlocks != null) {
+            for (ItemBlock item : eqItemBlocks) {
+                if (item.getItem() != null) items.add(item.getItem());
+            }
         }
 
         return items;
+    }
+
+    public void newRun() {
+        for (ItemBlock i : eqItemBlocks) {
+            i.setItem(null);
+        }
     }
 
     void draw(Batch batch, AbstractItem selectedItem) {
@@ -228,12 +236,18 @@ public class HeroSegment extends AbstractSegment {
     }
 
     public static void equipIfIsSpace(AbstractItem newItem) {
-        for (HeroEqItemBlock b : eqItemBlocks) {
-            if (b.getRequiredItem() == newItem.getItemTypeEnum()) {
-                EquipmentWindow.equipped(newItem, b.getItem());
-                b.setItem(newItem);
-                StatTracker.refreshWholeCharacter();
-                break;
+        if (EquipmentWindow.isSpaceFor(newItem)) {
+
+            //EquipmentWindow.pickItem(newItem);
+
+            for (HeroEqItemBlock b : eqItemBlocks) {
+                if (b.getRequiredItem() == newItem.getItemTypeEnum()) {
+                    EquipmentWindow.equipped(newItem, b.getItem());
+                    b.setItem(newItem);
+                    //StatTracker.equippedItems.add(newItem);
+                    StatTracker.refreshWholeCharacter();
+                    break;
+                }
             }
         }
     }

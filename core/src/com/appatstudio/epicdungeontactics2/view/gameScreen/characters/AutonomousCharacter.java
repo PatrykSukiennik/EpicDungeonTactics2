@@ -2,6 +2,8 @@ package com.appatstudio.epicdungeontactics2.view.gameScreen.characters;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.view.viewElements.game.StatBar;
@@ -34,5 +36,13 @@ public class AutonomousCharacter extends CharacterDrawable {
     public void drawTop(Batch guiBatch) {
         super.drawTop(guiBatch);
         if (statBar != null) statBar.draw(guiBatch);
+    }
+
+    @Override
+    public void dmgGet(int dmg) {
+        stats.dmgGot(dmg);
+        if (stats.getCurrHp() <= 0) {
+            GameScreen.getInstance().enemyDied(this);
+        }
     }
 }

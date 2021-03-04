@@ -5,6 +5,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.ItemSegmentMode;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackShelfEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
@@ -77,6 +78,11 @@ public final class EquipmentWindow {
         //play sound or whatever
     }
 
+    public static void newRun(CharacterEnum hero) {
+        heroSegment = new HeroSegment(hero);
+        backpackSegment = new BackpackSegment(hero);
+    }
+
     public void draw(Batch batch) {
         heroSegment.draw(batch, currItem);
         backpackSegment.draw(batch, currItem);
@@ -95,7 +101,11 @@ public final class EquipmentWindow {
 
     public boolean tap(float x, float y) {
         if (heroSegment.isTap(x, y)) {
-            if (currItem == null) currItem = heroSegment.getTapItem(x, y);
+            if (currItem == null) {
+                currItem = heroSegment.getTapItem(x, y);
+                backpackSegment.selectItem(currItem);
+                itemSegment.selectItem(currItem, ItemSegmentMode.NORMAL);
+            }
             else {
                 if (heroSegment.tapWithItem(x, y, currItem)) currItem = null;
             }

@@ -14,6 +14,8 @@ import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
@@ -64,6 +66,10 @@ public final class GameScreen extends Actor {
                     Gdx.graphics.getHeight() * 0.55f,
                     Align.center);
 
+    private static int killedEnemies = 0;
+    private static int goldCollected = 0;
+    private static int roomsCleared = 0;
+
     private static float freshRunTextDelay = 0f;
 
     private static StatTracker statTracker;
@@ -108,6 +114,11 @@ public final class GameScreen extends Actor {
         }
 
         guiContainer.newHero();
+
+        for (AbstractItem item : items) {
+            EquipmentWindow.pickItem(item);
+        }
+
         isStop = false;
         currRoom.moveFinished();
     }
@@ -116,12 +127,23 @@ public final class GameScreen extends Actor {
         currRoom.itemDropped(item);
     }
 
+    public void enemyDied(CharacterDrawable characterDrawable) {
+        currRoom.enemyDied(characterDrawable);
+        enemyKilled();
+    }
+
     public void startGame(CharacterEnum hero, PerkEnum perk) {
         this.hero = hero;
         this.perk = perk;
 
+        killedEnemies = 0;
+        goldCollected = 0;
+        roomsCleared = 0;
+
+        StatTracker.newRun(hero);
         StatTracker.init(hero, perk);
         stage = 1;
+        isStop = false;
 
         freshRunInit();
         guiContainer = GuiContainer.getInstance();
@@ -276,4 +298,30 @@ public final class GameScreen extends Actor {
     public static boolean isStop() {
         return isStop;
     }
+
+    public int getKilledEnemies() {
+        return killedEnemies;
+    }
+
+    public int getGoldCollected() {
+        return goldCollected;
+    }
+
+    public int getRoomsCleared() {
+        return roomsCleared;
+    }
+
+    public void enemyKilled() {
+        killedEnemies++;
+    }
+
+    public static void goldCollected(int addGold) {
+        goldCollected += addGold;
+    }
+
+    public static void roomCleared() {
+        roomsCleared++;
+    }
+
+
 }

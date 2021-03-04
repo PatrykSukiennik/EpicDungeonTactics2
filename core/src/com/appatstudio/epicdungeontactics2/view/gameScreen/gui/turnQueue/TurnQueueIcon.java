@@ -4,7 +4,6 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.ChangeAlphaAction;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -115,7 +114,7 @@ public class TurnQueueIcon extends Image {
         }
         else this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.NONE));
 
-        topSprite = GraphicsManager.getCharactersAnimation(
+        topSprite = GraphicsManager.guiHeroAnimations(
                 character.getCharacterEnum(), CharacterStateEnum.IDLE).getKeyFrame(0);
     }
 

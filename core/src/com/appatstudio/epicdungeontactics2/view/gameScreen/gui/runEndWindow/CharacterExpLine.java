@@ -23,7 +23,7 @@ public class CharacterExpLine {
 
     CharacterExpLine(CharacterEnum hero, int exp, boolean lvlUp, float y) {
         iconAndName = new TextWithIcon(
-                GraphicsManager.getCharactersAnimation(hero, CharacterStateEnum.IDLE).getKeyFrame(0),
+                GraphicsManager.getHead(hero),
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED),
                 StringsManager.getCharacterName(hero),
                 x,
@@ -32,7 +32,7 @@ public class CharacterExpLine {
         );
 
          expAndLvl = new TextWithIcon(
-                lvlUp ? GraphicsManager.getGuiElement(GuiElementEnum.HEAD_MOUNTAIN_KING) : null,
+                lvlUp ? GraphicsManager.getGuiElement(GuiElementEnum.STAT_PLUS) : null,
                 FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_LOCKED),
                 "+" + exp + " exp",
                 x + width,

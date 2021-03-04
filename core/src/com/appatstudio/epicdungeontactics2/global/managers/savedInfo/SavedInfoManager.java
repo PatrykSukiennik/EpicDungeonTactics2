@@ -226,4 +226,26 @@ public class SavedInfoManager {
             }
         }
     }
+
+    public static void saveCharacterStat(CharacterEnum character, StatisticEnum stat, int value) {
+        characterStats.get(character).put(
+                stat,
+                value);
+
+        preferences.putInteger("charStat" + character.toString() + stat.toString(), value);
+        preferences.flush();
+    }
+
+
+    public static void saveCharacterLvl(CharacterEnum currHero, int characterLvl) {
+        characterLvls.put(currHero, characterLvl);
+        preferences.putInteger("characterLvl" + currHero.toString(), characterLvl);
+        preferences.flush();
+    }
+
+    public static void saveCharacterExp(CharacterEnum currHero, int curr) {
+        characterExps.put(currHero, curr);
+        preferences.putInteger("characterExp" + currHero.toString(), curr);
+        preferences.flush();
+    }
 }

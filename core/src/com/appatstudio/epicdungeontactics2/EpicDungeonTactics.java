@@ -14,6 +14,7 @@ import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
 import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.view.financesScreen.FinancesUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
 import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
 import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
@@ -83,6 +84,11 @@ public class EpicDungeonTactics extends ApplicationAdapter {
 
     public static boolean canCameraMove() {
         return gameScreen != null && gameScreen.canCameraMove();
+    }
+
+    public static void refreshMenu() {
+        menuScreen = new MenuScreen();
+        perkScreen = new PerkScreen();
     }
 
     @Override
@@ -168,7 +174,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case MENU_SCREEN:
                 if (menuScreen == null) menuScreen = new MenuScreen();
                 if (idleGoldCollectedBanner == null) idleGoldCollectedBanner = new IdleGoldCollectedBanner();
-                GraphicsManager.setRotationXforHeroes(false);
+                //GraphicsManager.setRotationXforHeroes(false);
                 menuScreen.draw();
                 SavedInfoManager.checkChangeDay();
                 break;

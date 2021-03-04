@@ -1,15 +1,13 @@
 package com.appatstudio.epicdungeontactics2.view.gameScreen.gui.weaponSelector;
 
 import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.ItemSegment;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.ItemBlock;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.playerStatus.Backpack;
+import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -19,49 +17,51 @@ import sun.font.CoreMetrics;
 
 public class WeaponSelector {
 
-    private boolean isMele = false;
-    private boolean isDistance = false;
-    private boolean isUp = false;
-    private ItemBlock imageMele, imageDistance;
-    private CharacterDrawable target;
-    private static final float blockSize = Gdx.graphics.getWidth() * 0.2f;
+    private static boolean isMele = false;
+    private static boolean isDistance = false;
+    private static boolean isUp = false;
+    private static Image imageMele, imageDistance;
+    private static CharacterDrawable target;
+    private static final float blockSize = Gdx.graphics.getWidth() * 0.15f;
 
     public WeaponSelector() {
-        imageMele = new ItemBlock(new CoordsFloat(0, 0), blockSize);
-        imageDistance = new ItemBlock(new CoordsFloat(0, 0), blockSize);
+        imageMele = new Image();
+        imageDistance = new Image();
+
+        imageMele.setSize(blockSize, blockSize);
+        imageDistance.setSize(blockSize, blockSize);
     }
 
     public void show(Hero heroInRoom, CharacterDrawable target) {
         this.target = target;
 
-        if (heroInRoom.getAttackableTiles().contains(target.getTileStandingOn(), false)) {
-            isMele = true;
-        }
-        if (Vector2.dst(
+        isMele = heroInRoom.getAttackableTiles().contains(target.getTileStandingOn(), false);
+        isDistance =
+                Vector2.dst(
                 heroInRoom.getPosition().x,
                 heroInRoom.getPosition().y,
                 target.getPosition().x,
                 target.getPosition().y
                 ) <= StatTracker.getCurrentStat(CompleteHeroStatsEnum.RANGE)
-                && StatTracker.getRangedWeapon() != null) {
-            isDistance = true;
-        }
+                && StatTracker.getRangedWeapon() != null;
 
         if (isMele) {
             AbstractItem meleWeapon = StatTracker.getMeleWeapon();
             if (meleWeapon != null) {
-                imageMele.setItem(meleWeapon);
+                imageMele.setDrawable(GraphicsManager.getItemImage(meleWeapon.getItemEnum()));
+                imageMele.setPosition(Gdx.graphics.getWidth()/2f - blockSize/2f, Gdx.graphics.getHeight() * 0.2f);
             } else {
-                imageMele.setItem(null);
+                imageMele.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.MELE_PUNCH));
             }
         }
         if (isDistance) {
-            imageDistance.setItem(StatTracker.getRangedWeapon());
+            imageDistance.setDrawable(GraphicsManager.getItemImage(StatTracker.getRangedWeapon().getItemEnum()));
+            imageDistance.setPosition(Gdx.graphics.getWidth()/2f - blockSize/2f, Gdx.graphics.getHeight() * 0.2f);
         }
 
         if (isMele && isDistance) {
-            imageMele.setPosition(Gdx.graphics.getWidth()/2f - blockSize, Gdx.graphics.getHeight() * 0.3f);
-            imageDistance.setPosition(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight() * 0.3f);
+            imageMele.setPosition(Gdx.graphics.getWidth()/2f - blockSize * 1.2f, Gdx.graphics.getHeight() * 0.2f);
+            imageDistance.setPosition(Gdx.graphics.getWidth()/2f + blockSize * 0.2f, Gdx.graphics.getHeight() * 0.2f);
         }
         System.out.println("SHOW WEAPON SELECOR   " + isMele + "   " + isDistance);
         isUp = true;
@@ -72,7 +72,7 @@ public class WeaponSelector {
         isUp = false;
     }
 
-    public void draw(Batch batch) {
+    public static void draw(Batch batch) {
         if (isMele) imageMele.draw(batch, 1f);
         if (isDistance) imageDistance.draw(batch, 1f);
 
@@ -80,15 +80,29 @@ public class WeaponSelector {
     }
 
     public ItemTypeEnum tap(float x, float y) {
-        if (isMele && imageMele.isTap(x, y)) return ItemTypeEnum.MELE;
-        else if (isDistance && imageDistance.isTap(x, y)) return ItemTypeEnum.BOW;
+        if (isMele && x > imageMele.getX()
+                && x < imageMele.getX() + imageMele.getWidth()
+                && y > imageMele.getY()
+                && y < imageMele.getY() + imageMele.getHeight()) {
+            hide();
+            return ItemTypeEnum.MELE;
+        }
+
+        else if (isDistance && x > imageDistance.getX()
+                && x < imageDistance.getX() + imageDistance.getWidth()
+                && y > imageDistance.getY()
+                && y < imageDistance.getY() + imageDistance.getHeight()) {
+            hide();
+            return ItemTypeEnum.BOW;
+        }
+
         else {
             hide();
             return null;
         }
     }
 
-    public boolean isUp() {
+    public static boolean isUp() {
         return isUp;
     }
 

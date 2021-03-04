@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.HashMap;
+
 public class TurnQueue {
 
     private static final Image queueBorder;
@@ -17,6 +19,7 @@ public class TurnQueue {
 
     private TurnQueueIcon[] queueIcons;
     private Array<CharacterDrawable> queue;
+    private HashMap<CharacterDrawable, Boolean> queueAlive;
 
     public static final float[] ICON_ALPHA = {0f, 1f, 0.55f, 0.45f, 0.3f, 0.12f, 0.09f, 0.07f, 0f};
     public static final float QUEUE_MOVE_DURATION = 0.4f;
@@ -54,12 +57,17 @@ public class TurnQueue {
             queueIcons[i].setRepresentedCharacter(queue.get( (i + 1) % queue.size ));
         }
 
+        queueAlive = new HashMap<>();
+        for (CharacterDrawable c : queue) {
+            queueAlive.put(c, true);
+        }
+
     }
 
     public void draw(Batch batch) {
         for (TurnQueueIcon icon : queueIcons) {
             icon.act(Gdx.graphics.getDeltaTime());
-            icon.draw(batch, 1f);
+            icon.draw(batch, queueAlive.get(icon.getRepresentedCharacter()) ? 1f : 0.2f);
         }
         queueBorder.draw(batch, 1f);
     }
@@ -73,7 +81,9 @@ public class TurnQueue {
 
     public CharacterDrawable getCurrentCharacter() {
         System.out.println("CURRENT CHARACTER TO MOVE: " +  queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter().getCharacterEnum().toString());
-        return queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter();
+        return
+                queueAlive.get(queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter())
+                        ? queueIcons[currentTurn % QUEUE_SIZE].getRepresentedCharacter() : null;
     }
 
     private int countNotDestroyed() {
@@ -91,4 +101,7 @@ public class TurnQueue {
         return null;
     }
 
+    public void removeCharacter(CharacterDrawable characterDrawable) {
+        queueAlive.put(characterDrawable, false);
+    }
 }

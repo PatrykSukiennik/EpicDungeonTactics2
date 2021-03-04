@@ -288,6 +288,7 @@ public final class GuiContainer {
                 !heroStatWindow.isUp() &&
                 !PickupItemWindow.isUp() &&
                 !shopWindow.isUp() &&
+                (runEndWindow == null || !(runEndWindow.isUp())) &&
                 !selectNextHeroWindow.isUp();
     }
 
@@ -337,8 +338,8 @@ public final class GuiContainer {
         else if (runEndWindow != null && runEndWindow.isUp()) {
             runEndWindow.draw(batch);
         }
-        else if (weaponSelector.isUp()) {
-            weaponSelector.draw(batch);
+        else if (WeaponSelector.isUp()) {
+            WeaponSelector.draw(batch);
         }
 
         else if (EquipmentWindow.isUp()) {
@@ -385,17 +386,18 @@ public final class GuiContainer {
         }
         else if (runEndWindow != null && runEndWindow.isUp()) {
             if (runEndWindow.tap(x, y)) {
+                EpicDungeonTactics.refreshMenu();
                 EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
             }
             return true;
         }
-        else if (weaponSelector.isUp()) {
+        else if (weaponSelector != null && weaponSelector.isUp()) {
             ItemTypeEnum weaponSelected = weaponSelector.tap(x, y);
             if (weaponSelected == ItemTypeEnum.MELE) {
-                currRoom.setMeleTarget(weaponSelector.getTarget());
+                gameScreen.getCurrRoom().setMeleTarget(weaponSelector.getTarget());
             }
             else if (weaponSelected == ItemTypeEnum.BOW) {
-                currRoom.shotSelected(weaponSelector.getTarget());
+                gameScreen.getCurrRoom().shotSelected(weaponSelector.getTarget());
             }
             return true;
         }
@@ -478,6 +480,9 @@ public final class GuiContainer {
             selectNextHeroWindow.hide();
             selectNextHeroWindow.show();
         }
+        else if (runEndWindow != null && runEndWindow.isUp()) {
+            runQuitWindow.show();
+        }
 
         else runQuitWindow.show();
     }
@@ -515,8 +520,8 @@ public final class GuiContainer {
 
     }
 
-    public void refreshStats() {
-        heroStatWindow.refreshStats();
+    public static void refreshStats() {
+        HeroStatWindow.refreshStats();
     }
 
     public void init() {
@@ -530,6 +535,7 @@ public final class GuiContainer {
 
     public void refreshGui() {
         INSTANCE = new GuiContainer(GameScreen.getInstance());
+        communicatePrinter.clear();
     }
 
     public void createOrRefreshShop(CharacterEnum shop) {
@@ -541,9 +547,6 @@ public final class GuiContainer {
     }
 
     public void heroDied() {
-        System.out.println("CHUJ: 1 " + StatTracker.getUsedCharacters().size);
-        System.out.println("CHUJ: 2 " + SavedInfoManager.getAllUnlockedCharacters().length);
-
         if (StatTracker.getUsedCharacters().size == SavedInfoManager.getAllUnlockedCharacters().length) {
             runEndWindow = new RunEndWindow();
             runEndWindow.show();
@@ -551,5 +554,9 @@ public final class GuiContainer {
         else {
             selectNextHeroWindow.show();
         }
+    }
+
+    public void hideWeaponSelector() {
+        weaponSelector.hide();
     }
 }

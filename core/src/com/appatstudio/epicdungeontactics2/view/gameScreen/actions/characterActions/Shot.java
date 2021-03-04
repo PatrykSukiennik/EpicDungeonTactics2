@@ -37,12 +37,11 @@ public class Shot extends SequenceAction {
 
         System.out.println("ROTATION: " + projectileRotation);
 
-
-        this.addAction(Actions.rotateTo(projectileRotation));
-
         this.addAction(Actions.moveTo(
                 start.x,// - WorldConfig.TILE_SIZE/2f,
                 start.y));// - WorldConfig.TILE_SIZE/2f));
+
+        this.addAction(Actions.rotateTo(projectileRotation));
 
         this.addAction(
                 Actions.moveTo(
