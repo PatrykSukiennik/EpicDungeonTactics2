@@ -31,7 +31,6 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.Attack;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.ChangeState;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.DamageGiving;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.MoveToMapTile;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.RefreshShotableTiles;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.Shot;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.SwitchMapTile;
@@ -39,13 +38,11 @@ import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActi
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.TurnFinished;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.TurnStarted;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.actions.characterActions.Wait;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.AbstractCharacter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.AutonomousCharacter;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.turnQueue.TurnQueue;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.weaponSelector.WeaponSelector;
 import com.appatstudio.epicdungeontactics2.view.gameScreen.items.AbstractItem;
@@ -63,7 +60,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.sun.org.apache.bcel.internal.generic.DREM;
 
 import java.util.HashMap;
 
@@ -73,7 +69,6 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BLACKSMITH;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BUTCHER;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MAGIC_SHOP;
-import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.WOLF;
 
 public class Room {
 
