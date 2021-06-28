@@ -61,6 +61,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 import box2dLight.RayHandler;
@@ -867,23 +868,19 @@ public class Room {
 
     public Array<CharacterDrawable> getTurnQueue() {
         Array<CharacterDrawable> allCharacters = new Array<>();
-        Array<CharacterDrawable> result = new Array<>();
+        allCharacters.addAll(charactersInRoom);
 
-        int maxSpeed = 0;
-        for (CharacterDrawable character : charactersInRoom) {
-            if (character.getStats().getSpeed() > maxSpeed)
-                maxSpeed = character.getStats().getSpeed();
-        }
-
-        maxSpeed *= 2;
-
-        for (int i = 1; i < maxSpeed; i++) {
-            for (CharacterDrawable character : charactersInRoom) {
-                if ((maxSpeed - character.getStats().getSpeed()) % i == 0) result.add(character);
+        allCharacters.sort(new Comparator<CharacterDrawable>() {
+            @Override
+            public int compare(CharacterDrawable t0, CharacterDrawable t1) {
+                if (t0.getStats().getSpeed() < t1.getStats().getSpeed()) {
+                    return -1;
+                }
+                else return 0;
             }
-        }
-        //System.out.println("edvedvedv " + maxSpeed);
-        return result;
+        });
+
+        return allCharacters;
     }
 
     public SequenceAction getWay(Array<Array<MapTile>> allPaths, MapTile end, CharacterDrawable characterDrawable) {

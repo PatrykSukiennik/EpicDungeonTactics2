@@ -61,7 +61,7 @@ public class ShopSegment extends AbstractSegment {
 
     public ShopSegment(CharacterEnum shop) {
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
-        heroAnimation = GraphicsManager.guiHeroAnimations(shop, CharacterStateEnum.IDLE);
+        heroAnimation = GraphicsManager.getGuiHeroAnimation(shop, CharacterStateEnum.IDLE);
         heroY = posY + fullHeight / 2f - heroSize / 3f;
 
         itemsToBuy = new ItemBlock[8];

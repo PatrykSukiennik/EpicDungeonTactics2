@@ -392,8 +392,31 @@ public final class GraphicsManager {
         return charactersAnimations.get(c).get(s);
     }
 
-    public static Animation<SpriteDrawable> guiHeroAnimations(CharacterEnum c, CharacterStateEnum s) {
-        return guiCharactersAnimations.get(c).get(s);
+    public static Animation<SpriteDrawable> getGuiHeroAnimation(CharacterEnum c, CharacterStateEnum s) {
+        switch (c) {
+            case HERO_ELF: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_ELF).get(s);
+            }
+            case HERO_KNIGHT: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_KNIGHT).get(s);
+            }
+            case HERO_WIZZARD: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_WIZZARD).get(s);
+            }
+            case HERO_LIZARD: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_LIZARD).get(s);
+            }
+            case HERO_NINJA: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_NINJA).get(s);
+            }
+            case HERO_PIRATE: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_PIRATE).get(s);
+            }
+            case HERO_BABY: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_BABY).get(s);
+            }
+        }
+        return null;
     }
 
     public static SpriteDrawable getGuiElement(GuiElementEnum g) {

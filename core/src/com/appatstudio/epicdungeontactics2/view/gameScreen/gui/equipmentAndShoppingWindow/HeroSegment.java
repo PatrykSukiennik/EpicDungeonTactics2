@@ -65,7 +65,7 @@ public class HeroSegment extends AbstractSegment {
 
     HeroSegment(CharacterEnum hero) {
         bg = GraphicsManager.getGuiElement(GuiElementEnum.SEGMENT_HERO);
-        heroAnimation = GraphicsManager.guiHeroAnimations(hero, CharacterStateEnum.IDLE);
+        heroAnimation = GraphicsManager.getGuiHeroAnimation(hero, CharacterStateEnum.IDLE);
         heroY = posY + fullHeight / 2f - heroSize / 3f;
 
         createHeroSpecifiedEquipment(hero);

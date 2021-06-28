@@ -74,7 +74,7 @@ public class HeroStatWindow {
 
         heroSize = new CoordsFloat(bgSize.x / 3f, bgSize.x / 3f);
         heroPos = new CoordsFloat(bgPos.x + heroSize.x * 0.1f, bgPos.y + bgSize.y - heroSize.y);
-        heroAnimation = GraphicsManager.guiHeroAnimations(hero, CharacterStateEnum.IDLE);
+        heroAnimation = GraphicsManager.getGuiHeroAnimation(hero, CharacterStateEnum.IDLE);
 
         lvlPlus = new LvlPlus(new CoordsFloat(heroPos.x + heroSize.x / 2f, heroPos.y - heroSize.y * 0.65f), heroSize.x * 0.5f);
 

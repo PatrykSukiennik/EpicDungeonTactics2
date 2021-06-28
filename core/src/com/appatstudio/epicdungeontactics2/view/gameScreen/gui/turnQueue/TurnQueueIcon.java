@@ -114,7 +114,7 @@ public class TurnQueueIcon extends Image {
         }
         else this.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.NONE));
 
-        topSprite = GraphicsManager.guiHeroAnimations(
+        topSprite = GraphicsManager.getCharactersAnimation(
                 character.getCharacterEnum(), CharacterStateEnum.IDLE).getKeyFrame(0);
     }
 

@@ -201,7 +201,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case GAME_SCREEN:
                 //startGame() should be done yet
 
-                androidCommunication.startBanner();
+                if (androidCommunication != null)
+                    androidCommunication.startBanner();
                 gameScreen.draw();
                 break;
         }
@@ -266,7 +267,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     }
 
     public static boolean isInternetOn() {
-        return androidCommunication.checkInternetConnection();
+        if (androidCommunication != null)
+            return androidCommunication.checkInternetConnection();
+        else return false;
     }
 
     public static void generateInterstitialAd() {
