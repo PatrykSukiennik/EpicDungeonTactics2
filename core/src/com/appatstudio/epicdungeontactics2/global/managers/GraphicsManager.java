@@ -7,6 +7,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiCharacterAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MagicalEffectAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
@@ -32,6 +33,7 @@ public final class GraphicsManager {
     private static final float CHARACTER_IDLE_FRAMETIME = 0.2f;
     private static final float CHARACTER_RUN_FRAMETIME = 0.1f;
     private static final Map<MapElementAnimationEnum, Float> MAP_ELEMENT_ANIMATION_FRAMETIME;
+    private static final Map<MagicalEffectAnimationEnum, Float> MAGICAL_EFFECT_ANIMATION_FRAMETIME;
 
     private static Map<ItemEnum, SpriteDrawable> itemImages;
     private static Map<RoomTypeEnum, SpriteDrawable> mapRoomTypeImages;
@@ -45,6 +47,7 @@ public final class GraphicsManager {
     private static Map<ItemRarityEnum, SpriteDrawable> itemRarityIconsMap;
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
     private static Map<GuiCharacterAnimationEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> guiCharactersAnimations;
+    private static Map<MagicalEffectAnimationEnum, Animation<SpriteDrawable>> magicalEffectAnimations;
 
     private static Map<CharacterEnum, SpriteDrawable> characterProjectiles;
     private static Map<ItemEnum, SpriteDrawable> weaponProjectiles;
@@ -53,8 +56,6 @@ public final class GraphicsManager {
     private static Map<MapElementAnimationEnum, Animation<SpriteDrawable>> mapElementAnimations;
     private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSprites;
 
-    private static Map<MapElementAnimationEnum, SpriteDrawable> mapElementAnimationsBroken;
-    private static Map<MapElementSpriteEnum, SpriteDrawable> mapElementSpritesBroken;
 
     static {
         MAP_ELEMENT_ANIMATION_FRAMETIME = new HashMap<>();
@@ -84,6 +85,13 @@ public final class GraphicsManager {
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_2, 0.15f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_3, 0.15f);
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_4, 0.15f);
+
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME = new HashMap<>();
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.FIRE_EXPLOSION, 0.05f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.ICE_EXPLOSION, 0.05f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.POISON_EXPLOSION, 0.05f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.MAGIC_EXPLOSION, 0.05f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.LIGHT_EXPLOSION, 0.05f);
     }
 
     private static void loadItems(TextureAtlas atlas) {
@@ -305,7 +313,7 @@ public final class GraphicsManager {
                     CharacterStateEnum.IDLE,
                     createAnimation(
                             atlas,
-                            "heroes/" + g.toString() + "/idle",
+                            "characters/" + g.toString() + "/idle",
                             CHARACTER_IDLE_FRAMETIME
                     ));
 
@@ -313,7 +321,7 @@ public final class GraphicsManager {
                     CharacterStateEnum.RUN,
                     createAnimation(
                             atlas,
-                            "heroes/" + g.toString() + "/run",
+                            "characters/" + g.toString() + "/run",
                             CHARACTER_RUN_FRAMETIME
                     ));
 
@@ -343,28 +351,24 @@ public final class GraphicsManager {
                     )
             );
         }
-
-//        //broken
-//
-//        mapElementSpritesBroken = new HashMap<>();
-//        MapElementSpriteEnum[] allSpritesBroken = MapElementSpriteEnum.values();
-//
-//        for (MapElementSpriteEnum s : allSpritesBroken) {
-//            mapElementSpritesBroken.put(
-//                    s,
-//                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + s.toString() + "_BROKEN"))));
-//        }
-//
-//        mapElementAnimationsBroken = new HashMap<>();
-//        MapElementAnimationEnum[] allAnimationsBroken = MapElementAnimationEnum.values();
-//
-//        for (MapElementAnimationEnum a : allAnimationsBroken) {
-//            System.out.println("wdvewve:   " + a.toString());
-//            mapElementAnimationsBroken.put(
-//                    a,
-//                    new SpriteDrawable(new Sprite(atlas.findRegion("map-elements/sprites/" + a.toString() + "_BROKEN"))));
-//        }
     }
+
+    private static void loadSpellAnimations(TextureAtlas atlas) {
+        magicalEffectAnimations = new HashMap<>();
+        MagicalEffectAnimationEnum[] allAnimations = MagicalEffectAnimationEnum.values();
+
+        for (MagicalEffectAnimationEnum a : allAnimations) {
+            magicalEffectAnimations.put(
+                    a,
+                    createAnimation(
+                            atlas,
+                            "spells/" + a.toString() + "/frame",
+                            MAGICAL_EFFECT_ANIMATION_FRAMETIME.get(a)
+                    )
+            );
+        }
+    }
+
 
     private static Animation<SpriteDrawable> createAnimation(TextureAtlas atlas, String path, float frameTime) {
         TextureRegion[] regions = atlas.findRegions(path).toArray();
@@ -384,6 +388,7 @@ public final class GraphicsManager {
         loadGuiHeroAnimations(guiAtlas);
 
         loadCharacters(worldAtlas);
+        loadSpellAnimations(worldAtlas);
         loadMapSprites(worldAtlas);
 
     }
@@ -414,6 +419,48 @@ public final class GraphicsManager {
             }
             case HERO_BABY: {
                 return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_BABY).get(s);
+            }
+            case NPC_ALCHEMIST: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_ALCHEMIST).get(s);
+            }
+            case NPC_KNIGHT_ELITE: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KNIGHT_ELITE).get(s);
+            }
+            case NPC_BISHOP: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BISHOP).get(s);
+            }
+            case NPC_BLACKSMITH: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BLACKSMITH).get(s);
+            }
+            case NPC_BUTCHER: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BUTCHER).get(s);
+            }
+            case NPC_CITIZEN_FEMALE: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_FEMALE).get(s);
+            }
+            case NPC_CITIZEN_MALE: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_MALE).get(s);
+            }
+            case NPC_KING: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KING).get(s);
+            }
+            case NPC_MAGIC_SHOP: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MAGIC_SHOP).get(s);
+            }
+            case NPC_MOUNTAIN_KING: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MOUNTAIN_KING).get(s);
+            }
+            case NPC_NUN_FAT: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_FAT).get(s);
+            }
+            case NPC_NUN_NORMAL: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_NORMAL).get(s);
+            }
+            case NPC_PRINCESS: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_PRINCESS).get(s);
+            }
+            case NPC_THIEF: {
+                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_THIEF).get(s);
             }
         }
         return null;
@@ -453,14 +500,22 @@ public final class GraphicsManager {
 
     public static Animation<SpriteDrawable> getCampUpgradeFellow(CampUpgradeEnum campUpgrade, CharacterStateEnum s) {
         switch (campUpgrade) {
-            case ALCHEMIST: return charactersAnimations.get(CharacterEnum.NPC_ALCHEMIST).get(s);
-            case BLACKSMITH: return charactersAnimations.get(CharacterEnum.NPC_BLACKSMITH).get(s);
-            case MAGIC_SHOP: return charactersAnimations.get(CharacterEnum.NPC_MAGIC_SHOP).get(s);
-            case BUTCHER: return charactersAnimations.get(CharacterEnum.NPC_BUTCHER).get(s);
-            case PRINCESS: return charactersAnimations.get(CharacterEnum.NPC_PRINCESS).get(s);
-            case MOUNTAIN_KING: return charactersAnimations.get(CharacterEnum.NPC_MOUNTAIN_KING).get(s);
-            case LUGGAGE_CARRIAGE: return charactersAnimations.get(CharacterEnum.NPC_CITIZEN_MALE).get(s);
-            default: return null;
+            case ALCHEMIST:
+                return charactersAnimations.get(CharacterEnum.NPC_ALCHEMIST).get(s);
+            case BLACKSMITH:
+                return charactersAnimations.get(CharacterEnum.NPC_BLACKSMITH).get(s);
+            case MAGIC_SHOP:
+                return charactersAnimations.get(CharacterEnum.NPC_MAGIC_SHOP).get(s);
+            case BUTCHER:
+                return charactersAnimations.get(CharacterEnum.NPC_BUTCHER).get(s);
+            case PRINCESS:
+                return charactersAnimations.get(CharacterEnum.NPC_PRINCESS).get(s);
+            case MOUNTAIN_KING:
+                return charactersAnimations.get(CharacterEnum.NPC_MOUNTAIN_KING).get(s);
+            case LUGGAGE_CARRIAGE:
+                return charactersAnimations.get(CharacterEnum.NPC_CITIZEN_MALE).get(s);
+            default:
+                return null;
         }
     }
 
@@ -479,10 +534,6 @@ public final class GraphicsManager {
 //    public static SpriteDrawable getMapElementInactiveSprite(MapElementAnimationEnum animationEnum) {
 //        return mapElementAnimationsBroken.get(animationEnum);
 //    }
-
-    public static SpriteDrawable getMapElementInactiveSprite(MapElementSpriteEnum spriteEnum) {
-        return mapElementSpritesBroken.get(spriteEnum);
-    }
 
     public static SpriteDrawable getItemRaritySprite(ItemRarityEnum rarityEnum) {
         return itemRarityIconsMap.get(rarityEnum);
@@ -513,7 +564,7 @@ public final class GraphicsManager {
                 Object[] frames =
                         GraphicsManager.getCharactersAnimation(character, state).getKeyFrames();
 
-                for (int i=0; i<frames.length; i++) {
+                for (int i = 0; i < frames.length; i++) {
                     SpriteDrawable sd = (SpriteDrawable) frames[i];
                     sd.getSprite().setFlip(false, false);
                 }

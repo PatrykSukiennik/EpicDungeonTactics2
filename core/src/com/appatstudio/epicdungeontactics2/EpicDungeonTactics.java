@@ -7,18 +7,18 @@ import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
-import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.MusicEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.FinancesStats;
-import com.appatstudio.epicdungeontactics2.view.LoadingScreen;
-import com.appatstudio.epicdungeontactics2.view.campUpgradeScreen.CampUpgradeScreen;
-import com.appatstudio.epicdungeontactics2.view.financesScreen.FinancesUpgradeScreen;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.gui.communicatePrinter.CommunicatePrinter;
-import com.appatstudio.epicdungeontactics2.view.menuScreen.MenuScreen;
-import com.appatstudio.epicdungeontactics2.view.perkScreen.PerkScreen;
-import com.appatstudio.epicdungeontactics2.view.statsScreen.StatsScreen;
-import com.appatstudio.epicdungeontactics2.view.viewElements.IdleGoldCollectedBanner;
+import com.appatstudio.epicdungeontactics2.screens.loading.LoadingScreen;
+import com.appatstudio.epicdungeontactics2.screens.menu.campUpgradeScreen.CampUpgradeScreen;
+import com.appatstudio.epicdungeontactics2.screens.menu.financesScreen.FinancesUpgradeScreen;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.screens.menu.menuScreen.MenuScreen;
+import com.appatstudio.epicdungeontactics2.screens.menu.perkScreen.PerkScreen;
+import com.appatstudio.epicdungeontactics2.screens.game.statsScreen.StatsScreen;
+import com.appatstudio.epicdungeontactics2.screens.viewElements.IdleGoldCollectedBanner;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -107,6 +107,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        SoundsManager.tick();
 
         switch (currentScreen) {
             case LOADING_SCREEN:
@@ -168,15 +169,28 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     }
 
     public static void setCurrentScreen(CurrentScreenEnum newCurrentScreen) {
-        if (currentScreen == GAME_SCREEN) androidCommunication.stopBanner();
+        boolean backToMenuFlag = false;
+
+        if (currentScreen == GAME_SCREEN) {
+            androidCommunication.stopBanner();
+            backToMenuFlag = true;
+        }
+
 
         switch (newCurrentScreen) {
             case MENU_SCREEN:
-                if (menuScreen == null) menuScreen = new MenuScreen();
+                if (menuScreen == null) {
+                    menuScreen = new MenuScreen();
+                    SoundsManager.playMusic(MusicEnum.MENU_MUSIC);
+                }
+                else if (backToMenuFlag) SoundsManager.playMusic(MusicEnum.MENU_MUSIC);
+
                 if (idleGoldCollectedBanner == null) idleGoldCollectedBanner = new IdleGoldCollectedBanner();
                 //GraphicsManager.setRotationXforHeroes(false);
                 menuScreen.draw();
                 SavedInfoManager.checkChangeDay();
+
+
                 break;
             case STATS_SCREEN:
                 if (statsScreen == null) statsScreen = new StatsScreen();
@@ -201,9 +215,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case GAME_SCREEN:
                 //startGame() should be done yet
 
-                if (androidCommunication != null)
-                    androidCommunication.startBanner();
+                if (androidCommunication != null) androidCommunication.startBanner();
                 gameScreen.draw();
+                SoundsManager.playMusic(MusicEnum.STAGE_1_MUSIC);
                 break;
         }
 

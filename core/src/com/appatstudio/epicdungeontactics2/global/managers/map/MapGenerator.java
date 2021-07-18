@@ -2,19 +2,30 @@ package com.appatstudio.epicdungeontactics2.global.managers.map;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.MusicEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
-import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGeneratorConfig;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Room;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.map.Stage;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.Room;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 
 import java.util.HashMap;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.BIG_ZOMBIE;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.GOBLIN;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ICE_ZOMBIE;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.MASKED_ORC;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.MUDDY;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_SHAMAN;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ORC_WARRIOR;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.SWAMPY;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.TINY_ZOMBIE;
+import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.ZOMBIE;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomEnum.*;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.BOSS_ROOM;
 import static com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum.FIRST_ROOM;
@@ -25,7 +36,9 @@ public class MapGenerator {
     private static final HashMap<Integer, HashMap<RoomTypeEnum, Integer>> mapCounter;
     private static final HashMap<Integer, HashMap<RoomTypeEnum, Integer>> mapChanceSums;
     private static final HashMap<Integer, HashMap<RoomTypeEnum, RoomEnum[]>> mapEnums;
+    private static final HashMap<Integer, Float> enemiesFactor;
     private static final HashMap<RoomEnum, Integer> mapChances;
+    private static final HashMap<Integer, CharacterEnum[]> stageEnemies;
 
     static {
         mapCounter = new HashMap<>();
@@ -33,27 +46,120 @@ public class MapGenerator {
         mapCounter.put(2, new HashMap<RoomTypeEnum, Integer>());
         mapCounter.put(3, new HashMap<RoomTypeEnum, Integer>());
 
+        enemiesFactor = new HashMap<>();
+        enemiesFactor.put(1, 1f);
+        enemiesFactor.put(2, 0.3f);
+        enemiesFactor.put(3, 0.6f);
+        enemiesFactor.put(4, 1f);
+        enemiesFactor.put(5, 0.3f);
+        enemiesFactor.put(6, 0.7f);
+        enemiesFactor.put(7, 1f);
+
         mapChances = new HashMap<>();
 
 //python-include-map-counter
-mapCounter.get(1).put(FIRST_ROOM, 1);
-mapCounter.get(1).put(REGULAR_ROOM, 1);
-mapCounter.get(1).put(BOSS_ROOM, 1);
-mapCounter.get(2).put(FIRST_ROOM, 1);
-mapCounter.get(2).put(REGULAR_ROOM, 0);
-mapCounter.get(2).put(BOSS_ROOM, 0);
-mapCounter.get(3).put(FIRST_ROOM, 1);
-mapCounter.get(3).put(REGULAR_ROOM, 0);
-mapCounter.get(3).put(BOSS_ROOM, 0);
+mapCounter.get(1).put(FIRST_ROOM, 4);
+mapCounter.get(1).put(REGULAR_ROOM, 20);
+mapCounter.get(1).put(BOSS_ROOM, 4);
+mapCounter.get(2).put(FIRST_ROOM, 4);
+mapCounter.get(2).put(REGULAR_ROOM, 20);
+mapCounter.get(2).put(BOSS_ROOM, 4);
+mapCounter.get(3).put(FIRST_ROOM, 4);
+mapCounter.get(3).put(REGULAR_ROOM, 20);
+mapCounter.get(3).put(BOSS_ROOM, 4);
 //python-include-map-counter-end
 
 //python-include-map-chances
 mapChances.put(STAGE_1_FIRST_1, 100);
+mapChances.put(STAGE_1_FIRST_2, 100);
+mapChances.put(STAGE_1_FIRST_3, 100);
+mapChances.put(STAGE_1_FIRST_4, 100);
 mapChances.put(STAGE_1_REGULAR_1, 100);
+mapChances.put(STAGE_1_REGULAR_2, 100);
+mapChances.put(STAGE_1_REGULAR_3, 100);
+mapChances.put(STAGE_1_REGULAR_4, 100);
+mapChances.put(STAGE_1_REGULAR_5, 100);
+mapChances.put(STAGE_1_REGULAR_6, 100);
+mapChances.put(STAGE_1_REGULAR_7, 100);
+mapChances.put(STAGE_1_REGULAR_8, 100);
+mapChances.put(STAGE_1_REGULAR_9, 100);
+mapChances.put(STAGE_1_REGULAR_10, 100);
+mapChances.put(STAGE_1_REGULAR_11, 100);
+mapChances.put(STAGE_1_REGULAR_12, 100);
+mapChances.put(STAGE_1_REGULAR_13, 100);
+mapChances.put(STAGE_1_REGULAR_14, 100);
+mapChances.put(STAGE_1_REGULAR_15, 100);
+mapChances.put(STAGE_1_REGULAR_16, 100);
+mapChances.put(STAGE_1_REGULAR_17, 100);
+mapChances.put(STAGE_1_REGULAR_18, 100);
+mapChances.put(STAGE_1_REGULAR_19, 100);
+mapChances.put(STAGE_1_REGULAR_20, 100);
 mapChances.put(STAGE_1_BOSS_1, 100);
+mapChances.put(STAGE_1_BOSS_2, 100);
+mapChances.put(STAGE_1_BOSS_3, 100);
+mapChances.put(STAGE_1_BOSS_4, 100);
 mapChances.put(STAGE_2_FIRST_1, 100);
+mapChances.put(STAGE_2_FIRST_2, 100);
+mapChances.put(STAGE_2_FIRST_3, 100);
+mapChances.put(STAGE_2_FIRST_4, 100);
+mapChances.put(STAGE_2_REGULAR_1, 100);
+mapChances.put(STAGE_2_REGULAR_2, 100);
+mapChances.put(STAGE_2_REGULAR_3, 100);
+mapChances.put(STAGE_2_REGULAR_4, 100);
+mapChances.put(STAGE_2_REGULAR_5, 100);
+mapChances.put(STAGE_2_REGULAR_6, 100);
+mapChances.put(STAGE_2_REGULAR_7, 100);
+mapChances.put(STAGE_2_REGULAR_8, 100);
+mapChances.put(STAGE_2_REGULAR_9, 100);
+mapChances.put(STAGE_2_REGULAR_10, 100);
+mapChances.put(STAGE_2_REGULAR_11, 100);
+mapChances.put(STAGE_2_REGULAR_12, 100);
+mapChances.put(STAGE_2_REGULAR_13, 100);
+mapChances.put(STAGE_2_REGULAR_14, 100);
+mapChances.put(STAGE_2_REGULAR_15, 100);
+mapChances.put(STAGE_2_REGULAR_16, 100);
+mapChances.put(STAGE_2_REGULAR_17, 100);
+mapChances.put(STAGE_2_REGULAR_18, 100);
+mapChances.put(STAGE_2_REGULAR_19, 100);
+mapChances.put(STAGE_2_REGULAR_20, 100);
+mapChances.put(STAGE_2_BOSS_1, 100);
+mapChances.put(STAGE_2_BOSS_2, 100);
+mapChances.put(STAGE_2_BOSS_3, 100);
+mapChances.put(STAGE_2_BOSS_4, 100);
 mapChances.put(STAGE_3_FIRST_1, 100);
+mapChances.put(STAGE_3_FIRST_2, 100);
+mapChances.put(STAGE_3_FIRST_3, 100);
+mapChances.put(STAGE_3_FIRST_4, 100);
+mapChances.put(STAGE_3_REGULAR_1, 100);
+mapChances.put(STAGE_3_REGULAR_2, 100);
+mapChances.put(STAGE_3_REGULAR_3, 100);
+mapChances.put(STAGE_3_REGULAR_4, 100);
+mapChances.put(STAGE_3_REGULAR_5, 100);
+mapChances.put(STAGE_3_REGULAR_6, 100);
+mapChances.put(STAGE_3_REGULAR_7, 100);
+mapChances.put(STAGE_3_REGULAR_8, 100);
+mapChances.put(STAGE_3_REGULAR_9, 100);
+mapChances.put(STAGE_3_REGULAR_10, 100);
+mapChances.put(STAGE_3_REGULAR_11, 100);
+mapChances.put(STAGE_3_REGULAR_12, 100);
+mapChances.put(STAGE_3_REGULAR_13, 100);
+mapChances.put(STAGE_3_REGULAR_14, 100);
+mapChances.put(STAGE_3_REGULAR_15, 100);
+mapChances.put(STAGE_3_REGULAR_16, 100);
+mapChances.put(STAGE_3_REGULAR_17, 100);
+mapChances.put(STAGE_3_REGULAR_18, 100);
+mapChances.put(STAGE_3_REGULAR_19, 100);
+mapChances.put(STAGE_3_REGULAR_20, 100);
+mapChances.put(STAGE_3_BOSS_1, 100);
+mapChances.put(STAGE_3_BOSS_2, 100);
+mapChances.put(STAGE_3_BOSS_3, 100);
+mapChances.put(STAGE_3_BOSS_4, 100);
 //python-include-map-chances-end
+
+        stageEnemies = new HashMap<>();
+        stageEnemies.put(1, new CharacterEnum[]{ TINY_ZOMBIE, ZOMBIE, ICE_ZOMBIE, MUDDY, BIG_ZOMBIE, SWAMPY, ORC_SHAMAN, ORC_WARRIOR, GOBLIN, MASKED_ORC });
+        stageEnemies.put(2, new CharacterEnum[]{});
+        stageEnemies.put(3, new CharacterEnum[]{});
 
         mapEnums = new HashMap<>();
         mapEnums.put(1, new HashMap<RoomTypeEnum, RoomEnum[]>());
@@ -235,12 +341,36 @@ mapChances.put(STAGE_3_FIRST_1, 100);
         int temp = 0;
         int result = Math.abs(EpicDungeonTactics.random.nextInt()) % mapChanceSums.get(stage).get(type);
 
-        for (int i=0; i<mapCounter.get(stage).get(type); i++) {
-            temp += mapChances.get(mapEnums.get(stage).get(type)[i]);
+        int mapStage = stage == 1 ? 1 : stage <= 4 ? 2 : 3;
 
-            if (result <= temp) return mapEnums.get(stage).get(type)[i];
+        for (int i=0; i<mapCounter.get(mapStage).get(type); i++) {
+            temp += mapChances.get(mapEnums.get(mapStage).get(type)[i]);
+
+            if (result <= temp) return mapEnums.get(mapStage).get(type)[i];
         }
-        return mapEnums.get(stage).get(type)[0];
+        return mapEnums.get(mapStage).get(type)[0];
 
+    }
+
+    public static float getEnemiesFactor(int stage) {
+        return stage <= enemiesFactor.size() ? enemiesFactor.get(stage) : 1f;
+    }
+
+    public static MusicEnum nextMusic(int stage) {
+        return stage <= 4 ? MusicEnum.STAGE_2_MUSIC : MusicEnum.STAGE_3_MUSIC;
+    }
+
+    public static SoundEnum nextStepSound(int stage) {
+        return stage <= 4 ? SoundEnum.STAGE_2_STEP : SoundEnum.STAGE_3_STEP;
+    }
+
+    public static CharacterEnum getRandomEnemy(int stage) {
+        if (stage == 1) {
+            return stageEnemies.get(1)[Math.abs(EpicDungeonTactics.random.nextInt()) % stageEnemies.get(1).length];
+        } else if (stage <= 4) {
+            return stageEnemies.get(2)[Math.abs(EpicDungeonTactics.random.nextInt()) % stageEnemies.get(2).length];
+        } else {
+            return stageEnemies.get(3)[Math.abs(EpicDungeonTactics.random.nextInt()) % stageEnemies.get(3).length];
+        }
     }
 }

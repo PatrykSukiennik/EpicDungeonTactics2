@@ -1,6 +1,8 @@
 package com.appatstudio.epicdungeontactics2.global;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 
@@ -28,6 +30,7 @@ public final class GlobalValues {
         gold += v;
         SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
 
+        SoundsManager.playSound(SoundEnum.COINS_PICKUP);
         EpicDungeonTactics.updateGold();
     }
 
@@ -35,6 +38,7 @@ public final class GlobalValues {
         gold -= v;
         SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
 
+        SoundsManager.playSound(SoundEnum.COINS_SPENT);
         EpicDungeonTactics.updateGold();
     }
 }

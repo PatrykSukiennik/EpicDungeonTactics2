@@ -115,18 +115,31 @@ file_room_enum = '../core/src/com/appatstudio/epicdungeontactics2/global/enums/R
 
 file_room_map_generator = '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/MapGenerator.java'
 
-file_animations = '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/MapInfoElementsLocations.java'
+file_animations = [
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoElementsLocationsStage1.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoElementsLocationsStage2.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoElementsLocationsStage3.java'
+]
 
-file_characters = '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/MapInfoEnemy.java'
+file_characters = [
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoEnemyStage1.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoEnemyStage2.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoEnemyStage3.java'
+]
 
-file_walkable = '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/MapInfoWalkableArray.java'
+file_walkable = [
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoWalkableArrayStage1.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoWalkableArrayStage2.java',
+    '../core/src/com/appatstudio/epicdungeontactics2/global/managers/map/mapInfo/MapInfoWalkableArrayStage3.java'
+]
 
 enums_text = ''
 counter_text = ''
-chars_text = ''
-anim_text = ''
-walkable_text = ''
 map_chances_text = ''
+
+chars_text = ['', '', '']
+anim_text = ['', '', '']
+walkable_text = ['', '', '']
 
 for stage in range(1, 4):
     for mode in ('FIRST', 'REGULAR', 'BOSS'):
@@ -142,6 +155,7 @@ for stage in range(1, 4):
                 mode_text = 'REGULAR_ROOM'
 
             try:
+
                 curr_file_tree = ET.parse('../world_creating_elements/maps/STAGE_'
                                           + str(stage) + '_'
                                           + mode + '_'
@@ -149,7 +163,10 @@ for stage in range(1, 4):
 
                 curr_file_root = curr_file_tree.getroot()
 
-            except FileNotFoundError:
+            except IOError:
+                print (str(stage) + '_'
+                       + mode + '_'
+                       + str(index) + '.tmx')
                 map_counter[stage][mode] = index
 
                 counter_text = counter_text + 'mapCounter.get(' + str(stage) + ').put(' + mode_text + ', ' \
@@ -167,8 +184,9 @@ for stage in range(1, 4):
                             d = d.replace(str(v + 1), ' ' + animation_map.get(v))
 
                         d = ('{' + (' ' + (d[1:])).replace(',\n', ' },\n{ '))[:-1] + ' }'
-                        anim_text = anim_text + 'animationElementsMap.put(RoomEnum.STAGE_' + str(stage) + '_' + mode + '_' + str(index) + \
-                            ', new MapElementAnimationEnum[][] { \n' + d + '\n});\n'
+                        anim_text[stage-1] = anim_text[stage-1] + 'animationElementsMap.put(RoomEnum.STAGE_' + str(stage) \
+                                           + '_' + mode + '_' + str(index) + \
+                                           ', new MapElementAnimationEnum[][] { \n' + d + '\n});\n'
 
                 elif layer.get('name') == 'characters':
                     for data in layer.iterfind('data'):  # only one
@@ -179,7 +197,8 @@ for stage in range(1, 4):
                             d = d.replace(str(v + 1), ' ' + character_map.get(v))
 
                         d = ('{' + (' ' + (d[1:])).replace(',\n', ' },\n{ '))[:-1] + ' }'
-                        chars_text = chars_text + 'charactersInfoMap.put(RoomEnum.STAGE_' + str(stage) + '_' + mode + '_' + str(
+                        chars_text[stage-1] = chars_text[stage-1] + 'charactersInfoMap.put(RoomEnum.STAGE_' + str(
+                            stage) + '_' + mode + '_' + str(
                             index) + ', new CharacterEnum[][] { \n' + d + '\n});\n'
 
                 elif layer.get('name') == 'walkable':
@@ -190,13 +209,14 @@ for stage in range(1, 4):
                             d = d.replace(str(v + 1), ' ' + walkable_array_map.get(v))
 
                         d = ('{' + (' ' + (d[1:])).replace(',\n', ' },\n{ '))[:-1] + ' }'
-                        walkable_text = walkable_text + 'walkableMapsMap.put(RoomEnum.STAGE_' + str(stage) + '_' + mode + '_' + str(
+                        walkable_text[stage-1] = walkable_text[stage-1] + 'walkableMapsMap.put(RoomEnum.STAGE_' + str(
+                            stage) + '_' + mode + '_' + str(
                             index) + ', new MapPathFindingFlags[][] { \n' + d + '\n});\n'
 
             enums_text = enums_text + ', STAGE_' + str(stage) + '_' + mode + '_' + str(index) + '\n'
 
-            map_chances_text = map_chances_text + 'mapChances.put('\
-                               'STAGE_' + str(stage) + '_' + mode + '_' + str(index) + ', ' \
+            map_chances_text = map_chances_text + 'mapChances.put(' \
+                                                  'STAGE_' + str(stage) + '_' + mode + '_' + str(index) + ', ' \
                                + '100' + ');\n'
 
             index = index + 1
@@ -237,37 +257,36 @@ f_generator = open(file_room_map_generator, 'w')
 f_generator.write("".join(file_text))
 f_generator.close()
 
-f_char = open(file_characters, 'r')
-file_text = f_char.readlines()
-f_char.close()
-insert_index = file_text.index('//python-insert-char\n')
-delete_index = file_text.index('//python-insert-char-end\n')
-del file_text[insert_index + 1:delete_index]
-file_text.insert(insert_index + 1, chars_text)
-f_char = open(file_characters, 'w')
-f_char.write("".join(file_text))
-f_char.close()
+for stage in range(1, 4):
+    f_char = open(file_characters[stage-1], 'r')
+    file_text = f_char.readlines()
+    f_char.close()
+    insert_index = file_text.index('//python-insert-char\n')
+    delete_index = file_text.index('//python-insert-char-end\n')
+    del file_text[insert_index + 1:delete_index]
+    file_text.insert(insert_index + 1, chars_text[stage-1])
+    f_char = open(file_characters[stage-1], 'w')
+    f_char.write("".join(file_text))
+    f_char.close()
 
-f_anim = open(file_animations, 'r')
-file_text = f_anim.readlines()
-f_anim.close()
-insert_index = file_text.index('//python-insert-anim\n')
-delete_index = file_text.index('//python-insert-anim-end\n')
-del file_text[insert_index + 1:delete_index]
-file_text.insert(insert_index + 1, anim_text)
-f_anim = open(file_animations, 'w')
-f_anim.write("".join(file_text))
-f_anim.close()
+    f_anim = open(file_animations[stage-1], 'r')
+    file_text = f_anim.readlines()
+    f_anim.close()
+    insert_index = file_text.index('//python-insert-anim\n')
+    delete_index = file_text.index('//python-insert-anim-end\n')
+    del file_text[insert_index + 1:delete_index]
+    file_text.insert(insert_index + 1, anim_text[stage-1])
+    f_anim = open(file_animations[stage-1], 'w')
+    f_anim.write("".join(file_text))
+    f_anim.close()
 
-f_walkable = open(file_walkable, 'r')
-file_text = f_walkable.readlines()
-f_walkable.close()
-insert_index = file_text.index('//python-insert-walkable\n')
-delete_index = file_text.index('//python-insert-walkable-end\n')
-del file_text[insert_index + 1:delete_index]
-file_text.insert(insert_index + 1, walkable_text)
-f_walkable = open(file_walkable, 'w')
-f_walkable.write("".join(file_text))
-f_walkable.close()
-
-
+    f_walkable = open(file_walkable[stage-1], 'r')
+    file_text = f_walkable.readlines()
+    f_walkable.close()
+    insert_index = file_text.index('//python-insert-walkable\n')
+    delete_index = file_text.index('//python-insert-walkable-end\n')
+    del file_text[insert_index + 1:delete_index]
+    file_text.insert(insert_index + 1, walkable_text[stage-1])
+    f_walkable = open(file_walkable[stage-1], 'w')
+    f_walkable.write("".join(file_text))
+    f_walkable.close()

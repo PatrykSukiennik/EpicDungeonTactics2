@@ -772,7 +772,8 @@ public class LightsConfig {
     }
 
     public static LightConfigObject getCharacterLights(CharacterEnum characterEnum) {
-        return characterLights.get(characterEnum);
+        LightConfigObject result = characterLights.get(characterEnum);
+        return result == null ? characterLights.get(HERO_ELF) : result;
     }
 
     public static LightConfigObject getMapElementAnimationLights(MapElementAnimationEnum mapElementAnimationEnum) {

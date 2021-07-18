@@ -2,8 +2,8 @@ package com.appatstudio.epicdungeontactics2.global.input;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.CameraHandler;
-import com.appatstudio.epicdungeontactics2.view.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.CameraHandler;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
