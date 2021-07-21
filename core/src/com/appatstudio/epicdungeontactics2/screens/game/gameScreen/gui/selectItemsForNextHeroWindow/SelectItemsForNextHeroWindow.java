@@ -9,6 +9,7 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.AbstractSegment;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.BackpackSegment;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
@@ -119,8 +120,10 @@ public class SelectItemsForNextHeroWindow {
         }
         else if (finishButton.tap(x, y)) {
             //GuiContainer.newHero();
+            System.out.println("SIZE OF BACKPACK2: "+ StatTracker.getBackpackItems().size);
             GameScreen.newHero(hero, itemsForNewHeroSegment.getItems());
             hide();
+            System.out.println("SIZE OF BACKPACK3: "+StatTracker.getBackpackItems().size);
             return true;
         }
         else {

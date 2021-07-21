@@ -141,15 +141,18 @@ public class ShopSegment extends AbstractSegment {
         bg.draw(batch, posX, posY, fullWidth, fullHeight);
 
         stateTime += Gdx.graphics.getDeltaTime();
-        if (selectedItem != null
-                && (selectedItem.getItemTypeEnum() == ItemTypeEnum.FOOD
-                || selectedItem.getItemTypeEnum() == ItemTypeEnum.BOOK)) {
-            batch.getColor().a = HeroEqItemBlock.getPulsating();
-            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
-        } else {
-            batch.getColor().a = 1f;
-            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
-        }
+//        if (selectedItem != null
+//                && (selectedItem.getItemTypeEnum() == ItemTypeEnum.FOOD
+//                || selectedItem.getItemTypeEnum() == ItemTypeEnum.BOOK)) {
+//            batch.getColor().a = HeroEqItemBlock.getPulsating();
+//            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
+//        } else {
+//            batch.getColor().a = 1f;
+//            heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
+//        }
+
+        //batch.getColor().a = 1f;
+        heroAnimation.getKeyFrame(stateTime).draw(batch, heroX, heroY, heroSize, heroSize);
 
         batch.getColor().a = 1f;
         for (ItemBlock ib : itemsToBuy) {

@@ -89,6 +89,7 @@ public class BodyConfig {
         characterBodyDef.put(TROLL, smallBody);
         characterBodyDef.put(WOLF, smallBody);
         characterBodyDef.put(MUSHROOM_SMALL, smallBody);
+        characterBodyDef.put(ICE_ZOMBIE, smallBody);
         characterBodyDef.put(MUSHROOM_NORMAL, smallBody);
         characterBodyDef.put(MUSHROOM_LARGE, smallBody);
         characterBodyDef.put(BEAR, mediumBody);
@@ -110,6 +111,7 @@ public class BodyConfig {
         characterBodyDef.put(NPC_BISHOP, smallBody);
         characterBodyDef.put(NPC_NUN_FAT, smallBody);
         characterBodyDef.put(NPC_NUN_NORMAL, smallBody);
+        characterBodyDef.put(NPC_MAGIC_SHOP, smallBody);
         characterBodyDef.put(NPC_BLACKSMITH, smallBody);
         characterBodyDef.put(NPC_KING, smallBody);
         characterBodyDef.put(NPC_KNIGHT_ELITE, smallBody);
@@ -133,6 +135,7 @@ public class BodyConfig {
         characterFixtureDef.put(ORC_SHAMAN, smallFixtureDef);
         characterFixtureDef.put(ORC_WARRIOR, smallFixtureDef);
         characterFixtureDef.put(GOBLIN, smallFixtureDef);
+        characterFixtureDef.put(ICE_ZOMBIE, smallFixtureDef);
         characterFixtureDef.put(MASKED_ORC, smallFixtureDef);
         characterFixtureDef.put(BOSS_OGRE, smallFixtureDef);
         characterFixtureDef.put(SKELET, smallFixtureDef);
@@ -164,6 +167,7 @@ public class BodyConfig {
         characterFixtureDef.put(NPC_CITIZEN_MALE, smallFixtureDef);
         characterFixtureDef.put(NPC_BUTCHER, smallFixtureDef);
         characterFixtureDef.put(NPC_MOUNTAIN_KING, smallFixtureDef);
+        characterFixtureDef.put(NPC_MAGIC_SHOP, smallFixtureDef);
         characterFixtureDef.put(NPC_PRINCESS, smallFixtureDef);
         characterFixtureDef.put(NPC_BISHOP, smallFixtureDef);
         characterFixtureDef.put(NPC_NUN_FAT, smallFixtureDef);

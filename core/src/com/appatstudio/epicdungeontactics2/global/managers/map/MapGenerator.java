@@ -47,7 +47,7 @@ public class MapGenerator {
         mapCounter.put(3, new HashMap<RoomTypeEnum, Integer>());
 
         enemiesFactor = new HashMap<>();
-        enemiesFactor.put(1, 1f);
+        enemiesFactor.put(1, 0.7f);
         enemiesFactor.put(2, 0.3f);
         enemiesFactor.put(3, 0.6f);
         enemiesFactor.put(4, 1f);
@@ -226,7 +226,7 @@ mapChances.put(STAGE_3_BOSS_4, 100);
                 CoordsInt tempCoords = result.get(result.size - generatedInLastLoop + j).getPosition();
 
                 if (isFree(result, tempCoords.x - 1, tempCoords.y)) { //left
-                    if (EpicDungeonTactics.random.nextFloat() <  ((Math.abs(tempCoords.y) % 2 == 0) ? 0.25f : 0f)) {
+                    if (EpicDungeonTactics.random.nextFloat() <  ((Math.abs(tempCoords.y) % 2 == 0) ? 0.35f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -238,7 +238,7 @@ mapChances.put(STAGE_3_BOSS_4, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x + 1, tempCoords.y)) { //right
-                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.y) % 2 == 0) ? 0.25f : 0f)) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.y) % 2 == 0) ? 0.35f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -250,7 +250,7 @@ mapChances.put(STAGE_3_BOSS_4, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y - 1)) { //bottom
-                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.25f : 0f)) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.35f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,
@@ -262,7 +262,7 @@ mapChances.put(STAGE_3_BOSS_4, 100);
                     }
                 }
                 if (isFree(result, tempCoords.x, tempCoords.y + 1)) { //top
-                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.25f : 0f)) {
+                    if (EpicDungeonTactics.random.nextFloat() < ((Math.abs(tempCoords.x) % 2 == 0) ? 0.35f : 0f)) {
                         result.add(new Room(
                                 result.size == roomCount - 1 ? BOSS_ROOM : REGULAR_ROOM,
                                 stage,

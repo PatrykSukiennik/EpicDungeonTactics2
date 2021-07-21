@@ -15,7 +15,9 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.map.BodyConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.StatTracker;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.characters.CharacterDrawable;
@@ -268,6 +270,7 @@ public final class GuiContainer {
         weaponSelector = new WeaponSelector();
 
         heroStatWindow.init(gameScreen.getHero());
+
     }
 
     public void newHero() {
@@ -280,7 +283,7 @@ public final class GuiContainer {
         selectNextHeroWindow = new SelectNextHeroWindow();
         selectItemsForNextHeroWindow = new SelectItemsForNextHeroWindow();
         weaponSelector = new WeaponSelector();
-
+        System.out.println("SIZE OF BACKPACK5: "+StatTracker.getBackpackItems().size);
     }
 
     public boolean canCameraMove() {

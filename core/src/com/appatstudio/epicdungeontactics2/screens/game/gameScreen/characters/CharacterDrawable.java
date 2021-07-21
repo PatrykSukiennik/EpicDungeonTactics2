@@ -133,7 +133,7 @@ public class CharacterDrawable extends Image {
     public void draw(Batch mapBatch) {
         super.act(Gdx.graphics.getDeltaTime());
 
-        if (hasActions()) {
+        if (hasActions() && bodyOffset != null) {
             this.body.setTransform(this.getX() + bodyOffset.x, this.getY() + bodyOffset.y, 0);
             //this.pointLight.setPosition(getX() + lightOffset.x, getY() + lightOffset.y);
         }

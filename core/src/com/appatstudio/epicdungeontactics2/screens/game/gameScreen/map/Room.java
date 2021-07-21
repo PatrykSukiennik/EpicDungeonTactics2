@@ -8,6 +8,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
@@ -15,8 +16,10 @@ import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.map.BodyConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoMaster;
@@ -72,6 +75,7 @@ import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BLACKSMITH;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_BUTCHER;
 import static com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum.NPC_MAGIC_SHOP;
+import static java.lang.Math.abs;
 
 public class Room {
 
@@ -118,6 +122,8 @@ public class Room {
     private static WeaponSelector weaponSelector;
     private CharacterDrawable meleTarget = null;
 
+    private int[][] distanceToHeroArray;
+
 
     static {
         guiContainer = GuiContainer.getInstance();
@@ -163,9 +169,11 @@ public class Room {
         mapTiles = new MapTile[WorldConfig.ROOM_WIDTH][WorldConfig.ROOM_HEIGHT];
 
         MapPathFindingFlags[][] walkableArray = MapInfoMaster.getWalkableArray(roomEnum);
+        distanceToHeroArray = new int[WorldConfig.ROOM_WIDTH][WorldConfig.ROOM_HEIGHT];
         goingDownTiles = new Array<>();
         for (int x = 0; x < WorldConfig.ROOM_WIDTH; x++) {
             for (int y = 0; y < WorldConfig.ROOM_HEIGHT; y++) {
+                distanceToHeroArray[x][y] = 999;
                 mapTiles[x][y] = new MapTile(x, y, walkableArray[WorldConfig.ROOM_HEIGHT - y - 1][x] != MapPathFindingFlags.NONE);
                 if (walkableArray[WorldConfig.ROOM_HEIGHT - y - 1][x] == MapPathFindingFlags.NEW_STAGE) {
                     goingDownTiles.add(mapTiles[x][y]);
@@ -321,6 +329,72 @@ public class Room {
 
                 if (boss != null) bossHpBar = new BossHpBar(boss);
             }
+            refreshDistanceToHeroArray();
+        }
+    }
+
+    private void refreshDistanceToHeroArray() {
+        for (int x=0; x<WorldConfig.ROOM_WIDTH; x++) {
+            for (int y=0; y<WorldConfig.ROOM_HEIGHT; y++) {
+                distanceToHeroArray[x][y] = 999;
+            }
+        }
+
+        Array<CoordsInt> coveredTiles = new Array<>();
+        coveredTiles.add(heroInRoom.getPosition());
+        distanceToHeroArray[coveredTiles.get(0).x][coveredTiles.get(0).y] = 0;
+        int createdNow = 1;
+        int createdLastly = 1;
+        int loop = 0;
+        CoordsInt curr;
+
+        while (createdNow > 0) {
+            createdNow = 0;
+            loop++;
+            for (int i=coveredTiles.size - createdLastly; i<coveredTiles.size - createdNow; i++) {
+
+                curr = coveredTiles.get(i);
+
+                if (curr.x < WorldConfig.ROOM_WIDTH - 1) {
+                    if (distanceToHeroArray[curr.x+1][curr.y] == 999 &&
+                            (mapTiles[curr.x+1][curr.y].isWalkable()
+                            || mapTiles[curr.x+1][curr.y].getCharacterStandingOn() != null)) {
+                        distanceToHeroArray[curr.x+1][curr.y] = loop;
+                        coveredTiles.add(new CoordsInt(curr.x+1, curr.y));
+                        createdNow++;
+                    }
+                }
+                if (curr.x > 0) {
+                    if (distanceToHeroArray[curr.x-1][curr.y] == 999 &&
+                            (mapTiles[curr.x-1][curr.y].isWalkable()
+                            || mapTiles[curr.x-1][curr.y].getCharacterStandingOn() != null)) {
+                        distanceToHeroArray[curr.x-1][curr.y] = loop;
+                        coveredTiles.add(new CoordsInt(curr.x-1, curr.y));
+                        createdNow++;
+                    }
+                }
+                if (curr.y < WorldConfig.ROOM_HEIGHT - 1) {
+                    if (distanceToHeroArray[curr.x][curr.y+1] == 999 &&
+                            (mapTiles[curr.x][curr.y+1].isWalkable()
+                            || mapTiles[curr.x][curr.y+1].getCharacterStandingOn() != null)) {
+                        distanceToHeroArray[curr.x][curr.y+1] = loop;
+                        coveredTiles.add(new CoordsInt(curr.x, curr.y+1));
+                        createdNow++;
+                    }
+                }
+                if (curr.y > 0) {
+                    if (distanceToHeroArray[curr.x][curr.y-1] == 999 &&
+                            (mapTiles[curr.x][curr.y-1].isWalkable()
+                            || mapTiles[curr.x][curr.y-1].getCharacterStandingOn() != null)) {
+                        distanceToHeroArray[curr.x][curr.y-1] = loop;
+                        coveredTiles.add(new CoordsInt(curr.x, curr.y-1));
+                        createdNow++;
+                    }
+                }
+
+            }
+
+            createdLastly = createdNow;
         }
 
     }
@@ -331,7 +405,7 @@ public class Room {
         for (int x=0; x<WorldConfig.ROOM_WIDTH; x++) {
             for (int y=0; y<WorldConfig.ROOM_HEIGHT; y++) {
                 if (characters[y][x] != null && !characters[y][x].toString().startsWith("NPC")) {
-                    enemies.put(new CoordsInt(x, WorldConfig.ROOM_HEIGHT - y - 1), characters[y][x]);
+                    enemies.put(new CoordsInt(x, y), characters[y][x]);
                 }
             }
         }
@@ -361,7 +435,7 @@ public class Room {
                 charactersInRoom.add(newCharacter);
             }
         } else while(count > 0) {
-            CoordsInt newEnemyCoords = (CoordsInt) enemies.keySet().toArray()[EpicDungeonTactics.random.nextInt() % enemies.keySet().size()];
+            CoordsInt newEnemyCoords = (CoordsInt) enemies.keySet().toArray()[abs(EpicDungeonTactics.random.nextInt()) % enemies.keySet().size()];
 
             CharacterEnum randomEnemy = MapGenerator.getRandomEnemy(stage);
 
@@ -491,6 +565,9 @@ public class Room {
                 getNpcInfo(heroInRoom); //npcMode set if possible
 
             } else if (roomState == RoomStateEnum.FIGHT) {
+                if (currentCharacterMoving.isHero()) {
+                    refreshDistanceToHeroArray();
+                }
 
                 queue.tick();
                 currentCharacterMoving = queue.getCurrentCharacter();
@@ -588,8 +665,12 @@ public class Room {
 
 
         drawMovableTiles(heroInRoom, mapBatch); //____________________________________________________________??
+
         if (meleTarget == null) {
             drawEnemyShotTiles(mapBatch);
+            if (currentCharacterMoving.isHero()) {
+                drawHeroAttackableTiles(mapBatch);
+            }
         } else {
             drawTilesForAtttack(mapBatch, meleTarget);
         }
@@ -601,6 +682,7 @@ public class Room {
         for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
             for (int x = WorldConfig.ROOM_WIDTH - 1; x >= 0; x--) {
                 mapTiles[x][y].draw(mapBatch, roomState == RoomStateEnum.FIGHT);
+                //FontsManager.getFont(FontEnum.MAP_ITEM_BLUE).draw(mapBatch, Integer.toString(distanceToHeroArray[x][y]).substring(0, 1), mapTiles[x][y].getPositionFloat().x, mapTiles[x][y].getPositionFloat().y);
             }
         }
 
@@ -627,6 +709,19 @@ public class Room {
 
         guiBatch.end();
 
+    }
+
+    private void drawHeroAttackableTiles(Batch mapBatch) {
+        if (heroInRoom.getAttackableTiles() != null) {
+            for (MapTile meleAttackTile : heroInRoom.getAttackableTiles()) {
+                meleAttackTile.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+            }
+        }
+        if (heroInRoom.getHeroShotTiles() != null) {
+            for (MapTile shotTile : heroInRoom.getHeroShotTiles()) {
+                shotTile.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+            }
+        }
     }
 
     private void drawTilesForAtttack(Batch mapBatch, CharacterDrawable meleTarget) {
@@ -783,7 +878,7 @@ public class Room {
         Array<MapTile> attackableTiles = new Array<>();
         Array<MapTile> moveToTiles = new Array<>();
 
-        int lifeTime = range == -1 ? WorldConfig.ROOM_HEIGHT * WorldConfig.ROOM_WIDTH * 2 : range;
+        int lifeTime = range == -1 ? WorldConfig.ROOM_HEIGHT * WorldConfig.ROOM_WIDTH * 2 : range + 1;
 
         int nowAdded = 0;
         int lastlyAdded = 0;
@@ -904,15 +999,8 @@ public class Room {
 
                             if (currTile != null) {
 
-                                if (currTile.getFlag() == MapPathFindingFlags.NONE) {
-                                    if (currTile.isWalkable()) {
-                                        allPaths.add(new Array<MapTile>());
-                                        allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
-                                        allPaths.get(allPaths.size - 1).add(currTile);
-                                        currTile.setFlag(MapPathFindingFlags.MOVABLE, allPaths.size - 1);
-                                        moveToTiles.add(currTile);
-                                        nowAdded++;
-                                    } else if (currTile.getCharacterStandingOn() != null) {
+                                if (loop == range) { //last loop is only for mele attack
+                                    if (currTile.getCharacterStandingOn() != null) {
                                         CharacterDrawable characterStandingOnTile = currTile.getCharacterStandingOn();
 
                                         if (character.isHero()) {
@@ -926,6 +1014,34 @@ public class Room {
                                         } else {
                                             if (characterStandingOnTile.isPet() || !character.isHero()) {
                                                 attackableTiles.add(currTile);
+                                            }
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (currTile.getFlag() == MapPathFindingFlags.NONE) {
+                                        if (currTile.isWalkable()) {
+                                            allPaths.add(new Array<MapTile>());
+                                            allPaths.get(allPaths.size - 1).addAll(allPaths.get(i));
+                                            allPaths.get(allPaths.size - 1).add(currTile);
+                                            currTile.setFlag(MapPathFindingFlags.MOVABLE, allPaths.size - 1);
+                                            moveToTiles.add(currTile);
+                                            nowAdded++;
+                                        } else if (currTile.getCharacterStandingOn() != null) {
+                                            CharacterDrawable characterStandingOnTile = currTile.getCharacterStandingOn();
+
+                                            if (character.isHero()) {
+                                                if (characterStandingOnTile.isEnemy()) {
+                                                    attackableTiles.add(currTile);
+                                                }
+                                            } else if (character.isPet()) {
+                                                if (!characterStandingOnTile.isPet() && !character.isHero()) {
+                                                    attackableTiles.add(currTile);
+                                                }
+                                            } else {
+                                                if (characterStandingOnTile.isPet() || !character.isHero()) {
+                                                    attackableTiles.add(currTile);
+                                                }
                                             }
                                         }
                                     }
@@ -945,6 +1061,23 @@ public class Room {
                 currLimit = allPaths.size;
                 nowAdded = 0;
             }
+        }
+
+        if (roomState == RoomStateEnum.FIGHT && character.isHero()) {
+            Array<MapTile> heroShotTiles = new Array<>();
+            for (CharacterDrawable enemy : charactersInRoom) {
+                if ( !enemy.isHero() &&
+                        Vector2.dst(
+                            heroInRoom.getPosition().x,
+                            heroInRoom.getPosition().y,
+                            enemy.getPosition().x,
+                            enemy.getPosition().y)
+                        < StatTracker.getCurrentStat(CompleteHeroStatsEnum.RANGE)) {
+
+                    heroShotTiles.add(enemy.getTileStandingOn());
+                }
+            }
+            heroInRoom.setHeroShotTiles(heroShotTiles);
         }
 
         character.setPossibleMovements(allPaths);
@@ -1059,8 +1192,10 @@ public class Room {
         mapTiles[targetCoords.x][targetCoords.y].setCharacter(heroInRoom, true);
         heroInRoom.setTileStandingOn(mapTiles[targetCoords.x][targetCoords.y], true);
         heroInRoom.setPositionForce(targetCoords);
+        refreshDistanceToHeroArray();
 
         //queue.jumpToHero();
+
         moveStarted();
         moveFinished();
 
@@ -1133,13 +1268,13 @@ public class Room {
                 for (MapTile tile : character.getAttackableTiles()) {
                     if (tile.getCharacterStandingOn() != null && tile.getCharacterStandingOn().isPet()
                             && (
-                            (Math.abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 1
-                                    && Math.abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 0)
+                            (abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 1
+                                    && abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 0)
 
                                     ||
 
-                                    (Math.abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 1
-                                            && Math.abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 0))
+                                    (abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 1
+                                            && abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 0))
 
                     ) {
 
@@ -1147,13 +1282,13 @@ public class Room {
                         return;
                     } else if (tile.getCharacterStandingOn() != null && tile.getCharacterStandingOn().isHero()
                             && (
-                            (Math.abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 1
-                                    && Math.abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 0)
+                            (abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 1
+                                    && abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 0)
 
                                     ||
 
-                                    (Math.abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 1
-                                            && Math.abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 0))
+                                    (abs(tile.getPositionInt().y - character.getTileStandingOn().getPositionInt().y) == 1
+                                            && abs(tile.getPositionInt().x - character.getTileStandingOn().getPositionInt().x) == 0))
 
                     ) {
                         justAttack(character, tile);
@@ -1221,12 +1356,12 @@ public class Room {
 
     private void moveAndAttack(CharacterDrawable character, MapTile attackTile) {
         for (MapTile moveTile : character.getPossibleMoveToTiles()) {
-            if ((Math.abs(moveTile.getPositionInt().x - attackTile.getPositionInt().x) == 0
-                    && Math.abs(moveTile.getPositionInt().y - attackTile.getPositionInt().y) == 1)
+            if ((abs(moveTile.getPositionInt().x - attackTile.getPositionInt().x) == 0
+                    && abs(moveTile.getPositionInt().y - attackTile.getPositionInt().y) == 1)
                     ||
 
-                    (Math.abs(moveTile.getPositionInt().x - attackTile.getPositionInt().x) == 1
-                            && Math.abs(moveTile.getPositionInt().y - attackTile.getPositionInt().y) == 0)) {
+                    (abs(moveTile.getPositionInt().x - attackTile.getPositionInt().x) == 1
+                            && abs(moveTile.getPositionInt().y - attackTile.getPositionInt().y) == 0)) {
 
                 //good tile found
 
@@ -1298,14 +1433,8 @@ public class Room {
             }
         }
 
-
         for (MapTile maybeTile : character.getPossibleMoveToTiles()) {
-            float distance = Vector2.dst(
-                    maybeTile.getPositionInt().x,
-                    maybeTile.getPositionInt().y,
-                    targetToAttack.getTileStandingOn().getPositionInt().x,
-                    targetToAttack.getTileStandingOn().getPositionInt().y);
-
+            int distance = distanceToHeroArray[maybeTile.getPositionInt().x][maybeTile.getPositionInt().y];
             if (distance < closestToTargetTile) {
                 result = maybeTile;
                 closestToTargetTile = distance;
@@ -1383,7 +1512,7 @@ public class Room {
             for (int x = minX; x <= maxX; x++) {
                 for (int y = minY; y <= maxY; y++) {
                     distanceFromLine =
-                            Math.abs(
+                            abs(
                                     (a * x + b) //f(x)
                                             - y
                             );

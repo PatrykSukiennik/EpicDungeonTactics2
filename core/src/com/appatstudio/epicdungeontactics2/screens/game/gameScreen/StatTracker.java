@@ -45,7 +45,7 @@ public class StatTracker {
     private static HashMap<CharacterEnum, Boolean> lvlUps;
     private static Array<CharacterEnum> usedCharacters;
 
-    public static Array<AbstractItem> eqItems;
+    public static Array<AbstractItem> backpackItems;
     public static Array<AbstractItem> equippedItems;
 
     public static CharacterStatsObject stats;
@@ -62,7 +62,7 @@ public class StatTracker {
     private static final int MP_PER_INT_POINT = 10;
 
     public StatTracker() {
-        eqItems = new Array<>();
+        backpackItems = new Array<>();
     }
 
     static {
@@ -76,7 +76,7 @@ public class StatTracker {
 
     public static void newRun(CharacterEnum runHero) {
         System.out.println("newRun");
-        eqItems = new Array<>();
+        backpackItems = new Array<>();
         equippedItems = new Array<>();
         currHero = runHero;
         
@@ -89,6 +89,11 @@ public class StatTracker {
         }
 
         getStartItems(runHero);
+    }
+
+    public static void clearEq() {
+        if (backpackItems == null) backpackItems = new Array<>();
+        else backpackItems.clear();
     }
 
     public static void init(CharacterEnum hero, PerkEnum perk) {
@@ -115,44 +120,45 @@ public class StatTracker {
 
         //newRun(hero);
         //getStartItems(hero);
+
         refreshWholeCharacter();
     }
 
     private static void getStartItems(CharacterEnum hero) {
 
         equippedItems = new Array<>();
-        eqItems = new Array<>();
+        backpackItems = new Array<>();
 
         ItemEnum[] items = HeroStats.getStartingItems(hero);
 
         for (ItemEnum i : items) {
             System.out.println("DUPA");
-            eqItems.add(ItemGenerator.getItem(i));
+            backpackItems.add(ItemGenerator.getItem(i));
 
-            HeroSegment.equipIfIsSpace(eqItems.get(eqItems.size-1));
+            HeroSegment.equipIfIsSpace(backpackItems.get(backpackItems.size-1));
 
-            switch (eqItems.get(eqItems.size - 1).getItemTypeEnum()) {
+            switch (backpackItems.get(backpackItems.size - 1).getItemTypeEnum()) {
                 case ARMOR:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                     refreshProjectile();
                 case ARROW:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                     refreshProjectile();
                 case NECKLACE:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                 case SHIELD:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                 case STAFF:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                     refreshProjectile();
                 case MELE:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                 case RING:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                 case HELMET:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                 case BOW:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(backpackItems.get(backpackItems.size-1));
                     refreshProjectile();
             }
         }
@@ -170,6 +176,7 @@ public class StatTracker {
     public static void refreshWholeCharacter() {
         if (equippedItems == null) equippedItems = new Array<>();
         else equippedItems.clear();
+        
         System.out.println("DUPA4: " + equippedItems.size);
         Array<AbstractItem> itemsObjects = HeroSegment.getItems();
 
@@ -185,12 +192,12 @@ public class StatTracker {
                 case MELE:
                 case SHIELD:
                 case NECKLACE:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(i);
                     break;
                 case ARROW:
                 case STAFF:
                 case BOW:
-                    equippedItems.add(eqItems.get(eqItems.size-1));
+                    equippedItems.add(i);
                     refreshProjectile();
                     break;
             }
@@ -803,8 +810,8 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG, 0f);
     }
 
-    public static Array<AbstractItem> getEqItems() {
-        return eqItems;
+    public static Array<AbstractItem> getBackpackItems() {
+        return backpackItems;
     }
 
     public static Array<AbstractItem> getEquippedItems() {

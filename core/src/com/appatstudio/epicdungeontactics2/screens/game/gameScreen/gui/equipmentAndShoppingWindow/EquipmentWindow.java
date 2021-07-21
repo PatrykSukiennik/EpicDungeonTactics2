@@ -1,6 +1,5 @@
 package com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow;
 
-import com.appatstudio.epicdungeontactics2.global.assets.SoundsLoader;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
@@ -13,7 +12,6 @@ import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.SoundPlayAction;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.screens.viewElements.ButtonWithText;
 import com.badlogic.gdx.Gdx;
@@ -54,7 +52,7 @@ public final class EquipmentWindow {
         );
 
         AbstractItem tempItem;
-        Array<AbstractItem> items = StatTracker.getEqItems();
+        Array<AbstractItem> items = StatTracker.getBackpackItems();
         for (AbstractItem item : items) {
             tempItem = item;
             pickItem(item);
@@ -208,6 +206,7 @@ public final class EquipmentWindow {
 
     public static void pickItem(AbstractItem item) {
         backpackSegment.pickItem(item);
+        HeroSegment.equipIfIsSpace(item);
     }
 
     public static void showNotPossibleInFight() {

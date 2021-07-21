@@ -116,14 +116,19 @@ public final class GameScreen extends Actor {
             r.newHero(newHero);
         }
 
+        StatTracker.clearEq();
+
         guiContainer.newHero();
+
 
         for (AbstractItem item : items) {
             EquipmentWindow.pickItem(item);
         }
 
+        System.out.println("SIZE OF BACKPACK1: "+StatTracker.getBackpackItems().size);
         isStop = false;
         currRoom.moveFinished();
+        System.out.println("SIZE OF BACKPACK7: "+StatTracker.getBackpackItems().size);
     }
 
     public void itemDropped(AbstractItem item) {

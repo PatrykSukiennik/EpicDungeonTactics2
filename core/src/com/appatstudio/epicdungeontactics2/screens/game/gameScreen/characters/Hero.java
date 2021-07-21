@@ -11,10 +11,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
 
 import box2dLight.RayHandler;
 
 public class Hero extends CharacterDrawable {
+    private Array<MapTile> heroShotTiles;
+
     public Hero(CharacterEnum characterEnum, RayHandler handler, World world, Room room, MapTile tile) {
         super(characterEnum, new CoordsInt(0, 0), handler, world, room, tile, false);
         isHero = true;
@@ -67,5 +70,13 @@ public class Hero extends CharacterDrawable {
     @Override
     public Image getProjectile() {
         return StatTracker.getProjectile();
+    }
+
+    public void setHeroShotTiles(Array<MapTile> heroShotTiles) {
+        this.heroShotTiles = heroShotTiles;
+    }
+
+    public Array<MapTile> getHeroShotTiles() {
+        return heroShotTiles;
     }
 }

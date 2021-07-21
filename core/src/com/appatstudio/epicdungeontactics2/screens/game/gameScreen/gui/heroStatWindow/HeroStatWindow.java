@@ -135,7 +135,7 @@ public class HeroStatWindow {
                                     heroPos.x + heroSize.x * 2.4f,
                                     heroPos.y + heroSize.y * 0.3f - i * FontsManager.getTextHeight(FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 4f),
                             FontsManager.getTextHeight(
-                                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 4.5f
+                                    FontsManager.getFont(FontEnum.MENU_HERO_DESCRIPTION_UNLOCKED), "0") * 2.5f
                     ));
         }
 
@@ -305,23 +305,23 @@ public class HeroStatWindow {
 
     public static void refreshStats() {
         leftColumn[0].setIconAndFont(
-                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                GraphicsManager.getGuiElement(GuiElementEnum.MELE_DMG_ICON),
                 StringsManager.getGuiString(GuiStringEnum.MELE_DMG));
 
         leftColumn[1].setIconAndFont(
-                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                GraphicsManager.getGuiElement(GuiElementEnum.RANGE_DMG_ICON),
                 StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG));
 
         leftColumn[2].setIconAndFont(
-                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                GraphicsManager.getGuiElement(GuiElementEnum.RANGE_ICON),
                 StringsManager.getGuiString(GuiStringEnum.RANGE));
 
         leftColumn[3].setIconAndFont(
-                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                GraphicsManager.getGuiElement(GuiElementEnum.ARMOR_ICON),
                 StringsManager.getGuiString(GuiStringEnum.ARMOR));
 
         leftColumn[4].setIconAndFont(
-                GraphicsManager.getGuiElement(GuiElementEnum.DOT),
+                GraphicsManager.getGuiElement(GuiElementEnum.CRIT_CHANCE_ICON),
                 StringsManager.getGuiString(GuiStringEnum.CRIT_CHANCE));
 
 
@@ -358,10 +358,29 @@ public class HeroStatWindow {
                 perkStat > 1 ?
                         (int) perkStat + " " + descEnd :
                         (int) (perkStat * 100) + "% " + descEnd;
-        perkTextObject.setIconAndText(
-                GraphicsManager.getGuiElement(GuiElementEnum.RED_DOT),
-                perkText
-        );
+
+        switch (SavedInfoManager.getPerkLvl(StatTracker.getPerk())) {
+            case 1:
+                perkTextObject.setIconAndText(
+                        GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_MEDAL),
+                        perkText
+                );
+                break;
+            case 2:
+                perkTextObject.setIconAndText(
+                        GraphicsManager.getGuiElement(GuiElementEnum.SILVER_MEDAL),
+                        perkText
+                );
+                break;
+            default:
+                perkTextObject.setIconAndText(
+                        GraphicsManager.getGuiElement(GuiElementEnum.GOLD_MEDAL),
+                        perkText
+                );
+                break;
+
+        }
+
 
 
         refreshBars();
