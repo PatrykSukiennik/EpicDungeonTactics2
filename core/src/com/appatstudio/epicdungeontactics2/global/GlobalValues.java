@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global;
 
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoFlagsEnum;
@@ -18,7 +19,7 @@ public final class GlobalValues {
             gold = 500;
             SavedInfoManager.saveInt(SavedInfoFlagsEnum.GOLD, gold);
         }
-        gold = 5000;
+        if (EpicDungeonTactics.GAMEMODE == GameModeEnum.DEBUG) gold = 500000;
     }
 
     public static void setGold(int v) {

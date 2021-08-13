@@ -3,9 +3,9 @@ package com.appatstudio.epicdungeontactics2.global.managers.map;
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MagicalEffectAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
-import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.badlogic.gdx.graphics.Color;
 
@@ -84,6 +84,7 @@ public class LightsConfig {
     private static final HashMap<CharacterEnum, LightConfigObject> characterLights;
     private static final HashMap<MapElementAnimationEnum, LightConfigObject> mapElementsAnimationLightConfig;
     private static final HashMap<MapElementSpriteEnum, LightConfigObject> mapElementsSpriteLightConfig;
+    private static final HashMap<MagicalEffectAnimationEnum, LightConfigObject> magicEffectLight;
 
     static {
 
@@ -754,6 +755,49 @@ public class LightsConfig {
 //                        LIGHT_COLOR,
 //                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
 //                ));
+
+        magicEffectLight = new HashMap<>();
+        magicEffectLight.put(
+                MagicalEffectAnimationEnum.FIRE_EXPLOSION,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        magicEffectLight.put(
+                MagicalEffectAnimationEnum.ICE_EXPLOSION,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        magicEffectLight.put(
+                MagicalEffectAnimationEnum.POISON_EXPLOSION,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+        magicEffectLight.put(
+                MagicalEffectAnimationEnum.LIGHT_EXPLOSION,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
+
+        magicEffectLight.put(
+                MagicalEffectAnimationEnum.MAGIC_EXPLOSION,
+                new LightConfigObject(
+                        SMALL_CHARACTER_RADIUS,
+                        SMALL_SOFTNESS,
+                        LIGHT_COLOR,
+                        new CoordsFloat(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE)
+                ));
     }
 
     public static Color getAmbientColor(int stage) {
@@ -782,5 +826,9 @@ public class LightsConfig {
 
     public static LightConfigObject getMapElementSpriteLights(MapElementSpriteEnum mapElementSpriteEnum) {
         return mapElementsSpriteLightConfig.get(mapElementSpriteEnum);
+    }
+
+    public static LightConfigObject getMagicEffectLight(MagicalEffectAnimationEnum effect) {
+        return magicEffectLight.get(effect);
     }
 }

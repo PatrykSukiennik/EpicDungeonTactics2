@@ -46,7 +46,7 @@ public class MapTile {
         pathfindingFlagSprites.put(MapPathFindingFlags.ITEM_MOVABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_YELLOW));
         pathfindingFlagSprites.put(MapPathFindingFlags.ATTACKABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_RED));
         pathfindingFlagSprites.put(MapPathFindingFlags.MOVABLE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
-        pathfindingFlagSprites.put(MapPathFindingFlags.NEW_STAGE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
+        pathfindingFlagSprites.put(MapPathFindingFlags.NEW_STAGE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_BLUE));
         pathfindingFlagSprites.put(MapPathFindingFlags.ROOM_NODE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
         pathfindingFlagSprites.put(MapPathFindingFlags.NONE, GraphicsManager.getMapElementSprite(MapElementSpriteEnum.TILE_GREEN));
     }
@@ -201,9 +201,15 @@ public class MapTile {
                         WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
                 break;
             }
-            case ROOM_NODE:
-            case NEW_STAGE: {
+            case ROOM_NODE: {
                 pathfindingFlagSprites.get(MapPathFindingFlags.ROOM_NODE).draw(
+                        batch,
+                        this.positionFloat.x, this.positionFloat.y,
+                        WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+                break;
+            }
+            case NEW_STAGE: {
+                pathfindingFlagSprites.get(MapPathFindingFlags.NEW_STAGE).draw(
                         batch,
                         this.positionFloat.x, this.positionFloat.y,
                         WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);

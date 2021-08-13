@@ -1,7 +1,10 @@
 package com.appatstudio.epicdungeontactics2.screens.menu.campUpgradeScreen;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum.PROD;
+
 import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.stats.CampUpgradeStats;
@@ -38,7 +41,7 @@ public final class CampUpgradeScreen {
     private SpriteBatch batch;
     private TextWithIcon backButton, goldStatus;
 
-    private Image campUpgradeButton, financesUpgradeButton;
+    private Image campUpgradeButton, financesUpgradeButton, bestiaryButton;
 
     private CampUpgradeButton[] buttons;
 
@@ -67,6 +70,7 @@ public final class CampUpgradeScreen {
 
         batch = new SpriteBatch();
         batch.enableBlending();
+        float sizeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
 
         upgradeButton = new ButtonWithText(GraphicsManager.getGuiElement(GuiElementEnum.YELLOW_BUTTON_WIDE),
                 Gdx.graphics.getWidth()/2f - MenuScreen.BOTTOM_BUTTON_WIDTH/2f,
@@ -110,16 +114,19 @@ public final class CampUpgradeScreen {
         );
 
         campUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.CAMP_UPGRADE_BUTTON));
-        float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
-        campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
+        campUpgradeButton.setSize(sizeButtonSize, sizeButtonSize);
         campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
         campUpgradeButton.getColor().a = 0.4f;
 
         financesUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.FINANCES_UPGRADE_BUTTON));
-        float financesUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
-        financesUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
-        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + campUpgradeButtonSize);
+        financesUpgradeButton.setSize(sizeButtonSize, sizeButtonSize);
+        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sizeButtonSize);
         financesUpgradeButton.getColor().a = 0.8f;
+
+        bestiaryButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.BESTIARY_BUTTON));
+        bestiaryButton.setSize(sizeButtonSize, sizeButtonSize);
+        bestiaryButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sizeButtonSize * 2);
+        bestiaryButton.getColor().a = 0.8f;
 
         upgradeCards = new HashMap<>();
         CampUpgradeEnum[] allUpgrades = CampUpgradeEnum.values();
@@ -165,30 +172,33 @@ public final class CampUpgradeScreen {
 
         MenuBgContainer.drawOnlyLights(batch);
 
-        campUpgradeButton.draw(batch, 1f);
-        financesUpgradeButton.draw(batch, 1f);
-        batch.getColor().a = 1f;
+        if (EpicDungeonTactics.GAMEMODE != GameModeEnum.PROMO) {
 
-        for (CampUpgradeButton c : buttons) {
-            if (selectedUpgrade != null) {
-                if (selectedUpgrade.getUpgradeEnum() == c.getUpgradeEnum()) {
-                    batch.getColor().a = 0.6f;
-                    c.draw(batch);
-                    batch.getColor().a = 1f;
-                }
-                else c.draw(batch);
+            campUpgradeButton.draw(batch, 1f);
+            financesUpgradeButton.draw(batch, 1f);
+            bestiaryButton.draw(batch, 1f);
+            batch.getColor().a = 1f;
+
+            for (CampUpgradeButton c : buttons) {
+                if (selectedUpgrade != null) {
+                    if (selectedUpgrade.getUpgradeEnum() == c.getUpgradeEnum()) {
+                        batch.getColor().a = 0.6f;
+                        c.draw(batch);
+                        batch.getColor().a = 1f;
+                    } else c.draw(batch);
+                } else c.draw(batch);
             }
-            else c.draw(batch);
+
+            backButton.draw(batch);
+            goldStatus.draw(batch);
+            if (selectedUpgrade != null) {
+                selectedUpgrade.draw(batch);
+                if (selectedUpgrade.isUnlockPossible()) unlockButton.draw(batch, 1f);
+                else if (selectedUpgrade.isUpgradePossible()) upgradeButton.draw(batch, 1f);
+                else if (selectedUpgrade.isMaxedOut()) maxedOutText.draw(batch);
+            }
         }
 
-        backButton.draw(batch);
-        goldStatus.draw(batch);
-        if (selectedUpgrade != null) {
-            selectedUpgrade.draw(batch);
-            if (selectedUpgrade.isUnlockPossible()) unlockButton.draw(batch, 1f);
-            else if (selectedUpgrade.isUpgradePossible()) upgradeButton.draw(batch, 1f);
-            else if (selectedUpgrade.isMaxedOut()) maxedOutText.draw(batch);
-        }
         batch.end();
     }
 
@@ -241,8 +251,13 @@ public final class CampUpgradeScreen {
                 y < financesUpgradeButton.getY() + financesUpgradeButton.getHeight()) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.FINANCES_UPGRADE_SCREEN);
         }
+        else if (x < bestiaryButton.getWidth() &&
+                y > bestiaryButton.getY() &&
+                y < bestiaryButton.getY() + bestiaryButton.getHeight()) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.BESTIARY_SCREEN);
+        }
 
-        else if (selectedUpgrade != null && selectedUpgrade.isUpgradePossible()) {
+        else if ((selectedUpgrade != null && selectedUpgrade.isUpgradePossible()) || (selectedUpgrade != null && EpicDungeonTactics.GAMEMODE != PROD)) {
             if (upgradeButton.tap(x, y)) {
                 SavedInfoManager.saveCampUpgradeLvl(
                         selectedUpgrade.getUpgradeEnum(),

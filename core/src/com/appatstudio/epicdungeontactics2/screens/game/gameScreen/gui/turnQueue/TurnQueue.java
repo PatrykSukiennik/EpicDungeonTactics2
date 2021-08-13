@@ -1,5 +1,7 @@
 package com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.turnQueue;
 
+import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
@@ -67,9 +69,9 @@ public class TurnQueue {
     public void draw(Batch batch) {
         for (TurnQueueIcon icon : queueIcons) {
             icon.act(Gdx.graphics.getDeltaTime());
-            icon.draw(batch, queueAlive.get(icon.getRepresentedCharacter()) ? 1f : 0.2f);
+            if (EpicDungeonTactics.GAMEMODE != GameModeEnum.PROMO) icon.draw(batch, queueAlive.get(icon.getRepresentedCharacter()) ? 1f : 0.2f);
         }
-        queueBorder.draw(batch, 1f);
+        if (EpicDungeonTactics.GAMEMODE != GameModeEnum.PROMO) queueBorder.draw(batch, 1f);
     }
 
     public void tick() {

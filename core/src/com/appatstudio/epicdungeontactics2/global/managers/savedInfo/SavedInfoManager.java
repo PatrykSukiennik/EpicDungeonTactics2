@@ -4,9 +4,12 @@ import com.appatstudio.epicdungeontactics2.EpicDungeonTactics;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+import com.appatstudio.epicdungeontactics2.global.stats.PlayerStatisticsStats;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
+import com.appatstudio.epicdungeontactics2.screens.game.statsScreen.StatsScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Array;
@@ -16,6 +19,18 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SavedInfoManager {
+
+    private static final PlayerStatsTrackerFlagsEnum[] SUM_STATS = new PlayerStatsTrackerFlagsEnum[] {
+            PlayerStatsTrackerFlagsEnum.BOSSES_KILLED,
+            PlayerStatsTrackerFlagsEnum.DMG_DEALT,
+            PlayerStatsTrackerFlagsEnum.GOLD_COLLECTED,
+            PlayerStatsTrackerFlagsEnum.HEROES_UNLOCKED,
+            PlayerStatsTrackerFlagsEnum.KILLED_ENEMIES,
+            PlayerStatsTrackerFlagsEnum.PERKS_UPGRADED,
+            PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED,
+            PlayerStatsTrackerFlagsEnum.SKILL_POINTS_USED,
+            PlayerStatsTrackerFlagsEnum.UNIQUE_ENEMIES_SLAYED
+    };
 
     private static Preferences preferences;
 
@@ -30,6 +45,8 @@ public class SavedInfoManager {
     private static Map<CharacterEnum, Integer> characterExps;
     private static Map<CharacterEnum, Map<StatisticEnum, Integer>> characterStats;
     private static Map<CampUpgradeEnum, Integer> campUpgradeLvls;
+
+    private static int maxCharacterLvl = 1;
 
     private static Long saved_date;
 
@@ -72,7 +89,7 @@ public class SavedInfoManager {
         perkLvls = new HashMap<>();
         PerkEnum[] allPerks = PerkEnum.values();
         for (PerkEnum p : allPerks) {
-            perkLvls.put(p, preferences.getInteger("perkLvl" + p.toString(), 1));
+            perkLvls.put(p, preferences.getInteger("perkLvl" + p.toString(), 0));
         }
 
         campUpgradeLvls = new HashMap<>();
@@ -98,12 +115,82 @@ public class SavedInfoManager {
     }
 
     public static boolean isUnlocked(CharacterEnum characterEnum) {
-        return isCharacterUnlocked.get(characterEnum);
+        return (isCharacterUnlocked.get(characterEnum) != null && isCharacterUnlocked.get(characterEnum)) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO;
     }
 
     public static boolean isUnlockedCamp(CampUpgradeEnum campUpgradeEnum) {
         return campUpgradeLvls.get(campUpgradeEnum) != 0;
     }
+
+    public static void playerStatEffect(PlayerStatsTrackerFlagsEnum flag, int effect) {
+        boolean isSum = false;
+        for (PlayerStatsTrackerFlagsEnum f : SUM_STATS) {
+            if (f == flag) isSum = true;
+        }
+
+        System.out.println("siusior0 " + isSum);
+
+        int lvl = PlayerStatisticsStats.getStatLvl(flag);
+        int cap = PlayerStatisticsStats.getCap(flag, lvl);
+
+        System.out.println("siusior00 " + lvl + " " + cap);
+
+        if (isSum) {
+            int effectSum = getPlayerStat(flag) + effect;
+
+            if (effectSum >= cap) {
+            while (effectSum >= cap && lvl < 4) {
+                playerStatsWaitingRewards.put(flag, playerStatsWaitingRewards.get(flag) + PlayerStatisticsStats.getReward(flag, lvl));
+                lvl++;
+
+                playerStatsMap.put(flag, effectSum);
+                preferences.putInteger(flag.toString(), effectSum);
+                preferences.putInteger("waitingRewards" + flag.toString(), playerStatsWaitingRewards.get(flag));
+                preferences.flush();
+
+                StatsScreen.refreshStat(flag);
+
+                System.out.println("siusior1");
+
+                cap = PlayerStatisticsStats.getCap(flag, lvl);
+                }
+            } else {
+                playerStatsMap.put(flag, effectSum);
+                preferences.putInteger(flag.toString(), effectSum);
+                preferences.flush();
+                StatsScreen.refreshStat(flag);
+            }
+
+        }
+        else {
+            int tempLvl = lvl;
+
+            if (effect > PlayerStatisticsStats.getStatLvl(flag)) {
+                playerStatsMap.put(flag, effect);
+                preferences.putInteger(flag.toString(), effect);
+                preferences.flush();
+
+                System.out.println("siusior4 " + effect);
+                StatsScreen.refreshStat(flag);
+            }
+
+            while(tempLvl < 4 && effect >= PlayerStatisticsStats.getCap(flag, tempLvl)) {
+                playerStatsWaitingRewards.put(flag, playerStatsWaitingRewards.get(flag) + PlayerStatisticsStats.getReward(flag, tempLvl));
+
+                tempLvl++;
+                playerStatsMap.put(flag, effect);
+                preferences.putInteger(flag.toString(), effect);
+                preferences.putInteger("waitingRewards" + flag.toString(), playerStatsWaitingRewards.get(flag));
+                preferences.flush();
+
+                StatsScreen.refreshStat(flag);
+
+                System.out.println("siusior2");
+            }
+        }
+    }
+
+
 
     public static int getIntFromFlag(SavedInfoFlagsEnum flag) {
         return integerMap.get(flag);
@@ -124,6 +211,8 @@ public class SavedInfoManager {
         isCharacterUnlocked.put(characterEnum, true);
         preferences.putBoolean("isUnlocked" + characterEnum.toString(), true);
         preferences.flush();
+
+        playerStatEffect(PlayerStatsTrackerFlagsEnum.HEROES_UNLOCKED, 1);
     }
 
     public static int getCharacterStat(CharacterEnum c, StatisticEnum s) {
@@ -148,6 +237,11 @@ public class SavedInfoManager {
         return playerStatsWaitingRewards.get(flag);
     }
 
+    public static void resetReward(PlayerStatsTrackerFlagsEnum flag) {
+        preferences.putInteger("waitingRewards" + flag.toString(), 0);
+        preferences.flush();
+    }
+
     public static void savePerkLvl(PerkEnum perkEnum, int lvl) {
         perkLvls.put(perkEnum, lvl);
         preferences.putInteger("perkLvl" + perkEnum.toString(), lvl);
@@ -169,13 +263,13 @@ public class SavedInfoManager {
     public static CharacterEnum[] getAllUnlockedCharacters() {
         Array<CharacterEnum> characters = new Array<>();
 
-        if (isUnlocked(CharacterEnum.HERO_ELF)) characters.add(CharacterEnum.HERO_ELF);
-        if (isUnlocked(CharacterEnum.HERO_KNIGHT)) characters.add(CharacterEnum.HERO_KNIGHT);
-        if (isUnlocked(CharacterEnum.HERO_WIZZARD)) characters.add(CharacterEnum.HERO_WIZZARD);
-        if (isUnlocked(CharacterEnum.HERO_LIZARD)) characters.add(CharacterEnum.HERO_LIZARD);
-        if (isUnlocked(CharacterEnum.HERO_NINJA)) characters.add(CharacterEnum.HERO_NINJA);
-        if (isUnlocked(CharacterEnum.HERO_PIRATE)) characters.add(CharacterEnum.HERO_PIRATE);
-        if (isUnlocked(CharacterEnum.HERO_BABY)) characters.add(CharacterEnum.HERO_BABY);
+        if (isUnlocked(CharacterEnum.HERO_ELF) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_ELF);
+        if (isUnlocked(CharacterEnum.HERO_KNIGHT) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_KNIGHT);
+        if (isUnlocked(CharacterEnum.HERO_WIZZARD) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_WIZZARD);
+        if (isUnlocked(CharacterEnum.HERO_LIZARD) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_LIZARD);
+        if (isUnlocked(CharacterEnum.HERO_NINJA) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_NINJA);
+        if (isUnlocked(CharacterEnum.HERO_PIRATE) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_PIRATE);
+        if (isUnlocked(CharacterEnum.HERO_BABY) || EpicDungeonTactics.GAMEMODE == GameModeEnum.PROMO) characters.add(CharacterEnum.HERO_BABY);
 
         CharacterEnum[] returnArray = new CharacterEnum[characters.size];
         for (int i=0; i<characters.size; i++) {
@@ -241,11 +335,41 @@ public class SavedInfoManager {
         characterLvls.put(currHero, characterLvl);
         preferences.putInteger("characterLvl" + currHero.toString(), characterLvl);
         preferences.flush();
+
+        refreshMaxCharacterLvl();
     }
 
     public static void saveCharacterExp(CharacterEnum currHero, int curr) {
         characterExps.put(currHero, curr);
         preferences.putInteger("characterExp" + currHero.toString(), curr);
         preferences.flush();
+    }
+
+    public static void refreshMaxCharacterLvl() {
+        int max = 1;
+        CharacterEnum allHeroes[] = {CharacterEnum.HERO_ELF, CharacterEnum.HERO_KNIGHT, CharacterEnum.HERO_WIZZARD, CharacterEnum.HERO_LIZARD, CharacterEnum.HERO_NINJA, CharacterEnum.HERO_PIRATE, CharacterEnum.HERO_BABY};
+
+        for (CharacterEnum c : allHeroes) {
+            if (preferences.getInteger("characterLvl" + c.toString(), 0) > max) max = preferences.getInteger("characterLvl" + c.toString(), 0);
+        }
+
+        maxCharacterLvl = max;
+    }
+
+    public static int getMaxCharacterLvl() {
+        //return 50;
+        return maxCharacterLvl;
+    }
+
+    public static boolean isEnemyKilled(CharacterEnum characterEnum) {
+        return preferences.getBoolean("enemyKilled" + characterEnum.toString(), false);
+    }
+
+    public static void enemyKilled(CharacterEnum characterEnum, boolean isUnique) {
+        preferences.putBoolean("enemyKilled" + characterEnum.toString(), true);
+        preferences.flush();
+
+        playerStatEffect(isUnique ? PlayerStatsTrackerFlagsEnum.UNIQUE_ENEMIES_SLAYED : PlayerStatsTrackerFlagsEnum.KILLED_ENEMIES, 1);
+        if (characterEnum.toString().startsWith("BOSS")) playerStatEffect(PlayerStatsTrackerFlagsEnum.BOSSES_KILLED, 1);
     }
 }

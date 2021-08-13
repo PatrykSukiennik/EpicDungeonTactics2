@@ -15,6 +15,9 @@ public class CharacterStatsObject {
     private int maxHp;
     private int currHp;
 
+    private int maxMp;
+    private int currMp;
+
     private int range;
     private int speed;
 
@@ -30,7 +33,14 @@ public class CharacterStatsObject {
                     + CharacterStats.getEnemyLvlUpStats(characterEnum).getVIT()
                     * (int) StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL);
             currHp = maxHp;
+
+            maxMp = CharacterStats.getBasicHeroStat(characterEnum, StatisticEnum.INT)
+                    + CharacterStats.getEnemyLvlUpStats(characterEnum).getINT()
+                    * (int) StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL);
+            currMp = maxMp;
         }
+
+
     }
 
 
@@ -60,5 +70,9 @@ public class CharacterStatsObject {
 
     public void dmgGot(int dmg) {
         currHp -= dmg;
+    }
+
+    public int getCurrMp() {
+        return currMp;
     }
 }

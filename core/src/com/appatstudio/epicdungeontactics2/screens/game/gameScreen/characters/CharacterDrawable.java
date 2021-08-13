@@ -8,6 +8,8 @@ import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.BodyConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightConfigObject;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
@@ -29,6 +31,8 @@ import box2dLight.RayHandler;
 
 public class CharacterDrawable extends Image {
 
+
+
     private Animation<SpriteDrawable> idleAnimation;
     private Animation<SpriteDrawable> runAnimation;
     private Image projectile;
@@ -36,7 +40,7 @@ public class CharacterDrawable extends Image {
     private CharacterEnum characterEnum;
 
     private CharacterStateEnum state;
-    private float stateTime;
+    protected float stateTime;
     private CoordsInt position;
 
     private PointLight pointLight;
@@ -62,17 +66,17 @@ public class CharacterDrawable extends Image {
     protected boolean isPet = false;
     protected boolean isEnemy = false;
     protected boolean isBoss = false;
+    protected boolean isUnique = false;
 
+    private boolean isRotation;
 
-
-    private boolean isRotation = EpicDungeonTactics.random.nextBoolean();
-
-    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile, boolean isRotation) {
+    public CharacterDrawable(CharacterEnum characterEnum, CoordsInt position, RayHandler rayHandler, World world, Room room, MapTile tile, boolean isRotation, boolean isUnique) {
         idleAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.IDLE);
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
 
         projectile = new Image(GraphicsManager.getProjectile(characterEnum));
-        projectile.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+        projectile.setSize(WorldConfig.TILE_SIZE / 64f, WorldConfig.TILE_SIZE / 64f);
+        projectile.setOrigin(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE/2f);
 
         stateTime = EpicDungeonTactics.random.nextFloat();
 
@@ -120,6 +124,8 @@ public class CharacterDrawable extends Image {
         if (characterEnum.toString().startsWith("PET")) isPet = true;
         else if (characterEnum.toString().startsWith("HERO")) isHero = true;
         else if (!characterEnum.toString().startsWith("NPC")) isEnemy = true;
+
+        this.isUnique = isUnique;
     }
 
     protected void createStatsObject() {
@@ -172,6 +178,9 @@ public class CharacterDrawable extends Image {
         System.out.println(characterEnum.toString() + "________");
         pointLight.remove(true);
         room.removeBody(body);
+
+        SavedInfoManager.enemyKilled(characterEnum, isUnique);
+        if (isBoss) SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.BOSSES_KILLED, 1);
         //room.getRoomCharacters().removeValue(this, false);
         //this.remove();
     }
@@ -355,7 +364,8 @@ public class CharacterDrawable extends Image {
         runAnimation = GraphicsManager.getCharactersAnimation(characterEnum, CharacterStateEnum.RUN);
 
         projectile = new Image(GraphicsManager.getProjectile(characterEnum));
-        projectile.setSize(WorldConfig.TILE_SIZE, WorldConfig.TILE_SIZE);
+        projectile.setSize(WorldConfig.TILE_SIZE / 64f, WorldConfig.TILE_SIZE / 64f);
+        projectile.setOrigin(WorldConfig.TILE_SIZE/2f, WorldConfig.TILE_SIZE/2f);
 
         stateTime = EpicDungeonTactics.random.nextFloat();
     }
@@ -367,4 +377,6 @@ public class CharacterDrawable extends Image {
     public boolean isBoss() {
         return isBoss;
     }
+
+
 }

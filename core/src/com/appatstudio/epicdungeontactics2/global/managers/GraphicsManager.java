@@ -12,6 +12,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
@@ -34,6 +35,7 @@ public final class GraphicsManager {
     private static final float CHARACTER_RUN_FRAMETIME = 0.1f;
     private static final Map<MapElementAnimationEnum, Float> MAP_ELEMENT_ANIMATION_FRAMETIME;
     private static final Map<MagicalEffectAnimationEnum, Float> MAGICAL_EFFECT_ANIMATION_FRAMETIME;
+    private static final Map<SpellEnum, Float> SPELL_EFFECT_ANIMATION_FRAMETIME;
 
     private static Map<ItemEnum, SpriteDrawable> itemImages;
     private static Map<RoomTypeEnum, SpriteDrawable> mapRoomTypeImages;
@@ -48,6 +50,7 @@ public final class GraphicsManager {
     private static Map<CharacterEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> charactersAnimations;
     private static Map<GuiCharacterAnimationEnum, Map<CharacterStateEnum, Animation<SpriteDrawable>>> guiCharactersAnimations;
     private static Map<MagicalEffectAnimationEnum, Animation<SpriteDrawable>> magicalEffectAnimations;
+    private static Map<SpellEnum, Animation<SpriteDrawable>> spellEffectAnimations;
 
     private static Map<CharacterEnum, SpriteDrawable> characterProjectiles;
     private static Map<ItemEnum, SpriteDrawable> weaponProjectiles;
@@ -87,11 +90,18 @@ public final class GraphicsManager {
         MAP_ELEMENT_ANIMATION_FRAMETIME.put(MapElementAnimationEnum.LAVA_ROCK_SMOKE_4, 0.15f);
 
         MAGICAL_EFFECT_ANIMATION_FRAMETIME = new HashMap<>();
-        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.FIRE_EXPLOSION, 0.05f);
-        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.ICE_EXPLOSION, 0.05f);
-        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.POISON_EXPLOSION, 0.05f);
-        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.MAGIC_EXPLOSION, 0.05f);
-        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.LIGHT_EXPLOSION, 0.05f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.FIRE_EXPLOSION, 0.02f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.ICE_EXPLOSION, 0.02f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.POISON_EXPLOSION, 0.02f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.MAGIC_EXPLOSION, 0.02f);
+        MAGICAL_EFFECT_ANIMATION_FRAMETIME.put(MagicalEffectAnimationEnum.LIGHT_EXPLOSION, 0.02f);
+
+        SPELL_EFFECT_ANIMATION_FRAMETIME = new HashMap<>();
+        SPELL_EFFECT_ANIMATION_FRAMETIME.put(SpellEnum.FIRE_EXPLOSION, 0.08f);
+        SPELL_EFFECT_ANIMATION_FRAMETIME.put(SpellEnum.ICE_EXPLOSION, 0.08f);
+        SPELL_EFFECT_ANIMATION_FRAMETIME.put(SpellEnum.STUN_EXPLOSION, 0.08f);
+        SPELL_EFFECT_ANIMATION_FRAMETIME.put(SpellEnum.POISON_EXPLOSION, 0.08f);
+
     }
 
     private static void loadItems(TextureAtlas atlas) {
@@ -202,7 +212,7 @@ public final class GraphicsManager {
         guiElements = new HashMap<>();
         GuiElementEnum[] allElements = GuiElementEnum.values();
         for (GuiElementEnum g : allElements) {
-            System.out.println(g.toString());
+            //System.out.println(g.toString());
             guiElements.put(g, new SpriteDrawable(new Sprite(atlas.findRegion(g.toString()))));
         }
 
@@ -266,7 +276,7 @@ public final class GraphicsManager {
     }
 
     private static void loadCharacters(TextureAtlas atlas) {
-        characterProjectiles = new HashMap<>();
+//        characterProjectiles = new HashMap<>();
         charactersAnimations = new HashMap<>();
         CharacterEnum[] allCharacters = CharacterEnum.values();
 
@@ -291,12 +301,12 @@ public final class GraphicsManager {
                             CHARACTER_RUN_FRAMETIME
                     ));
 
-            TextureAtlas.AtlasRegion projectile = atlas.findRegion("characters/" + c.toString() + "/projectile");
-            if (projectile != null) {
-                characterProjectiles.put(
-                        c,
-                        new SpriteDrawable(new Sprite(projectile)));
-            }
+//            TextureAtlas.AtlasRegion projectile = atlas.findRegion("characters/" + c.toString() + "/projectile");
+//            if (projectile != null) {
+//                characterProjectiles.put(
+//                        c,
+//                        new SpriteDrawable(new Sprite(projectile)));
+//            }
         }
     }
 
@@ -367,6 +377,19 @@ public final class GraphicsManager {
                     )
             );
         }
+        spellEffectAnimations = new HashMap<>();
+        SpellEnum[] allSpells = SpellEnum.values();
+        for (SpellEnum s : allSpells) {
+            spellEffectAnimations.put(
+                    s,
+                    createAnimation(
+                            atlas,
+                            "spell-effects/" + s.toString() + "/frame",
+                            SPELL_EFFECT_ANIMATION_FRAMETIME.get(s)
+                    )
+            );
+            spellEffectAnimations.get(s).setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+        }
     }
 
 
@@ -398,72 +421,76 @@ public final class GraphicsManager {
     }
 
     public static Animation<SpriteDrawable> getGuiHeroAnimation(CharacterEnum c, CharacterStateEnum s) {
-        switch (c) {
-            case HERO_ELF: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_ELF).get(s);
-            }
-            case HERO_KNIGHT: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_KNIGHT).get(s);
-            }
-            case HERO_WIZZARD: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_WIZZARD).get(s);
-            }
-            case HERO_LIZARD: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_LIZARD).get(s);
-            }
-            case HERO_NINJA: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_NINJA).get(s);
-            }
-            case HERO_PIRATE: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_PIRATE).get(s);
-            }
-            case HERO_BABY: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_BABY).get(s);
-            }
-            case NPC_ALCHEMIST: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_ALCHEMIST).get(s);
-            }
-            case NPC_KNIGHT_ELITE: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KNIGHT_ELITE).get(s);
-            }
-            case NPC_BISHOP: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BISHOP).get(s);
-            }
-            case NPC_BLACKSMITH: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BLACKSMITH).get(s);
-            }
-            case NPC_BUTCHER: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BUTCHER).get(s);
-            }
-            case NPC_CITIZEN_FEMALE: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_FEMALE).get(s);
-            }
-            case NPC_CITIZEN_MALE: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_MALE).get(s);
-            }
-            case NPC_KING: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KING).get(s);
-            }
-            case NPC_MAGIC_SHOP: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MAGIC_SHOP).get(s);
-            }
-            case NPC_MOUNTAIN_KING: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MOUNTAIN_KING).get(s);
-            }
-            case NPC_NUN_FAT: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_FAT).get(s);
-            }
-            case NPC_NUN_NORMAL: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_NORMAL).get(s);
-            }
-            case NPC_PRINCESS: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_PRINCESS).get(s);
-            }
-            case NPC_THIEF: {
-                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_THIEF).get(s);
-            }
-        }
-        return null;
+//        switch (c) {
+//            case HERO_ELF: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_ELF).get(s);
+//            }
+//            case HERO_KNIGHT: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_KNIGHT).get(s);
+//            }
+//            case HERO_WIZZARD: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_WIZZARD).get(s);
+//            }
+//            case HERO_LIZARD: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_LIZARD).get(s);
+//            }
+//            case HERO_NINJA: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_NINJA).get(s);
+//            }
+//            case HERO_PIRATE: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_PIRATE).get(s);
+//            }
+//            case HERO_BABY: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_HERO_BABY).get(s);
+//            }
+//            case NPC_ALCHEMIST: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_ALCHEMIST).get(s);
+//            }
+//            case NPC_KNIGHT_ELITE: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KNIGHT_ELITE).get(s);
+//            }
+//            case NPC_BISHOP: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BISHOP).get(s);
+//            }
+//            case NPC_BLACKSMITH: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BLACKSMITH).get(s);
+//            }
+//            case NPC_BUTCHER: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_BUTCHER).get(s);
+//            }
+//            case NPC_CITIZEN_FEMALE: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_FEMALE).get(s);
+//            }
+//            case NPC_CITIZEN_MALE: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_CITIZEN_MALE).get(s);
+//            }
+//            case NPC_KING: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_KING).get(s);
+//            }
+//            case NPC_MAGIC_SHOP: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MAGIC_SHOP).get(s);
+//            }
+//            case NPC_MOUNTAIN_KING: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_MOUNTAIN_KING).get(s);
+//            }
+//            case NPC_NUN_FAT: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_FAT).get(s);
+//            }
+//            case NPC_NUN_NORMAL: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_NUN_NORMAL).get(s);
+//            }
+//            case NPC_PRINCESS: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_PRINCESS).get(s);
+//            }
+//            case NPC_THIEF: {
+//                return guiCharactersAnimations.get(GuiCharacterAnimationEnum.GUI_NPC_THIEF).get(s);
+//            }
+//
+//
+//
+//        }
+        return guiCharactersAnimations.get(GuiCharacterAnimationEnum.valueOf("GUI_" + c.toString())).get(s);
+
     }
 
     public static SpriteDrawable getGuiElement(GuiElementEnum g) {
@@ -540,7 +567,7 @@ public final class GraphicsManager {
     }
 
     public static SpriteDrawable getProjectile(CharacterEnum characterEnum) {
-        return characterProjectiles.get(characterEnum);
+        return getProjectile(ItemEnum.STAFFv0);//characterProjectiles.get(characterEnum);
     }
 
     public static void setRotationXforHeroes(boolean b) {
@@ -581,4 +608,11 @@ public final class GraphicsManager {
         return weaponProjectiles.get(rangedWeapon);
     }
 
+    public static Animation<SpriteDrawable> getMagicalEffect(MagicalEffectAnimationEnum effect) {
+        return magicalEffectAnimations.get(effect);
+    }
+
+    public static Animation<SpriteDrawable> getSpellEffectAnimation(SpellEnum spell) {
+        return spellEffectAnimations.get(spell);
+    }
 }

@@ -19,10 +19,10 @@ import com.badlogic.gdx.utils.Align;
 
 public class StatsScreen {
 
-    private SpriteBatch batch;
-    private TextWithIcon backButton, goldStatus;
-    private StatPosition[] stats;
-    private MultiLineText title;
+    private static SpriteBatch batch;
+    private static TextWithIcon backButton, goldStatus;
+    private static StatPosition[] stats;
+    private static MultiLineText title;
 
     public StatsScreen() {
         batch = new SpriteBatch();
@@ -52,11 +52,21 @@ public class StatsScreen {
                 Align.left
         );
 
+
+    }
+
+    static {
         PlayerStatsTrackerFlagsEnum[] allStats = PlayerStatsTrackerFlagsEnum.values();
 
         stats = new StatPosition[allStats.length];
         for (int i = 0; i < stats.length; i++) {
             stats[i] = new StatPosition(allStats[i], i);
+        }
+    }
+
+    public static void refreshStat(PlayerStatsTrackerFlagsEnum flag) {
+        for (int i = 0; i < stats.length; i++) {
+            if (stats[i].getFlag() == flag) stats[i] = new StatPosition(flag, i);
         }
     }
 
@@ -75,6 +85,11 @@ public class StatsScreen {
     }
 
     public void tap(float x, float y) {
+        for (StatPosition sp : stats) {
+            if (sp.tap(x, y)) {
+                return;
+            }
+        }
         if (backButton.tap(x, y)) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
         }

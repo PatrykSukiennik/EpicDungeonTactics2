@@ -8,6 +8,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
 import com.appatstudio.epicdungeontactics2.screens.viewElements.MultiLineText;
@@ -44,7 +45,7 @@ public final class PerkIcon extends Image {
 
         this.lvl = SavedInfoManager.getPerkLvl(perkEnum);
 
-        if (lvl < 4) {
+        if (lvl < 3) {
             upgradeCost = PerkStats.getPerkUpgradeCost(perkEnum, lvl);
             upgradeText = new TextObject(
                     upgradeCost <= GlobalValues.getGold() ? FontsManager.getFont(FontEnum.MENU_PERK_TITLE) : FontsManager.getFont(FontEnum.MENU_PERK_DESCRIPTION),
@@ -74,10 +75,17 @@ public final class PerkIcon extends Image {
 
         String descEnd = StringsManager.getPerkDescription(perkEnum);
         float perkStat = PerkStats.getPerkStat(perkEnum, lvl);
-        String descString =
-                perkStat > 1 ?
-                        (int) perkStat + " " + descEnd :
-                        (int) (perkStat * 100) + "% " + descEnd;
+        String descString;
+
+        if (lvl > 0) {
+            descString =
+                    perkStat > 1 ?
+                            (int) perkStat + " " + descEnd :
+                            (int) (perkStat * 100) + "% " + descEnd;
+        } else {
+            descString = descEnd;
+        }
+
 
         description = new MultiLineText(
                 FontsManager.getFont(FontEnum.MENU_PERK_DESCRIPTION),
@@ -99,9 +107,11 @@ public final class PerkIcon extends Image {
 
         title.draw(batch);
         description.draw(batch);
-        upgradeText.draw(batch);
-        batch.getColor().a = 1f;
-        upgradeCostText.draw(batch);
+        if (lvl < 3) {
+            upgradeText.draw(batch);
+            batch.getColor().a = 1f;
+            upgradeCostText.draw(batch);
+        }
     }
 
     public boolean tap(float x, float y) {
@@ -112,6 +122,7 @@ public final class PerkIcon extends Image {
 
             GlobalValues.minusGold(upgradeCost);
             SavedInfoManager.savePerkLvl(perkEnum, SavedInfoManager.getPerkLvl(perkEnum) + 1);
+            SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.PERKS_UPGRADED, 1);
             PerkScreen.updatePerks();
             return false;
         }

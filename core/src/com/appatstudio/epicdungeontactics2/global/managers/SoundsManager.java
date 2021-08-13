@@ -83,7 +83,7 @@ public final class SoundsManager {
     }
 
     public static void playSound(SoundEnum soundEnum) {
-        System.out.println("PLAY SOUND: " + soundEnum.toString());
+        //System.out.println("PLAY SOUND: " + soundEnum.toString());
         soundMap.get(soundEnum).play();
     }
 

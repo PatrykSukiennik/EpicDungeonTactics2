@@ -13,6 +13,7 @@ public abstract class AbstractItem {
     private int value;
     private Array<ItemEffect> effects;
     private ItemRarityEnum rarity;
+    private boolean isStartingItem;
 
     public AbstractItem(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, ItemRarityEnum rarity) {
         this.itemEnum = itemEnum;
@@ -20,6 +21,7 @@ public abstract class AbstractItem {
         this.value = value;
         this.effects = effects;
         this.rarity = rarity;
+        this.isStartingItem = false;
     }
 
     public int getValue() {
@@ -67,9 +69,6 @@ public abstract class AbstractItem {
         else if (itemEnum.toString().startsWith("BOOK")) {
             return ItemTypeEnum.BOOK;
         }
-        else if (itemEnum.toString().startsWith("OTHER")) {
-            return ItemTypeEnum.OTHER;
-        }
         else if (itemEnum.toString().startsWith("SHIELD")) {
             return ItemTypeEnum.SHIELD;
         }
@@ -80,5 +79,13 @@ public abstract class AbstractItem {
             return ItemTypeEnum.RING;
         }
         return ItemTypeEnum.MELE;
+    }
+
+    public void setStartingItem(boolean startingItem) {
+        isStartingItem = startingItem;
+    }
+
+    public boolean isStartingItem() {
+        return isStartingItem;
     }
 }

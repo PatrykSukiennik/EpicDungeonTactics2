@@ -20,13 +20,13 @@ public final class CharacterStats {
 
     static {
         characterPrototypes = new HashMap<>();
-        characterPrototypes.put(CharacterEnum.HERO_ELF, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_KNIGHT, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_WIZZARD, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_LIZARD, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_NINJA, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_PIRATE, new CharacterPrototype(3, 3, 3, 3, 3));
-        characterPrototypes.put(CharacterEnum.HERO_BABY, new CharacterPrototype(3, 3, 3, 3, 3));
+        characterPrototypes.put(CharacterEnum.HERO_ELF, new CharacterPrototype(3, 4, 3, 3, 5));
+        characterPrototypes.put(CharacterEnum.HERO_KNIGHT, new CharacterPrototype(5, 3, 2, 5, 3));
+        characterPrototypes.put(CharacterEnum.HERO_WIZZARD, new CharacterPrototype(2, 3, 6, 4, 3));
+        characterPrototypes.put(CharacterEnum.HERO_LIZARD, new CharacterPrototype(7, 2, 2, 4, 1));
+        characterPrototypes.put(CharacterEnum.HERO_NINJA, new CharacterPrototype(5, 10, 4, 3, 7));
+        characterPrototypes.put(CharacterEnum.HERO_PIRATE, new CharacterPrototype(8, 4, 1, 6, 10));
+        characterPrototypes.put(CharacterEnum.HERO_BABY, new CharacterPrototype(1, 1, 1, 1, 1));
 
         //forest
         characterPrototypes.put(CharacterEnum.CENTAUR_MALE, new CharacterPrototype(3, 3, 3, 3, 3));

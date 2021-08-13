@@ -9,7 +9,17 @@ public enum CommunicatesEnum {
     USE_ITEM,
     LVL_UP,
     CRITICAL,
-    DOWN
+    DOWN,
+
+    IS_BURNING,
+    IS_FROZEN,
+    IS_POISONED,
+    IS_STUNNED,
+
+    BURNING,
+    FREEZE,
+    POISON,
+    STUN
 
 
 }

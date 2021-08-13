@@ -68,6 +68,8 @@ public class MapWindow {
         int count = stage.getRooms().size;
 
         calculateSize(stage.getRooms());
+
+        setCurrRoom(null, stage.getFirstRoom());
     }
 
     private void calculateSize(Array<Room> rooms) {
@@ -116,7 +118,7 @@ public class MapWindow {
 
     public void setCurrRoom(Room oldRoom, Room newRoom) {
         for (MapRoomIcon i : roomIcons) {
-            if (i.getRoom() == oldRoom) i.getColor().a = 0.6f;
+            if (oldRoom != null & i.getRoom() == oldRoom) i.getColor().a = 0.6f;
             else if (i.getRoom() == newRoom) i.getColor().a = 1f;
         }
     }

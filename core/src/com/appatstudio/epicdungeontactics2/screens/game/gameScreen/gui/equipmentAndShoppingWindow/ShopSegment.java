@@ -94,14 +94,16 @@ public class ShopSegment extends AbstractSegment {
                 float random = EpicDungeonTactics.random.nextFloat();
                 switch (shop) {
                     case NPC_MAGIC_SHOP: {
-                        if (random < 0.25f) newItem = ItemGenerator.getItem(ItemTypeEnum.RING);
-                        else if (random < 0.5f) newItem = ItemGenerator.getItem(ItemTypeEnum.NECKLACE);
-                        else if (random < 0.54f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv0);
-                        else if (random < 0.58f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv1);
-                        else if (random < 0.62f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv2);
-                        else if (random < 0.66f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv3);
-                        else if (random < 0.7f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv4);
-                        else if (random < 0.74f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv5);
+                        if (random < 0.24f) newItem = ItemGenerator.getItem(ItemTypeEnum.RING);
+                        else if (random < 0.48f) newItem = ItemGenerator.getItem(ItemTypeEnum.NECKLACE);
+                        else if (random < 0.52f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv0);
+                        else if (random < 0.56f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv1);
+                        else if (random < 0.60f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv2);
+                        else if (random < 0.64f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv3);
+                        else if (random < 0.68f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv4);
+                        else if (random < 0.72f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv5);
+                        else if (random < 0.78f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv6);
+                        else if (random < 0.82f) newItem = ItemGenerator.getItem(ItemEnum.BOOKv7);
                         else newItem = ItemGenerator.getItem(ItemTypeEnum.STAFF);
                         break;
                     }

@@ -98,7 +98,7 @@ public final class CampUpgradeCard {
                     StringsManager.getCampUpgradeDescription(upgradeEnum) + " " + CampUpgradeStats.getCampUpgradeStat(upgradeEnum, lvl-1),
                     Gdx.graphics.getWidth()/2f,
                     descW,
-                    (Gdx.graphics.getWidth()/(float)CampUpgradeEnum.values().length) * 3f,
+                    (Gdx.graphics.getWidth()/(float)CampUpgradeEnum.values().length) * 3.5f,
                     Align.center
             );
             if (lvl < 3) {

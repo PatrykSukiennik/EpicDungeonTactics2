@@ -19,12 +19,12 @@ public class Hero extends CharacterDrawable {
     private Array<MapTile> heroShotTiles;
 
     public Hero(CharacterEnum characterEnum, RayHandler handler, World world, Room room, MapTile tile) {
-        super(characterEnum, new CoordsInt(0, 0), handler, world, room, tile, false);
+        super(characterEnum, new CoordsInt(0, 0), handler, world, room, tile, false, false);
         isHero = true;
     }
 
     public Hero(CharacterEnum characterEnum, CoordsInt coords, RayHandler handler, World world, Room room, MapTile tile) {
-        super(characterEnum, coords, handler, world, room, tile, false);
+        super(characterEnum, coords, handler, world, room, tile, false, false);
         isHero = true;
     }
 

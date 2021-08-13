@@ -90,7 +90,7 @@ public enum EffectEnum {
     STRONGER_ENEMIES,
 
     //more chance for dropping key
-    KEY_FINDER,
+    // KEY_FINDER,
 
     //more elemental effect chance
     ELEMENTALIST,

@@ -8,30 +8,34 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.MagicalEffectAnimationEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapElementAnimationEnum;
-import com.appatstudio.epicdungeontactics2.global.enums.MapElementSpriteEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.MapPathFindingFlags;
+import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomStateEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
-import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
-import com.appatstudio.epicdungeontactics2.global.managers.map.BodyConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.LightsConfig;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapInfoMaster;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
 import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterStats;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.CameraHandler;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.StatTracker;
-import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.SoundPlayAction;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.SpellExplosionAction;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.characterActions.Attack;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.characterActions.ChangeState;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.characterActions.DamageGiving;
@@ -47,13 +51,17 @@ import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.characters.Ch
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.characters.Hero;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.communicatePrinter.CommunicatePrinter;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.spellBook.KnownSpell;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.turnQueue.TurnQueue;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.weaponSelector.WeaponSelector;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.AbstractItem;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Staff;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.mapElements.AnimatedElement;
 import com.appatstudio.epicdungeontactics2.screens.viewElements.game.BossHpBar;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -124,6 +132,12 @@ public class Room {
 
     private int[][] distanceToHeroArray;
 
+    private Animation<SpriteDrawable> explosionAnimation;
+    private float explosionDuration = -1;
+    private final float EXPLOSION_SIZE = WorldConfig.TILE_SIZE * 3;
+    private CoordsFloat explosionCoords;
+
+
 
     static {
         guiContainer = GuiContainer.getInstance();
@@ -162,7 +176,7 @@ public class Room {
         RayHandler.useDiffuseLight(true);
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(LightsConfig.getAmbientColor(stage));
-        b2dr = new Box2DDebugRenderer(); //todo
+        //b2dr = new Box2DDebugRenderer(); //todo
 
         mapDrawable = new SpriteDrawable(new Sprite(new Texture("maps/" + roomEnum.toString() + ".png")));
 
@@ -288,10 +302,15 @@ public class Room {
                         }
                     }
                     if (doCreate) {
+                        float isUniqueChance = (WorldConfig.UNIQUE_ENEMIES_CHANCE + SavedInfoManager.getMaxCharacterLvl() * WorldConfig.UNIQUE_ENEMIES_CHANCE_LVL);
+                        if (StatTracker.getPerk() == PerkEnum.STRONGER_ENEMIES) isUniqueChance *=  PerkStats.getPerkStat(PerkEnum.STRONGER_ENEMIES, SavedInfoManager.getPerkLvl(PerkEnum.STRONGER_ENEMIES));
+
+                        boolean isUnique = EpicDungeonTactics.random.nextFloat() < isUniqueChance;
+
                         CharacterDrawable newCharacter = new AutonomousCharacter(
                                 characters[y][x],
                                 new CoordsInt(x, WorldConfig.ROOM_HEIGHT - y - 1),
-                                rayHandler, world, this, mapTiles[x][y], x > heroInRoom.getPosition().x);
+                                rayHandler, world, this, mapTiles[x][y], x > heroInRoom.getPosition().x, isUnique);
 
 
                         mapTiles[x][WorldConfig.ROOM_HEIGHT - y - 1].setCharacter(newCharacter, true);
@@ -321,11 +340,14 @@ public class Room {
 
             if (type == RoomTypeEnum.BOSS_ROOM) {
                 CharacterDrawable boss = null;
-                for (CharacterDrawable c : charactersInRoom)
+                for (CharacterDrawable c : charactersInRoom) {
+                    System.out.println("llllll: " + c.getCharacterEnum().toString());
                     if (c.getCharacterEnum().toString().startsWith("BOSS")) {
+
                         boss = c;
                         break;
                     }
+                }
 
                 if (boss != null) bossHpBar = new BossHpBar(boss);
             }
@@ -404,37 +426,58 @@ public class Room {
 
         for (int x=0; x<WorldConfig.ROOM_WIDTH; x++) {
             for (int y=0; y<WorldConfig.ROOM_HEIGHT; y++) {
-                if (characters[y][x] != null && !characters[y][x].toString().startsWith("NPC")) {
+                if (characters[y][x] != null && !characters[y][x].toString().startsWith("NPC") && !characters[y][x].toString().startsWith("BOSS")) {
                     enemies.put(new CoordsInt(x, y), characters[y][x]);
+                } else if (characters[y][x] != null && characters[y][x].toString().startsWith("BOSS")) {
+                    charactersInRoom.add(
+                            new AutonomousCharacter(
+                                    characters[y][x],
+                                    new CoordsInt(x, WorldConfig.ROOM_HEIGHT - y - 1),
+                                    rayHandler, world, this, mapTiles[x][WorldConfig.ROOM_HEIGHT - y - 1],
+                                    x > heroInRoom.getPosition().x,
+                                    false));
+                    mapTiles[x][WorldConfig.ROOM_HEIGHT - y - 1].setCharacter(charactersInRoom.get(charactersInRoom.size - 1), true);
                 }
             }
         }
 
         int count = (int)(MapGenerator.getEnemiesFactor(stage) * (float)enemies.size());
 
-        System.out.println("size: " + count);
-        System.out.println("enemies: " + enemies.size());
+        //System.out.println("size: " + count);
+        //System.out.println("enemies: " + enemies.size());
 
-        System.out.println(enemies.toString());
+        //System.out.println(enemies.toString());
 
         if (count == enemies.size()) {
             for (CoordsInt coords : enemies.keySet()) {
 
-                System.out.println("coords: " + coords.x + " " + coords.y);
-                System.out.println("entry: " + enemies.get(coords));
+                //System.out.println("coords: " + coords.x + " " + coords.y);
+                //System.out.println("entry: " + enemies.get(coords));
+
+                float isUniqueChance = WorldConfig.UNIQUE_ENEMIES_CHANCE + SavedInfoManager.getMaxCharacterLvl() * WorldConfig.UNIQUE_ENEMIES_CHANCE_LVL;
+                if (StatTracker.getPerk() == PerkEnum.STRONGER_ENEMIES) isUniqueChance *=  PerkStats.getPerkStat(PerkEnum.STRONGER_ENEMIES, SavedInfoManager.getPerkLvl(PerkEnum.STRONGER_ENEMIES));
+
+                boolean isUnique = EpicDungeonTactics.random.nextFloat() < isUniqueChance;
 
                 CharacterEnum randomEnemy = MapGenerator.getRandomEnemy(stage);
 
                 CharacterDrawable newCharacter = new AutonomousCharacter(
                         randomEnemy,
                         new CoordsInt(coords.x, WorldConfig.ROOM_HEIGHT - coords.y - 1),
-                        rayHandler, world, this, mapTiles[coords.x][coords.y], coords.x > heroInRoom.getPosition().x);
+                        rayHandler, world, this, mapTiles[coords.x][WorldConfig.ROOM_HEIGHT - coords.y - 1],
+                        coords.x > heroInRoom.getPosition().x, isUnique);
 
 
                 mapTiles[coords.x][WorldConfig.ROOM_HEIGHT - coords.y - 1].setCharacter(newCharacter, true);
                 charactersInRoom.add(newCharacter);
             }
         } else while(count > 0) {
+            float isUniqueChance = WorldConfig.UNIQUE_ENEMIES_CHANCE + SavedInfoManager.getMaxCharacterLvl() * WorldConfig.UNIQUE_ENEMIES_CHANCE_LVL;
+            if (StatTracker.getPerk() == PerkEnum.STRONGER_ENEMIES) isUniqueChance *=  PerkStats.getPerkStat(PerkEnum.STRONGER_ENEMIES, SavedInfoManager.getPerkLvl(PerkEnum.STRONGER_ENEMIES));
+
+            boolean isUnique = EpicDungeonTactics.random.nextFloat() < isUniqueChance;
+
+
             CoordsInt newEnemyCoords = (CoordsInt) enemies.keySet().toArray()[abs(EpicDungeonTactics.random.nextInt()) % enemies.keySet().size()];
 
             CharacterEnum randomEnemy = MapGenerator.getRandomEnemy(stage);
@@ -442,7 +485,8 @@ public class Room {
             CharacterDrawable newCharacter = new AutonomousCharacter(
                     randomEnemy,
                     new CoordsInt(newEnemyCoords.x, WorldConfig.ROOM_HEIGHT - newEnemyCoords.y - 1),
-                    rayHandler, world, this, mapTiles[newEnemyCoords.x][newEnemyCoords.y], newEnemyCoords.x > heroInRoom.getPosition().x);
+                    rayHandler, world, this, mapTiles[newEnemyCoords.x][WorldConfig.ROOM_HEIGHT - newEnemyCoords.y - 1],
+                    newEnemyCoords.x > heroInRoom.getPosition().x, isUnique);
 
 
             mapTiles[newEnemyCoords.x][WorldConfig.ROOM_HEIGHT - newEnemyCoords.y - 1].setCharacter(newCharacter, true);
@@ -492,53 +536,73 @@ public class Room {
                 } else if (roomState == RoomStateEnum.FIGHT) {
 
                     if (currentCharacterMoving.isReady()) {
-                        if (meleTarget != null) {
-                            if (currentCharacterMoving.getPossibleMoveToTiles().contains(tapped, false)
-                                    && Vector2.dst(
-                                    tapped.getPositionInt().x,
-                                    tapped.getPositionInt().y,
-                                    meleTarget.getPosition().x,
-                                    meleTarget.getPosition().y) == 1) {
-                                moveAndAttack(currentCharacterMoving, tapped, meleTarget);
-                                meleTarget = null;
-                            } else if (tapped.getCharacterStandingOn() == currentCharacterMoving
-                                    && Vector2.dst(
-                                    tapped.getPositionInt().x,
-                                    tapped.getPositionInt().y,
-                                    meleTarget.getPosition().x,
-                                    meleTarget.getPosition().y) == 1) {
-                                justAttack(currentCharacterMoving, meleTarget.getTileStandingOn());
-                                meleTarget = null;
-                            } else {
-                                meleTarget = null;
-                                guiContainer.hideWeaponSelector();
+                        if (GuiContainer.getInstance().getSpellSelector().getSelectedSpell() != null) {
+                            KnownSpell spell = GuiContainer.getInstance().getSpellSelector().getSelectedSpell();
+
+                            if (tapped.getCharacterStandingOn() != null && tapped.getCharacterStandingOn().isEnemy()) {
+                                if (StatTracker.getCurrentStat(CompleteHeroStatsEnum.MP) >= spell.getMpCost()) {
+                                    CharacterDrawable spellTarget = tapped.getCharacterStandingOn();
+
+                                    TurnAction action = new TurnAction();
+                                    action.addAction(new TurnStarted(this));
+                                    action.addAction(new SpellExplosionAction(spell.getSpell(), (AutonomousCharacter) spellTarget, this, spell.getDmg(), spell.getDuration()));
+                                    action.addAction(new DamageGiving(spellTarget, spell.getDmg(), heroInRoom));
+                                    action.addAction(new TurnFinished(this));
+                                    StatTracker.mpEffect( -spell.getMpCost() );
+                                    heroInRoom.addAction(action.getSequence());
+
+                                    GuiContainer.getInstance().getSpellSelector().setSelectedSpell(null);
+                                    GuiContainer.getInstance().getSpellSelector().refreshMp();
+                                }
                             }
                         } else {
-                            if (currentCharacterMoving.canMoveTo(tapped)) {
-                                TurnAction action = new TurnAction();
-                                action.addAction(new TurnStarted(this));
-                                action.addAction(getWay(currentCharacterMoving.getPossibleMovements(), tapped, currentCharacterMoving));
-                                action.addAction(new TurnFinished(this));
-                                currentCharacterMoving.addAction(action.getSequence());
-                                currentCharacterMoving.setTargetTile(tapped);
-                            } else if (tapped == currentCharacterMoving.getTileStandingOn()) {
-                                moveStarted();
-                                moveFinished();
-                            } else if (tapped.getCharacterStandingOn() != null) {
-                                if (tapped.getCharacterStandingOn().isEnemy()
-                                        && (
-                                        (heroInRoom.getAttackableTiles().contains(tapped, false)
-                                                || Vector2.dst(
-                                                heroInRoom.getPosition().x,
-                                                heroInRoom.getPosition().y,
-                                                tapped.getPositionInt().x,
-                                                tapped.getPositionInt().y)
-                                                < StatTracker.getCurrentStat(CompleteHeroStatsEnum.RANGE)))) {
-                                    guiContainer.showWeaponSelector(heroInRoom, tapped.getCharacterStandingOn());
+                            if (meleTarget != null) {
+                                if (currentCharacterMoving.getPossibleMoveToTiles().contains(tapped, false)
+                                        && Vector2.dst(
+                                        tapped.getPositionInt().x,
+                                        tapped.getPositionInt().y,
+                                        meleTarget.getPosition().x,
+                                        meleTarget.getPosition().y) == 1) {
+                                    moveAndAttack(currentCharacterMoving, tapped, meleTarget);
+                                    meleTarget = null;
+                                } else if (tapped.getCharacterStandingOn() == currentCharacterMoving
+                                        && Vector2.dst(
+                                        tapped.getPositionInt().x,
+                                        tapped.getPositionInt().y,
+                                        meleTarget.getPosition().x,
+                                        meleTarget.getPosition().y) == 1) {
+                                    justAttack(currentCharacterMoving, meleTarget.getTileStandingOn());
+                                    meleTarget = null;
+                                } else {
+                                    meleTarget = null;
+                                    guiContainer.hideWeaponSelector();
+                                }
+                            } else {
+                                if (currentCharacterMoving.canMoveTo(tapped)) {
+                                    TurnAction action = new TurnAction();
+                                    action.addAction(new TurnStarted(this));
+                                    action.addAction(getWay(currentCharacterMoving.getPossibleMovements(), tapped, currentCharacterMoving));
+                                    action.addAction(new TurnFinished(this));
+                                    currentCharacterMoving.addAction(action.getSequence());
+                                    currentCharacterMoving.setTargetTile(tapped);
+                                } else if (tapped == currentCharacterMoving.getTileStandingOn()) {
+                                    moveStarted();
+                                    moveFinished();
+                                } else if (tapped.getCharacterStandingOn() != null) {
+                                    if (tapped.getCharacterStandingOn().isEnemy()
+                                            && (
+                                            (heroInRoom.getAttackableTiles().contains(tapped, false)
+                                                    || Vector2.dst(
+                                                    heroInRoom.getPosition().x,
+                                                    heroInRoom.getPosition().y,
+                                                    tapped.getPositionInt().x,
+                                                    tapped.getPositionInt().y)
+                                                    < StatTracker.getCurrentStat(CompleteHeroStatsEnum.RANGE)))) {
+                                        guiContainer.showWeaponSelector(heroInRoom, tapped.getCharacterStandingOn());
+                                    }
                                 }
                             }
                         }
-
                     }
                 }
             }
@@ -579,7 +643,7 @@ public class Room {
                 getMoveInfo(currentCharacterMoving);
                 if (currentCharacterMoving.isHero() || currentCharacterMoving.isPet()) {
                 } else {
-                    makeMove(currentCharacterMoving);
+                    makeMove((AutonomousCharacter) currentCharacterMoving);
                 }
 
             }
@@ -663,16 +727,21 @@ public class Room {
         mapBatch.begin();
         mapDrawable.draw(mapBatch, WorldConfig.ROOM_POS_X, WorldConfig.ROOM_POS_Y, WorldConfig.ROOM_WIDTH_RES, WorldConfig.ROOM_HEIGHT_RES);
 
+        if (GuiContainer.getInstance().getSpellSelector().getSelectedSpell() != null && roomState == RoomStateEnum.FIGHT) {
+            drawSpellTargets(mapBatch);
+        } else if (roomState == RoomStateEnum.FIGHT) {
+            drawMovableTiles(heroInRoom, mapBatch); //____________________________________________________________??
 
-        drawMovableTiles(heroInRoom, mapBatch); //____________________________________________________________??
-
-        if (meleTarget == null) {
-            drawEnemyShotTiles(mapBatch);
-            if (currentCharacterMoving.isHero()) {
-                drawHeroAttackableTiles(mapBatch);
+            if (meleTarget == null) {
+                drawEnemyShotTiles(mapBatch);
+                if (currentCharacterMoving.isHero()) {
+                    drawHeroAttackableTiles(mapBatch);
+                }
+            } else {
+                drawTilesForAtttack(mapBatch, meleTarget);
             }
         } else {
-            drawTilesForAtttack(mapBatch, meleTarget);
+            //drawMovableTiles(heroInRoom, mapBatch); //____________________________________________________________??
         }
 
         if (roomState != RoomStateEnum.FIGHT) drawNodes(mapBatch);
@@ -686,13 +755,24 @@ public class Room {
             }
         }
 
+        if (explosionDuration > 0) {
+            explosionDuration -= Gdx.graphics.getDeltaTime();
+            explosionAnimation.getKeyFrame(
+                    explosionAnimation.getAnimationDuration() - explosionDuration).draw(
+                    mapBatch,
+                    explosionCoords.x,
+                    explosionCoords.y,
+                    EXPLOSION_SIZE,
+                    EXPLOSION_SIZE);
+        }
+
         mapBorder.draw(mapBatch, borderCoords.x, borderCoords.y, borderSize.x, borderSize.y);
 
         mapBatch.end();
 
         rayHandler.setCombinedMatrix(camera);
         rayHandler.updateAndRender();
-        b2dr.render(world, camera.combined.scl(1f));
+        //b2dr.render(world, camera.combined.scl(1f));
 
         guiBatch.begin();
         for (int y = WorldConfig.ROOM_HEIGHT - 1; y >= 0; y--) {
@@ -707,8 +787,23 @@ public class Room {
 
         if (roomState != RoomStateEnum.CLEAN) queue.draw(guiBatch);
 
+
         guiBatch.end();
 
+    }
+
+    private void drawSpellTargets(Batch mapBatch) {
+        for (MapTile[] xmt : mapTiles) {
+            for (MapTile ymt : xmt) {
+                if (ymt.getCharacterStandingOn() != null && ymt.getCharacterStandingOn().isEnemy()) {
+                    ymt.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+                    ymt.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+                    ymt.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+                    ymt.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+                    ymt.drawFlag(MapPathFindingFlags.ATTACKABLE, mapBatch);
+                }
+            }
+        }
     }
 
     private void drawHeroAttackableTiles(Batch mapBatch) {
@@ -762,16 +857,17 @@ public class Room {
     }
 
     private void drawNodes(Batch mapBatch) {
-        for (MapTile node : nodesInRoom) {
-            node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
-            node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
-            node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
-        }
-        if (type == RoomTypeEnum.GOING_DOWN_ROOM) {
-            for (MapTile goingDown : goingDownTiles) {
-                goingDown.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
-                goingDown.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
-                goingDown.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
+        if (EpicDungeonTactics.GAMEMODE != GameModeEnum.PROMO) {
+
+            for (MapTile node : nodesInRoom) {
+                node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
+                node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
+                node.drawFlag(MapPathFindingFlags.MOVABLE, mapBatch);
+            }
+            if (type == RoomTypeEnum.GOING_DOWN_ROOM) {
+                for (MapTile goingDown : goingDownTiles) {
+                    goingDown.drawFlag(MapPathFindingFlags.NEW_STAGE, mapBatch);
+                }
             }
         }
     }
@@ -1233,7 +1329,33 @@ public class Room {
         GuiContainer.setItemsToPick(tile.getItemsToPick());
     }
 
-    private void makeMove(CharacterDrawable character) {
+    private void makeMove(AutonomousCharacter character) {
+
+        if (character.getBurningDuration() > 0) {
+            character.setBurning(character.getBurningDuration() - 1);
+            CommunicatePrinter.burning(character.getBurningDmg(), StringsManager.getCharacterName(character.getCharacterEnum()), character.getBurningDuration());
+            character.dmgGet(character.getBurningDmg());
+        }
+        if (character.getPosionDuration() > 0) {
+            character.setPosion(character.getPosionDuration() - 1);
+            CommunicatePrinter.poisoned(character.getPoisonDmg(), StringsManager.getCharacterName(character.getCharacterEnum()), character.getPosionDuration());
+            character.dmgGet(character.getPoisonDmg());
+        }
+        if (character.getFreezeDuration() > 0) {
+            character.setFreeze(character.getFreezeDuration() - 1);
+            CommunicatePrinter.frozen(character.getFreezeDmg(), StringsManager.getCharacterName(character.getCharacterEnum()), character.getFreezeDuration());
+            moveStarted();
+            moveFinished();
+            character.dmgGet(character.getFreezeDmg());
+            return;
+        }
+        if (character.getStunDuration() > 0) {
+            character.setStun(character.getStunDuration() - 1);
+            CommunicatePrinter.stunned(StringsManager.getCharacterName(character.getCharacterEnum()), character.getStunDuration());
+            moveStarted();
+            moveFinished();
+            return;
+        }
 
         getMoveInfo(character);
         System.out.println("Character making move now: " + character.getCharacterEnum().toString());
@@ -1243,7 +1365,7 @@ public class Room {
                     for (MapTile tile : character.getRangeTiles()) {
                         if (tile.getCharacterStandingOn() != null &&
                                 (tile.getCharacterStandingOn().isHero() || tile.getCharacterStandingOn().isPet())) {
-                            shot(character, tile.getCharacterStandingOn());
+                            shot(character, tile.getCharacterStandingOn(), null);
                             return;
                         }
                     }
@@ -1319,12 +1441,35 @@ public class Room {
         }
     }
 
-    private void shot(CharacterDrawable shooter, CharacterDrawable target) {
+    private void shot(CharacterDrawable shooter, CharacterDrawable target, SpellEnum spell) {
+        int dmg = shooter.getShotDamage();
+
         TurnAction action = new TurnAction();
         action.addAction(new TurnStarted(this));
         action.addAction(new Wait(WorldConfig.SHOT_DURATION));
         shooter.getProjectile().addAction(new Shot(shooter, target, shooter.getProjectile(), null, shooter.getShotDamage()));
-        action.addAction(new DamageGiving(target, shooter.getShotDamage()));
+        action.addAction(new DamageGiving(target, dmg, shooter));
+
+        if (!target.isHero()) {
+            if (spell != null) {
+
+                switch (spell) {
+                    case FIRE_EXPLOSION:
+                        action.addAction(new SpellExplosionAction(spell, (AutonomousCharacter) target, this, (int) (dmg * WorldConfig.BURN_DMG_FACTOR), WorldConfig.BURN_DURATION));
+                        break;
+                    case ICE_EXPLOSION:
+                        action.addAction(new SpellExplosionAction(spell, (AutonomousCharacter) target, this, (int) (dmg * WorldConfig.FREEZE_DMG_FACTOR), WorldConfig.FREEZE_DURATION));
+                        break;
+                    case POISON_EXPLOSION:
+                        action.addAction(new SpellExplosionAction(spell, (AutonomousCharacter) target, this, (int) (dmg * WorldConfig.POISON_DMG_FACTOR), WorldConfig.POISON_DURATION));
+                        break;
+                    case STUN_EXPLOSION:
+                        action.addAction(new SpellExplosionAction(spell, (AutonomousCharacter) target, this, 0, WorldConfig.STUN_DURATION));
+                        break;
+                }
+
+            }
+        }
         action.addAction(new TurnFinished(this));
         shooter.addAction(action.getSequence());
     }
@@ -1632,7 +1777,22 @@ public class Room {
     }
 
     public void shotSelected(CharacterDrawable target) {
-        shot(this.currentCharacterMoving, target);
+        SpellEnum spell = null;
+        if (
+                StatTracker.getRangedWeapon() != null
+
+                && StatTracker.getRangedWeapon().getItemTypeEnum() == ItemTypeEnum.STAFF
+
+                //&& Math.abs(EpicDungeonTactics.random.nextFloat())
+                //        < StatTracker.getCurrentStat(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE)
+        ) {
+            System.out.println("WWWWWWWWWW" + Math.abs(EpicDungeonTactics.random.nextFloat()) + "     " + StatTracker.getCurrentStat(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE));
+            spell = ((Staff)StatTracker.getRangedWeapon()).getSpell();
+        }
+
+        if (spell != null) System.out.println("JJJJJJJJJJJJJ" + spell.toString());
+
+        shot(this.currentCharacterMoving, target, spell);
     }
 
     public void newHero(CharacterEnum newHero) {
@@ -1642,8 +1802,9 @@ public class Room {
 
     public void enemyDied(CharacterDrawable characterDrawable) {
         if (characterDrawable.isBoss()) {
+            System.out.println("oooooooooooooooooooooooo");
             itemDropped(ItemGenerator.getItemUnique(), characterDrawable);
-        } else if (EpicDungeonTactics.random.nextFloat() <= StatTracker.getCurrentStat(CompleteHeroStatsEnum.EXP_MULTIPLIER)) {
+        } else if (EpicDungeonTactics.random.nextFloat() <= StatTracker.getCurrentStat(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE)) {
             itemDropped(ItemGenerator.getItem(), characterDrawable);
         }
 
@@ -1659,7 +1820,7 @@ public class Room {
 
         GameScreen.goldCollected(goldCollected);
         GlobalValues.addGold(goldCollected);
-
+        SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.GOLD_COLLECTED, goldCollected);
 
         for (MapTile[] m1 : mapTiles) {
             for (MapTile m : m1) {
@@ -1683,6 +1844,7 @@ public class Room {
                 type = RoomTypeEnum.GOING_DOWN_ROOM;
                 SoundsManager.playSound(SoundEnum.BOSS_DEFEATED);
             }
+
         }
 
 
@@ -1690,5 +1852,22 @@ public class Room {
 
     public void removeBody(Body body) {
         this.world.destroyBody(body);
+    }
+
+    public void startExplosion(MagicalEffectAnimationEnum spell, CharacterDrawable target) {
+        explosionCoords = new CoordsFloat(
+                target.getTileStandingOn().getPositionFloat().x - WorldConfig.TILE_SIZE,
+                target.getTileStandingOn().getPositionFloat().y - WorldConfig.TILE_SIZE
+        );
+        explosionAnimation = GraphicsManager.getMagicalEffect(spell);
+        explosionDuration = explosionAnimation.getAnimationDuration();
+    }
+
+    public RayHandler getRayHandler() {
+        return rayHandler;
+    }
+
+    public CharacterDrawable getHeroInRoom() {
+        return charactersInRoom.get(0);
     }
 }

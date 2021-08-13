@@ -48,10 +48,10 @@ public class WeaponSelector {
             AbstractItem meleWeapon = StatTracker.getMeleWeapon();
             if (meleWeapon != null) {
                 imageMele.setDrawable(GraphicsManager.getItemImage(meleWeapon.getItemEnum()));
-                imageMele.setPosition(Gdx.graphics.getWidth()/2f - blockSize/2f, Gdx.graphics.getHeight() * 0.2f);
             } else {
                 imageMele.setDrawable(GraphicsManager.getGuiElement(GuiElementEnum.MELE_PUNCH));
             }
+            imageMele.setPosition(Gdx.graphics.getWidth()/2f - blockSize/2f, Gdx.graphics.getHeight() * 0.2f);
         }
         if (isDistance) {
             imageDistance.setDrawable(GraphicsManager.getItemImage(StatTracker.getRangedWeapon().getItemEnum()));
@@ -75,7 +75,7 @@ public class WeaponSelector {
         if (isMele) imageMele.draw(batch, 1f);
         if (isDistance) imageDistance.draw(batch, 1f);
 
-        System.out.println("DRAWING");
+        //System.out.println("DRAWING");
     }
 
     public ItemTypeEnum tap(float x, float y) {

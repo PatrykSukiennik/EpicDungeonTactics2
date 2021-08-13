@@ -13,14 +13,16 @@ public class StaffPrototype extends ItemPrototype {
     @Getter private final SpellEnum SPELL;
     @Getter private final int DMG;
     @Getter private final float SPELL_CHANCE;
+    @Getter private final int RANGE;
 
-    public StaffPrototype(ItemEnum id, ItemTypeEnum type, int value, int speed, SpellEnum spell, int dmg, float spellChance, ItemRarityEnum rarityEnum) {
+    public StaffPrototype(ItemEnum id, ItemTypeEnum type, int value, int speed, SpellEnum spell, int dmg, float spellChance, ItemRarityEnum rarityEnum, int range) {
         super(id, type, value, rarityEnum);
 
         this.SPEED_EFFECT = speed;
         this.SPELL = spell;
         this.DMG = dmg;
         this.SPELL_CHANCE = spellChance;
+        this.RANGE = range;
     }
 
 }

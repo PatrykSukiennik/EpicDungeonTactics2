@@ -12,6 +12,8 @@ import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.StatTracker;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.GuiContainer;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.heroStatWindow.HeroStatWindow;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.screens.viewElements.ButtonWithText;
 import com.badlogic.gdx.Gdx;
@@ -133,6 +135,7 @@ public final class EquipmentWindow {
                     break;
             }
         }
+        StatTracker.refreshWholeCharacter();
     }
 
     public boolean tap(float x, float y) {
@@ -192,6 +195,7 @@ public final class EquipmentWindow {
     }
 
     public static void hide() {
+        currItem = null;
         isUp = false;
     }
 

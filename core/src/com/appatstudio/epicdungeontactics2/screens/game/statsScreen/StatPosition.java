@@ -30,6 +30,7 @@ final class StatPosition {
 
     static {
         medals = new SpriteDrawable[]{
+                GraphicsManager.getGuiElement(GuiElementEnum.NONE),
                 GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_MEDAL),
                 GraphicsManager.getGuiElement(GuiElementEnum.SILVER_MEDAL),
                 GraphicsManager.getGuiElement(GuiElementEnum.GOLD_MEDAL),
@@ -48,7 +49,7 @@ final class StatPosition {
         int value = SavedInfoManager.getPlayerStat(flag);
         if (value == -1) value = 0;
 
-        int cap = PlayerStatisticsStats.getCap(flag, lvl);
+        String cap = PlayerStatisticsStats.getCap(flag, lvl) == -1 ? "" : "/" + PlayerStatisticsStats.getCap(flag, lvl);
 
         reward = SavedInfoManager.getPlayerStatRewardWaiting(flag);
 
@@ -63,7 +64,7 @@ final class StatPosition {
 
         textRightProgress = new TextObject(
                 font,
-                value + "/" + cap,
+                value + cap,
                 Gdx.graphics.getWidth() * 0.95f,
                 bottomY,
                 Align.right
@@ -73,7 +74,7 @@ final class StatPosition {
             collectText = new TextWithIcon(
                     GraphicsManager.getGuiElement(GuiElementEnum.COINS),
                     font,
-                    Integer.toString(PlayerStatisticsStats.getReward(flag, lvl - 1)),
+                    Integer.toString(SavedInfoManager.getPlayerStatRewardWaiting(flag)),
                     Gdx.graphics.getWidth() * 0.95f,
                     bottomY,
                     Align.right
@@ -82,11 +83,14 @@ final class StatPosition {
 
     }
 
-    void tap(float x, float y) {
-        if (collectText != null && collectText.tap(x, y)) {
+    boolean tap(float x, float y) {
+        if (collectText != null && collectText.tap(x, y) && reward > 0) {
             GlobalValues.addGold(reward);
             collectText = null;
+            SavedInfoManager.resetReward(flag);
+            return true;
         }
+        return false;
     }
 
     void draw(Batch batch) {
@@ -96,4 +100,7 @@ final class StatPosition {
     }
 
 
+    public PlayerStatsTrackerFlagsEnum getFlag() {
+        return flag;
+    }
 }

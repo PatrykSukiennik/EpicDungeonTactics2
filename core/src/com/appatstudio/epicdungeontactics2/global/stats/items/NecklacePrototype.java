@@ -16,4 +16,7 @@ public class NecklacePrototype extends ItemPrototype {
         this.EFFECTS = effects;
     }
 
+    public int getEFFECTS() {
+        return EFFECTS;
+    }
 }

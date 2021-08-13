@@ -16,4 +16,7 @@ public class RingPrototype extends ItemPrototype {
         this.EFFECTS = effects;
     }
 
+    public int getEFFECTS() {
+        return EFFECTS;
+    }
 }

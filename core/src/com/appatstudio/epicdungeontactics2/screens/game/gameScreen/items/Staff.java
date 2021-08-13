@@ -11,15 +11,17 @@ public class Staff extends AbstractItem {
 
     private final SpellEnum spell;
     private final int dmg;
+    private final int rangeEffect;
     private final int speedEffect;
     private final float spellChance;
 
-    public Staff(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, SpellEnum spell, int dmg, float spellChance, int speedEffect, ItemRarityEnum rarityEnum) {
+    public Staff(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, SpellEnum spell, int dmg, float spellChance, int speedEffect, ItemRarityEnum rarityEnum, int rangeEffect) {
         super(itemEnum, typeEnum, value, effects, rarityEnum);
         this.spell = spell;
         this.dmg = dmg;
         this.spellChance = spellChance;
         this.speedEffect = speedEffect;
+        this.rangeEffect = rangeEffect;
     }
 
     public int getSpeedEffect() {
@@ -36,5 +38,9 @@ public class Staff extends AbstractItem {
 
     public SpellEnum getSpell() {
         return spell;
+    }
+
+    public int getRangeEffect() {
+        return rangeEffect;
     }
 }

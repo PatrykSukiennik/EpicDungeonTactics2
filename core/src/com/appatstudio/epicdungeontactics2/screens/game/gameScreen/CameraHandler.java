@@ -4,12 +4,15 @@ import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.cameraAction.NextStageAction;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class CameraHandler extends Actor {
@@ -20,6 +23,7 @@ public class CameraHandler extends Actor {
     private static float actingDuration;
 
     private static Image blackOut;
+    private static boolean actingButNotMoving = false;
 
     static {
         movingPoint = new Actor();
@@ -43,11 +47,15 @@ public class CameraHandler extends Actor {
 
     public static void update(Batch gameBatch) {
         if (actingDuration > 0) {
-            movingPoint.act(Gdx.graphics.getDeltaTime());
-            camera.position.x = movingPoint.getX();
-            camera.position.y = movingPoint.getY();
             actingDuration -= Gdx.graphics.getDeltaTime();
+            if (!actingButNotMoving) {
+                movingPoint.act(Gdx.graphics.getDeltaTime());
+                camera.position.x = movingPoint.getX();
+                camera.position.y = movingPoint.getY();
+            }
         }
+
+        if (actingDuration <= 0) actingButNotMoving = false;
 
         camera.update();
         gameBatch.setProjectionMatrix(camera.combined);
@@ -160,14 +168,17 @@ public class CameraHandler extends Actor {
     }
 
     public static void nextStage() {
-        actingDuration = 2.5f;
+        actingDuration = 2f;
+        actingButNotMoving = true;
 
-        blackOut.addAction(
-                Actions.sequence(
-                        Actions.fadeIn(1f),
-                        Actions.fadeOut(1.5f)
-                )
-        );
+        SequenceAction action = new SequenceAction();
+
+        action.addAction(Actions.fadeIn(0.8f));
+        action.addAction(new NextStageAction());
+        action.addAction(Actions.fadeOut(1.2f));
+
+        blackOut.addAction(action);
+
     }
 
     public static float getBlackOutAlpha() {
@@ -221,5 +232,14 @@ public class CameraHandler extends Actor {
         camera.zoom = WorldConfig.CAMERA_ZOOM_LIMIT_MIN;
         camera.position.x = x;
         camera.position.y = y;
+    }
+
+    public static void centerOnCoordsNoZoom(float x, float y) {
+        currentZoom = (WorldConfig.CAMERA_ZOOM_LIMIT_MIN + WorldConfig.CAMERA_ZOOM_LIMIT_MAX) / 2f;
+        camera.zoom = (WorldConfig.CAMERA_ZOOM_LIMIT_MIN + WorldConfig.CAMERA_ZOOM_LIMIT_MAX) / 2f;
+        camera.position.x = x;
+        camera.position.y = y;
+
+        System.out.println("teeeeeeeeeeest: " + camera.position.x + "  " + camera.position.y);
     }
 }

@@ -10,6 +10,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.CampUpgradeStats;
 import com.appatstudio.epicdungeontactics2.global.stats.PerkStats;
@@ -17,7 +18,9 @@ import com.appatstudio.epicdungeontactics2.global.stats.characters.HeroStats;
 import com.appatstudio.epicdungeontactics2.global.stats.itemEffects.ItemEffect;
 import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.characters.CharacterStatsObject;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.communicatePrinter.CommunicatePrinter;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.BackpackSegment;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.HeroSegment;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.heroStatWindow.HeroStatWindow;
@@ -30,10 +33,10 @@ import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Bow;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Food;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Helmet;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.MeleWeapon;
-import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Necklace;
-import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Ring;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Shield;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.Staff;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.spellBook.KnownSpell;
+import com.appatstudio.epicdungeontactics2.screens.menu.perkScreen.PerkScreen;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 
@@ -41,9 +44,9 @@ import java.util.HashMap;
 
 public class StatTracker {
 
-    private static HashMap<CharacterEnum, Integer> expCollected;
-    private static HashMap<CharacterEnum, Boolean> lvlUps;
-    private static Array<CharacterEnum> usedCharacters;
+    private static final HashMap<CharacterEnum, Integer> expCollected;
+    private static final HashMap<CharacterEnum, Boolean> lvlUps;
+    private static final Array<CharacterEnum> usedCharacters;
 
     public static Array<AbstractItem> backpackItems;
     public static Array<AbstractItem> equippedItems;
@@ -52,9 +55,11 @@ public class StatTracker {
 
     private static HashMap<CompleteHeroStatsEnum, Float> currStats;
 
+    private static Array<KnownSpell> knownSpells;
+
     private static CharacterEnum currHero;
 
-    private static Image projectile;
+    private static final Image projectile;
 
     private static PerkEnum selectedPerk;
 
@@ -78,6 +83,7 @@ public class StatTracker {
         System.out.println("newRun");
         backpackItems = new Array<>();
         equippedItems = new Array<>();
+        knownSpells = new Array<>();
         currHero = runHero;
         
         EquipmentWindow.newRun(runHero);
@@ -94,6 +100,9 @@ public class StatTracker {
     public static void clearEq() {
         if (backpackItems == null) backpackItems = new Array<>();
         else backpackItems.clear();
+
+        if (knownSpells == null) knownSpells = new Array<>();
+        else knownSpells.clear();
     }
 
     public static void init(CharacterEnum hero, PerkEnum perk) {
@@ -125,15 +134,16 @@ public class StatTracker {
     }
 
     private static void getStartItems(CharacterEnum hero) {
-
+        System.out.println("getstartItems");
         equippedItems = new Array<>();
         backpackItems = new Array<>();
 
         ItemEnum[] items = HeroStats.getStartingItems(hero);
 
         for (ItemEnum i : items) {
-            System.out.println("DUPA");
+
             backpackItems.add(ItemGenerator.getItem(i));
+            backpackItems.get(backpackItems.size - 1).setStartingItem(true);
 
             HeroSegment.equipIfIsSpace(backpackItems.get(backpackItems.size-1));
 
@@ -160,6 +170,20 @@ public class StatTracker {
                 case BOW:
                     equippedItems.add(backpackItems.get(backpackItems.size-1));
                     refreshProjectile();
+            }
+        }
+
+        if (GameScreen.getInstance().getPerk() == PerkEnum.EXPERIENCED_ADVENTURER) {
+            int bonusItems = (int)PerkStats.getPerkStat(PerkEnum.EXPERIENCED_ADVENTURER, SavedInfoManager.getPerkLvl(PerkEnum.EXPERIENCED_ADVENTURER));
+            System.out.println("STARTING BONUS ITEMS X:  " + bonusItems);
+            while (bonusItems > 0) {
+                System.out.println("STARTING BONUS ITEMS:  " + bonusItems);
+
+                AbstractItem item = ItemGenerator.getItem();
+                if (EquipmentWindow.isSpaceFor(item)) {
+                    backpackItems.add(item);
+                    bonusItems--;
+                }
             }
         }
     }
@@ -206,8 +230,8 @@ public class StatTracker {
         System.out.println("DUPA6: " + equippedItems.size);
 
         getBasicStats();
-
         refreshBonuses();
+
     }
 
     public static void refreshBonuses() {
@@ -287,8 +311,8 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.HP_RESTORE_KILL,
                 (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.HP_RESTORE_KILL, itemBonuses)));
 
-        currStats.put(CompleteHeroStatsEnum.POISON_DURATION_EFFECT,
-                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.POISON_DURATION_EFFECT, itemBonuses)));
+//        currStats.put(CompleteHeroStatsEnum.POISON_DURATION_EFFECT,
+//                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.POISON_DURATION_EFFECT, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.MAGICAL_RESIST,
                 (currStats.get(CompleteHeroStatsEnum.INT) * 0.02f / currStats.get(CompleteHeroStatsEnum.LVL)
@@ -307,24 +331,24 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE,
                 (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE, itemBonuses)));
 
-        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,
-                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE, itemBonuses)));
+//        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,
+//                (getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR,
                 (currStats.get(CompleteHeroStatsEnum.INT) * 0.01f / currStats.get(CompleteHeroStatsEnum.LVL)
                         + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR, itemBonuses)));
 
-        currStats.put(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER,
-                (1
-                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER, itemBonuses)));
+//        currStats.put(CompleteHeroStatsEnum.UNIQUE_ENEMY_CHANCE,
+//                (1
+//                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.UNIQUE_ENEMY_CHANCE, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP,
                 (1
                         + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP, itemBonuses)));
 
-        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY,
-                (0.02f
-                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY, itemBonuses)));
+//        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY,
+//                (0.02f
+//                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.RANGE,
                 (1
@@ -344,15 +368,15 @@ public class StatTracker {
 
         currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG,
                 (getItemStats(CompleteHeroStatsEnum.MAGICAL_DMG)
-                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAGICAL_DMG, itemBonuses)));;
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.MAGICAL_DMG, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.SPEED,
                 (currStats.get(CompleteHeroStatsEnum.DEX)
                         + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.SPEED, itemBonuses)));
 
-        currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE,
-                (currStats.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE)
-                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, itemBonuses)));
+        currStats.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE,
+                (currStats.get(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE)
+                        + getItemAndPerkEffectsValue(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE, itemBonuses)));
 
         currStats.put(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL,
                 (currStats.get(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL)
@@ -414,11 +438,11 @@ public class StatTracker {
                 if (selectedPerk == PerkEnum.INT_BONUS)
                     result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
                 return result;
-            case CHANCE_FOR_RANDOM_KEY:
-                result = 0;
-                if (selectedPerk == PerkEnum.KEY_FINDER)
-                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
-                return result;
+//            case CHANCE_FOR_RANDOM_KEY:
+//                result = 0;
+//                if (selectedPerk == PerkEnum.KEY_FINDER)
+//                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+//                return result;
             case DOUBLE_ATTACK_CHANCE:
                 result = 0;
                 if (selectedPerk == PerkEnum.DOUBLE_ATTACK)
@@ -445,11 +469,11 @@ public class StatTracker {
                     result += CampUpgradeStats.getCampUpgradeStat(CampUpgradeEnum.PRINCESS, SavedInfoManager.getNpcLvl(CampUpgradeEnum.PRINCESS) - 1);
                 if (currHero == CharacterEnum.HERO_BABY) result += 0.5f;
                 return result;
-            case POISON_DURATION_EFFECT:
-                result = 0;
-                if (selectedPerk == PerkEnum.POISON_DURATION_DECREASE)
-                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
-                return result;
+//            case POISON_DURATION_EFFECT:
+//                result = 0;
+//                if (selectedPerk == PerkEnum.POISON_DURATION_DECREASE)
+//                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+//                return result;
             case MAGICAL_RESIST:
                 result = 0;
                 if (selectedPerk == PerkEnum.MAGICAL_RESIST)
@@ -475,21 +499,21 @@ public class StatTracker {
                 if (selectedPerk == PerkEnum.APPLE_FINDER)
                     result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
                 return result;
-            case CHANCE_FOR_SECOND_REVIVE:
-                result = 0;
-                if (selectedPerk == PerkEnum.THIRD_CHANCE)
-                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
-                return result;
+//            case CHANCE_FOR_SECOND_REVIVE:
+//                result = 0;
+//                if (selectedPerk == PerkEnum.THIRD_CHANCE)
+//                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+//                return result;
             case CHANCE_FOR_MAGIC_MIRROR:
                 result = 0;
                 if (selectedPerk == PerkEnum.MAGIC_MIRROR)
                     result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
                 return result;
-            case ENEMY_POWER_MULTIPLIER:
-                result = 0;
-                if (selectedPerk == PerkEnum.STRONGER_ENEMIES)
-                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
-                return result;
+//            case UNIQUE_ENEMY_CHANCE:
+//                result = 0;
+//                if (selectedPerk == PerkEnum.STRONGER_ENEMIES)
+//                    result += PerkStats.getPerkStat(selectedPerk, SavedInfoManager.getPerkLvl(selectedPerk));
+//                return result;
             case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP:
                 result = 0;
                 if (selectedPerk == PerkEnum.BERSERKER)
@@ -514,10 +538,6 @@ public class StatTracker {
                         result += ((Helmet) item).getArmor();
                     else if (item.getItemTypeEnum() == ItemTypeEnum.SHIELD)
                         result += ((Shield) item).getArmor();
-                    else if (item.getItemTypeEnum() == ItemTypeEnum.RING)
-                        result += ((Ring) item).getArmor();
-                    else if (item.getItemTypeEnum() == ItemTypeEnum.NECKLACE)
-                        result += ((Necklace) item).getArmor();
                 }
                 break;
 
@@ -527,6 +547,8 @@ public class StatTracker {
                         result += ((Bow) item).getRange();
                     else if (item.getItemTypeEnum() == ItemTypeEnum.ARROW)
                         result += ((Arrow) item).getRangeEffect();
+                    else if (item.getItemTypeEnum() == ItemTypeEnum.STAFF)
+                        result += ((Staff) item).getRangeEffect();
                 }
                 break;
 
@@ -575,10 +597,37 @@ public class StatTracker {
 
     public static void itemUsed(AbstractItem item) {
         if (item.getItemTypeEnum() == ItemTypeEnum.BOOK) {
-            expEffect(((Book) item).getExpEffect());
+            Book book = (Book) item;
+            boolean isAlreadyKnown = false;
+            for (int i=0; i<knownSpells.size; i++) {
+                if (knownSpells.get(i).getSpell() == book.getSpell()) {
+                    knownSpells.set(i,
+                            new KnownSpell(
+                            book.getSpell(),
+                            book.getDuration(),
+                            book.getMpCost(),
+                            book.getDmg(),
+                            GraphicsManager.getItemImage(item.getItemEnum())));
+                    isAlreadyKnown = true;
+                    break;
+                }
+            }
+            if (!isAlreadyKnown) {
+                knownSpells.add(new KnownSpell(
+                        book.getSpell(),
+                        book.getDuration(),
+                        book.getMpCost(),
+                        book.getDmg(),
+                        GraphicsManager.getItemImage(item.getItemEnum())
+                ));
+            }
+
+            System.out.println("SPELL_ADDED");
+
+            GuiContainer.getInstance().refreshSpells();
         } else if (item.getItemTypeEnum() == ItemTypeEnum.FOOD) {
-            hpEffect(((Food) item).getHpEffect());
-            hpEffect(((Food) item).getMpEffect());
+            hpEffect((int)((((Food) item).getHpEffect() / 100f) * currStats.get(CompleteHeroStatsEnum.MAX_HP)));
+            hpEffect((int)((((Food) item).getMpEffect() / 100f) * currStats.get(CompleteHeroStatsEnum.MAX_MP)));
         }
         CommunicatePrinter.usedItem(
                 StringsManager.getItemName(item.getItemEnum()));
@@ -595,7 +644,7 @@ public class StatTracker {
         }
         currStats.put(CompleteHeroStatsEnum.HP, curr);
         StatusBarContainer.setHp(currStats.get(CompleteHeroStatsEnum.HP) / currStats.get(CompleteHeroStatsEnum.MAX_HP));
-        HeroStatWindow.refreshStats();
+        GuiContainer.getInstance().getHeroStatsWindow().refreshStats();
         HeroStatWindow.refreshBars();
     }
 
@@ -605,7 +654,8 @@ public class StatTracker {
         curr += mpEffect;
         if (curr > max) curr = max;
         currStats.put(CompleteHeroStatsEnum.MP, curr);
-        HeroStatWindow.refreshStats();
+        StatusBarContainer.setMp(currStats.get(CompleteHeroStatsEnum.MP) / currStats.get(CompleteHeroStatsEnum.MAX_MP));
+        GuiContainer.getInstance().getHeroStatsWindow().refreshStats();
         HeroStatWindow.refreshBars();
     }
 
@@ -622,7 +672,7 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.EXP, curr);
         SavedInfoManager.saveCharacterExp(currHero, curr.intValue());
         StatusBarContainer.setExp(currStats.get(CompleteHeroStatsEnum.EXP) / currStats.get(CompleteHeroStatsEnum.MAX_EXP));
-        HeroStatWindow.refreshStats();
+        GuiContainer.getInstance().getHeroStatsWindow().refreshStats();
         HeroStatWindow.refreshBars();
 
         expCollected.put(currHero, expCollected.get(currHero) + expEffect);
@@ -672,6 +722,12 @@ public class StatTracker {
                         break;
                     case PERCENT_CHANCE_FOR_BURNING:
                         result.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING, result.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_STUN:
+                        result.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_STUNNING, result.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_STUNNING) + effect.getPower());
+                        break;
+                    case PERCENT_CHANCE_FOR_FREEZE:
+                        result.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_FREEZE, result.get(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_FREEZE) + effect.getPower());
                         break;
                     case PERCENT_CHANCE_FOR_DOUBLE_MOVE:
                         result.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE, result.get(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE) + effect.getPower());
@@ -741,7 +797,9 @@ public class StatTracker {
                 statisticEnum,
                 SavedInfoManager.getCharacterStat(currHero, statisticEnum) + 1);
 
-        HeroStatWindow.refreshStats();
+        SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.SKILL_POINTS_USED, 1);
+        StatTracker.refreshWholeCharacter();
+        GuiContainer.getInstance().getHeroStatsWindow().refreshStats();
     }
 
     public static Array<CharacterEnum> getUsedCharacters() {
@@ -779,7 +837,7 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.RANGE, 0f);
         currStats.put(CompleteHeroStatsEnum.ARMOR,0f);
         currStats.put(CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE,0f);
-        currStats.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE,0f);
+        currStats.put(CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE,0.02f);
         currStats.put(CompleteHeroStatsEnum.GOLD_MULTIPLIER,1f);
         currStats.put(CompleteHeroStatsEnum.EXP_MULTIPLIER,1f);
         currStats.put(CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER,1f);
@@ -787,24 +845,25 @@ public class StatTracker {
         currStats.put(CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER,1f);
         currStats.put(CompleteHeroStatsEnum.HP_RESTORE_ROOM,0.05f);
         currStats.put(CompleteHeroStatsEnum.HP_RESTORE_KILL,0f);
-        currStats.put(CompleteHeroStatsEnum.POISON_DURATION_EFFECT,0f);
+//        currStats.put(CompleteHeroStatsEnum.POISON_DURATION_EFFECT,0f);
         currStats.put(CompleteHeroStatsEnum.MAGICAL_RESIST,0f);
         currStats.put(CompleteHeroStatsEnum.INSTAKILL_ENEMY_CHANCE,0f);
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP,0.1f);
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_MISS_STAGE,0f);
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE,0f);
-        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY,0f);
-        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,0f);
+//        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_KEY,0f);
+//        currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,0f);
         currStats.put(CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR,0f);
-        currStats.put(CompleteHeroStatsEnum.ENEMY_POWER_MULTIPLIER,1f);
+//        currStats.put(CompleteHeroStatsEnum.UNIQUE_ENEMY_CHANCE,1f);
         currStats.put(CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP,1f);
         currStats.put(CompleteHeroStatsEnum.SPEED, (float)SavedInfoManager.getCharacterStat(currHero, StatisticEnum.DEX) - SavedInfoManager.getCharacterLvl(currHero));
-        currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE,0.05f);
         currStats.put(CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL,0.05f);
         currStats.put(CompleteHeroStatsEnum.PERCENT_ANY_DROP_CHANCE,0.05f);
-        currStats.put(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE,0.05f);
+        currStats.put(CompleteHeroStatsEnum.PERCENT_SPELL_CHANCE,0f);
         currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_POISONING,0f);
         currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING,0f); 
+        currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_STUNNING,0f);
+        currStats.put(CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_FREEZE,0f);
         currStats.put(CompleteHeroStatsEnum.MELE_DMG, (float)SavedInfoManager.getCharacterStat(currHero, StatisticEnum.STR));
         currStats.put(CompleteHeroStatsEnum.BOW_DMG, 0f);
         currStats.put(CompleteHeroStatsEnum.MAGICAL_DMG, 0f);
@@ -823,4 +882,7 @@ public class StatTracker {
         else if (getRangedWeapon() != null) projectile.setDrawable(GraphicsManager.getProjectile(getRangedWeapon().getItemEnum()));
     }
 
+    public static Array<KnownSpell> getKnownSpells() {
+        return knownSpells;
+    }
 }

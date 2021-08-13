@@ -14,12 +14,17 @@ import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.StringsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.map.MapGenerator;
+import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.PlayerStatsTrackerFlagsEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
+import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.characters.CharacterDrawable;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.GuiContainer;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.communicatePrinter.CommunicatePrinter;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.EquipmentWindow;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.selectNextHeroWindow.SelectNextHeroWindow;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.weaponSelector.WeaponSelector;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.AbstractItem;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.MapTile;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.Room;
@@ -131,6 +136,19 @@ public final class GameScreen extends Actor {
         System.out.println("SIZE OF BACKPACK7: "+StatTracker.getBackpackItems().size);
     }
 
+    public static void nextStageNow() {
+        System.out.println("STAGENEXTNEXT");
+        stage++;
+        //newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
+        currStage = MapGenerator.createStage(stage);
+        currRoom = currStage.getFirstRoom();
+        guiContainer.updateStage(currStage);
+
+        CoordsFloat heroPos = currRoom.getHeroInRoom().getTileStandingOn().getPositionFloat();
+        CameraHandler.centerOnCoordsNoZoom(heroPos.x, heroPos.y);
+        CameraHandler.updateCamera();
+    }
+
     public void itemDropped(AbstractItem item) {
         currRoom.itemDropped(item);
     }
@@ -147,11 +165,11 @@ public final class GameScreen extends Actor {
         killedEnemies = 0;
         goldCollected = 0;
         roomsCleared = 0;
+        stage = 1;
+        isStop = false;
 
         StatTracker.newRun(hero);
         StatTracker.init(hero, perk);
-        stage = 1;
-        isStop = false;
 
         freshRunInit();
         guiContainer = GuiContainer.getInstance();
@@ -202,13 +220,15 @@ public final class GameScreen extends Actor {
     public static void nextStageInit() {
         CameraHandler.nextStage();
         newStageText.setText(StringsManager.getGuiString(GuiStringEnum.STAGE) + " " + (stage + 1));
-        switchStageDelay = 1f;
+        switchStageDelay = 0.8f;
 
         MusicEnum nextMusic = MapGenerator.nextMusic(stage);
         if (nextMusic != null) SoundsManager.playMusic(nextMusic);
 
         SoundEnum nextStepSound = MapGenerator.nextStepSound(stage);
         if (nextStepSound != null) stepSound = nextStepSound;
+
+        SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.DEEPEST_STAGE, stage + 1);
 
     }
 
@@ -270,18 +290,11 @@ public final class GameScreen extends Actor {
         }
 
         if (switchStageDelay > 0) {
-            CameraHandler.updateCamera();
             switchStageDelay -= Gdx.graphics.getDeltaTime();
-            CameraHandler.drawEffects(mapGuiBatch);
-            if (switchStageDelay > 0.2f) newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
-            if (switchStageDelay <= 0) {
-                stage++;
-                newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
-                CameraHandler.resetCameraPos();
-                currStage = MapGenerator.createStage(stage);
-                currRoom = currStage.getFirstRoom();
-                guiContainer.updateStage(currStage);
-            }
+            //CameraHandler.drawEffects(mapGuiBatch);
+             newStageText.draw(mapGuiBatch, CameraHandler.getBlackOutAlpha());
+
+            CameraHandler.updateCamera();
         }
 
         if (freshRunTextDelay > 0) {
@@ -336,6 +349,7 @@ public final class GameScreen extends Actor {
 
     public static void roomCleared() {
         roomsCleared++;
+        SavedInfoManager.playerStatEffect(PlayerStatsTrackerFlagsEnum.ROOMS_CLEARED, 1);
     }
 
 

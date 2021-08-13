@@ -62,7 +62,7 @@ public enum PerkEnum {
     TANK,
 
     //chance for one more chance
-    THIRD_CHANCE,
+//    THIRD_CHANCE,
 
     //magical attack reflection chance
     MAGIC_MIRROR,
@@ -86,7 +86,7 @@ public enum PerkEnum {
     STRONGER_ENEMIES,
 
     //more chance for dropping key
-    KEY_FINDER,
+    //KEY_FINDER,
 
     //more elemental effect chance
     //ELEMENTALIST,

@@ -1,5 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.stats.characters;
 
+import com.appatstudio.epicdungeontactics2.global.enums.StatisticEnum;
+
 public final class CharacterPrototype {
 
     private final int STR, DEX, INT, VIT, LCK;
@@ -30,5 +32,22 @@ public final class CharacterPrototype {
 
     public int getVIT() {
         return VIT;
+    }
+
+    public int getStat(StatisticEnum allStat) {
+        switch (allStat) {
+            case DEX:
+                return DEX;
+            case INT:
+                return INT;
+            case LCK:
+                return LCK;
+            case STR:
+                return STR;
+            case VIT:
+                return VIT;
+            default:
+                return 1;
+        }
     }
 }

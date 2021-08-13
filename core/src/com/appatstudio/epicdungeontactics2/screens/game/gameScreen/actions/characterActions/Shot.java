@@ -1,5 +1,7 @@
 package com.appatstudio.epicdungeontactics2.screens.game.gameScreen.actions.characterActions;
 
+import static com.appatstudio.epicdungeontactics2.global.WorldConfig.TILE_SIZE;
+
 import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.SpellEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsFloat;
@@ -13,34 +15,39 @@ public class Shot extends SequenceAction {
 
     public Shot(CharacterDrawable attacker, CharacterDrawable target, Image projectile, SpellEnum effect, int dmg) {
 
+        projectile.setSize(TILE_SIZE, TILE_SIZE);
+        projectile.setOrigin(TILE_SIZE/2f, TILE_SIZE/2f);
+
         CoordsFloat start = new CoordsFloat(
-                attacker.getX() + attacker.getWidth()/2f,
-                attacker.getY() + attacker.getHeight()/2f
+                attacker.getTileStandingOn().getPositionFloat().x,
+                attacker.getTileStandingOn().getPositionFloat().y
         );
         CoordsFloat end = new CoordsFloat(
-                target.getX() + target.getWidth()/2f,
-                target.getY() + target.getHeight()/2f
+                target.getTileStandingOn().getPositionFloat().x,
+                target.getTileStandingOn().getPositionFloat().y
         );
 
         float projectileRotation = (float) Math.toDegrees(Math.atan2(
                 end.y - start.y,
                 end.x - start.x));
-        projectileRotation += 270;
+        projectileRotation += 220; //correction
 
         if (projectileRotation < 0) projectileRotation += 360;
 
         System.out.println("ROTATION: " + projectileRotation);
+        System.out.println("SIZE: " + projectile.getWidth());
+
 
         this.addAction(Actions.moveTo(
-                start.x,// - WorldConfig.TILE_SIZE/2f,
-                start.y));// - WorldConfig.TILE_SIZE/2f));
+                start.x,
+                start.y));
 
         this.addAction(Actions.rotateTo(projectileRotation));
 
         this.addAction(
                 Actions.moveTo(
-                        end.x,// - WorldConfig.TILE_SIZE/2f,
-                        end.y,// - WorldConfig.TILE_SIZE/2f,
+                        end.x,
+                        end.y,
                         WorldConfig.SHOT_DURATION
                 ));
 

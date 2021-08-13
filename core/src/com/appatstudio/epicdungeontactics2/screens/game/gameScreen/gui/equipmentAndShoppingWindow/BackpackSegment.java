@@ -4,6 +4,7 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiElementEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemBackpackShelfEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.GraphicsManager;
+import com.appatstudio.epicdungeontactics2.global.stats.itemGenerator.ItemGenerator;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.BackpackPage;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.equipmentAndShoppingWindow.backpackElements.CategoryColumn;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.items.AbstractItem;
@@ -35,6 +36,12 @@ public class BackpackSegment extends AbstractSegment {
         for (ItemBackpackShelfEnum shelf : allCategories) {
             pages.put(shelf, new BackpackPage(shelf, hero));
         }
+
+//        AbstractItem item = ItemGenerator.getItem();
+//        while (isSpaceFor(item)) {
+//            pickItem(item);
+//            item = ItemGenerator.getItem();
+//        }
     }
 
     public boolean isSpaceFor(AbstractItem item) {
@@ -49,7 +56,6 @@ public class BackpackSegment extends AbstractSegment {
                 return pages.get(ItemBackpackShelfEnum.ARMOR).isSpace();
             case BOOK:
             case FOOD:
-            case OTHER:
                 return pages.get(ItemBackpackShelfEnum.FOOD).isSpace();
             case ARROW:
             case BOW:
@@ -88,7 +94,6 @@ public class BackpackSegment extends AbstractSegment {
                 break;
             case BOOK:
             case FOOD:
-            case OTHER:
                 pages.get(ItemBackpackShelfEnum.FOOD).replace(toReplace, newItem);
                 break;
             case ARROW:
@@ -115,7 +120,6 @@ public class BackpackSegment extends AbstractSegment {
                 break;
             case BOOK:
             case FOOD:
-            case OTHER:
                 pages.get(ItemBackpackShelfEnum.FOOD).put(item);
                 break;
             case ARROW:
@@ -131,7 +135,6 @@ public class BackpackSegment extends AbstractSegment {
     public void selectItem(AbstractItem item) {
         if (item != null) {
             switch (item.getItemTypeEnum()) {
-                case STAFF:
                 case MELE:
                     currShelf = ItemBackpackShelfEnum.MELE;
                     break;
@@ -144,11 +147,11 @@ public class BackpackSegment extends AbstractSegment {
                     break;
                 case BOOK:
                 case FOOD:
-                case OTHER:
                     currShelf = ItemBackpackShelfEnum.FOOD;
                     break;
                 case ARROW:
                 case BOW:
+                case STAFF:
                     currShelf = ItemBackpackShelfEnum.DISTANCE;
                     break;
             }
@@ -187,7 +190,6 @@ public class BackpackSegment extends AbstractSegment {
                 break;
             case BOOK:
             case FOOD:
-            case OTHER:
                 currShelf = ItemBackpackShelfEnum.FOOD;
                 break;
             case ARROW:
@@ -217,7 +219,6 @@ public class BackpackSegment extends AbstractSegment {
                 break;
             case BOOK:
             case FOOD:
-            case OTHER:
                 currShelf = ItemBackpackShelfEnum.FOOD;
                 break;
             case ARROW:

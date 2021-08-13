@@ -52,7 +52,7 @@ public class ShopWindow {
                 }
             }
             else if (mode == ItemSegmentMode.SELL) {
-                if (shopSegment.get(shop).hasSpace()) {
+                if (shopSegment.get(shop).hasSpace() && !currItem.isStartingItem()) {
                     itemSegment.draw(batch, true, mode);
                 } else {
                     itemSegment.draw(batch, false, mode);
@@ -68,6 +68,7 @@ public class ShopWindow {
     }
 
     public void hide() {
+        currItem = null;
         isUp = false;
     }
 
@@ -116,7 +117,7 @@ public class ShopWindow {
         } else if (currItem != null && itemSegment.isTap(x, y, true)) {
             if (itemSegment.isButtonClicked(x, y)) {
                 if (mode == ItemSegmentMode.SELL) {
-                    if (shopSegment.get(shop).hasSpace()) {
+                    if (shopSegment.get(shop).hasSpace() && !currItem.isStartingItem()) {
                         shopSegment.get(shop).addItem(currItem);
                         backpackSegment.itemDropped(currItem);
                         GlobalValues.addGold(currItem.getValue());

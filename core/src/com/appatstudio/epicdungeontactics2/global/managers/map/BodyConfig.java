@@ -82,7 +82,7 @@ public class BodyConfig {
         characterBodyDef.put(IMP, smallBody);
         characterBodyDef.put(NECROMANCER, smallBody);
         characterBodyDef.put(WOGOL, smallBody);
-        characterBodyDef.put(BOSS_BIG_DEMON, bigBody);
+        characterBodyDef.put(BOSS_BIG_DEMON, smallBody);
         characterBodyDef.put(CENTAUR_MALE, smallBody);
         characterBodyDef.put(CENTAUR_FEMALE, smallBody);
         characterBodyDef.put(ENT, smallBody);
@@ -92,7 +92,7 @@ public class BodyConfig {
         characterBodyDef.put(ICE_ZOMBIE, smallBody);
         characterBodyDef.put(MUSHROOM_NORMAL, smallBody);
         characterBodyDef.put(MUSHROOM_LARGE, smallBody);
-        characterBodyDef.put(BEAR, mediumBody);
+        characterBodyDef.put(BEAR, smallBody);
         characterBodyDef.put(BOSS_FOREST_GUARDIAN, smallBody);
         characterBodyDef.put(ELVEN_PRINCESS, smallBody);
         characterBodyDef.put(ELVEN_KING, smallBody);
@@ -143,7 +143,7 @@ public class BodyConfig {
         characterFixtureDef.put(IMP, smallFixtureDef);
         characterFixtureDef.put(NECROMANCER, smallFixtureDef);
         characterFixtureDef.put(WOGOL, smallFixtureDef);
-        characterFixtureDef.put(BOSS_BIG_DEMON, bigFixtureDef);
+        characterFixtureDef.put(BOSS_BIG_DEMON, smallFixtureDef);
         characterFixtureDef.put(CENTAUR_MALE, smallFixtureDef);
         characterFixtureDef.put(CENTAUR_FEMALE, smallFixtureDef);
         characterFixtureDef.put(ENT, smallFixtureDef);

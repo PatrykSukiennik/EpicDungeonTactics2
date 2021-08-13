@@ -16,7 +16,7 @@ public final class MenuScreen {
 
     private SpriteBatch batch;
     private CharacterSelector characterSelector;
-    private Image campUpgradeButton, financesUpgradeButton;
+    private Image campUpgradeButton, financesUpgradeButton, bestiaryButton;
 
     public static final float BOTTOM_BUTTON_HEIGHT, BOTTOM_BUTTON_WIDTH;
 
@@ -28,20 +28,24 @@ public final class MenuScreen {
     public MenuScreen() {
         batch = new SpriteBatch();
         batch.enableBlending();
+        float sideButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
 
         characterSelector = new CharacterSelector();
 
         campUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.CAMP_UPGRADE_BUTTON));
-        float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
-        campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
+        campUpgradeButton.setSize(sideButtonSize, sideButtonSize);
         campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
         campUpgradeButton.getColor().a = 0.8f;
 
         financesUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.FINANCES_UPGRADE_BUTTON));
-        float financesUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth()*0.15f;
-        financesUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
-        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + campUpgradeButtonSize);
+        financesUpgradeButton.setSize(sideButtonSize, sideButtonSize);
+        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sideButtonSize);
         financesUpgradeButton.getColor().a = 0.8f;
+
+        bestiaryButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.BESTIARY_BUTTON));
+        bestiaryButton.setSize(sideButtonSize, sideButtonSize);
+        bestiaryButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sideButtonSize * 2);
+        bestiaryButton.getColor().a = 0.8f;
     }
 
     public void draw() {
@@ -52,6 +56,7 @@ public final class MenuScreen {
         characterSelector.draw(batch);
         campUpgradeButton.draw(batch, 1f);
         financesUpgradeButton.draw(batch, 1f);
+        bestiaryButton.draw(batch, 1f);
         batch.end();
     }
 
@@ -65,6 +70,11 @@ public final class MenuScreen {
                 y > financesUpgradeButton.getY() &&
                 y < financesUpgradeButton.getY() + financesUpgradeButton.getHeight()) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.FINANCES_UPGRADE_SCREEN);
+        }
+        else if (x < bestiaryButton.getWidth() &&
+                y > bestiaryButton.getY() &&
+                y < bestiaryButton.getY() + bestiaryButton.getHeight()) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.BESTIARY_SCREEN);
         }
 
         characterSelector.tap(x, y);

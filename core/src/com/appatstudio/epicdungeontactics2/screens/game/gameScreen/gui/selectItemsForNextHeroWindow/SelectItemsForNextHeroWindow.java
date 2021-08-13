@@ -139,6 +139,7 @@ public class SelectItemsForNextHeroWindow {
     }
 
     public void hide() {
+        currItem = null;
         isUp = false;
     }
 

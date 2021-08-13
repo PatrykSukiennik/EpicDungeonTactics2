@@ -9,6 +9,8 @@ import com.appatstudio.epicdungeontactics2.global.enums.RoomTypeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.MusicEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.SoundEnum;
 import com.appatstudio.epicdungeontactics2.global.primitives.CoordsInt;
+import com.appatstudio.epicdungeontactics2.global.stats.characters.CharacterPrototype;
+import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.minimapWindow.MapWindow;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.Room;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.map.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -47,7 +49,7 @@ public class MapGenerator {
         mapCounter.put(3, new HashMap<RoomTypeEnum, Integer>());
 
         enemiesFactor = new HashMap<>();
-        enemiesFactor.put(1, 0.7f);
+        enemiesFactor.put(1, 1f);
         enemiesFactor.put(2, 0.3f);
         enemiesFactor.put(3, 0.6f);
         enemiesFactor.put(4, 1f);
@@ -157,9 +159,48 @@ mapChances.put(STAGE_3_BOSS_4, 100);
 //python-include-map-chances-end
 
         stageEnemies = new HashMap<>();
-        stageEnemies.put(1, new CharacterEnum[]{ TINY_ZOMBIE, ZOMBIE, ICE_ZOMBIE, MUDDY, BIG_ZOMBIE, SWAMPY, ORC_SHAMAN, ORC_WARRIOR, GOBLIN, MASKED_ORC });
-        stageEnemies.put(2, new CharacterEnum[]{});
-        stageEnemies.put(3, new CharacterEnum[]{});
+
+        stageEnemies.put(1, new CharacterEnum[]{
+                CharacterEnum.CENTAUR_MALE,
+                CharacterEnum.CENTAUR_FEMALE,
+                CharacterEnum.ENT,
+                CharacterEnum.TROLL,
+                CharacterEnum.WOLF,
+                CharacterEnum.MUSHROOM_SMALL,
+                CharacterEnum.MUSHROOM_NORMAL,
+                CharacterEnum.MUSHROOM_LARGE,
+                CharacterEnum.BEAR,
+//                CharacterEnum.BOSS_FOREST_GUARDIAN,
+                CharacterEnum.ELVEN_PRINCESS,
+                CharacterEnum.ELVEN_KING,
+                CharacterEnum.ELVEN_KNIGHT,
+                CharacterEnum.GNOLL_BRUTE,
+                CharacterEnum.GNOLL_OVERSEER,
+                CharacterEnum.GNOLL_SCOUT,
+                CharacterEnum.GNOLL_SHAMAN
+        });
+        stageEnemies.put(2, new CharacterEnum[]{
+                CharacterEnum.TINY_ZOMBIE,
+                CharacterEnum.ZOMBIE,
+                CharacterEnum.MUDDY,
+                CharacterEnum.ICE_ZOMBIE,
+                CharacterEnum.GOBLIN,
+                CharacterEnum.BIG_ZOMBIE,
+                CharacterEnum.ORC_SHAMAN,
+                CharacterEnum.MASKED_ORC,
+                CharacterEnum.ORC_WARRIOR,
+                CharacterEnum.SWAMPY,
+//                CharacterEnum.BOSS_OGRE
+        });
+        stageEnemies.put(3, new CharacterEnum[]{
+                CharacterEnum.CHORT,
+                CharacterEnum.IMP,
+                CharacterEnum.NECROMANCER,
+                CharacterEnum.SKELET,
+                CharacterEnum.WOGOL,
+//                CharacterEnum.BOSS_BIG_DEMON
+        });
+
 
         mapEnums = new HashMap<>();
         mapEnums.put(1, new HashMap<RoomTypeEnum, RoomEnum[]>());
@@ -339,9 +380,9 @@ mapChances.put(STAGE_3_BOSS_4, 100);
     public static RoomEnum getRandomRoom(RoomTypeEnum type, int stage) {
 
         int temp = 0;
-        int result = Math.abs(EpicDungeonTactics.random.nextInt()) % mapChanceSums.get(stage).get(type);
-
         int mapStage = stage == 1 ? 1 : stage <= 4 ? 2 : 3;
+
+        int result = Math.abs(EpicDungeonTactics.random.nextInt()) % mapChanceSums.get(mapStage).get(type);
 
         for (int i=0; i<mapCounter.get(mapStage).get(type); i++) {
             temp += mapChances.get(mapEnums.get(mapStage).get(type)[i]);

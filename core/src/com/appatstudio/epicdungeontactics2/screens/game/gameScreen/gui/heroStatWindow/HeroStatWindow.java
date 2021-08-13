@@ -25,17 +25,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.HashMap;
 
 public class HeroStatWindow {
 
     private static CharacterEnum hero;
-    private float stateTime = 0;
+    private static float stateTime = 0;
 
-    private boolean isLvlUpMode = false;
+    private static boolean isLvlUpMode = false;
 
-    private boolean isUp = false;
+    private static boolean isUp = false;
 
     private static SpriteDrawable bg;
     private static Animation<SpriteDrawable> heroAnimation;
@@ -50,14 +51,16 @@ public class HeroStatWindow {
     private static Image firstSeparator, secondSeparator;
 
     private static TextWithIcon[] leftColumn;
-    private static TextWithIcon[] rightColumn;
+    private static TextObject[] rightColumn;
     private static MultiLineTextWithIcon perkTextObject;
 
     private static Image hpBar, mpBar, expBar;
     private static Image hpBarBg, mpBarBg, expBarBg;
     private static TextObject hpStat, mpStat, expStat;
 
-    private final int ROWS = 8;
+    CompleteHeroStatsEnum[] rightColumnStats;
+
+    private static final int ROWS = 8;
 
     public HeroStatWindow() {
 
@@ -170,26 +173,134 @@ public class HeroStatWindow {
                     leftIcons[i],
                     FontsManager.getFont(FontEnum.STAT_DESC),
                     leftTexts[i],
-                    bgPos.x + bgSize.x * 0.1f,
+                    bgPos.x + bgSize.x * 0.08f,
                     firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
                             FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
                     Align.left
             );
         }
 
-        rightColumn = new TextWithIcon[ROWS];
-        for (int i = 0; i < ROWS; i++) {
-            rightColumn[i] = new TextWithIcon(
-                    GraphicsManager.getGuiElement(GuiElementEnum.NONE),
-                    FontsManager.getFont(FontEnum.STAT_DESC),
-                    "",
-                    bgPos.x + bgSize.x * 0.9f,
-                    firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
-                            FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
-                    Align.right
-            );
+        Array<CompleteHeroStatsEnum> otherStats = new Array<>();
+
+        rightColumnStats = new CompleteHeroStatsEnum[] {
+                CompleteHeroStatsEnum.GOLD_MULTIPLIER,
+                CompleteHeroStatsEnum.EXP_MULTIPLIER,
+                CompleteHeroStatsEnum.MISS_CHANCE,
+                CompleteHeroStatsEnum.DOUBLE_MOVE_CHANCE,
+                CompleteHeroStatsEnum.DOUBLE_ATTACK_CHANCE,
+                CompleteHeroStatsEnum.INSTAKILL_ENEMY_CHANCE,
+//                CompleteHeroStatsEnum.CHANCE_FOR_SECOND_REVIVE,
+                CompleteHeroStatsEnum.MAGICAL_RESIST,
+//                CompleteHeroStatsEnum.MELE_DMG_MULTIPLIER,
+//                CompleteHeroStatsEnum.BOW_DMG_MULTIPLIER,
+//                CompleteHeroStatsEnum.MAGICAL_DMG_MULTIPLIER,
+//                CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_STUNNING,
+                CompleteHeroStatsEnum.CHANCE_FOR_ANY_DROP,
+                CompleteHeroStatsEnum.CHANCE_FOR_MAGIC_MIRROR,
+                CompleteHeroStatsEnum.CHANCE_FOR_MISS_STAGE,
+                CompleteHeroStatsEnum.CHANCE_FOR_RANDOM_APPLE,
+                CompleteHeroStatsEnum.DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP,
+//                CompleteHeroStatsEnum.UNIQUE_ENEMY_CHANCE,
+                CompleteHeroStatsEnum.HP_RESTORE_KILL,
+                CompleteHeroStatsEnum.HP_RESTORE_ROOM,
+                CompleteHeroStatsEnum.PERCENT_HP_REGEN_KILL,
+                CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_STUNNING,
+                CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_FREEZE,
+                CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_BURNING,
+                CompleteHeroStatsEnum.PERCENT_CHANCE_FOR_POISONING,
+        };
+
+        for (CompleteHeroStatsEnum stat : rightColumnStats) {
+            System.out.println("ZAZAZAZAZAZAZ");
+            if (otherStats.size < ROWS) {
+                switch (stat) {
+                    case MISS_CHANCE:
+                    case CHANCE_FOR_ANY_DROP:
+                    case CHANCE_FOR_MAGIC_MIRROR:
+                    case CHANCE_FOR_MISS_STAGE:
+                    case CHANCE_FOR_RANDOM_APPLE:
+//                    case CHANCE_FOR_SECOND_REVIVE:
+                    case PERCENT_CHANCE_FOR_FREEZE:
+                    case PERCENT_CHANCE_FOR_BURNING:
+                    case PERCENT_CHANCE_FOR_POISONING:
+                    case DOUBLE_MOVE_CHANCE:
+                    case DOUBLE_ATTACK_CHANCE:
+                    case INSTAKILL_ENEMY_CHANCE:
+                    case MAGICAL_RESIST:
+                    case HP_RESTORE_KILL:
+                    case HP_RESTORE_ROOM:
+                    case PERCENT_HP_REGEN_KILL: {
+                        if (StatTracker.getCurrentStat(stat) > 0) {
+                            otherStats.add(stat);
+                            break;
+                        }
+                    }
+                    case EXP_MULTIPLIER:
+                    case GOLD_MULTIPLIER:
+                    case BOW_DMG_MULTIPLIER:
+                    case MELE_DMG_MULTIPLIER:
+                    case MAGICAL_DMG_MULTIPLIER:
+//                    case UNIQUE_ENEMY_CHANCE:
+                    case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP: {
+                        if (StatTracker.getCurrentStat(stat) > 1) {
+                            otherStats.add(stat);
+                            break;
+                        }
+                    }
+                }
+            } else break;
         }
 
+        rightColumn = new TextObject[ROWS];
+        for (int i = 0; i < ROWS; i++) {
+            if (i < otherStats.size) {
+                switch (otherStats.get(i)) {
+                    case PERCENT_CHANCE_FOR_STUNNING:
+                    case CHANCE_FOR_ANY_DROP:
+                    case CHANCE_FOR_MAGIC_MIRROR:
+                    case CHANCE_FOR_MISS_STAGE:
+                    case CHANCE_FOR_RANDOM_APPLE:
+//                    case CHANCE_FOR_SECOND_REVIVE:
+                    case PERCENT_CHANCE_FOR_FREEZE:
+                    case PERCENT_CHANCE_FOR_BURNING:
+                    case PERCENT_CHANCE_FOR_POISONING:
+                    case HP_RESTORE_KILL:
+                    case HP_RESTORE_ROOM:
+                    case PERCENT_HP_REGEN_KILL: {
+                        rightColumn[i] = new TextObject(
+                                FontsManager.getFont(FontEnum.STAT_DESC),
+                                StringsManager.getCompleteHeroStatName(otherStats.get(i)) + ": " + Math.round(StatTracker.getCurrentStat(otherStats.get(i)) * 100f) / 100f + "%",
+                                bgPos.x + bgSize.x * 0.92f,
+                                firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                                Align.right
+                        );
+                    }
+                    case BOW_DMG_MULTIPLIER:
+//                    case UNIQUE_ENEMY_CHANCE:
+                    case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP: {
+                        rightColumn[i] = new TextObject(
+                                FontsManager.getFont(FontEnum.STAT_DESC),
+                                StringsManager.getCompleteHeroStatName(otherStats.get(i)) + ": +" + ( 100f * (StatTracker.getCurrentStat(otherStats.get(i)) - 1 )) + "%",
+                                bgPos.x + bgSize.x * 0.92f,
+                                firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                                Align.right
+                        );
+                    }
+                }
+
+            } else {
+                rightColumn[i] = new TextObject(
+                        FontsManager.getFont(FontEnum.STAT_DESC),
+                        "",
+                        bgPos.x + bgSize.x * 0.92f,
+                        firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                        Align.right
+                );
+            }
+        }
 
         String descEnd = StringsManager.getPerkDescription(StatTracker.getPerk());
         float perkStat = PerkStats.getPerkStat(StatTracker.getPerk(), (int) StatTracker.getCurrentStat(CompleteHeroStatsEnum.LVL));
@@ -202,7 +313,7 @@ public class HeroStatWindow {
                 GraphicsManager.getPerkIcon(StatTracker.getPerk()),
                 FontsManager.getFont(FontEnum.STAT_DESC),
                 descString,
-                bgPos.x + bgSize.x * 0.1f,
+                bgPos.x + bgSize.x * 0.08f,
                 bgSize.x * 0.45f,
                 firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
                         FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * ((ROWS - 2) - 0.2f) * 2.5f
@@ -282,7 +393,7 @@ public class HeroStatWindow {
         }
 
         for (TextWithIcon t : leftColumn) if (t != null) t.draw(batch);
-        for (TextWithIcon t : rightColumn) t.draw(batch);
+        for (TextObject t : rightColumn) t.draw(batch);
         perkTextObject.draw(batch);
 
         firstSeparator.draw(batch, 1f);
@@ -303,27 +414,135 @@ public class HeroStatWindow {
 
     }
 
-    public static void refreshStats() {
+    public void refreshStats() {
         leftColumn[0].setIconAndFont(
                 GraphicsManager.getGuiElement(GuiElementEnum.MELE_DMG_ICON),
-                StringsManager.getGuiString(GuiStringEnum.MELE_DMG));
+                StringsManager.getGuiString(GuiStringEnum.MELE_DMG) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.MELE_DMG));
 
         leftColumn[1].setIconAndFont(
                 GraphicsManager.getGuiElement(GuiElementEnum.RANGE_DMG_ICON),
-                StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG));
+                StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + (int)(Math.max(StatTracker.getCurrentStat(CompleteHeroStatsEnum.BOW_DMG), StatTracker.getCurrentStat(CompleteHeroStatsEnum.MAGICAL_DMG))));
 
         leftColumn[2].setIconAndFont(
                 GraphicsManager.getGuiElement(GuiElementEnum.RANGE_ICON),
-                StringsManager.getGuiString(GuiStringEnum.RANGE));
+                StringsManager.getGuiString(GuiStringEnum.RANGE) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.RANGE));
 
         leftColumn[3].setIconAndFont(
                 GraphicsManager.getGuiElement(GuiElementEnum.ARMOR_ICON),
-                StringsManager.getGuiString(GuiStringEnum.ARMOR));
+                StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.ARMOR));
 
         leftColumn[4].setIconAndFont(
                 GraphicsManager.getGuiElement(GuiElementEnum.CRIT_CHANCE_ICON),
-                StringsManager.getGuiString(GuiStringEnum.CRIT_CHANCE));
+                StringsManager.getGuiString(GuiStringEnum.CRIT_CHANCE) + " " + Math.round(StatTracker.getCurrentStat(CompleteHeroStatsEnum.CRIT_CHANCE) * 100f) + "%");
 
+        leftColumn[5].setIconAndFont(
+                GraphicsManager.getPerkIcon(PerkEnum.DOUBLE_MOVE),
+                StringsManager.getGuiString(GuiStringEnum.SPEED) + " " + (int)StatTracker.getCurrentStat(CompleteHeroStatsEnum.SPEED));
+
+
+        Array<CompleteHeroStatsEnum> otherStats = new Array<>();
+
+        for (CompleteHeroStatsEnum stat : rightColumnStats) {
+            System.out.println("ZAZAZAZAZAZAZ");
+            if (otherStats.size < ROWS) {
+                switch (stat) {
+                    case MISS_CHANCE:
+                    case CHANCE_FOR_ANY_DROP:
+                    case CHANCE_FOR_MAGIC_MIRROR:
+                    case CHANCE_FOR_MISS_STAGE:
+                    case CHANCE_FOR_RANDOM_APPLE:
+//                    case CHANCE_FOR_SECOND_REVIVE:
+                    case PERCENT_CHANCE_FOR_FREEZE:
+                    case PERCENT_CHANCE_FOR_BURNING:
+                    case PERCENT_CHANCE_FOR_POISONING:
+                    case DOUBLE_MOVE_CHANCE:
+                    case DOUBLE_ATTACK_CHANCE:
+                    case INSTAKILL_ENEMY_CHANCE:
+                    case MAGICAL_RESIST:
+                    case HP_RESTORE_KILL:
+                    case HP_RESTORE_ROOM:
+                    case PERCENT_HP_REGEN_KILL: {
+                        if (StatTracker.getCurrentStat(stat) > 0) {
+                            otherStats.add(stat);
+                            break;
+                        }
+                    }
+                    case EXP_MULTIPLIER:
+                    case GOLD_MULTIPLIER:
+                    case BOW_DMG_MULTIPLIER:
+                    case MELE_DMG_MULTIPLIER:
+                    case MAGICAL_DMG_MULTIPLIER:
+//                    case UNIQUE_ENEMY_CHANCE:
+                    case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP: {
+                        if (StatTracker.getCurrentStat(stat) > 1) {
+                            otherStats.add(stat);
+                            break;
+                        }
+                    }
+                }
+            } else break;
+        }
+
+        rightColumn = new TextObject[ROWS];
+        for (int i = 0; i < ROWS; i++) {
+            if (i < otherStats.size) {
+                switch (otherStats.get(i)) {
+                    case MISS_CHANCE:
+                    case CHANCE_FOR_ANY_DROP:
+                    case CHANCE_FOR_MAGIC_MIRROR:
+                    case CHANCE_FOR_MISS_STAGE:
+                    case CHANCE_FOR_RANDOM_APPLE:
+//                    case CHANCE_FOR_SECOND_REVIVE:
+                    case PERCENT_CHANCE_FOR_FREEZE:
+                    case PERCENT_CHANCE_FOR_BURNING:
+                    case PERCENT_CHANCE_FOR_POISONING:
+                    case DOUBLE_MOVE_CHANCE:
+                    case DOUBLE_ATTACK_CHANCE:
+                    case INSTAKILL_ENEMY_CHANCE:
+                    case MAGICAL_RESIST:
+                    case HP_RESTORE_KILL:
+                    case HP_RESTORE_ROOM:
+                    case PERCENT_HP_REGEN_KILL: {
+                        rightColumn[i] = new TextObject(
+                                FontsManager.getFont(FontEnum.STAT_DESC),
+                                StringsManager.getCompleteHeroStatName(otherStats.get(i)) + ": " + Math.round(StatTracker.getCurrentStat(otherStats.get(i)) * 100f)+ "%",
+                                bgPos.x + bgSize.x * 0.92f,
+                                firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                                Align.right
+                        );
+                        break;
+                    }
+                    case EXP_MULTIPLIER:
+                    case GOLD_MULTIPLIER:
+                    case BOW_DMG_MULTIPLIER:
+                    case MELE_DMG_MULTIPLIER:
+//                    case UNIQUE_ENEMY_CHANCE:
+                    case MAGICAL_DMG_MULTIPLIER:
+                    case DMG_MULTIPLIER_LESS_THAN_30_PERCENT_HP: {
+                        rightColumn[i] = new TextObject(
+                                FontsManager.getFont(FontEnum.STAT_DESC),
+                                StringsManager.getCompleteHeroStatName(otherStats.get(i)) + ": +" + ( 100f * (StatTracker.getCurrentStat(otherStats.get(i)) - 1 )) + "%",
+                                bgPos.x + bgSize.x * 0.92f,
+                                firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                        FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                                Align.right
+                        );
+                        break;
+                    }
+                }
+
+            } else {
+                rightColumn[i] = new TextObject(
+                        FontsManager.getFont(FontEnum.STAT_DESC),
+                        "",
+                        bgPos.x + bgSize.x * 0.92f,
+                        firstSeparator.getY() - firstSeparator.getHeight() * 0.4f -
+                                FontsManager.getTextHeight(FontsManager.getFont(FontEnum.STAT_DESC), "0") * i * 2.5f,
+                        Align.right
+                );
+            }
+        }
 
         StatisticEnum[] allStats = {StatisticEnum.VIT, StatisticEnum.STR, StatisticEnum.DEX, StatisticEnum.INT, StatisticEnum.LCK};
         CompleteHeroStatsEnum[] heroStatsEnums = {CompleteHeroStatsEnum.VIT, CompleteHeroStatsEnum.STR, CompleteHeroStatsEnum.DEX, CompleteHeroStatsEnum.INT, CompleteHeroStatsEnum.LCK};
@@ -360,21 +579,27 @@ public class HeroStatWindow {
                         (int) (perkStat * 100) + "% " + descEnd;
 
         switch (SavedInfoManager.getPerkLvl(StatTracker.getPerk())) {
-            case 1:
+            case 0:
                 perkTextObject.setIconAndText(
                         GraphicsManager.getGuiElement(GuiElementEnum.BRONZE_MEDAL),
                         perkText
                 );
                 break;
-            case 2:
+            case 1:
                 perkTextObject.setIconAndText(
                         GraphicsManager.getGuiElement(GuiElementEnum.SILVER_MEDAL),
                         perkText
                 );
                 break;
-            default:
+            case 2:
                 perkTextObject.setIconAndText(
                         GraphicsManager.getGuiElement(GuiElementEnum.GOLD_MEDAL),
+                        perkText
+                );
+                break;
+            default:
+                perkTextObject.setIconAndText(
+                        GraphicsManager.getGuiElement(GuiElementEnum.DIAMOND_MEDAL),
                         perkText
                 );
                 break;
@@ -426,6 +651,9 @@ public class HeroStatWindow {
     }
 
     public void show() {
+        refreshStats();
+        refreshBars();
+        isLvlUpMode = false;
         isUp = true;
     }
 

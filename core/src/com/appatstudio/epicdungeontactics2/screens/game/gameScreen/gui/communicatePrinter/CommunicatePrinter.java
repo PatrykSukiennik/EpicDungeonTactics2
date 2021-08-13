@@ -1,5 +1,6 @@
 package com.appatstudio.epicdungeontactics2.screens.game.gameScreen.gui.communicatePrinter;
 
+import com.appatstudio.epicdungeontactics2.global.WorldConfig;
 import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FontEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.FontsManager;
@@ -53,6 +54,54 @@ public final class CommunicatePrinter {
                 FontEnum.COMMUNICATE_WHITE);
         String text = StringsManager.getCommunicate(CommunicatesEnum.DMG_DEALT) + " " + enemyName + ": " + dmg;
         if (isCrit) text += " " + StringsManager.getCommunicate(CommunicatesEnum.CRITICAL);
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void burning(int dmg, String enemyName, int durationLeft) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = enemyName + " " + StringsManager.getCommunicate(CommunicatesEnum.IS_BURNING) + ": " + dmg + " (" + durationLeft + ")";;
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void frozen(int dmg, String enemyName, int durationLeft) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = enemyName + " " + StringsManager.getCommunicate(CommunicatesEnum.IS_FROZEN) + ": " + dmg + " (" + durationLeft + ")";;
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void stunned(String enemyName, int durationLeft) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = enemyName + " " + StringsManager.getCommunicate(CommunicatesEnum.IS_STUNNED) + " (" + durationLeft + ")";;
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void poisoned(int dmg, String enemyName, int durationLeft) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = enemyName + " " + StringsManager.getCommunicate(CommunicatesEnum.IS_POISONED) + ": " + dmg + " (" + durationLeft + ")";
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void burning(int duration) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = StringsManager.getCommunicate(CommunicatesEnum.BURNING) + " (" + duration + ")";
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void frozen(int duration) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = StringsManager.getCommunicate(CommunicatesEnum.FREEZE) + " (" + duration + ")";
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void stun(int duration) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = StringsManager.getCommunicate(CommunicatesEnum.STUN) + " (" + duration + ")";
+        print(new CommunicateObject(font, text));
+    }
+
+    public static void poison(int duration) {
+        BitmapFont font = FontsManager.getFont(FontEnum.COMMUNICATE_WHITE);
+        String text = StringsManager.getCommunicate(CommunicatesEnum.POISON) + " (" + duration + ")";
         print(new CommunicateObject(font, text));
     }
 

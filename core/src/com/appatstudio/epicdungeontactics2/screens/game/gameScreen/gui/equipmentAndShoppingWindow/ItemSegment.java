@@ -197,7 +197,10 @@ public class ItemSegment extends AbstractSegment {
             switch (item.getItemTypeEnum()) {
                 case ARMOR:
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Armor)item).getArmor());
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Armor)item).getMoveSpeedCost());
+                    leftColumn[1].setText(
+                            ((Armor)item).getMoveSpeedCost() != 0 ?
+                            StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) +
+                                    (((Armor)item).getMoveSpeedCost() > 0 ? " +" : " ") + ((Armor)item).getMoveSpeedCost() : "");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f)); //_____________!!!!!!!!!!!
 
@@ -218,8 +221,13 @@ public class ItemSegment extends AbstractSegment {
 
                     break;
                 case ARROW:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DMG_EFFECT) + " " + ((Arrow)item).getDmgEffect());
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.RANGE_EFFECT) + " " + ((Arrow)item).getRangeEffect());
+                    leftColumn[0].setText(
+                            StringsManager.getGuiString(GuiStringEnum.DMG_EFFECT) +
+                                    (((Arrow)item).getDmgEffect() > 0 ? " +" : " ") + ((Arrow)item).getDmgEffect());
+                    leftColumn[1].setText(
+                            ((Arrow)item).getRangeEffect() != 0 ?
+                            StringsManager.getGuiString(GuiStringEnum.RANGE_EFFECT) +
+                                    (((Arrow)item).getRangeEffect() > 0 ? " +" : " ") + ((Arrow)item).getRangeEffect() : "");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
@@ -239,12 +247,15 @@ public class ItemSegment extends AbstractSegment {
                     }
                     break;
                 case BOOK:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.EXP_EFFECT) + " " + ((Book)item).getExpEffect());
-                    leftColumn[1].setText("");
+                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.SPELL_TEXT) + " " + StringsManager.getSpellName(((Book)item).getSpell()));
+                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MANA_COST) + " " + ((Book)item).getMpCost());
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
-                    for (TextWithIcon t1 : rightColumn) t1.setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
+                    rightColumn[0].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), StringsManager.getGuiString(GuiStringEnum.DMG_EFFECT) + " " + ((Book)item).getDmg());
+                    rightColumn[1].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), StringsManager.getGuiString(GuiStringEnum.DURATION_EFFECT) + " " + ((Book)item).getDuration());
+                    rightColumn[2].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
+                    rightColumn[3].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                     break;
                 case BOW:
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + ((Bow)item).getDmg());
@@ -268,15 +279,29 @@ public class ItemSegment extends AbstractSegment {
                     }
                     break;
                 case FOOD:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.HP_EFFECT) + " " + (((Food)item).getHpEffect() != 0 ? ((Food)item).getHpEffect() : ""));
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MP_EFFECT) + " " + (((Food)item).getMpEffect() != 0 ? ((Food)item).getMpEffect() : ""));
-                    leftColumn[2].setText("");
-                    leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
+                    if (((Food)item).getHpEffect() == 0 && ((Food)item).getMpEffect() > 0) {
+                        leftColumn[0].setText(
+                                ((Food) item).getMpEffect() != 0 ?
+                                        StringsManager.getGuiString(GuiStringEnum.MP_EFFECT) + " +" + (((Food) item).getMpEffect() != 0 ? ((Food) item).getMpEffect() + "%" : "") : "");
+                        leftColumn[1].setText("");
+                        leftColumn[2].setText("");
+                        leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int) (item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
+                    }
+                    else {
+                        leftColumn[0].setText(
+                                ((Food) item).getHpEffect() != 0 ?
+                                        StringsManager.getGuiString(GuiStringEnum.HP_EFFECT) + " +" + (((Food) item).getHpEffect() != 0 ? ((Food) item).getHpEffect() + "%" : "") : "");
+                        leftColumn[1].setText(
+                                ((Food) item).getMpEffect() != 0 ?
+                                        StringsManager.getGuiString(GuiStringEnum.MP_EFFECT) + " +" + (((Food) item).getMpEffect() != 0 ? ((Food) item).getMpEffect() + "%" : "") : "");
+                        leftColumn[2].setText("");
+                        leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int) (item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
+                    }
 
                     for (TextWithIcon t2 : rightColumn) t2.setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                     break;
                 case HELMET:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Helmet)item).getArmor());
+                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " +" + ((Helmet)item).getArmor());
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " "  + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
@@ -297,7 +322,7 @@ public class ItemSegment extends AbstractSegment {
                     }
                     break;
                 case NECKLACE:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Necklace)item).getArmor());
+                    leftColumn[0].setText("");
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
@@ -316,8 +341,9 @@ public class ItemSegment extends AbstractSegment {
                             break;
                         }
                     }
+                    break;
                 case RING:
-                    leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Ring)item).getArmor());
+                    leftColumn[0].setText("");
                     leftColumn[1].setText("");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
@@ -339,7 +365,9 @@ public class ItemSegment extends AbstractSegment {
                     break;
                 case SHIELD:
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.ARMOR) + " " + ((Shield)item).getArmor());
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Shield)item).getSpeedEffect());
+                    leftColumn[1].setText(
+                            ((Shield)item).getSpeedEffect() != 0 ?
+                            StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Shield)item).getSpeedEffect() : "");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
@@ -360,7 +388,9 @@ public class ItemSegment extends AbstractSegment {
                     break;
                 case STAFF:
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.DISTANCE_DMG) + " " + ((Staff)item).getDmg());
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Staff)item).getSpeedEffect());
+                    leftColumn[1].setText(
+                            ((Staff)item).getSpeedEffect() != 0 ?
+                            StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((Staff)item).getSpeedEffect() : "");
                     leftColumn[2].setText((int)(((Staff)item).getSpellChance() * 100) + "% " + StringsManager.getGuiString(GuiStringEnum.CHANCE_FOR) + " " + StringsManager.getSpellName(((Staff)item).getSpell()));
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
@@ -381,7 +411,10 @@ public class ItemSegment extends AbstractSegment {
                     break;
                 case MELE:
                     leftColumn[0].setText(StringsManager.getGuiString(GuiStringEnum.MELE_DMG) + " " + ((MeleWeapon)item).getDmg());
-                    leftColumn[1].setText(StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) + " " + ((MeleWeapon)item).getSpeedEffect());
+                    leftColumn[1].setText(
+                            ((MeleWeapon)item).getSpeedEffect() != 0 ?
+                            StringsManager.getGuiString(GuiStringEnum.MOVE_SPEED_COST) +
+                                    (((MeleWeapon)item).getSpeedEffect() > 0 ? " +" : " ") + ((MeleWeapon)item).getSpeedEffect() : "");
                     leftColumn[2].setText("");
                     leftColumn[3].setText(StringsManager.getGuiString(GuiStringEnum.VALUE) + " " + (int)(item.getValue() * (mode == ItemSegmentMode.BUY ? ShopWindow.BUY_VALUE_MULTIPLIER : 1f))); //_____________!!!!!!!!!!!
 
@@ -399,10 +432,6 @@ public class ItemSegment extends AbstractSegment {
                             rightColumn[i].setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                         }
                     }
-                    break;
-                case OTHER:
-                    for (TextObject tl : leftColumn) tl.setText("");
-                    for (TextWithIcon tr : rightColumn) tr.setIconAndFont(GraphicsManager.getGuiElement(GuiElementEnum.NONE), "");
                     break;
             }
         }

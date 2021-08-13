@@ -8,15 +8,8 @@ import com.badlogic.gdx.utils.Array;
 
 public final class Necklace extends AbstractItem {
 
-    private int armor;
-
-    public Necklace(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, int armor, ItemRarityEnum rarityEnum) {
+    public Necklace(ItemEnum itemEnum, ItemTypeEnum typeEnum, int value, Array<ItemEffect> effects, ItemRarityEnum rarityEnum) {
         super(itemEnum, typeEnum, value, effects, rarityEnum);
-        this.armor = armor;
-    }
-
-    public int getArmor() {
-        return armor;
     }
 
 }

@@ -3,6 +3,7 @@ package com.appatstudio.epicdungeontactics2.global.managers;
 import com.appatstudio.epicdungeontactics2.global.enums.CampUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CommunicatesEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.CompleteHeroStatsEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.EffectEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.GuiStringEnum;
@@ -36,9 +37,11 @@ public final class StringsManager {
     private static Map<StatisticEnum, String> statsNameMap;
     private static Map<ItemEffectEnum, String> itemEffectNameMap;
     private static Map<SpellEnum, String> spellNameMap;
+    private static Map<SpellEnum, String> spellNameFullMap;
     private static Map<GuiStringEnum, String> guiStringMap;
     private static Map<CommunicatesEnum, String> communicatesStringMap;
     private static Map<PlayerStatsTrackerFlagsEnum, String> playerStatStringMap;
+    private static Map<CompleteHeroStatsEnum, String> completeHeroStatStringsMap;
 
     public static void load() {
         I18NBundle itemNames = I18NBundle.createBundle(Gdx.files.internal("strings/item_names"), java.util.Locale.getDefault());
@@ -58,6 +61,8 @@ public final class StringsManager {
         I18NBundle communicatesStrings = I18NBundle.createBundle(Gdx.files.internal("strings/communicates"), java.util.Locale.getDefault());
         I18NBundle itemEffectStrings = I18NBundle.createBundle(Gdx.files.internal("strings/item_effects"), java.util.Locale.getDefault());
         I18NBundle spellNamesStrings = I18NBundle.createBundle(Gdx.files.internal("strings/spell_names"), java.util.Locale.getDefault());
+        I18NBundle spellNamesFullStrings = I18NBundle.createBundle(Gdx.files.internal("strings/spell_names_full"), java.util.Locale.getDefault());
+        I18NBundle completeHeroStatStrings = I18NBundle.createBundle(Gdx.files.internal("strings/complete_hero_stats_names"), java.util.Locale.getDefault());
 
         itemNamesMap = new HashMap<>();
         ItemEnum[] itemEnums = ItemEnum.values();
@@ -132,10 +137,19 @@ public final class StringsManager {
         }
 
         spellNameMap = new HashMap<>();
+        spellNameFullMap = new HashMap<>();
         SpellEnum[] allSpells = SpellEnum.values();
         for (SpellEnum s : allSpells) {
             spellNameMap.put(s, spellNamesStrings.get(s.toString()));
+            spellNameFullMap.put(s, spellNamesFullStrings.get(s.toString()));
         }
+
+        completeHeroStatStringsMap = new HashMap<>();
+        CompleteHeroStatsEnum[] allCompleteStats = CompleteHeroStatsEnum.values();
+        for (CompleteHeroStatsEnum s : allCompleteStats) {
+            completeHeroStatStringsMap.put(s, completeHeroStatStrings.get(s.toString()));
+        }
+
 
 
 
@@ -207,5 +221,13 @@ public final class StringsManager {
 
     public static String getSpellName(SpellEnum spell) {
         return spellNameMap.get(spell);
+    }
+
+    public static String getSpellNameFull(SpellEnum spellEnum) {
+        return spellNameFullMap.get(spellEnum);
+    }
+
+    public static String getCompleteHeroStatName(CompleteHeroStatsEnum stat) {
+        return completeHeroStatStringsMap.get(stat);
     }
 }

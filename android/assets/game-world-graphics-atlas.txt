@@ -5,378 +5,378 @@ filter: Nearest,Nearest
 repeat: none
 characters/BEAR/idle
   rotate: false
-  xy: 200, 1
+  xy: 203, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BEAR/idle
   rotate: false
-  xy: 234, 1
+  xy: 237, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BEAR/idle
   rotate: false
-  xy: 268, 1
+  xy: 271, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BEAR/idle
   rotate: false
-  xy: 302, 1
+  xy: 305, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/BEAR/run
   rotate: false
-  xy: 336, 1
+  xy: 339, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BEAR/run
   rotate: false
-  xy: 370, 1
+  xy: 373, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BEAR/run
   rotate: false
-  xy: 404, 1
+  xy: 407, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BEAR/run
   rotate: false
-  xy: 438, 1
+  xy: 441, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/BIG_ZOMBIE/idle
   rotate: false
-  xy: 472, 1
+  xy: 475, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BIG_ZOMBIE/idle
   rotate: false
-  xy: 506, 1
+  xy: 509, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BIG_ZOMBIE/idle
   rotate: false
-  xy: 540, 1
+  xy: 543, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BIG_ZOMBIE/idle
   rotate: false
-  xy: 574, 1
+  xy: 577, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BIG_ZOMBIE/run
   rotate: false
-  xy: 608, 1
+  xy: 611, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BIG_ZOMBIE/run
   rotate: false
-  xy: 642, 1
+  xy: 645, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BIG_ZOMBIE/run
   rotate: false
-  xy: 676, 1
+  xy: 679, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BIG_ZOMBIE/run
   rotate: false
-  xy: 710, 1
+  xy: 713, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_BIG_DEMON/idle
   rotate: false
-  xy: 744, 1
+  xy: 747, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BOSS_BIG_DEMON/idle
   rotate: false
-  xy: 778, 1
+  xy: 781, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_BIG_DEMON/idle
   rotate: false
-  xy: 812, 1
+  xy: 815, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_BIG_DEMON/idle
   rotate: false
-  xy: 846, 1
+  xy: 849, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_BIG_DEMON/run
   rotate: false
-  xy: 880, 1
+  xy: 883, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BOSS_BIG_DEMON/run
   rotate: false
-  xy: 914, 1
+  xy: 917, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_BIG_DEMON/run
   rotate: false
-  xy: 948, 1
+  xy: 951, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_BIG_DEMON/run
   rotate: false
-  xy: 982, 1
+  xy: 985, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_FOREST_GUARDIAN/idle
   rotate: false
-  xy: 1016, 1
+  xy: 1019, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_FOREST_GUARDIAN/idle
   rotate: false
-  xy: 1050, 1
+  xy: 1053, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_FOREST_GUARDIAN/idle
   rotate: false
-  xy: 1084, 1
+  xy: 1087, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_FOREST_GUARDIAN/idle
   rotate: false
-  xy: 1118, 1
+  xy: 1121, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/BOSS_FOREST_GUARDIAN/run
   rotate: false
-  xy: 1152, 1
+  xy: 1155, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_FOREST_GUARDIAN/run
   rotate: false
-  xy: 1186, 1
+  xy: 1189, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_FOREST_GUARDIAN/run
   rotate: false
-  xy: 1220, 1
+  xy: 1223, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_FOREST_GUARDIAN/run
   rotate: false
-  xy: 1254, 1
+  xy: 1257, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/BOSS_OGRE/idle
   rotate: false
-  xy: 1288, 1
+  xy: 1291, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BOSS_OGRE/idle
   rotate: false
-  xy: 1322, 1
+  xy: 1325, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_OGRE/idle
   rotate: false
-  xy: 1356, 1
+  xy: 1359, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_OGRE/idle
   rotate: false
-  xy: 1390, 1
+  xy: 1393, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/BOSS_OGRE/run
   rotate: false
-  xy: 1424, 1
+  xy: 1427, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 characters/BOSS_OGRE/run
   rotate: false
-  xy: 1458, 1
+  xy: 1461, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/BOSS_OGRE/run
   rotate: false
-  xy: 1492, 1
+  xy: 1495, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/BOSS_OGRE/run
   rotate: false
-  xy: 1526, 1
+  xy: 1529, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/CENTAUR_FEMALE/idle
   rotate: false
-  xy: 1560, 1
+  xy: 1563, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/CENTAUR_FEMALE/idle
   rotate: false
-  xy: 1594, 1
+  xy: 1597, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/CENTAUR_FEMALE/idle
   rotate: false
-  xy: 1628, 1
+  xy: 1631, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/CENTAUR_FEMALE/idle
   rotate: false
-  xy: 1662, 1
+  xy: 1665, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/CENTAUR_FEMALE/run
   rotate: false
-  xy: 1696, 1
+  xy: 1699, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/CENTAUR_FEMALE/run
   rotate: false
-  xy: 1730, 1
+  xy: 1733, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/CENTAUR_FEMALE/run
   rotate: false
-  xy: 1764, 1
+  xy: 1767, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/CENTAUR_FEMALE/run
   rotate: false
-  xy: 1798, 1
+  xy: 1801, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/CENTAUR_MALE/idle
   rotate: false
-  xy: 1832, 1
+  xy: 1835, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/CENTAUR_MALE/idle
   rotate: false
-  xy: 1866, 1
+  xy: 1869, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 characters/CENTAUR_MALE/idle
   rotate: false
-  xy: 1900, 1
+  xy: 1903, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 characters/CENTAUR_MALE/idle
   rotate: false
-  xy: 1934, 1
+  xy: 1937, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 characters/CENTAUR_MALE/run
   rotate: false
-  xy: 1968, 1
+  xy: 1971, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 characters/CENTAUR_MALE/run
   rotate: false
-  xy: 2002, 1
+  xy: 2005, 1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -3190,28 +3190,28 @@ characters/ZOMBIE/run
   index: 3
 map-elements/animations/btb
   rotate: false
-  xy: 136, 1
+  xy: 139, 1
   size: 7, 16
   orig: 7, 16
   offset: 0, 0
   index: -1
 map-elements/animations/CANDLE/frame
   rotate: false
-  xy: 170, 1
+  xy: 173, 1
   size: 8, 18
   orig: 8, 18
   offset: 0, 0
   index: 0
 map-elements/animations/CANDLE/frame
   rotate: false
-  xy: 180, 1
+  xy: 183, 1
   size: 8, 18
   orig: 8, 18
   offset: 0, 0
   index: 1
 map-elements/animations/CANDLE/frame
   rotate: false
-  xy: 190, 1
+  xy: 193, 1
   size: 8, 18
   orig: 8, 18
   offset: 0, 0
@@ -3239,28 +3239,28 @@ map-elements/animations/CANDLE_BIG/frame
   index: 2
 map-elements/animations/CHEST/frame
   rotate: false
-  xy: 10, 1
+  xy: 13, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 map-elements/animations/CHEST/frame
   rotate: false
-  xy: 28, 1
+  xy: 31, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 map-elements/animations/CHEST/frame
   rotate: false
-  xy: 46, 1
+  xy: 49, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 map-elements/animations/frame
   rotate: false
-  xy: 145, 1
+  xy: 148, 1
   size: 5, 16
   orig: 5, 16
   offset: 0, 0
@@ -3624,28 +3624,28 @@ map-elements/animations/LAVA_ROCK_SMOKE_4/frame
   index: 5
 map-elements/animations/TORCH/frame
   rotate: false
-  xy: 64, 1
+  xy: 67, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 map-elements/animations/TORCH/frame
   rotate: false
-  xy: 82, 1
+  xy: 85, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 map-elements/animations/TORCH/frame
   rotate: false
-  xy: 100, 1
+  xy: 103, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 map-elements/animations/TORCH/frame
   rotate: false
-  xy: 118, 1
+  xy: 121, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -4513,21 +4513,21 @@ map-elements/animations/WATER/frame
   index: 2
 map-elements/sprites/CHEST_CLOSED
   rotate: false
-  xy: 10, 1
+  xy: 13, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 map-elements/sprites/CHEST_EMPTY
   rotate: false
-  xy: 152, 1
+  xy: 155, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 map-elements/sprites/CHEST_FULL
   rotate: false
-  xy: 46, 1
+  xy: 49, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -4539,1346 +4539,1521 @@ map-elements/sprites/ITEMS
   orig: 48, 48
   offset: 0, 0
   index: -1
-map-elements/sprites/TILE_GREEN
+map-elements/sprites/TILE_BLUE
   rotate: false
   xy: 1, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-map-elements/sprites/TILE_RED
+map-elements/sprites/TILE_GREEN
   rotate: false
   xy: 4, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-map-elements/sprites/TILE_YELLOW
+map-elements/sprites/TILE_RED
   rotate: false
   xy: 7, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
-spells/FIRE_EXPLOSION/frame
+map-elements/sprites/TILE_YELLOW
+  rotate: false
+  xy: 10, 1
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 791, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 0
-spells/FIRE_EXPLOSION/frame
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 841, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 1
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 1391, 239
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 2
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 1941, 239
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 3
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 451, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 4
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 701, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 5
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 751, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 6
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 801, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 7
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 851, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 8
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 901, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 9
-spells/FIRE_EXPLOSION/frame
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 891, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 10
-spells/FIRE_EXPLOSION/frame
+  index: 2
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 941, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 11
-spells/FIRE_EXPLOSION/frame
+  index: 3
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 991, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 12
-spells/FIRE_EXPLOSION/frame
+  index: 4
+spell-effects/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1041, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 13
-spells/FIRE_EXPLOSION/frame
+  index: 5
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1091, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 14
-spells/FIRE_EXPLOSION/frame
+  index: 0
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1141, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 15
-spells/FIRE_EXPLOSION/frame
+  index: 1
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1191, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 16
-spells/FIRE_EXPLOSION/frame
+  index: 2
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1241, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 17
-spells/FIRE_EXPLOSION/frame
+  index: 3
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1291, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 18
-spells/FIRE_EXPLOSION/frame
+  index: 4
+spell-effects/ICE_EXPLOSION/frame
   rotate: false
   xy: 1341, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 19
-spells/FIRE_EXPLOSION/frame
+  index: 5
+spell-effects/POISON_EXPLOSION/frame
+  rotate: false
+  xy: 1391, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 0
+spell-effects/POISON_EXPLOSION/frame
   rotate: false
   xy: 1441, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 20
-spells/FIRE_EXPLOSION/frame
+  index: 1
+spell-effects/POISON_EXPLOSION/frame
   rotate: false
   xy: 1491, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 21
-spells/FIRE_EXPLOSION/frame
+  index: 2
+spell-effects/POISON_EXPLOSION/frame
   rotate: false
   xy: 1541, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 22
-spells/FIRE_EXPLOSION/frame
+  index: 3
+spell-effects/POISON_EXPLOSION/frame
   rotate: false
   xy: 1591, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 23
-spells/FIRE_EXPLOSION/frame
+  index: 4
+spell-effects/POISON_EXPLOSION/frame
   rotate: false
   xy: 1641, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 24
-spells/FIRE_EXPLOSION/frame
+  index: 5
+spell-effects/STUN_EXPLOSION/frame
   rotate: false
   xy: 1691, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 25
-spells/FIRE_EXPLOSION/frame
+  index: 0
+spell-effects/STUN_EXPLOSION/frame
   rotate: false
   xy: 1741, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 26
-spells/FIRE_EXPLOSION/frame
+  index: 1
+spell-effects/STUN_EXPLOSION/frame
   rotate: false
   xy: 1791, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 27
-spells/FIRE_EXPLOSION/frame
+  index: 2
+spell-effects/STUN_EXPLOSION/frame
   rotate: false
   xy: 1841, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 28
-spells/FIRE_EXPLOSION/frame
+  index: 3
+spell-effects/STUN_EXPLOSION/frame
   rotate: false
   xy: 1891, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 29
+  index: 4
+spell-effects/STUN_EXPLOSION/frame
+  rotate: false
+  xy: 1941, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
 spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1991, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 30
+  index: 0
 spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 31
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 51, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 32
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 101, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 33
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 151, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 34
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 201, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 35
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 251, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 36
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 301, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 37
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 351, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 38
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 401, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 39
-spells/FIRE_EXPLOSION/frame
-  rotate: false
-  xy: 501, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 40
+  index: 1
 spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 551, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 41
+  index: 2
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 801, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 3
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1351, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 4
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1601, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1651, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 6
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1701, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 7
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1751, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 8
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1801, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 9
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 51, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 10
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 101, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 11
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 151, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 12
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 201, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 13
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 251, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 14
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 301, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 15
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 351, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 16
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 401, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 17
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 451, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 18
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 501, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 19
 spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 601, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 42
+  index: 20
 spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 651, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 43
-spells/ICE_EXPLOSION/frame
+  index: 21
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 701, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 22
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 751, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 23
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 791, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 24
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 841, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 25
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 891, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 26
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 941, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 27
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 991, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 28
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 1041, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 29
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 851, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 30
+spells/FIRE_EXPLOSION/frame
+  rotate: false
+  xy: 901, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 31
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 951, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 0
-spells/ICE_EXPLOSION/frame
+  index: 32
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1001, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 1
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1551, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 2
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 101, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 3
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 651, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 4
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1151, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 5
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1201, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 6
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1251, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 7
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1301, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 8
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1351, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 9
-spells/ICE_EXPLOSION/frame
+  index: 33
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1051, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 10
-spells/ICE_EXPLOSION/frame
+  index: 34
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1101, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 11
-spells/ICE_EXPLOSION/frame
+  index: 35
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1151, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 12
-spells/ICE_EXPLOSION/frame
+  index: 36
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1201, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 13
-spells/ICE_EXPLOSION/frame
+  index: 37
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1251, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 14
-spells/ICE_EXPLOSION/frame
+  index: 38
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1301, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 15
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1351, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 16
-spells/ICE_EXPLOSION/frame
+  index: 39
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1401, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 17
-spells/ICE_EXPLOSION/frame
+  index: 40
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1451, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 18
-spells/ICE_EXPLOSION/frame
+  index: 41
+spells/FIRE_EXPLOSION/frame
   rotate: false
   xy: 1501, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 19
-spells/ICE_EXPLOSION/frame
+  index: 42
+spells/FIRE_EXPLOSION/frame
   rotate: false
-  xy: 1601, 289
+  xy: 1551, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 20
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1651, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 21
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1701, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 22
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1751, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 23
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1801, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 24
+  index: 43
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1851, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 25
+  index: 0
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1901, 289
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 26
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1951, 289
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 27
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 1, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 28
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 51, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 29
+  index: 1
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 151, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 30
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 201, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 31
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 251, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 32
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 301, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 33
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 351, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 34
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 401, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 35
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 451, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 36
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 501, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 37
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 551, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 38
-spells/ICE_EXPLOSION/frame
-  rotate: false
-  xy: 601, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 39
+  index: 2
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 701, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 40
+  index: 3
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1251, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 4
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1751, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1801, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 6
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1851, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 7
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1901, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 8
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1951, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 9
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1951, 289
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 10
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 11
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1091, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 12
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1141, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 13
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1191, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 14
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1241, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 15
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1291, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 16
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1341, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 17
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 51, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 18
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 101, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 19
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 201, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 20
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 251, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 21
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 301, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 22
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 351, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 23
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 401, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 24
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 451, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 25
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 501, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 26
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 551, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 27
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 601, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 28
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 651, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 29
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 751, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 41
+  index: 30
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 801, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 42
+  index: 31
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 851, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 43
+  index: 32
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 901, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 44
+  index: 33
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 951, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 45
+  index: 34
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1001, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 46
+  index: 35
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1051, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 47
+  index: 36
 spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1101, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 48
-spells/LIGHT_EXPLOSION/frame
+  index: 37
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1151, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 38
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1201, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 39
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1301, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 40
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1351, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 41
+spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1401, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 0
-spells/LIGHT_EXPLOSION/frame
+  index: 42
+spells/ICE_EXPLOSION/frame
   rotate: false
   xy: 1451, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 1
+  index: 43
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1501, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 44
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1551, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 45
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1601, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 46
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1651, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 47
+spells/ICE_EXPLOSION/frame
+  rotate: false
+  xy: 1701, 339
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 48
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 2
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 551, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 3
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1101, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 4
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1651, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 5
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 201, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 6
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 251, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 7
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 301, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 8
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 351, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 9
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1501, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 10
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1551, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 11
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1601, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 12
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1651, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 13
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1701, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 14
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1751, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 15
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1801, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 16
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1851, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 17
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1901, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 18
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1951, 339
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 19
+  index: 0
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 51, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 20
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 101, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 21
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 151, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 22
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 201, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 23
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 251, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 24
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 301, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 25
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 351, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 26
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 401, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 27
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 451, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 28
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 501, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 29
+  index: 1
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 601, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 30
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 651, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 31
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 701, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 32
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 751, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 33
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 801, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 34
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 851, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 35
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 901, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 36
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 951, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 37
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1001, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 38
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1051, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 39
+  index: 2
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1151, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 40
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1201, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 41
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1251, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 42
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1301, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 43
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1351, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 44
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1401, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 45
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1451, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 46
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1501, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 47
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1551, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 48
-spells/LIGHT_EXPLOSION/frame
-  rotate: false
-  xy: 1601, 389
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 49
+  index: 3
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1701, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 50
+  index: 4
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 251, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 801, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 6
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 851, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 7
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 901, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 8
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 951, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 9
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 101, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 10
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 151, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 11
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 201, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 12
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 251, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 13
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 301, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 14
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 351, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 15
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 401, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 16
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 451, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 17
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 501, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 18
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 551, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 19
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 651, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 20
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 701, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 21
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 751, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 22
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 801, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 23
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 851, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 24
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 901, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 25
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 951, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 26
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1001, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 27
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1051, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 28
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1101, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 29
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1201, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 30
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1251, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 31
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1301, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 32
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1351, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 33
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1401, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 34
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1451, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 35
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1501, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 36
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1551, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 37
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1601, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 38
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 1651, 389
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 39
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1751, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 51
+  index: 40
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1801, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 52
+  index: 41
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1851, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 53
+  index: 42
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1901, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 54
+  index: 43
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1951, 389
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 55
+  index: 44
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 1, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 56
+  index: 45
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 51, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 57
+  index: 46
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 101, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 58
+  index: 47
 spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 151, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 59
-spells/MAGIC_EXPLOSION/frame
+  index: 48
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 201, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 49
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 301, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 50
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 351, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 51
+spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 401, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 0
-spells/MAGIC_EXPLOSION/frame
+  index: 52
+spells/LIGHT_EXPLOSION/frame
   rotate: false
   xy: 451, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 1
+  index: 53
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 501, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 54
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 551, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 55
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 601, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 56
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 651, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 57
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 701, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 58
+spells/LIGHT_EXPLOSION/frame
+  rotate: false
+  xy: 751, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 59
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1001, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 2
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1551, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 3
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1701, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 4
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1751, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 5
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1801, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 6
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1851, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 7
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1901, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 8
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1951, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 9
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 501, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 10
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 551, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 11
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 601, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 12
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 651, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 13
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 701, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 14
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 751, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 15
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 801, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 16
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 851, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 17
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 901, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 18
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 951, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 19
+  index: 0
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1051, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 20
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1101, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 21
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1151, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 22
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1201, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 23
-spells/MAGIC_EXPLOSION/frame
-  rotate: false
-  xy: 1251, 439
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: 24
+  index: 1
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1301, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 25
+  index: 2
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1851, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 3
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 4
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 51, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 101, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 6
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 151, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 7
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 201, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 8
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 251, 489
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 9
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1101, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 10
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1151, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 11
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1691, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 12
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1741, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 13
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1791, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 14
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1841, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 15
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1891, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 16
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1941, 239
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 17
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1201, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 18
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1251, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 19
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1351, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 26
+  index: 20
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1401, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 27
+  index: 21
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1451, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 28
+  index: 22
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1501, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 29
+  index: 23
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1551, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 24
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1601, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 30
+  index: 25
 spells/MAGIC_EXPLOSION/frame
   rotate: false
   xy: 1651, 439
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
+  index: 26
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1701, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 27
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1751, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 28
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1801, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 29
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1901, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 30
+spells/MAGIC_EXPLOSION/frame
+  rotate: false
+  xy: 1951, 439
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
   index: 31
 spells/MAGIC_EXPLOSION/frame
   rotate: false
-  xy: 1101, 339
+  xy: 1701, 339
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 32
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 1, 489
+  xy: 301, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 0
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 51, 489
+  xy: 351, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 1
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 601, 489
+  xy: 801, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
@@ -5934,98 +6109,98 @@ spells/POISON_EXPLOSION/frame
   index: 9
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 101, 489
+  xy: 401, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 10
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 151, 489
+  xy: 451, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 11
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 201, 489
+  xy: 501, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 12
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 251, 489
+  xy: 551, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 13
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 301, 489
+  xy: 601, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 14
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 351, 489
+  xy: 651, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 15
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 401, 489
+  xy: 701, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 16
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 451, 489
+  xy: 751, 489
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 17
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 501, 489
+  xy: 1391, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 18
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 551, 489
+  xy: 1441, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 19
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 651, 489
+  xy: 1491, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 20
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 701, 489
+  xy: 1541, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 21
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 751, 489
+  xy: 1591, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 22
 spells/POISON_EXPLOSION/frame
   rotate: false
-  xy: 801, 489
+  xy: 1641, 239
   size: 48, 48
   orig: 48, 48
   offset: 0, 0

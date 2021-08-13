@@ -26,26 +26,26 @@ public class Attack extends AbstractCharacterAction {
             actions.addAction(Actions.moveBy(WorldConfig.TILE_SIZE/3f, 0, 0.1f));
             actions.addAction(new SoundPlayAction(SoundEnum.FIST_PUNCH));
             actions.addAction(Actions.moveBy(-WorldConfig.TILE_SIZE/3f, 0, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().x > targetCoords.x) {
             actions.addAction(new SetRotationX(attacker, true));
             actions.addAction(Actions.moveBy(-WorldConfig.TILE_SIZE/3f, 0, 0.1f));
             actions.addAction(new SoundPlayAction(SoundEnum.FIST_PUNCH));
             actions.addAction(Actions.moveBy(WorldConfig.TILE_SIZE/3f, 0, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().y > targetCoords.y) {
             actions.addAction(Actions.moveBy(0, -WorldConfig.TILE_SIZE/3f, 0.1f));
             actions.addAction(new SoundPlayAction(SoundEnum.FIST_PUNCH));
             actions.addAction(Actions.moveBy(0, WorldConfig.TILE_SIZE/3f, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().y < targetCoords.y) {
             actions.addAction(Actions.moveBy(0, WorldConfig.TILE_SIZE/3f, 0.1f));
             actions.addAction(new SoundPlayAction(SoundEnum.FIST_PUNCH));
             actions.addAction(Actions.moveBy(0, -WorldConfig.TILE_SIZE/3f, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
     }
 
@@ -59,26 +59,26 @@ public class Attack extends AbstractCharacterAction {
             actions.addAction(Actions.moveBy(WorldConfig.TILE_SIZE/3f, 0, 0.1f));
             actions.addAction(new SoundPlayAction(attackSound));
             actions.addAction(Actions.moveBy(-WorldConfig.TILE_SIZE/3f, 0, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().x > targetCoords.x) {
             actions.addAction(new SetRotationX(attacker, true));
             actions.addAction(Actions.moveBy(-WorldConfig.TILE_SIZE/3f, 0, 0.1f));
             actions.addAction(new SoundPlayAction(attackSound));
             actions.addAction(Actions.moveBy(WorldConfig.TILE_SIZE/3f, 0, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().y > targetCoords.y) {
             actions.addAction(Actions.moveBy(0, -WorldConfig.TILE_SIZE/3f, 0.1f));
             actions.addAction(new SoundPlayAction(attackSound));
             actions.addAction(Actions.moveBy(0, WorldConfig.TILE_SIZE/3f, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
         else if (tileAttackIsFrom.getPositionInt().y < targetCoords.y) {
             actions.addAction(Actions.moveBy(0, WorldConfig.TILE_SIZE/3f, 0.1f));
             actions.addAction(new SoundPlayAction(attackSound));
             actions.addAction(Actions.moveBy(0, -WorldConfig.TILE_SIZE/3f, 0.1f));
-            actions.addAction(new DamageGiving(target, attacker.getMeleDamage()));
+            actions.addAction(new DamageGiving(target, attacker.getMeleDamage(), attacker));
         }
     }
 

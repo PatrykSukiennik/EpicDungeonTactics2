@@ -77,6 +77,7 @@ public class AnimatedElement {
     }
 
     public boolean isWalkable() {
-        return isWalkable;
+        //return isWalkable;
+        return true;
     }
 }

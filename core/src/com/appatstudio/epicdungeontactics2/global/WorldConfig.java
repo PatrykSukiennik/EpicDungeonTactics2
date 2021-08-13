@@ -33,11 +33,23 @@ public class WorldConfig {
     public static final float CAMERA_ZOOM_LIMIT_MIN = INIT_CAMERA_ZOOM * 0.6f;
     public static final float CAMERA_ZOOM_LIMIT_MAX = INIT_CAMERA_ZOOM * 1.4f;
 
-    public static final int STAGE_MIN_ROOMS = 7;
-    public static final int STAGE_MAX_ROOMS = 11;
+    public static final int STAGE_MIN_ROOMS = 7;//2;//7;
+    public static final int STAGE_MAX_ROOMS = 11;//3;//11;
 
     public static final float MOVE_SPEED_CLEAN = 0.04f;
     public static final float MOVE_SPEED_FIGHT = 0.12f;
+
+    public static final int BURN_DURATION = 2;
+    public static final int FREEZE_DURATION = 2;
+    public static final int STUN_DURATION = 2;
+    public static final int POISON_DURATION = 3;
+
+    public static final float BURN_DMG_FACTOR = 0.4f;
+    public static final float FREEZE_DMG_FACTOR = 0.4f;
+    public static final float POISON_DMG_FACTOR = 0.4f;
+
+    public static final float UNIQUE_ENEMIES_CHANCE = 0.03f;
+    public static final float UNIQUE_ENEMIES_CHANCE_LVL = 0.015f;
 
     public static final CoordsFloat[][] tileCoords;
     public static final CoordsFloat[][] characterDrawingCoords;

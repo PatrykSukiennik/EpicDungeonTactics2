@@ -31,9 +31,9 @@ charactersInfoMap.put(RoomEnum.STAGE_2_FIRST_1, new CharacterEnum[][] {
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, NPC_ALCHEMIST, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
-{  null, null, null, null, null, null, null, null, null, null, null },
-{  null, null, null, null, null, null, NPC_PRINCESS, null, null, null, null },
 {  null, null, null, null, null, null, null, NPC_MOUNTAIN_KING, null, null, null },
+{  null, null, null, null, null, null, NPC_PRINCESS, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null }
 });
 charactersInfoMap.put(RoomEnum.STAGE_2_FIRST_2, new CharacterEnum[][] { 
@@ -66,9 +66,9 @@ charactersInfoMap.put(RoomEnum.STAGE_2_FIRST_3, new CharacterEnum[][] {
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
-{  null, null, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, NPC_MOUNTAIN_KING, null, null, null },
 {  null, null, null, NPC_PRINCESS, NPC_CITIZEN_MALE, null, null, null, null, null, null },
-{  null, NPC_MOUNTAIN_KING, null, null, null, null, null, null, null, null, null },
+{  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, null, null, null, null, null, null },
 {  null, null, null, null, null, HERO_BABY, null, null, null, null, null },
 {  null, null, null, NPC_BUTCHER, null, null, null, null, NPC_BLACKSMITH, null, null },

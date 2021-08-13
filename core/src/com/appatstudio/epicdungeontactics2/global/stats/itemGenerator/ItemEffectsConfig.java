@@ -1,6 +1,7 @@
 package com.appatstudio.epicdungeontactics2.global.stats.itemGenerator;
 
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemEffectEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemRarityEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.itemEnums.ItemTypeEnum;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class ItemEffectsConfig {
     public static final Map<ItemTypeEnum, HashMap<ItemEffectEnum, Integer>> effectChance;
     public static final Map<ItemEffectEnum, Float> basicEffectPower;
     public static final Map<ItemEffectEnum, Float> lvlEffectPower;
+    public static final Map<ItemRarityEnum, Integer> rarityEffectPowerBonusLvl;
 
     static {
         effectChance = new HashMap<>();
@@ -20,6 +22,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARMOR).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -39,6 +43,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.ARROW).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -58,6 +64,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOOK).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -77,6 +85,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.BOW).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -96,6 +106,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.FOOD).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -115,6 +127,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.HELMET).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -134,6 +148,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.RING).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -153,6 +169,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.NECKLACE).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -172,6 +190,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.SHIELD).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -191,6 +211,8 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -205,30 +227,14 @@ public class ItemEffectsConfig {
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 2);
         effectChance.get(ItemTypeEnum.STAFF).put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 2);
 
-        effectChance.put(ItemTypeEnum.OTHER, new HashMap<ItemEffectEnum, Integer>());
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.DMG_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.STR_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.INT_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.LCK_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.VIT_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.DEX_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 2);
-        effectChance.get(ItemTypeEnum.OTHER).put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 2);
 
         effectChance.put(ItemTypeEnum.MELE, new HashMap<ItemEffectEnum, Integer>());
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.DMG_BONUS, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2);
+        effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 2);
+        effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.STR_BONUS, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.INT_BONUS, 2);
         effectChance.get(ItemTypeEnum.MELE).put(ItemEffectEnum.LCK_BONUS, 2);
@@ -245,45 +251,56 @@ public class ItemEffectsConfig {
 
 
         basicEffectPower = new HashMap<>();
-        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 2f);
-        basicEffectPower.put(ItemEffectEnum.DMG_BONUS, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 0.05f);
+        basicEffectPower.put(ItemEffectEnum.DMG_BONUS, 3f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 0.1f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 0.1f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 0.1f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 0.1f);
         basicEffectPower.put(ItemEffectEnum.STR_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.INT_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.LCK_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.VIT_BONUS, 2f);
         basicEffectPower.put(ItemEffectEnum.DEX_BONUS, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 2f);;
-        basicEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 2f);
-        basicEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 2f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 0.08f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 0.1f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 0.06f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 0.09f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 0.07f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 0.04f);;
+        basicEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 0.1f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 0.06f);
+        basicEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 0.06f);
 
         lvlEffectPower = new HashMap<>();
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 2f);
-        lvlEffectPower.put(ItemEffectEnum.DMG_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 2f);
-        lvlEffectPower.put(ItemEffectEnum.STR_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.INT_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.LCK_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.VIT_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.DEX_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 2f);;
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 2f);
-        lvlEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 2f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_ATTACK, 0.02f);
+        lvlEffectPower.put(ItemEffectEnum.DMG_BONUS, 0.6f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_BURNING, 0.02f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_POISONING, 0.03f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_STUN, 0.03f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_FREEZE, 0.03f);
+        lvlEffectPower.put(ItemEffectEnum.STR_BONUS, 0.3f);
+        lvlEffectPower.put(ItemEffectEnum.INT_BONUS, 0.3f);
+        lvlEffectPower.put(ItemEffectEnum.LCK_BONUS, 0.3f);
+        lvlEffectPower.put(ItemEffectEnum.VIT_BONUS, 0.3f);
+        lvlEffectPower.put(ItemEffectEnum.DEX_BONUS, 0.3f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_EXP_COLLECTED_BONUS, 0.06f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_GOLD_COLLECTED_BONUS, 0.06f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CHANCE_FOR_DOUBLE_MOVE, 0.02f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 0.06f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_KILL, 0.02f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_ANY_DROP_CHANCE, 0.04f);;
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_SPELL_CHANCE, 0.03f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_CRIT_CHANCE, 0.02f);
+        lvlEffectPower.put(ItemEffectEnum.PERCENT_HP_REGEN_CLEAN_ROOM, 0.05f);
 
+        rarityEffectPowerBonusLvl = new HashMap<>();
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.WHITE, 0);
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.GREEN, 2);
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.BLUE, 4);
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.VIOLET, 5);
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.ORANGE, 7);
+        rarityEffectPowerBonusLvl.put(ItemRarityEnum.RED, 9);
     }
 
 }

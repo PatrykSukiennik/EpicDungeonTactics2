@@ -20,4 +20,15 @@ public class ItemPrototype {
         RARITY = rarity;
     }
 
+    public ItemRarityEnum getRARITY() {
+        return RARITY;
+    }
+
+    public ItemEnum getItemEnum() {
+        return ID;
+    }
+
+    public ItemTypeEnum getTYPE() {
+        return TYPE;
+    }
 }

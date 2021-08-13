@@ -44,7 +44,7 @@ public final class CampUpgradeStats {
         return campUpgradeCost.get(upgrade)[lvl];
     }
     public static int getCampUpgradeStat(CampUpgradeEnum upgrade, int lvl) {
-        return campUpgradeStats.get(upgrade)[lvl];
+        return campUpgradeStats.get(upgrade)[lvl >= 3 ? 2 : lvl];
     }
     public static int getCampUnlockStage(CampUpgradeEnum upgradeEnum) {
         return campUnlockStage.get(upgradeEnum);

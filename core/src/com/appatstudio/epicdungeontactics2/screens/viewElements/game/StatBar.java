@@ -35,7 +35,7 @@ public class StatBar {
 
 
 
-    public StatBar(CharacterDrawable character) {
+    public StatBar(CharacterDrawable character, boolean isUnique) {
         this.character = character;
 
         if (character.getCharacterEnum().toString().startsWith("BOSS")) isActive = false;
@@ -64,7 +64,7 @@ public class StatBar {
                         GraphicsManager.getGuiElement(
                                 character.getStats().getRange() > 1 ?
                                         GuiElementEnum.BAR_DISTANCE : GuiElementEnum.BAR_MELE),
-                        FontsManager.getFont(FontEnum.ENEMY_BAR_NAME),
+                        FontsManager.getFont(isUnique ? FontEnum.UNIQUE_ENEMY_FONT : FontEnum.ENEMY_BAR_NAME),
                         StringsManager.getCharacterName(character.getCharacterEnum()),
                         Align.center
                 );

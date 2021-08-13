@@ -34,7 +34,7 @@ public final class FinancesUpgradeScreen {
 
     private static FinanceUpgradeEnum selectedEnum = null;
 
-    private final Image campUpgradeButton, financesUpgradeButton;
+    private final Image campUpgradeButton, financesUpgradeButton, bestiaryButton;
     private final static HashMap<FinanceUpgradeEnum, FinanceUpgradeIcon> financeUpgradeIcons = new HashMap<>();
 
     public FinancesUpgradeScreen() {
@@ -75,17 +75,22 @@ public final class FinancesUpgradeScreen {
                 FontsManager.getFont(FontEnum.MENU_HERO_TITLE_UNLOCKED),
                 StringsManager.getGuiString(GuiStringEnum.INVEST));
 
-        float campUpgradeButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth() * 0.15f;
+        float sideButtonSize = EpicDungeonTactics.isTablet() ? Gdx.graphics.getWidth() * 0.1f : Gdx.graphics.getWidth() * 0.15f;
 
         campUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.CAMP_UPGRADE_BUTTON));
-        campUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
+        campUpgradeButton.setSize(sideButtonSize, sideButtonSize);
         campUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f);
         campUpgradeButton.getColor().a = 0.8f;
 
         financesUpgradeButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.FINANCES_UPGRADE_BUTTON));
-        financesUpgradeButton.setSize(campUpgradeButtonSize, campUpgradeButtonSize);
-        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + campUpgradeButtonSize);
+        financesUpgradeButton.setSize(sideButtonSize, sideButtonSize);
+        financesUpgradeButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sideButtonSize);
         financesUpgradeButton.getColor().a = 0.4f;
+
+        bestiaryButton = new Image(GraphicsManager.getGuiElement(GuiElementEnum.BESTIARY_BUTTON));
+        bestiaryButton.setSize(sideButtonSize, sideButtonSize);
+        bestiaryButton.setPosition(0, Gdx.graphics.getHeight() * 0.7f + sideButtonSize * 2);
+        bestiaryButton.getColor().a = 0.8f;
 
         float iconsYModif = Gdx.graphics.getHeight() * 0.92f - (title.getHeight() * 2) - FinanceUpgradeEnum.values().length * FinanceUpgradeIcon.getIconHeight() * 1.2f;
 
@@ -99,10 +104,11 @@ public final class FinancesUpgradeScreen {
     }
 
     public void draw() {
-        MenuBgContainer.drawOnlyBg(batch);
+        MenuBgContainer.draw(batch);
         MenuBgContainer.drawAlpha50(batch);
 
         batch.begin();
+
         batch.getColor().a = 1f;
 
         goldStatus.draw(batch);
@@ -110,6 +116,7 @@ public final class FinancesUpgradeScreen {
 
         campUpgradeButton.draw(batch, 1f);
         financesUpgradeButton.draw(batch, 1f);
+        bestiaryButton.draw(batch, 1f);
 
         if (selectedEnum != null && GlobalValues.getGold() >= FinancesStats.getCost(selectedEnum))
             investButton.draw(batch, 1f);
@@ -134,6 +141,10 @@ public final class FinancesUpgradeScreen {
                 y > financesUpgradeButton.getY() &&
                 y < financesUpgradeButton.getY() + financesUpgradeButton.getHeight()) {
             EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.MENU_SCREEN);
+        } else if (x < bestiaryButton.getWidth() &&
+                y > bestiaryButton.getY() &&
+                y < bestiaryButton.getY() + bestiaryButton.getHeight()) {
+            EpicDungeonTactics.setCurrentScreen(CurrentScreenEnum.BESTIARY_SCREEN);
         } else if (selectedEnum != null && GlobalValues.getGold() >= financeUpgradeIcons.get(selectedEnum).getUpgradeCost() && investButton.tap(x, y)) {
             SavedInfoManager.saveFinancesLvl(
                     selectedEnum,

@@ -6,12 +6,14 @@ import com.appatstudio.epicdungeontactics2.global.enums.CharacterEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.DirectionEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.FinanceUpgradeEnum;
+import com.appatstudio.epicdungeontactics2.global.enums.GameModeEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.PerkEnum;
 import com.appatstudio.epicdungeontactics2.global.enums.soundEnum.MusicEnum;
 import com.appatstudio.epicdungeontactics2.global.managers.SoundsManager;
 import com.appatstudio.epicdungeontactics2.global.managers.savedInfo.SavedInfoManager;
 import com.appatstudio.epicdungeontactics2.global.stats.FinancesStats;
 import com.appatstudio.epicdungeontactics2.screens.loading.LoadingScreen;
+import com.appatstudio.epicdungeontactics2.screens.menu.bestiaryScreen.menuScreen.BestiaryScreen;
 import com.appatstudio.epicdungeontactics2.screens.menu.campUpgradeScreen.CampUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.screens.menu.financesScreen.FinancesUpgradeScreen;
 import com.appatstudio.epicdungeontactics2.screens.game.gameScreen.GameScreen;
@@ -30,10 +32,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.BESTIARY_SCREEN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.GAME_SCREEN;
 import static com.appatstudio.epicdungeontactics2.global.enums.CurrentScreenEnum.MENU_SCREEN;
 
 public class EpicDungeonTactics extends ApplicationAdapter {
+
+    public static final GameModeEnum GAMEMODE = GameModeEnum.DEBUG;
 
     private static AndroidCommunication androidCommunication;
 
@@ -45,6 +50,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     private static PerkScreen perkScreen;
     private static CampUpgradeScreen campUpgradeScreen;
     private static FinancesUpgradeScreen financesUpgradeScreen;
+    private static BestiaryScreen bestiaryScreen;
     private static GameScreen gameScreen;
 
     private static CurrentScreenEnum currentScreen;
@@ -152,6 +158,13 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 financesUpgradeScreen.draw();
                 break;
 
+            case BESTIARY_SCREEN:
+                if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+                    setCurrentScreen(MENU_SCREEN);
+                }
+                bestiaryScreen.draw();
+                break;
+
             case GAME_SCREEN:
                 if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
                     gameScreen.backPressed();
@@ -212,6 +225,12 @@ public class EpicDungeonTactics extends ApplicationAdapter {
                 SavedInfoManager.checkChangeDay();
                 financesUpgradeScreen.draw();
                 break;
+            case BESTIARY_SCREEN:
+                if (bestiaryScreen == null) bestiaryScreen = new BestiaryScreen();
+                SavedInfoManager.checkChangeDay();
+                bestiaryScreen.refreshIsUnlocked();
+                bestiaryScreen.draw();
+                break;
             case GAME_SCREEN:
                 //startGame() should be done yet
 
@@ -241,6 +260,9 @@ public class EpicDungeonTactics extends ApplicationAdapter {
             case FINANCES_UPGRADE_SCREEN:
                 financesUpgradeScreen.tap(x, y);
                 break;
+            case BESTIARY_SCREEN:
+                bestiaryScreen.tap(x, y);
+                break;
             case GAME_SCREEN:
                 gameScreen.tap(x, y);
         }
@@ -264,6 +286,8 @@ public class EpicDungeonTactics extends ApplicationAdapter {
     public static void swiped(DirectionEnum directionEnum) {
         if (currentScreen == MENU_SCREEN) {
             menuScreen.swiped(directionEnum);
+        } else if (currentScreen == BESTIARY_SCREEN) {
+            bestiaryScreen.swiped(directionEnum);
         }
     }
 
@@ -278,6 +302,7 @@ public class EpicDungeonTactics extends ApplicationAdapter {
         if (statsScreen != null) statsScreen.updateGold();
         if (campUpgradeScreen != null) campUpgradeScreen.updateGold();
         if (gameScreen != null) gameScreen.updateGold();
+        if (bestiaryScreen != null) bestiaryScreen.updateGold();
     }
 
     public static boolean isInternetOn() {
